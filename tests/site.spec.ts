@@ -16,8 +16,8 @@ test("estrutura, imagens e navegação principal", async ({ page }) => {
 
   const heading = page.locator("h1");
   await expect(heading).toHaveCount(1);
-  await expect(heading).toContainText("Sacos para calçado.");
-  await expect(heading).toContainText("Impressos à medida.");
+  await expect(heading).toContainText("Imprimimos ideias.");
+  await expect(heading).toContainText("Entregamos resultados.");
   await expect(page.locator("img")).toHaveCount(1);
 
   const images = page.locator("img");
