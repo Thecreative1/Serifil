@@ -14,7 +14,6 @@ const contactItems = [
 
 export function ContactSection() {
   const available = contactItems.filter((item) => item.value);
-  const isDevelopment = process.env.NODE_ENV === "development";
 
   return (
     <section id="contacto" className="scroll-mt-20 border-t border-border bg-surface py-20 sm:py-28">
@@ -40,7 +39,6 @@ export function ContactSection() {
                   </div>
                 );
               })}
-              {isDevelopment && available.length === 0 ? <p className="border-t border-border py-7 text-sm text-text-secondary">Contacto a adicionar na configuração da marca.</p> : null}
             </div>
           </div>
         </Reveal>
