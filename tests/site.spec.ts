@@ -16,8 +16,8 @@ test("estrutura, imagens e navegação principal", async ({ page }) => {
 
   const heading = page.locator("h1");
   await expect(heading).toHaveCount(1);
-  await expect(heading).toContainText("Imprimimos ideias.");
-  await expect(heading).toContainText("Entregamos resultados.");
+  await expect(heading).toContainText("Sacos para calçado.");
+  await expect(heading).toContainText("Impressos à medida.");
   await expect(page.locator("img")).toHaveCount(1);
 
   const images = page.locator("img");
@@ -103,7 +103,7 @@ test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
   await page.getByLabel("Nome").fill("Empresa Exemplo");
   await page.getByLabel("E-mail").fill("producao@example.test");
   await page.getByLabel("Telefone").fill("000 000 000");
-  await page.getByLabel("Serviço pretendido").selectOption({ label: "Impressão em plástico ou sacos" });
+  await page.getByLabel("Serviço pretendido").selectOption({ label: "Sacos em tecido para calçado" });
   await page.getByLabel("Quantidade aproximada").fill("500");
   await page.getByLabel("Data pretendida").fill("2030-12-20");
   await page.getByLabel("Mensagem").fill("Precisamos de sacos impressos a uma cor para uma série de produção.");

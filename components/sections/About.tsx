@@ -16,7 +16,7 @@ export function About() {
             <div className="lg:col-span-7">
               <p className="section-kicker text-accent">A SERIFIL</p>
               <h2 className="mt-8 max-w-[12ch] text-[clamp(2.8rem,6vw,6.5rem)] leading-[0.88] font-bold tracking-[-0.065em] text-text-primary">Experiência de produção. Nova ambição.</h2>
-              <p className="mt-10 max-w-[62ch] text-base leading-7 text-text-secondary sm:text-lg">A Serifil é uma empresa de serigrafia e personalização em Guimarães, preparada para trabalhar com empresas, associações, eventos, equipas e marcas locais. Combinamos experiência prática de produção com acompanhamento próximo e comunicação direta.</p>
+              <p className="mt-10 max-w-[62ch] text-base leading-7 text-text-secondary sm:text-lg">A Serifil é uma empresa de serigrafia e personalização em Guimarães, com experiência na impressão de sacos em tecido e plástico para o setor do calçado e de capas guarda-fatos. Trabalhamos também com empresas, equipas, associações e marcas que procuram acompanhamento próximo e comunicação direta.</p>
             </div>
             <div className="border-t border-border lg:col-span-5">
               {principles.map(([number, label]) => (

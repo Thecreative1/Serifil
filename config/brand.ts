@@ -18,9 +18,9 @@ type BrandConfig = {
 export const brand: BrandConfig = {
   name: "SERIFIL",
   descriptor: "Serigrafia & Personalização",
-  heroLineOne: "Imprimimos ideias.",
-  heroLineTwo: "Entregamos resultados.",
-  secondaryTagline: "Damos forma à sua marca.",
+  heroLineOne: "Sacos para calçado.",
+  heroLineTwo: "Impressos à medida.",
+  secondaryTagline: "Impressão especializada para o setor do calçado.",
   location: "Guimarães, Portugal",
   phone: "",
   email: "",

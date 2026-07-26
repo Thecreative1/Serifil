@@ -8,10 +8,10 @@ export function QuoteCTA() {
       <Container>
         <Reveal>
           <div className="grid gap-10 lg:grid-cols-[1.5fr_auto] lg:items-end">
-            <div>
+            <div className="min-w-0">
               <p className="section-kicker text-light-muted">VAMOS PRODUZIR</p>
-              <h2 className="mt-8 max-w-[12ch] text-[clamp(3.2rem,8vw,7.6rem)] leading-[0.86] font-bold tracking-[-0.07em] text-light-text">Tem uma ideia para imprimir?</h2>
-              <p className="mt-7 max-w-[56ch] text-lg leading-8 text-[#555951]">Envie os detalhes do projeto e receba uma análise inicial do trabalho.</p>
+              <h2 className="mt-8 max-w-[12ch] text-[clamp(2.5rem,8vw,7.6rem)] leading-[0.86] font-bold tracking-[-0.07em] text-light-text">Precisa de sacos personalizados?</h2>
+              <p className="mt-7 max-w-[56ch] text-lg leading-8 text-[#555951]">Indique o material, as medidas, a quantidade e as cores de impressão para receber uma análise inicial.</p>
             </div>
             <Button href="#orcamento" variant="dark" className="lg:mb-2">Pedir orçamento</Button>
           </div>

@@ -8,12 +8,12 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 
 export const metadata: Metadata = {
   metadataBase: brand.website ? new URL(brand.website) : undefined,
-  title: "Serifil | Serigrafia e Personalização em Guimarães",
-  description: "Serigrafia, impressão em plástico e sacos, personalização têxtil, roupa profissional, merchandising e gravação laser em Guimarães. Peça um orçamento para o seu projeto.",
+  title: "Serifil | Impressão de Sacos para Calçado em Guimarães",
+  description: "Impressão e personalização de sacos em tecido para calçado, sacos plásticos e capas guarda-fatos em Guimarães. Peça um orçamento à Serifil.",
   ...(brand.website ? { alternates: { canonical: brand.website } } : {}),
   openGraph: {
-    title: "Serifil | Serigrafia e Personalização em Guimarães",
-    description: "Produção profissional em Guimarães, da ideia à peça final.",
+    title: "Serifil | Impressão de Sacos para Calçado em Guimarães",
+    description: "Sacos em tecido para calçado, sacos plásticos e capas guarda-fatos personalizados em Guimarães.",
     locale: "pt_PT",
     type: "website",
     ...(brand.website ? {

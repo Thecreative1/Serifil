@@ -7,22 +7,22 @@ export type PortfolioItem = {
 
 export const portfolio: PortfolioItem[] = [
   {
-    category: "Embalagem",
-    name: "Sacos para comércio",
-    technique: "Impressão em plástico",
-    description: "Aplicação de uma cor em sacos de asa recortada para comércio.",
+    category: "Calçado",
+    name: "Sacos em tecido para calçado",
+    technique: "Serigrafia em tecido",
+    description: "Impressão de marca em sacos de proteção destinados ao setor do calçado.",
   },
   {
     category: "Calçado",
-    name: "Sacos de proteção",
-    technique: "Serigrafia em plástico",
-    description: "Produção de sacos para acondicionamento de produtos do setor do calçado.",
+    name: "Sacos plásticos impressos",
+    technique: "Impressão em plástico",
+    description: "Personalização de sacos plásticos para acondicionamento e apresentação de calçado.",
   },
   {
-    category: "Equipas",
-    name: "Roupa profissional",
-    technique: "Serigrafia têxtil",
-    description: "Personalização coordenada para vestuário de trabalho e equipas.",
+    category: "Vestuário",
+    name: "Capas guarda-fatos",
+    technique: "Impressão em capas",
+    description: "Aplicação de logótipos em capas de proteção para fatos e outras peças de vestuário.",
   },
   {
     category: "Merchandising",
@@ -37,9 +37,9 @@ export const portfolio: PortfolioItem[] = [
     description: "Gravação precisa em madeira e acrílico para placas e sinalética.",
   },
   {
-    category: "Produção local",
-    name: "Série para marca independente",
-    technique: "Serigrafia",
-    description: "Acompanhamento desde a preparação do ficheiro até ao acabamento.",
+    category: "Equipas",
+    name: "Roupa profissional",
+    technique: "Serigrafia têxtil",
+    description: "Personalização coordenada para vestuário de trabalho e equipas.",
   },
 ];

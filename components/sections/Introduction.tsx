@@ -11,7 +11,7 @@ export function Introduction() {
             <p className="section-kicker text-light-muted">DA IDEIA À PRODUÇÃO</p>
             <div>
               <h2 className="max-w-[12ch] text-[clamp(3rem,8vw,7.4rem)] leading-[0.88] font-bold tracking-[-0.065em]">{brand.secondaryTagline}</h2>
-              <p className="mt-8 max-w-[62ch] text-lg leading-8 text-[#555951] sm:text-xl">Transformamos ideias, logótipos e projetos em peças produzidas com acompanhamento técnico, comunicação direta e atenção ao resultado final.</p>
+              <p className="mt-8 max-w-[62ch] text-lg leading-8 text-[#555951] sm:text-xl">Trabalhamos sobretudo para o setor do calçado, imprimindo sacos em tecido, sacos plásticos e capas guarda-fatos com acompanhamento técnico e comunicação direta.</p>
             </div>
           </div>
         </Reveal>

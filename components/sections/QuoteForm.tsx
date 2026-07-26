@@ -122,7 +122,9 @@ export function QuoteForm() {
               <div className="grid gap-6 sm:grid-cols-2">
                 <SelectInput id="service" name="service" label="Serviço pretendido" error={errors.service} required defaultValue="">
                   <option value="" disabled>Selecione uma opção</option>
-                  <option>Impressão em plástico ou sacos</option>
+                  <option>Sacos em tecido para calçado</option>
+                  <option>Sacos plásticos impressos</option>
+                  <option>Capas guarda-fatos</option>
                   <option>Serigrafia têxtil</option>
                   <option>Roupa profissional</option>
                   <option>Merchandising</option>
@@ -132,7 +134,7 @@ export function QuoteForm() {
                 <TextInput id="quantity" name="quantity" label="Quantidade aproximada" inputMode="numeric" placeholder="Ex.: 250 unidades" error={errors.quantity} required />
               </div>
               <TextInput inputRef={dateInputRef} id="date" name="date" type="date" label="Data pretendida" error={errors.date} required />
-              <TextArea id="message" name="message" label="Mensagem" placeholder="Indique o produto, material, número de cores e outras informações úteis." error={errors.message} required />
+              <TextArea id="message" name="message" label="Mensagem" placeholder="Indique o tipo de saco, material, medidas, número de cores e outras informações úteis." error={errors.message} required />
               <div>
                 <label className="flex cursor-pointer items-start gap-3 text-sm leading-6 text-text-secondary">
                   <input name="privacy" type="checkbox" className="mt-1 size-5 shrink-0 accent-[#e85b2a] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent" aria-invalid={Boolean(errors.privacy)} aria-describedby={errors.privacy ? "privacy-error" : undefined} />
