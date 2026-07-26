@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 import { brand } from "@/config/brand";
+import { assetPath } from "@/config/paths";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 
 export function Hero() {
   return (
     <section id="inicio" className="relative min-h-[760px] overflow-hidden bg-background pt-20 lg:min-h-screen lg:pt-24">
-      <Image src="/images/hero-serigrafia.webp" alt="Processo de serigrafia com tinta a ser puxada através de uma tela" fill priority sizes="100vw" className="object-cover object-[62%_center]" />
+      <Image src={assetPath("/images/hero-serigrafia.webp")} alt="Processo de serigrafia com tinta a ser puxada através de uma tela" fill priority sizes="100vw" className="object-cover object-[62%_center]" />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,13,11,0.98)_0%,rgba(12,13,11,0.92)_36%,rgba(12,13,11,0.38)_72%,rgba(12,13,11,0.3)_100%)]" aria-hidden="true" />
       <div className="absolute inset-0 industrial-grid opacity-20" aria-hidden="true" />
       <Container className="relative flex min-h-[680px] flex-col justify-end pb-9 pt-24 lg:min-h-[calc(100vh-6rem)] lg:pb-12">
