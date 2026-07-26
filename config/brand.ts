@@ -12,6 +12,7 @@ type BrandConfig = {
   address: string;
   openingHours: string;
   website: string;
+  quoteEndpoint: string;
 };
 
 export const brand: BrandConfig = {
@@ -28,4 +29,5 @@ export const brand: BrandConfig = {
   address: "",
   openingHours: "",
   website: "",
+  quoteEndpoint: "https://formspree.io/f/xzdnyead",
 };

@@ -30,7 +30,7 @@ export function Footer() {
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-text-secondary">Informação</p>
             <ul className="mt-5 grid gap-3 text-sm text-text-primary">
               <li>{brand.location}</li>
-              <li><span className="text-text-secondary">Política de privacidade</span> <span className="text-xs text-[#777c74]">(em preparação)</span></li>
+              <li>Pedidos através do formulário</li>
             </ul>
           </div>
         </div>

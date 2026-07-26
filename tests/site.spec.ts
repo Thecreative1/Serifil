@@ -18,7 +18,7 @@ test("estrutura, imagens e navegação principal", async ({ page }) => {
   await expect(heading).toHaveCount(1);
   await expect(heading).toContainText("Imprimimos ideias.");
   await expect(heading).toContainText("Entregamos resultados.");
-  await expect(page.locator("img")).toHaveCount(12);
+  await expect(page.locator("img")).toHaveCount(1);
 
   const images = page.locator("img");
   for (let index = 0; index < await images.count(); index += 1) {
@@ -75,7 +75,10 @@ test("menu móvel fecha por Escape e por navegação", async ({ page }) => {
   await expect(page.locator("#processo h2")).toBeInViewport();
 });
 
-test("formulário valida e apresenta sucesso simulado", async ({ page }) => {
+test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
+  await page.route("https://formspree.io/f/xzdnyead", async (route) => {
+    await route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
+  });
   await page.setViewportSize({ width: 1024, height: 900 });
   await page.goto("/#orcamento");
   await page.waitForLoadState("networkidle");
@@ -95,8 +98,8 @@ test("formulário valida e apresenta sucesso simulado", async ({ page }) => {
   await page.getByRole("checkbox").check();
   await form.getByRole("button", { name: "Enviar pedido" }).click();
 
-  await expect(page.getByRole("heading", { name: "Pedido recebido." })).toBeVisible();
-  await expect(page.getByText("Demonstração: nenhum dado foi enviado.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Pedido enviado." })).toBeVisible();
+  await expect(page.getByText("Recebemos os detalhes do seu projeto e entraremos em contacto assim que possível.")).toBeVisible();
 });
 
 test("não publica contactos vazios ou links falsos", async ({ page }) => {
