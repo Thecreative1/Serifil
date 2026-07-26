@@ -63,10 +63,19 @@ test("menu móvel fecha por Escape e por navegação", async ({ page }) => {
   await openButton.click();
   await expect(openButton).toHaveAttribute("aria-expanded", "true");
   await expect(page.getByRole("navigation", { name: "Navegação móvel" })).toBeVisible();
+  const closeButton = page.getByRole("button", { name: "Fechar menu" });
+  const mobileQuoteLink = page.getByRole("navigation", { name: "Navegação móvel" }).getByRole("link", { name: "Pedir orçamento" });
+  await expect(closeButton).toBeFocused();
   expect(await page.evaluate(() => document.body.style.overflow)).toBe("hidden");
+
+  await page.keyboard.press("Shift+Tab");
+  await expect(mobileQuoteLink).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(closeButton).toBeFocused();
 
   await page.keyboard.press("Escape");
   await expect(openButton).toHaveAttribute("aria-expanded", "false");
+  await expect(openButton).toBeFocused();
   expect(await page.evaluate(() => document.body.style.overflow)).toBe("");
 
   await openButton.click();
@@ -87,6 +96,9 @@ test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
   await form.getByRole("button", { name: "Enviar pedido" }).click();
   await expect(page.getByText("Indique o seu nome.")).toBeVisible();
   await expect(page.getByText("Introduza um endereço de e-mail válido.")).toBeVisible();
+  await page.getByLabel("Data pretendida").fill("2020-01-01");
+  await form.getByRole("button", { name: "Enviar pedido" }).click();
+  await expect(page.getByText("Escolha uma data a partir de hoje.")).toBeVisible();
 
   await page.getByLabel("Nome").fill("Empresa Exemplo");
   await page.getByLabel("E-mail").fill("producao@example.test");
@@ -100,6 +112,7 @@ test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
 
   await expect(page.getByRole("heading", { name: "Pedido enviado." })).toBeVisible();
   await expect(page.getByText("Recebemos os detalhes do seu projeto e entraremos em contacto assim que possível.")).toBeVisible();
+  await expect(page.getByRole("status")).toBeFocused();
 });
 
 test("não publica contactos vazios ou links falsos", async ({ page }) => {
@@ -107,4 +120,11 @@ test("não publica contactos vazios ou links falsos", async ({ page }) => {
   await expect(page.locator('#contacto a[href^="tel:"]')).toHaveCount(0);
   await expect(page.locator('#contacto a[href^="mailto:"]')).toHaveCount(0);
   await expect(page.locator('a[href*="wa.me"]')).toHaveCount(0);
+});
+
+test("publica metadados canónicos e de partilha corretos", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://thecreative1.github.io/Serifil/");
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", "https://thecreative1.github.io/Serifil/");
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://thecreative1.github.io/Serifil/images/hero-serigrafia.webp");
 });

@@ -9,7 +9,7 @@ const principles = [
 
 export function About() {
   return (
-    <section id="sobre" className="scroll-mt-20 bg-background py-20 sm:py-28 lg:py-36">
+    <section id="sobre" className="scroll-mt-20 bg-background py-20 sm:py-28 lg:scroll-mt-24 lg:py-36">
       <Container>
         <Reveal>
           <div className="grid gap-16 lg:grid-cols-12 lg:items-end lg:gap-12">

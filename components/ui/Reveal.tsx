@@ -4,11 +4,17 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 
 export function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [enhanced, setEnhanced] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
+    if (!element || !("IntersectionObserver" in window)) return;
+
+    const initiallyVisible = element.getBoundingClientRect().top <= window.innerHeight * 0.92;
+    setEnhanced(true);
+    setVisible(initiallyVisible);
+    if (initiallyVisible) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -25,7 +31,7 @@ export function Reveal({ children, className = "" }: { children: ReactNode; clas
   }, []);
 
   return (
-    <div ref={ref} className={`reveal ${visible ? "is-visible" : ""} ${className}`}>
+    <div ref={ref} className={`${enhanced ? `reveal ${visible ? "is-visible" : ""}` : ""} ${className}`}>
       {children}
     </div>
   );

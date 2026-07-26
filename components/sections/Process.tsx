@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function Process() {
   return (
-    <section id="processo" className="scroll-mt-20 bg-light-background py-20 sm:py-28 lg:py-36">
+    <section id="processo" className="scroll-mt-20 bg-light-background py-20 sm:py-28 lg:scroll-mt-24 lg:py-36">
       <Container>
         <Reveal><SectionHeading eyebrow="COMO FUNCIONA" title="Da ideia à peça final." light /></Reveal>
         <div className="relative mt-16 grid gap-0 border-y border-[#c9c3b8] lg:mt-24 lg:grid-cols-5 lg:border-x">

@@ -16,7 +16,7 @@ export function ContactSection() {
   const available = contactItems.filter((item) => item.value);
 
   return (
-    <section id="contacto" className="scroll-mt-20 border-t border-border bg-surface py-20 sm:py-28">
+    <section id="contacto" className="scroll-mt-20 border-t border-border bg-surface py-20 sm:py-28 lg:scroll-mt-24">
       <Container>
         <Reveal>
           <div className="grid gap-12 lg:grid-cols-[0.8fr_1.4fr] lg:gap-20">

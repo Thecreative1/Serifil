@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
+import type { InputHTMLAttributes, ReactNode, Ref, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
 
 type BaseProps = {
   id: string;
@@ -24,12 +24,12 @@ export function FieldShell({ id, label, optional, error, children }: BaseProps) 
   );
 }
 
-const fieldClass = "min-h-12 w-full border border-border bg-surface px-4 py-3 text-base text-text-primary outline-none transition-colors placeholder:text-[#777c74] hover:border-[#4d514b] focus:border-accent focus:ring-1 focus:ring-accent";
+const fieldClass = "min-h-12 w-full border border-border bg-surface px-4 py-3 text-base text-text-primary outline-none transition-colors placeholder:text-field-placeholder hover:border-[#4d514b] focus:border-accent focus:ring-1 focus:ring-accent";
 
-export function TextInput({ id, label, optional, error, ...props }: BaseProps & InputHTMLAttributes<HTMLInputElement>) {
+export function TextInput({ id, label, optional, error, inputRef, ...props }: BaseProps & InputHTMLAttributes<HTMLInputElement> & { inputRef?: Ref<HTMLInputElement> }) {
   return (
     <FieldShell id={id} label={label} optional={optional} error={error}>
-      <input id={id} className={fieldClass} aria-invalid={Boolean(error)} aria-describedby={error ? `${id}-error` : undefined} {...props} />
+      <input ref={inputRef} id={id} className={fieldClass} aria-invalid={Boolean(error)} aria-describedby={error ? `${id}-error` : undefined} {...props} />
     </FieldShell>
   );
 }

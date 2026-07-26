@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function Portfolio() {
   return (
-    <section id="trabalhos" className="scroll-mt-20 bg-surface py-20 sm:py-28 lg:py-36">
+    <section id="trabalhos" className="scroll-mt-20 bg-surface py-20 sm:py-28 lg:scroll-mt-24 lg:py-36">
       <Container>
         <Reveal><SectionHeading eyebrow="APLICAÇÕES" title="Soluções pensadas para diferentes setores." description="Cada projeto é acompanhado desde o ficheiro inicial até à produção final, com atenção ao material, à técnica e ao resultado pretendido." /></Reveal>
         <div className="mt-16 grid border-t border-border md:grid-cols-2 lg:mt-24">

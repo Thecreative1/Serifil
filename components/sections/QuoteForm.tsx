@@ -1,7 +1,7 @@
 "use client";
 
 import { AlertCircle, CheckCircle2, LoaderCircle } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Container } from "@/components/ui/Container";
 import { SelectInput, TextArea, TextInput } from "@/components/ui/FormField";
 import { brand } from "@/config/brand";
@@ -10,9 +10,26 @@ type FormErrors = Partial<Record<"name" | "email" | "phone" | "service" | "quant
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function getLocalToday() {
+  const now = new Date();
+  return new Date(now.getTime() - now.getTimezoneOffset() * 60_000)
+    .toISOString()
+    .slice(0, 10);
+}
+
 export function QuoteForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<FormErrors>({});
+  const successRef = useRef<HTMLDivElement>(null);
+  const dateInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (dateInputRef.current) dateInputRef.current.min = getLocalToday();
+  }, [status]);
+
+  useEffect(() => {
+    if (status === "success") successRef.current?.focus();
+  }, [status]);
 
   function validate(form: HTMLFormElement) {
     const formData = new FormData(form);
@@ -24,7 +41,11 @@ export function QuoteForm() {
     if (!value("phone")) nextErrors.phone = "Indique um contacto telefónico.";
     if (!value("service")) nextErrors.service = "Selecione o serviço pretendido.";
     if (!value("quantity")) nextErrors.quantity = "Indique uma quantidade aproximada.";
-    if (!value("date")) nextErrors.date = "Indique a data pretendida.";
+    if (!value("date")) {
+      nextErrors.date = "Indique a data pretendida.";
+    } else if (value("date") < getLocalToday()) {
+      nextErrors.date = "Escolha uma data a partir de hoje.";
+    }
     if (value("message").length < 15) nextErrors.message = "Descreva o projeto com pelo menos 15 caracteres.";
     if (formData.get("privacy") !== "on") nextErrors.privacy = "É necessário aceitar o tratamento dos dados deste pedido.";
 
@@ -36,6 +57,7 @@ export function QuoteForm() {
     const form = event.currentTarget;
     const nextErrors = validate(form);
     setErrors(nextErrors);
+    setStatus("idle");
 
     const firstError = Object.keys(nextErrors)[0];
     if (firstError) {
@@ -66,7 +88,7 @@ export function QuoteForm() {
   }
 
   return (
-    <section id="orcamento" className="scroll-mt-20 bg-background py-20 sm:py-28 lg:py-36">
+    <section id="orcamento" className="scroll-mt-20 bg-background py-20 sm:py-28 lg:scroll-mt-24 lg:py-36">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.4fr] lg:gap-20">
           <div>
@@ -80,15 +102,15 @@ export function QuoteForm() {
           </div>
 
           {status === "success" ? (
-            <div className="flex min-h-[520px] flex-col items-start justify-center border border-border bg-surface p-7 sm:p-12" role="status" tabIndex={-1}>
+            <div ref={successRef} className="flex min-h-[520px] flex-col items-start justify-center border border-border bg-surface p-7 sm:p-12" role="status" tabIndex={-1}>
               <CheckCircle2 className="size-12 text-accent" aria-hidden="true" />
               <h3 className="mt-7 max-w-[16ch] text-4xl font-bold tracking-[-0.05em] text-text-primary sm:text-5xl">Pedido enviado.</h3>
               <p className="mt-5 max-w-[50ch] text-lg leading-8 text-text-secondary">Recebemos os detalhes do seu projeto e entraremos em contacto assim que possível.</p>
-              <button type="button" onClick={() => setStatus("idle")} className="mt-9 min-h-12 border border-border px-5 py-3 text-sm font-bold uppercase tracking-[0.08em] text-text-primary transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">Criar outro pedido</button>
+              <button type="button" onClick={() => { setErrors({}); setStatus("idle"); }} className="mt-9 min-h-12 border border-border px-5 py-3 text-sm font-bold uppercase tracking-[0.08em] text-text-primary transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">Criar outro pedido</button>
             </div>
           ) : (
-            <form action={brand.quoteEndpoint} method="POST" onSubmit={handleSubmit} noValidate className="grid gap-6" aria-label="Formulário de pedido de orçamento">
-              <input type="text" name="_gotcha" className="sr-only" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+            <form action={brand.quoteEndpoint} method="POST" onSubmit={handleSubmit} noValidate className="grid gap-6" aria-label="Formulário de pedido de orçamento" aria-busy={status === "submitting"}>
+              <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
               <div className="grid gap-6 sm:grid-cols-2">
                 <TextInput id="name" name="name" label="Nome" autoComplete="name" error={errors.name} required />
                 <TextInput id="company" name="company" label="Empresa" autoComplete="organization" optional />
@@ -109,7 +131,7 @@ export function QuoteForm() {
                 </SelectInput>
                 <TextInput id="quantity" name="quantity" label="Quantidade aproximada" inputMode="numeric" placeholder="Ex.: 250 unidades" error={errors.quantity} required />
               </div>
-              <TextInput id="date" name="date" type="date" label="Data pretendida" error={errors.date} required />
+              <TextInput inputRef={dateInputRef} id="date" name="date" type="date" label="Data pretendida" error={errors.date} required />
               <TextArea id="message" name="message" label="Mensagem" placeholder="Indique o produto, material, número de cores e outras informações úteis." error={errors.message} required />
               <div>
                 <label className="flex cursor-pointer items-start gap-3 text-sm leading-6 text-text-secondary">

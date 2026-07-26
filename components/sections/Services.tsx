@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function Services() {
   return (
-    <section id="servicos" className="scroll-mt-20 bg-background py-20 sm:py-28 lg:py-36">
+    <section id="servicos" className="scroll-mt-20 bg-background py-20 sm:py-28 lg:scroll-mt-24 lg:py-36">
       <Container>
         <Reveal><SectionHeading eyebrow="O QUE PRODUZIMOS" title="Soluções para dar presença à sua marca." description="Produção personalizada para diferentes materiais, necessidades, quantidades e tipos de projeto." /></Reveal>
         <div className="mt-16 border-t border-border lg:mt-24">

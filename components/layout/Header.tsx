@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { brand } from "@/config/brand";
 import { MobileMenu } from "./MobileMenu";
 
@@ -16,7 +16,11 @@ const navLinks = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const closeMenu = useCallback(() => setMenuOpen(false), []);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    window.requestAnimationFrame(() => menuButtonRef.current?.focus({ preventScroll: true }));
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -43,7 +47,7 @@ export function Header() {
               Pedir orçamento
             </a>
           </nav>
-          <button type="button" onClick={() => setMenuOpen(true)} className="grid size-12 place-items-center border border-border text-text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:hidden" aria-label="Abrir menu" aria-expanded={menuOpen} aria-controls="mobile-menu">
+          <button ref={menuButtonRef} type="button" onClick={() => setMenuOpen(true)} className="grid size-12 place-items-center border border-border text-text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:hidden" aria-label="Abrir menu" aria-expanded={menuOpen} aria-controls="mobile-menu">
             <Menu aria-hidden="true" />
           </button>
         </div>
