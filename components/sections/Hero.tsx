@@ -13,7 +13,7 @@ export function Hero() {
       <div className="absolute inset-0 industrial-grid opacity-20" aria-hidden="true" />
       <Container className="relative flex min-h-[680px] flex-col justify-end pb-9 pt-24 lg:min-h-[calc(100vh-6rem)] lg:pb-12">
         <div className="max-w-[1050px]">
-          <p className="hero-enter text-xs font-bold uppercase tracking-[0.17em] text-accent sm:text-sm">ESPECIALISTAS EM SACOS PARA CALÇADO</p>
+          <p className="hero-enter text-xs font-bold uppercase tracking-[0.17em] text-accent sm:text-sm">ESPECIALISTAS EM IMPRESSÃO DE SACOS TÊXTEIS E PLÁSTICOS</p>
           <h1 className="hero-enter hero-delay-1 mt-6 max-w-[14ch] text-[clamp(3.25rem,9.8vw,9.2rem)] leading-[0.82] font-black uppercase tracking-[-0.075em] text-text-primary">
             <span className="block">{brand.heroLineOne}</span>
             <span className="block">{brand.heroLineTwo}</span>
