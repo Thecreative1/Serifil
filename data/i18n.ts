@@ -59,7 +59,7 @@ export const translations = {
       eyebrow: "DA IDEIA AO RESULTADO FINAL",
       title: "Impressão adaptada a diferentes materiais e aplicações.",
       description:
-        "Trabalhamos com empresas e marcas de diferentes setores, incluindo o setor do calçado, produzindo impressão em PVC, tecido e TNT para sacos, capas, porta-fatos, componentes e outras aplicações, com acompanhamento técnico e comunicação direta.",
+        "Trabalhamos com empresas e marcas de diferentes setores, incluindo o setor do calçado, realizando impressão em PVC, tecido e TNT para sacos, capas, porta-fatos e outras aplicações, assim como em diferentes componentes utilizados na produção de calçado, com acompanhamento técnico e comunicação direta.",
     },
     services: {
       eyebrow: "ESPECIALIDADE PRINCIPAL",
@@ -361,7 +361,7 @@ export const translations = {
       eyebrow: "FROM IDEA TO FINAL RESULT",
       title: "Printing adapted to different materials and applications.",
       description:
-        "We work with businesses and brands across different industries, including the footwear sector, printing on PVC, fabric and non-woven materials for bags, covers, garment bags, components and other applications, with technical guidance and direct communication.",
+        "We work with businesses and brands across different industries, including the footwear sector, printing on PVC, fabric and non-woven materials for bags, covers, garment bags and other applications, as well as on different components used in footwear production, with technical guidance and direct communication.",
     },
     services: {
       eyebrow: "CORE SPECIALITY",
