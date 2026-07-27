@@ -28,7 +28,7 @@ export const brand: BrandConfig = {
   location: "Guimarães, Portugal",
   phone: "",
   email: "",
-  whatsapp: "",
+  whatsapp: "+351 910 508 706",
   instagram: "",
   address: "Travessa Bernardino Jordão 90, Urgezes",
   openingHours: "",

@@ -6,11 +6,11 @@ import type { SiteContent } from "@/data/i18n";
 
 export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
   const contactItems = [
-    { label: copy.phone, value: brand.phone, href: brand.phone ? `tel:${brand.phone.replace(/\s/g, "")}` : "", icon: Phone },
-    { label: copy.email, value: brand.email, href: brand.email ? `mailto:${brand.email}` : "", icon: Mail },
-    { label: copy.whatsapp, value: brand.whatsapp, href: brand.whatsapp ? `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}` : "", icon: MessageCircle },
-    { label: copy.hours, value: brand.openingHours, href: "", icon: Clock3 },
-    { label: copy.instagram, value: brand.instagram, href: brand.instagram, icon: AtSign },
+    { label: copy.phone, value: brand.phone, href: brand.phone ? `tel:${brand.phone.replace(/\s/g, "")}` : "", icon: Phone, external: false },
+    { label: copy.email, value: brand.email, href: brand.email ? `mailto:${brand.email}` : "", icon: Mail, external: false },
+    { label: copy.whatsapp, value: brand.whatsapp, href: brand.whatsapp ? `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}` : "", icon: MessageCircle, external: true },
+    { label: copy.hours, value: brand.openingHours, href: "", icon: Clock3, external: false },
+    { label: copy.instagram, value: brand.instagram, href: brand.instagram, icon: AtSign, external: true },
   ];
   const available = contactItems.filter((item) => item.value);
 
@@ -38,7 +38,7 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
                 return (
                   <div key={item.label} className="flex items-start gap-5 border-t border-border py-7">
                     <Icon className="mt-1 size-5 shrink-0 text-accent" aria-hidden="true" />
-                    <div><p className="text-xs font-bold uppercase tracking-[0.12em] text-text-secondary">{item.label}</p>{item.href ? <a className="mt-2 inline-block text-xl font-bold text-text-primary underline-offset-4 hover:underline" href={item.href}>{item.value}</a> : <p className="mt-2 text-xl font-bold text-text-primary">{item.value}</p>}</div>
+                    <div><p className="text-xs font-bold uppercase tracking-[0.12em] text-text-secondary">{item.label}</p>{item.href ? <a className="mt-2 inline-block text-xl font-bold text-text-primary underline-offset-4 hover:underline" href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>{item.value}</a> : <p className="mt-2 text-xl font-bold text-text-primary">{item.value}</p>}</div>
                   </div>
                 );
               })}

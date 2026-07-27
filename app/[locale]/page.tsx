@@ -66,7 +66,7 @@ export default async function Home({
         <QuoteForm copy={copy.quoteForm} />
         <ContactSection copy={copy.contact} />
       </main>
-      {brand.whatsapp ? <a className="fixed bottom-5 right-5 z-40 grid min-h-12 place-items-center bg-accent px-5 text-sm font-bold text-light-text" href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`}>WhatsApp</a> : null}
+      {brand.whatsapp ? <a className="fixed bottom-5 right-5 z-40 grid min-h-12 place-items-center bg-accent px-5 text-sm font-bold text-light-text" href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noreferrer">WhatsApp</a> : null}
       <Footer copy={copy.footer} headerCopy={copy.header} />
     </>
   );
