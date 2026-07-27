@@ -12,14 +12,14 @@ export const translations = {
     meta: {
       title: "Serifil | Serigrafia em PVC, Tecido e TNT em Guimarães",
       description:
-        "Impressão e personalização em PVC, tecido e TNT para sacos, capas, porta-fatos, componentes e outras aplicações. Produção em Guimarães para empresas e marcas, incluindo o setor do calçado.",
+        "Impressão e personalização em PVC, tecido e TNT para sacos, capas, porta-fatos e outras aplicações, incluindo diferentes componentes para calçado. Produção em Guimarães para empresas e marcas.",
       openGraphDescription:
         "Impressão personalizada em PVC, tecido e TNT para empresas, marcas e diferentes setores de atividade, incluindo soluções para o setor do calçado.",
       imageAlt: "Processo de serigrafia na SERIFIL",
       locale: "pt_PT",
     },
     businessDescription:
-      "Serigrafia e personalização em PVC, tecido e TNT para sacos, capas, componentes e outras aplicações.",
+      "Serigrafia e personalização em PVC, tecido e TNT para sacos, capas e outras aplicações, incluindo diferentes componentes para calçado.",
     header: {
       descriptor: "Serigrafia & Personalização",
       homeLabel: "SERIFIL, voltar ao início",
@@ -43,7 +43,7 @@ export const translations = {
       lineOne: "Imprimimos ideias.",
       lineTwo: "Entregamos resultados.",
       description:
-        "Impressão e personalização em PVC, tecido e TNT para sacos, capas, porta-fatos, componentes e outras aplicações destinadas a empresas e marcas.",
+        "Impressão e personalização em PVC, tecido e TNT para sacos, capas, porta-fatos e outras aplicações destinadas a empresas e marcas, além de diferentes componentes para calçado.",
       quote: "Pedir orçamento",
       work: "Ver trabalhos",
       specialties: "PVC · Tecido · TNT · Componentes · Personalização",
@@ -53,7 +53,7 @@ export const translations = {
     marquee: {
       line: "PVC · TECIDO · TNT · SACOS PERSONALIZADOS · CAPAS · PORTA-FATOS · COMPONENTES · SETOR DO CALÇADO · PRODUÇÃO EM GUIMARÃES ·",
       label:
-        "Especialidades da Serifil: impressão em PVC, tecido e TNT, sacos personalizados, capas, porta-fatos, componentes e soluções para o setor do calçado",
+        "Especialidades da Serifil: impressão em PVC, tecido e TNT, sacos personalizados, capas, porta-fatos e diferentes componentes para o setor do calçado",
     },
     introduction: {
       eyebrow: "DA IDEIA AO RESULTADO FINAL",
@@ -65,7 +65,7 @@ export const translations = {
       eyebrow: "ESPECIALIDADE PRINCIPAL",
       title: "Impressão e personalização para diferentes setores.",
       description:
-        "Produzimos sacos, capas, porta-fatos, componentes e outros artigos personalizados em PVC, tecido e TNT, incluindo soluções específicas para o setor do calçado.",
+        "Produzimos sacos, capas, porta-fatos e outros artigos personalizados em PVC, tecido e TNT, incluindo impressão em diferentes componentes para o setor do calçado.",
       otherServices: "OUTROS SERVIÇOS",
       quote: "Pedir orçamento",
       shortQuote: "Orçamento",
@@ -314,14 +314,14 @@ export const translations = {
     meta: {
       title: "Serifil | PVC, Fabric and Non-Woven Screen Printing",
       description:
-        "Printing and customisation on PVC, fabric and non-woven materials for bags, covers, footwear components and other applications. Produced in Guimarães, Portugal, for businesses and brands across different industries.",
+        "Printing and customisation on PVC, fabric and non-woven materials for bags, covers and other applications, including different footwear components. Produced in Guimarães, Portugal, for businesses and brands across different industries.",
       openGraphDescription:
         "Custom printing on PVC, fabric and non-woven materials for businesses, brands and different industries, including specialist solutions for the footwear sector.",
       imageAlt: "Screen-printing process at SERIFIL",
       locale: "en_GB",
     },
     businessDescription:
-      "Screen printing and customisation on PVC, fabric and non-woven materials for bags, covers, components and other applications.",
+      "Screen printing and customisation on PVC, fabric and non-woven materials for bags, covers and other applications, including different footwear components.",
     header: {
       descriptor: "Screen Printing & Customisation",
       homeLabel: "SERIFIL, back to the top",
@@ -345,7 +345,7 @@ export const translations = {
       lineOne: "We print ideas.",
       lineTwo: "We deliver results.",
       description:
-        "Printing and customisation on PVC, fabric and non-woven materials for bags, covers, garment bags, components and other applications for businesses and brands.",
+        "Printing and customisation on PVC, fabric and non-woven materials for bags, covers, garment bags and other applications for businesses and brands, as well as different footwear components.",
       quote: "Request a quote",
       work: "View our work",
       specialties: "PVC · Fabric · Non-woven · Components · Customisation",
@@ -355,7 +355,7 @@ export const translations = {
     marquee: {
       line: "PVC · FABRIC · NON-WOVEN · CUSTOM BAGS · COVERS · GARMENT BAGS · COMPONENTS · FOOTWEAR SECTOR · MADE IN GUIMARÃES ·",
       label:
-        "Serifil specialities: printing on PVC, fabric and non-woven materials, custom bags, covers, garment bags, components and solutions for the footwear sector",
+        "Serifil specialities: printing on PVC, fabric and non-woven materials, custom bags, covers, garment bags and different components for the footwear sector",
     },
     introduction: {
       eyebrow: "FROM IDEA TO FINAL RESULT",
@@ -367,7 +367,7 @@ export const translations = {
       eyebrow: "CORE SPECIALITY",
       title: "Printing and customisation for different industries.",
       description:
-        "We produce customised bags, covers, garment bags, components and other items in PVC, fabric and non-woven materials, including specialist solutions for the footwear industry.",
+        "We produce customised bags, covers, garment bags and other items in PVC, fabric and non-woven materials, including printing on different components for the footwear industry.",
       otherServices: "OTHER SERVICES",
       quote: "Request a quote",
       shortQuote: "Quote",

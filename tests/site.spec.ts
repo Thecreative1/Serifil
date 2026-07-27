@@ -151,7 +151,7 @@ test("publica metadados canónicos e de partilha corretos", async ({ page }) => 
   await expect(page).toHaveTitle("Serifil | Serigrafia em PVC, Tecido e TNT em Guimarães");
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     "content",
-    "Impressão e personalização em PVC, tecido e TNT para sacos, capas, porta-fatos, componentes e outras aplicações. Produção em Guimarães para empresas e marcas, incluindo o setor do calçado.",
+    "Impressão e personalização em PVC, tecido e TNT para sacos, capas, porta-fatos e outras aplicações, incluindo diferentes componentes para calçado. Produção em Guimarães para empresas e marcas.",
   );
   await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
     "content",
