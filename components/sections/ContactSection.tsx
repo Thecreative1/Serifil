@@ -6,9 +6,7 @@ import type { SiteContent } from "@/data/i18n";
 
 export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
   const contactItems = [
-    { label: copy.phone, value: brand.phone, href: brand.phone ? `tel:${brand.phone.replace(/\s/g, "")}` : "", icon: Phone, external: false },
     { label: copy.email, value: brand.email, href: brand.email ? `mailto:${brand.email}` : "", icon: Mail, external: false },
-    { label: copy.whatsapp, value: brand.whatsapp, href: brand.whatsapp ? `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}` : "", icon: MessageCircle, external: true },
     { label: copy.hours, value: brand.openingHours, href: "", icon: Clock3, external: false },
     { label: copy.instagram, value: brand.instagram, href: brand.instagram, icon: AtSign, external: true },
   ];
@@ -33,6 +31,39 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
                   <p className="mt-1 text-sm text-text-secondary">{brand.location}</p>
                 </div>
               </div>
+              {brand.phone || brand.whatsapp ? (
+                <div className="flex items-start gap-5 border-t border-border py-7">
+                  <Phone className="mt-1 size-5 shrink-0 text-accent" aria-hidden="true" />
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.12em] text-text-secondary">{copy.directContact}</p>
+                    <p className="mt-2 text-xl font-bold text-text-primary">{brand.phone || brand.whatsapp}</p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {brand.phone ? (
+                        <a
+                          href={`tel:${brand.phone.replace(/\s/g, "")}`}
+                          aria-label={`${copy.call} ${brand.phone}`}
+                          className="inline-flex min-h-11 items-center gap-2 border border-border px-4 text-sm font-bold text-text-primary transition-colors duration-300 hover:border-text-secondary hover:bg-background focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                        >
+                          <Phone className="size-4" aria-hidden="true" />
+                          {copy.call}
+                        </a>
+                      ) : null}
+                      {brand.whatsapp ? (
+                        <a
+                          href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`WhatsApp ${brand.whatsapp}`}
+                          className="inline-flex min-h-11 items-center gap-2 bg-accent px-4 text-sm font-bold text-light-text transition-colors duration-300 hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                        >
+                          <MessageCircle className="size-4" aria-hidden="true" />
+                          WhatsApp
+                        </a>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              ) : null}
               {available.map((item) => {
                 const Icon = item.icon;
                 return (

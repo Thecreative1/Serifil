@@ -122,9 +122,11 @@ test("publica apenas contactos configurados e o WhatsApp correto", async ({ page
   const whatsappLinks = page.locator('a[href="https://wa.me/351910508706"]');
   await expect(phoneLinks).toHaveCount(2);
   await expect(whatsappLinks).toHaveCount(2);
-  await expect(page.locator("#contacto").getByRole("link", { name: "+351 910 508 706" })).toHaveCount(2);
-  await expect(page.getByRole("link", { name: "Ligar +351 910 508 706" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "WhatsApp +351 910 508 706" })).toBeVisible();
+  const contact = page.locator("#contacto");
+  await expect(contact.getByText("+351 910 508 706", { exact: true })).toHaveCount(1);
+  await expect(contact.getByRole("link", { name: "Ligar +351 910 508 706" })).toBeVisible();
+  await expect(contact.getByRole("link", { name: "WhatsApp +351 910 508 706" })).toBeVisible();
+  await expect(page.getByText("Orçamentos por formulário, telefone ou WhatsApp")).toBeVisible();
   await expect(whatsappLinks.first()).toHaveAttribute("target", "_blank");
 });
 
@@ -203,6 +205,7 @@ test("publica a versão inglesa completa e permite trocar de idioma", async ({ p
   await expect(page.getByRole("navigation", { name: "Main navigation" })).toBeVisible();
   await expect(page.getByRole("form", { name: "Quote request form" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Get directions" })).toBeVisible();
+  await expect(page.getByText("Quotes via form, phone or WhatsApp")).toBeVisible();
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/en/");
 
   await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "pt" }).click();
