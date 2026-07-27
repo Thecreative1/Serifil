@@ -4,15 +4,16 @@ type BaseProps = {
   id: string;
   label: string;
   optional?: boolean;
+  optionalLabel?: string;
   error?: string;
   children?: ReactNode;
 };
 
-export function FieldShell({ id, label, optional, error, children }: BaseProps) {
+export function FieldShell({ id, label, optional, optionalLabel = "opcional", error, children }: BaseProps) {
   return (
     <div className="grid gap-2">
       <label htmlFor={id} className="text-sm font-bold text-text-primary">
-        {label} {optional ? <span className="font-normal text-text-secondary">(opcional)</span> : null}
+        {label} {optional ? <span className="font-normal text-text-secondary">({optionalLabel})</span> : null}
       </label>
       {children}
       {error ? (
@@ -26,9 +27,9 @@ export function FieldShell({ id, label, optional, error, children }: BaseProps) 
 
 const fieldClass = "min-h-12 w-full border border-border bg-surface px-4 py-3 text-base text-text-primary outline-none transition-colors placeholder:text-field-placeholder hover:border-[#4d514b] focus:border-accent focus:ring-1 focus:ring-accent";
 
-export function TextInput({ id, label, optional, error, inputRef, ...props }: BaseProps & InputHTMLAttributes<HTMLInputElement> & { inputRef?: Ref<HTMLInputElement> }) {
+export function TextInput({ id, label, optional, optionalLabel, error, inputRef, ...props }: BaseProps & InputHTMLAttributes<HTMLInputElement> & { inputRef?: Ref<HTMLInputElement> }) {
   return (
-    <FieldShell id={id} label={label} optional={optional} error={error}>
+    <FieldShell id={id} label={label} optional={optional} optionalLabel={optionalLabel} error={error}>
       <input ref={inputRef} id={id} className={fieldClass} aria-invalid={Boolean(error)} aria-describedby={error ? `${id}-error` : undefined} {...props} />
     </FieldShell>
   );

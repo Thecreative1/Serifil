@@ -12,13 +12,13 @@ test("capturas visuais completas", async ({ page }) => {
   };
 
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/");
+  await page.goto("/pt/");
   await page.waitForLoadState("networkidle");
   await loadImages();
   await page.screenshot({ path: "test-results/serifil-desktop-complete.png", fullPage: true });
 
   await page.setViewportSize({ width: 375, height: 812 });
-  await page.goto("/");
+  await page.goto("/en/");
   await page.waitForLoadState("networkidle");
   await loadImages();
   await page.screenshot({ path: "test-results/serifil-mobile-complete.png", fullPage: true });

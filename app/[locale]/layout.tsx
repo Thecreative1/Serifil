@@ -1,0 +1,74 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Archivo, Inter } from "next/font/google";
+import { brand } from "@/config/brand";
+import { isLocale, locales, translations, type Locale } from "@/data/i18n";
+import "../globals.css";
+
+const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: localeParam } = await params;
+  if (!isLocale(localeParam)) return {};
+
+  const locale = localeParam as Locale;
+  const copy = translations[locale];
+  const canonical = `${brand.website}${locale}/`;
+  const imageUrl = `${brand.website}og.png`;
+
+  return {
+    metadataBase: new URL(brand.website),
+    title: copy.meta.title,
+    description: copy.meta.description,
+    alternates: {
+      canonical,
+      languages: {
+        "pt-PT": `${brand.website}pt/`,
+        en: `${brand.website}en/`,
+        "x-default": brand.website,
+      },
+    },
+    openGraph: {
+      title: copy.meta.title,
+      description: copy.meta.openGraphDescription,
+      locale: copy.meta.locale,
+      alternateLocale: locale === "pt" ? ["en_GB"] : ["pt_PT"],
+      type: "website",
+      url: canonical,
+      images: [{
+        url: imageUrl,
+        width: 1732,
+        height: 909,
+        alt: copy.meta.imageAlt,
+      }],
+    },
+  };
+}
+
+export default async function LocaleLayout({
+  children,
+  params,
+}: Readonly<{
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}>) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+
+  return (
+    <html lang={translations[locale].htmlLang} className={`${archivo.variable} ${inter.variable}`}>
+      <body>{children}</body>
+    </html>
+  );
+}
