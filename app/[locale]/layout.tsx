@@ -29,8 +29,23 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(brand.website),
+    applicationName: brand.name,
     title: copy.meta.title,
     description: copy.meta.description,
+    creator: brand.name,
+    publisher: brand.name,
+    category: locale === "pt" ? "Serigrafia e personalização" : "Screen printing and customisation",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     alternates: {
       canonical,
       languages: {
@@ -42,6 +57,7 @@ export async function generateMetadata({
     openGraph: {
       title: copy.meta.title,
       description: copy.meta.openGraphDescription,
+      siteName: brand.name,
       locale: copy.meta.locale,
       alternateLocale: locale === "pt" ? ["en_GB"] : ["pt_PT"],
       type: "website",
@@ -50,6 +66,15 @@ export async function generateMetadata({
         url: imageUrl,
         width: 1732,
         height: 909,
+        alt: copy.meta.imageAlt,
+      }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: copy.meta.title,
+      description: copy.meta.openGraphDescription,
+      images: [{
+        url: imageUrl,
         alt: copy.meta.imageAlt,
       }],
     },

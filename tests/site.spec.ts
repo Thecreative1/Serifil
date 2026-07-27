@@ -161,6 +161,54 @@ test("publica metadados canónicos e de partilha corretos", async ({ page }) => 
   await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/");
   await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", "https://serifil.com/pt/");
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://serifil.com/og.png");
+  await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute("content", "SERIFIL");
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /index/);
+  await expect(page.locator('meta[name="googlebot"]')).toHaveAttribute("content", /max-image-preview:large/);
+});
+
+test("publica robots, sitemap localizado e dados estruturados completos", async ({ page, request }) => {
+  const robotsResponse = await request.get("/robots.txt");
+  expect(robotsResponse.ok()).toBeTruthy();
+  const robots = await robotsResponse.text();
+  expect(robots).toContain("User-Agent: *");
+  expect(robots).toContain("Allow: /");
+  expect(robots).toContain("Sitemap: https://serifil.com/sitemap.xml");
+
+  const sitemapResponse = await request.get("/sitemap.xml");
+  expect(sitemapResponse.ok()).toBeTruthy();
+  const sitemap = await sitemapResponse.text();
+  expect(sitemap).toContain("<loc>https://serifil.com/pt/</loc>");
+  expect(sitemap).toContain("<loc>https://serifil.com/en/</loc>");
+  expect(sitemap).toContain('hreflang="pt-PT"');
+  expect(sitemap).toContain('hreflang="en"');
+  expect(sitemap).toContain('hreflang="x-default"');
+  expect(sitemap).toContain("<image:loc>https://serifil.com/images/hero-serigrafia.webp</image:loc>");
+  expect(sitemap).toContain("<image:loc>https://serifil.com/og.png</image:loc>");
+
+  const rootResponse = await request.get("/");
+  const rootHtml = await rootResponse.text();
+  expect(rootHtml).toContain('"@type":"WebSite"');
+  expect(rootHtml).toContain('"alternateName":["Serifil","serifil.com"]');
+
+  await page.goto("/pt/");
+  const structuredDataText = await page.locator('script[type="application/ld+json"]').textContent();
+  const structuredData = JSON.parse(structuredDataText ?? "{}") as {
+    "@type": string;
+    "@id": string;
+    address: { addressRegion: string };
+    contactPoint: { telephone: string; availableLanguage: string[] };
+    hasOfferCatalog: { itemListElement: Array<{ itemOffered: { name: string } }> };
+  };
+
+  expect(structuredData["@type"]).toBe("LocalBusiness");
+  expect(structuredData["@id"]).toBe("https://serifil.com/#business");
+  expect(structuredData.address.addressRegion).toBe("Braga");
+  expect(structuredData.contactPoint.telephone).toBe("+351 910 508 706");
+  expect(structuredData.contactPoint.availableLanguage).toEqual(["Portuguese", "English"]);
+  expect(structuredData.hasOfferCatalog.itemListElement).toHaveLength(6);
+  expect(structuredData.hasOfferCatalog.itemListElement[0].itemOffered.name).toBe("Sacos em PVC, tecido e TNT");
+  expect(structuredData.hasOfferCatalog.itemListElement[2].itemOffered.name).toBe("Componentes para calçado");
 });
 
 test("comunica materiais, setores e componentes de calçado nas duas línguas", async ({ page }) => {

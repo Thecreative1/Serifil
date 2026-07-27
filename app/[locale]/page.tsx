@@ -26,26 +26,53 @@ export default async function Home({
   if (!isLocale(locale)) notFound();
 
   const copy = translations[locale];
+  const canonical = `${brand.website}${locale}/`;
+  const businessId = `${brand.website}#business`;
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": businessId,
     name: brand.name,
     description: copy.businessDescription,
+    image: `${brand.website}og.png`,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Guimarães",
+      addressRegion: "Braga",
       addressCountry: "PT",
       ...(brand.address ? { streetAddress: brand.address } : {}),
     },
     ...(brand.phone ? { telephone: brand.phone } : {}),
     ...(brand.email ? { email: brand.email } : {}),
-    url: `${brand.website}${locale}/`,
+    ...(brand.phone ? {
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: brand.phone,
+        contactType: "sales",
+        availableLanguage: ["Portuguese", "English"],
+      },
+    } : {}),
+    url: brand.website,
+    mainEntityOfPage: canonical,
     inLanguage: copy.htmlLang,
     hasMap: brand.mapsUrl,
     geo: {
       "@type": "GeoCoordinates",
       latitude: brand.latitude,
       longitude: brand.longitude,
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: copy.services.title,
+      itemListElement: copy.services.items.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.title,
+          description: service.description,
+          provider: { "@id": businessId },
+        },
+      })),
     },
   };
 
