@@ -24,7 +24,7 @@ export const brand: BrandConfig = {
   descriptor: "Serigrafia & Personalização",
   heroLineOne: "Imprimimos ideias.",
   heroLineTwo: "Entregamos resultados.",
-  secondaryTagline: "Impressão especializada para o setor do calçado.",
+  secondaryTagline: "Serigrafia e personalização em PVC, tecido e TNT.",
   location: "Guimarães, Portugal",
   phone: "+351 910 508 706",
   email: "",

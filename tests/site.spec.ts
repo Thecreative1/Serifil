@@ -103,7 +103,7 @@ test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
   await page.getByLabel("Nome").fill("Empresa Exemplo");
   await page.getByLabel("E-mail").fill("producao@example.test");
   await page.getByLabel("Telefone").fill("000 000 000");
-  await page.getByLabel("Serviço pretendido").selectOption({ label: "Sacos em tecido para calçado" });
+  await page.getByLabel("Serviço pretendido").selectOption({ label: "Sacos em PVC, tecido e TNT" });
   await page.getByLabel("Quantidade aproximada").fill("500");
   await page.getByLabel("Data pretendida").fill("2030-12-20");
   await page.getByLabel("Mensagem").fill("Precisamos de sacos impressos a uma cor para uma série de produção.");
@@ -146,10 +146,54 @@ test("apresenta a localização e direções de forma acessível", async ({ page
 
 test("publica metadados canónicos e de partilha corretos", async ({ page }) => {
   await page.goto("/pt/");
+  await expect(page).toHaveTitle("Serifil | Serigrafia em PVC, Tecido e TNT em Guimarães");
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    "content",
+    "Impressão e personalização em PVC, tecido e TNT para sacos, capas, porta-fatos, componentes e outras aplicações. Produção em Guimarães para empresas e marcas, incluindo o setor do calçado.",
+  );
+  await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
+    "content",
+    "Impressão personalizada em PVC, tecido e TNT para empresas, marcas e diferentes setores de atividade, incluindo soluções para o setor do calçado.",
+  );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/pt/");
   await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/");
   await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", "https://serifil.com/pt/");
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://serifil.com/og.png");
+});
+
+test("comunica materiais, setores e componentes de calçado nas duas línguas", async ({ page }) => {
+  await page.goto("/pt/");
+  await expect(page.getByText("ESPECIALISTAS EM SERIGRAFIA E PERSONALIZAÇÃO")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Impressão adaptada a diferentes materiais e aplicações." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Componentes para calçado" }).first()).toBeVisible();
+  await expect(page.getByText(/palmilhas, palas e outros componentes/).first()).toBeVisible();
+  await expect(page.getByLabel("Serviço pretendido").locator("option")).toHaveText([
+    "Selecione uma opção",
+    "Sacos em PVC, tecido e TNT",
+    "Capas e porta-fatos",
+    "Componentes para calçado",
+    "Serigrafia têxtil e roupa profissional",
+    "Produção personalizada para empresas",
+    "Gravação ou corte laser",
+    "Outro",
+  ]);
+
+  await page.goto("/en/");
+  await expect(page).toHaveTitle("Serifil | PVC, Fabric and Non-Woven Screen Printing");
+  await expect(page.getByText("SPECIALISTS IN SCREEN PRINTING AND CUSTOMISATION")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Footwear components" }).first()).toBeVisible();
+  await expect(page.getByText(/insoles, uppers and other components/).first()).toBeVisible();
+  await expect(page.locator("body")).not.toContainText(/\bTNT\b/);
+  await expect(page.getByLabel("Required service").locator("option")).toHaveText([
+    "Select an option",
+    "PVC, fabric and non-woven bags",
+    "Covers and garment bags",
+    "Footwear components",
+    "Textile printing and workwear",
+    "Custom production for businesses",
+    "Laser engraving or cutting",
+    "Other",
+  ]);
 });
 
 test("publica a versão inglesa completa e permite trocar de idioma", async ({ page }) => {

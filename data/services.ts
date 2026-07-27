@@ -9,25 +9,25 @@ export type Service = {
 export const services: Service[] = [
   {
     number: "01",
-    title: "Sacos em tecido para calçado",
+    title: "Sacos em PVC, tecido e TNT",
     description:
-      "Impressão de logótipos e elementos de marca em sacos de tecido utilizados para proteger e apresentar calçado.",
+      "Impressão de logótipos e elementos de marca em sacos para apresentação, proteção, acondicionamento e utilização promocional.",
     emphasis: "primary",
     label: "Principal especialidade",
   },
   {
     number: "02",
-    title: "Sacos plásticos impressos",
+    title: "Capas e porta-fatos",
     description:
-      "Personalização de sacos plásticos para calçado, comércio e embalagem, de acordo com o material e a imagem pretendida.",
+      "Impressão em capas e porta-fatos de tecido ou TNT para vestuário, hotelaria, comércio, marcas e confeção.",
     emphasis: "supporting",
     label: "Produção frequente",
   },
   {
     number: "03",
-    title: "Capas guarda-fatos",
+    title: "Componentes para calçado",
     description:
-      "Impressão em capas guarda-fatos, também conhecidas como porta-fatos, para marcas de vestuário, lojas e confeção.",
+      "Impressão e personalização de palmilhas, palas e outros componentes utilizados na produção de calçado.",
     emphasis: "supporting",
     label: "Produção especializada",
   },
@@ -35,15 +35,15 @@ export const services: Service[] = [
     number: "04",
     title: "Serigrafia têxtil e roupa profissional",
     description:
-      "Impressão resistente para t-shirts, sweatshirts, uniformes e vestuário de equipas, comércio, construção e restauração.",
+      "Impressão em t-shirts, sweatshirts, uniformes, vestuário profissional e outros artigos têxteis.",
     emphasis: "complementary",
     label: "Serviço complementar",
   },
   {
     number: "05",
-    title: "Merchandising e eventos",
+    title: "Produção personalizada para empresas",
     description:
-      "Produção personalizada para empresas, associações, campanhas, festas, eventos e projetos locais, adaptada à necessidade de cada pedido.",
+      "Impressão de artigos para empresas, marcas, hotelaria, comércio, associações, campanhas e eventos, adaptada a cada projeto.",
     emphasis: "complementary",
     label: "Serviço complementar",
   },

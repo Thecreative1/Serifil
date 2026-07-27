@@ -7,39 +7,44 @@ export type PortfolioItem = {
 
 export const portfolio: PortfolioItem[] = [
   {
-    category: "Calçado",
-    name: "Sacos em tecido para calçado",
-    technique: "Serigrafia em tecido",
-    description: "Impressão de marca em sacos de proteção destinados ao setor do calçado.",
-  },
-  {
-    category: "Calçado",
-    name: "Sacos plásticos impressos",
-    technique: "Impressão em plástico",
-    description: "Personalização de sacos plásticos para acondicionamento e apresentação de calçado.",
+    category: "Sacos",
+    name: "Sacos em PVC, tecido e TNT",
+    technique: "Serigrafia em diferentes materiais",
+    description:
+      "Personalização de sacos para apresentação, proteção, embalagem, hotelaria, comércio e ações promocionais.",
   },
   {
     category: "Vestuário",
-    name: "Capas guarda-fatos",
-    technique: "Impressão em capas",
-    description: "Aplicação de logótipos em capas de proteção para fatos e outras peças de vestuário.",
+    name: "Capas e porta-fatos",
+    technique: "Impressão em tecido e TNT",
+    description:
+      "Aplicação de logótipos em capas e porta-fatos destinados a vestuário, hotelaria, lojas e confeção.",
   },
   {
-    category: "Merchandising",
-    name: "Sweatshirts personalizadas",
-    technique: "Impressão direta",
-    description: "Produção têxtil personalizada para marcas, equipas e iniciativas.",
+    category: "Calçado",
+    name: "Componentes para calçado",
+    technique: "Impressão em componentes",
+    description:
+      "Impressão e personalização de palmilhas, palas e outros componentes utilizados na produção de calçado.",
+  },
+  {
+    category: "Têxtil",
+    name: "Roupa profissional",
+    technique: "Serigrafia têxtil",
+    description:
+      "Personalização de vestuário profissional para empresas, equipas, restauração, construção e outros setores.",
+  },
+  {
+    category: "Empresas",
+    name: "Produções personalizadas",
+    technique: "Produção por projeto",
+    description:
+      "Soluções personalizadas para empresas, marcas, hotelaria, campanhas, eventos e outras aplicações.",
   },
   {
     category: "Sinalética",
     name: "Placas gravadas",
     technique: "Gravação laser",
     description: "Gravação precisa em madeira e acrílico para placas e sinalética.",
-  },
-  {
-    category: "Equipas",
-    name: "Roupa profissional",
-    technique: "Serigrafia têxtil",
-    description: "Personalização coordenada para vestuário de trabalho e equipas.",
   },
 ];

@@ -10,16 +10,16 @@ export const translations = {
   pt: {
     htmlLang: "pt-PT",
     meta: {
-      title: "Serifil | Impressão de Sacos para Calçado em Guimarães",
+      title: "Serifil | Serigrafia em PVC, Tecido e TNT em Guimarães",
       description:
-        "Impressão e personalização de sacos em tecido para calçado, sacos plásticos e capas guarda-fatos em Guimarães. Peça um orçamento à Serifil.",
+        "Impressão e personalização em PVC, tecido e TNT para sacos, capas, porta-fatos, componentes e outras aplicações. Produção em Guimarães para empresas e marcas, incluindo o setor do calçado.",
       openGraphDescription:
-        "Sacos em tecido para calçado, sacos plásticos e capas guarda-fatos personalizados em Guimarães.",
+        "Impressão personalizada em PVC, tecido e TNT para empresas, marcas e diferentes setores de atividade, incluindo soluções para o setor do calçado.",
       imageAlt: "Processo de serigrafia na SERIFIL",
       locale: "pt_PT",
     },
     businessDescription:
-      "Serigrafia e personalização de sacos em tecido e plástico para o setor do calçado.",
+      "Serigrafia e personalização em PVC, tecido e TNT para sacos, capas, componentes e outras aplicações.",
     header: {
       descriptor: "Serigrafia & Personalização",
       homeLabel: "SERIFIL, voltar ao início",
@@ -39,33 +39,33 @@ export const translations = {
       ],
     },
     hero: {
-      eyebrow: "ESPECIALISTAS EM IMPRESSÃO DE SACOS TÊXTEIS E PLÁSTICOS",
+      eyebrow: "ESPECIALISTAS EM SERIGRAFIA E PERSONALIZAÇÃO",
       lineOne: "Imprimimos ideias.",
       lineTwo: "Entregamos resultados.",
       description:
-        "Impressão e personalização de sacos em tecido para calçado, sacos plásticos e capas guarda-fatos para fábricas, marcas e empresas.",
+        "Impressão e personalização em PVC, tecido e TNT para sacos, capas, porta-fatos, componentes e outras aplicações destinadas a empresas e marcas.",
       quote: "Pedir orçamento",
       work: "Ver trabalhos",
-      specialties: "Sacos em tecido · Sacos plásticos · Capas guarda-fatos",
+      specialties: "PVC · Tecido · TNT · Componentes · Personalização",
       imageAlt: "Processo de serigrafia com tinta a ser puxada através de uma tela",
       continueLabel: "Continuar para a introdução",
     },
     marquee: {
-      line: "SACOS EM TECIDO PARA CALÇADO · SACOS PLÁSTICOS · CAPAS GUARDA-FATOS · SERIGRAFIA · PRODUÇÃO EM GUIMARÃES ·",
+      line: "PVC · TECIDO · TNT · SACOS PERSONALIZADOS · CAPAS · PORTA-FATOS · COMPONENTES · SETOR DO CALÇADO · PRODUÇÃO EM GUIMARÃES ·",
       label:
-        "Especialidades: sacos em tecido para calçado, sacos plásticos, capas guarda-fatos e serigrafia em Guimarães",
+        "Especialidades da Serifil: impressão em PVC, tecido e TNT, sacos personalizados, capas, porta-fatos, componentes e soluções para o setor do calçado",
     },
     introduction: {
-      eyebrow: "DA IDEIA À PRODUÇÃO",
-      title: "Impressão especializada para o setor do calçado.",
+      eyebrow: "DA IDEIA AO RESULTADO FINAL",
+      title: "Impressão adaptada a diferentes materiais e aplicações.",
       description:
-        "Trabalhamos sobretudo para o setor do calçado, imprimindo sacos em tecido, sacos plásticos e capas guarda-fatos com acompanhamento técnico e comunicação direta.",
+        "Trabalhamos com empresas e marcas de diferentes setores, incluindo o setor do calçado, produzindo impressão em PVC, tecido e TNT para sacos, capas, porta-fatos, componentes e outras aplicações, com acompanhamento técnico e comunicação direta.",
     },
     services: {
       eyebrow: "ESPECIALIDADE PRINCIPAL",
-      title: "Sacos personalizados para o setor do calçado.",
+      title: "Impressão e personalização para diferentes setores.",
       description:
-        "A maior parte do nosso trabalho concentra-se na impressão de sacos em tecido, sacos plásticos e capas guarda-fatos.",
+        "Produzimos sacos, capas, porta-fatos, componentes e outros artigos personalizados em PVC, tecido e TNT, incluindo soluções específicas para o setor do calçado.",
       otherServices: "OUTROS SERVIÇOS",
       quote: "Pedir orçamento",
       shortQuote: "Orçamento",
@@ -73,25 +73,25 @@ export const translations = {
       items: [
         {
           number: "01",
-          title: "Sacos em tecido para calçado",
+          title: "Sacos em PVC, tecido e TNT",
           description:
-            "Impressão de logótipos e elementos de marca em sacos de tecido utilizados para proteger e apresentar calçado.",
+            "Impressão de logótipos e elementos de marca em sacos para apresentação, proteção, acondicionamento e utilização promocional.",
           emphasis: "primary",
           label: "Principal especialidade",
         },
         {
           number: "02",
-          title: "Sacos plásticos impressos",
+          title: "Capas e porta-fatos",
           description:
-            "Personalização de sacos plásticos para calçado, comércio e embalagem, de acordo com o material e a imagem pretendida.",
+            "Impressão em capas e porta-fatos de tecido ou TNT para vestuário, hotelaria, comércio, marcas e confeção.",
           emphasis: "supporting",
           label: "Produção frequente",
         },
         {
           number: "03",
-          title: "Capas guarda-fatos",
+          title: "Componentes para calçado",
           description:
-            "Impressão em capas guarda-fatos, também conhecidas como porta-fatos, para marcas de vestuário, lojas e confeção.",
+            "Impressão e personalização de palmilhas, palas e outros componentes utilizados na produção de calçado.",
           emphasis: "supporting",
           label: "Produção especializada",
         },
@@ -99,15 +99,15 @@ export const translations = {
           number: "04",
           title: "Serigrafia têxtil e roupa profissional",
           description:
-            "Impressão resistente para t-shirts, sweatshirts, uniformes e vestuário de equipas, comércio, construção e restauração.",
+            "Impressão em t-shirts, sweatshirts, uniformes, vestuário profissional e outros artigos têxteis.",
           emphasis: "complementary",
           label: "Serviço complementar",
         },
         {
           number: "05",
-          title: "Merchandising e eventos",
+          title: "Produção personalizada para empresas",
           description:
-            "Produção personalizada para empresas, associações, campanhas, festas, eventos e projetos locais, adaptada à necessidade de cada pedido.",
+            "Impressão de artigos para empresas, marcas, hotelaria, comércio, associações, campanhas e eventos, adaptada a cada projeto.",
           emphasis: "complementary",
           label: "Serviço complementar",
         },
@@ -123,45 +123,50 @@ export const translations = {
     },
     portfolio: {
       eyebrow: "APLICAÇÕES",
-      title: "Soluções pensadas para diferentes setores.",
+      title: "Soluções para empresas, marcas e diferentes setores.",
       description:
-        "Cada projeto é acompanhado desde o ficheiro inicial até à produção final, com atenção ao material, à técnica e ao resultado pretendido.",
+        "Cada trabalho é acompanhado desde o ficheiro inicial até ao resultado final, com atenção ao material, à técnica e à aplicação pretendida, incluindo soluções específicas para o setor do calçado.",
       items: [
         {
-          category: "Calçado",
-          name: "Sacos em tecido para calçado",
-          technique: "Serigrafia em tecido",
-          description: "Impressão de marca em sacos de proteção destinados ao setor do calçado.",
-        },
-        {
-          category: "Calçado",
-          name: "Sacos plásticos impressos",
-          technique: "Impressão em plástico",
-          description: "Personalização de sacos plásticos para acondicionamento e apresentação de calçado.",
+          category: "Sacos",
+          name: "Sacos em PVC, tecido e TNT",
+          technique: "Serigrafia em diferentes materiais",
+          description:
+            "Personalização de sacos para apresentação, proteção, embalagem, hotelaria, comércio e ações promocionais.",
         },
         {
           category: "Vestuário",
-          name: "Capas guarda-fatos",
-          technique: "Impressão em capas",
-          description: "Aplicação de logótipos em capas de proteção para fatos e outras peças de vestuário.",
+          name: "Capas e porta-fatos",
+          technique: "Impressão em tecido e TNT",
+          description:
+            "Aplicação de logótipos em capas e porta-fatos destinados a vestuário, hotelaria, lojas e confeção.",
         },
         {
-          category: "Merchandising",
-          name: "Sweatshirts personalizadas",
-          technique: "Impressão direta",
-          description: "Produção têxtil personalizada para marcas, equipas e iniciativas.",
+          category: "Calçado",
+          name: "Componentes para calçado",
+          technique: "Impressão em componentes",
+          description:
+            "Impressão e personalização de palmilhas, palas e outros componentes utilizados na produção de calçado.",
+        },
+        {
+          category: "Têxtil",
+          name: "Roupa profissional",
+          technique: "Serigrafia têxtil",
+          description:
+            "Personalização de vestuário profissional para empresas, equipas, restauração, construção e outros setores.",
+        },
+        {
+          category: "Empresas",
+          name: "Produções personalizadas",
+          technique: "Produção por projeto",
+          description:
+            "Soluções personalizadas para empresas, marcas, hotelaria, campanhas, eventos e outras aplicações.",
         },
         {
           category: "Sinalética",
           name: "Placas gravadas",
           technique: "Gravação laser",
           description: "Gravação precisa em madeira e acrílico para placas e sinalética.",
-        },
-        {
-          category: "Equipas",
-          name: "Roupa profissional",
-          technique: "Serigrafia têxtil",
-          description: "Personalização coordenada para vestuário de trabalho e equipas.",
         },
       ],
     },
@@ -194,7 +199,7 @@ export const translations = {
     },
     process: {
       eyebrow: "COMO FUNCIONA",
-      title: "Da ideia à peça final.",
+      title: "Da ideia ao resultado final.",
       items: [
         { number: "01", title: "Pedido", description: "Indique o produto, a quantidade e a data pretendida." },
         { number: "02", title: "Orçamento", description: "Analisamos o trabalho e apresentamos uma proposta clara." },
@@ -211,7 +216,7 @@ export const translations = {
       eyebrow: "A SERIFIL",
       title: "Experiência de produção. Nova ambição.",
       description:
-        "A Serifil é uma empresa de serigrafia e personalização em Guimarães, com experiência na impressão de sacos em tecido e plástico para o setor do calçado e de capas guarda-fatos. Trabalhamos também com empresas, equipas, associações e marcas que procuram acompanhamento próximo e comunicação direta.",
+        "A Serifil é uma empresa de serigrafia e personalização em Guimarães, com experiência em impressão sobre PVC, tecido e TNT. Produzimos sacos, capas, porta-fatos, artigos têxteis e outras soluções para empresas, fábricas e marcas de diferentes setores. Trabalhamos também com o setor do calçado, nomeadamente na personalização de sacos, palmilhas, palas e outros componentes.",
       principles: [
         ["01", "Produção local"],
         ["02", "Comunicação direta"],
@@ -220,9 +225,9 @@ export const translations = {
     },
     quoteCta: {
       eyebrow: "VAMOS PRODUZIR",
-      title: "Precisa de sacos personalizados?",
+      title: "Precisa de impressão personalizada?",
       description:
-        "Indique o material, as medidas, a quantidade e as cores de impressão para receber uma análise inicial.",
+        "Indique o produto, o material, as medidas, a quantidade e as cores de impressão para receber uma análise inicial.",
       button: "Pedir orçamento",
     },
     quoteForm: {
@@ -249,19 +254,18 @@ export const translations = {
       date: "Data pretendida",
       message: "Mensagem",
       messagePlaceholder:
-        "Indique o tipo de saco, material, medidas, número de cores e outras informações úteis.",
+        "Indique o produto, o material, as medidas, a quantidade, o número de cores e outras informações úteis.",
       privacy: "Autorizo o tratamento destes dados para resposta ao pedido de orçamento.",
       submissionError: "Não foi possível enviar o pedido. Verifique a ligação e tente novamente.",
       submitting: "A enviar pedido",
       submit: "Enviar pedido",
       subject: "Novo pedido de orçamento através do site Serifil",
       serviceOptions: [
-        "Sacos em tecido para calçado",
-        "Sacos plásticos impressos",
-        "Capas guarda-fatos",
-        "Serigrafia têxtil",
-        "Roupa profissional",
-        "Merchandising",
+        "Sacos em PVC, tecido e TNT",
+        "Capas e porta-fatos",
+        "Componentes para calçado",
+        "Serigrafia têxtil e roupa profissional",
+        "Produção personalizada para empresas",
         "Gravação ou corte laser",
         "Outro",
       ],
@@ -307,16 +311,16 @@ export const translations = {
   en: {
     htmlLang: "en",
     meta: {
-      title: "Serifil | Custom Shoe Bags and Screen Printing in Portugal",
+      title: "Serifil | PVC, Fabric and Non-Woven Screen Printing",
       description:
-        "Custom printing for fabric shoe bags, plastic bags and garment covers in Guimarães, Portugal. Request a quote from Serifil.",
+        "Printing and customisation on PVC, fabric and non-woven materials for bags, covers, footwear components and other applications. Produced in Guimarães, Portugal, for businesses and brands across different industries.",
       openGraphDescription:
-        "Custom fabric shoe bags, printed plastic bags and garment covers, produced in Guimarães, Portugal.",
+        "Custom printing on PVC, fabric and non-woven materials for businesses, brands and different industries, including specialist solutions for the footwear sector.",
       imageAlt: "Screen-printing process at SERIFIL",
       locale: "en_GB",
     },
     businessDescription:
-      "Screen printing and customisation of fabric and plastic bags for the footwear industry.",
+      "Screen printing and customisation on PVC, fabric and non-woven materials for bags, covers, components and other applications.",
     header: {
       descriptor: "Screen Printing & Customisation",
       homeLabel: "SERIFIL, back to the top",
@@ -336,33 +340,33 @@ export const translations = {
       ],
     },
     hero: {
-      eyebrow: "SPECIALISTS IN PRINTED FABRIC AND PLASTIC BAGS",
+      eyebrow: "SPECIALISTS IN SCREEN PRINTING AND CUSTOMISATION",
       lineOne: "We print ideas.",
       lineTwo: "We deliver results.",
       description:
-        "Printing and customisation of fabric shoe bags, plastic bags and garment covers for factories, brands and businesses.",
+        "Printing and customisation on PVC, fabric and non-woven materials for bags, covers, garment bags, components and other applications for businesses and brands.",
       quote: "Request a quote",
       work: "View our work",
-      specialties: "Fabric bags · Plastic bags · Garment covers",
+      specialties: "PVC · Fabric · Non-woven · Components · Customisation",
       imageAlt: "Ink being pulled across a screen during the screen-printing process",
       continueLabel: "Continue to the introduction",
     },
     marquee: {
-      line: "FABRIC SHOE BAGS · PLASTIC BAGS · GARMENT COVERS · SCREEN PRINTING · MADE IN GUIMARÃES ·",
+      line: "PVC · FABRIC · NON-WOVEN · CUSTOM BAGS · COVERS · GARMENT BAGS · COMPONENTS · FOOTWEAR SECTOR · MADE IN GUIMARÃES ·",
       label:
-        "Specialities: fabric shoe bags, plastic bags, garment covers and screen printing in Guimarães",
+        "Serifil specialities: printing on PVC, fabric and non-woven materials, custom bags, covers, garment bags, components and solutions for the footwear sector",
     },
     introduction: {
-      eyebrow: "FROM IDEA TO PRODUCTION",
-      title: "Specialist printing for the footwear industry.",
+      eyebrow: "FROM IDEA TO FINAL RESULT",
+      title: "Printing adapted to different materials and applications.",
       description:
-        "We work primarily with the footwear industry, printing fabric bags, plastic bags and garment covers with technical guidance and direct communication.",
+        "We work with businesses and brands across different industries, including the footwear sector, printing on PVC, fabric and non-woven materials for bags, covers, garment bags, components and other applications, with technical guidance and direct communication.",
     },
     services: {
       eyebrow: "CORE SPECIALITY",
-      title: "Custom bags for the footwear industry.",
+      title: "Printing and customisation for different industries.",
       description:
-        "Most of our work focuses on printing fabric bags, plastic bags and garment covers.",
+        "We produce customised bags, covers, garment bags, components and other items in PVC, fabric and non-woven materials, including specialist solutions for the footwear industry.",
       otherServices: "OTHER SERVICES",
       quote: "Request a quote",
       shortQuote: "Quote",
@@ -370,25 +374,25 @@ export const translations = {
       items: [
         {
           number: "01",
-          title: "Fabric shoe bags",
+          title: "PVC, fabric and non-woven bags",
           description:
-            "Logos and brand elements printed on fabric bags designed to protect and present footwear.",
+            "Logos and brand elements printed on bags for presentation, protection, packaging and promotional use.",
           emphasis: "primary",
           label: "Core speciality",
         },
         {
           number: "02",
-          title: "Printed plastic bags",
+          title: "Covers and garment bags",
           description:
-            "Custom plastic bags for footwear, retail and packaging, matched to the chosen material and brand identity.",
+            "Printing on fabric and non-woven covers and garment bags for clothing, hospitality, retail, brands and manufacturers.",
           emphasis: "supporting",
           label: "Regular production",
         },
         {
           number: "03",
-          title: "Garment covers",
+          title: "Footwear components",
           description:
-            "Printed garment and suit covers for clothing brands, retailers and manufacturers.",
+            "Printing and customisation of insoles, uppers and other components used in footwear production.",
           emphasis: "supporting",
           label: "Specialist production",
         },
@@ -396,15 +400,15 @@ export const translations = {
           number: "04",
           title: "Textile printing and workwear",
           description:
-            "Durable printing for T-shirts, sweatshirts, uniforms and clothing for teams, retail, construction and hospitality.",
+            "Printing on T-shirts, sweatshirts, uniforms, professional clothing and other textile items.",
           emphasis: "complementary",
           label: "Additional service",
         },
         {
           number: "05",
-          title: "Merchandise and events",
+          title: "Custom production for businesses",
           description:
-            "Custom production for businesses, associations, campaigns, celebrations, events and local projects, tailored to each brief.",
+            "Custom printing for businesses, brands, hospitality, retail, associations, campaigns and events, adapted to each project.",
           emphasis: "complementary",
           label: "Additional service",
         },
@@ -420,45 +424,50 @@ export const translations = {
     },
     portfolio: {
       eyebrow: "APPLICATIONS",
-      title: "Solutions for different industries.",
+      title: "Solutions for businesses, brands and different industries.",
       description:
-        "Every project is supported from the initial artwork to final production, with close attention to the material, technique and intended result.",
+        "Every project is supported from the initial artwork to the final result, with close attention to the material, technique and intended application, including specialist solutions for the footwear sector.",
       items: [
         {
-          category: "Footwear",
-          name: "Fabric shoe bags",
-          technique: "Fabric screen printing",
-          description: "Brand printing on protective fabric bags made for the footwear industry.",
-        },
-        {
-          category: "Footwear",
-          name: "Printed plastic bags",
-          technique: "Plastic printing",
-          description: "Custom plastic bags for packaging and presenting footwear.",
+          category: "Bags",
+          name: "PVC, fabric and non-woven bags",
+          technique: "Screen printing on different materials",
+          description:
+            "Custom bags for presentation, protection, packaging, hospitality, retail and promotional campaigns.",
         },
         {
           category: "Clothing",
-          name: "Garment covers",
-          technique: "Cover printing",
-          description: "Logos printed on protective covers for suits and other garments.",
+          name: "Covers and garment bags",
+          technique: "Printing on fabric and non-woven materials",
+          description:
+            "Logos printed on covers and garment bags for clothing, hospitality, retail and manufacturing.",
         },
         {
-          category: "Merchandise",
-          name: "Custom sweatshirts",
-          technique: "Direct printing",
-          description: "Custom textile production for brands, teams and initiatives.",
+          category: "Footwear",
+          name: "Footwear components",
+          technique: "Component printing",
+          description:
+            "Printing and customisation of insoles, uppers and other components used in footwear production.",
+        },
+        {
+          category: "Textiles",
+          name: "Workwear",
+          technique: "Textile screen printing",
+          description:
+            "Custom workwear for businesses, teams, hospitality, construction and other industries.",
+        },
+        {
+          category: "Businesses",
+          name: "Custom production",
+          technique: "Project-based production",
+          description:
+            "Custom solutions for businesses, brands, hospitality, campaigns, events and other applications.",
         },
         {
           category: "Signage",
           name: "Engraved signs",
           technique: "Laser engraving",
           description: "Precise engraving on wood and acrylic for plaques and signage.",
-        },
-        {
-          category: "Teams",
-          name: "Workwear",
-          technique: "Textile screen printing",
-          description: "Coordinated customisation for workwear and team clothing.",
         },
       ],
     },
@@ -491,7 +500,7 @@ export const translations = {
     },
     process: {
       eyebrow: "HOW IT WORKS",
-      title: "From idea to finished piece.",
+      title: "From idea to final result.",
       items: [
         { number: "01", title: "Brief", description: "Tell us the product, quantity and required date." },
         { number: "02", title: "Quote", description: "We assess the job and provide a clear proposal." },
@@ -508,7 +517,7 @@ export const translations = {
       eyebrow: "SERIFIL",
       title: "Production experience. New ambition.",
       description:
-        "Serifil is a screen-printing and customisation company in Guimarães, Portugal, experienced in printing fabric and plastic bags for the footwear industry and garment covers. We also work with businesses, teams, associations and brands looking for attentive support and direct communication.",
+        "Serifil is a screen-printing and customisation company based in Guimarães, Portugal, with experience printing on PVC, fabric and non-woven materials. We produce bags, covers, garment bags, textile items and other solutions for businesses, factories and brands across different industries. We also serve the footwear sector, including the customisation of shoe bags, insoles, uppers and other components.",
       principles: [
         ["01", "Local production"],
         ["02", "Direct communication"],
@@ -517,9 +526,9 @@ export const translations = {
     },
     quoteCta: {
       eyebrow: "LET'S MAKE IT",
-      title: "Need custom bags?",
+      title: "Need custom printing?",
       description:
-        "Tell us the material, dimensions, quantity and print colours for an initial assessment.",
+        "Tell us the product, material, dimensions, quantity and print colours for an initial assessment.",
       button: "Request a quote",
     },
     quoteForm: {
@@ -546,19 +555,18 @@ export const translations = {
       date: "Required date",
       message: "Message",
       messagePlaceholder:
-        "Include the bag type, material, dimensions, number of print colours and any other useful details.",
+        "Include the product, material, dimensions, quantity, number of print colours and any other useful details.",
       privacy: "I authorise the use of this data to reply to my quote request.",
       submissionError: "We could not send your request. Check your connection and try again.",
       submitting: "Sending request",
       submit: "Send request",
       subject: "New quote request from the Serifil website",
       serviceOptions: [
-        "Fabric shoe bags",
-        "Printed plastic bags",
-        "Garment covers",
-        "Textile screen printing",
-        "Workwear",
-        "Merchandise",
+        "PVC, fabric and non-woven bags",
+        "Covers and garment bags",
+        "Footwear components",
+        "Textile printing and workwear",
+        "Custom production for businesses",
         "Laser engraving or cutting",
         "Other",
       ],
