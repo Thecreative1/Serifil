@@ -1,15 +1,15 @@
-import { portfolio } from "@/data/portfolio";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import type { SiteContent } from "@/data/i18n";
 
-export function Portfolio() {
+export function Portfolio({ copy }: { copy: SiteContent["portfolio"] }) {
   return (
     <section id="trabalhos" className="scroll-mt-20 bg-surface py-20 sm:py-28 lg:scroll-mt-24 lg:py-36">
       <Container>
-        <Reveal><SectionHeading eyebrow="APLICAÇÕES" title="Soluções pensadas para diferentes setores." description="Cada projeto é acompanhado desde o ficheiro inicial até à produção final, com atenção ao material, à técnica e ao resultado pretendido." /></Reveal>
+        <Reveal><SectionHeading eyebrow={copy.eyebrow} title={copy.title} description={copy.description} /></Reveal>
         <div className="mt-16 grid border-t border-border md:grid-cols-2 lg:mt-24">
-          {portfolio.map((item, index) => (
+          {copy.items.map((item, index) => (
             <Reveal key={item.name} className={`border-b border-border ${index % 2 === 0 ? "md:border-r" : ""}`}>
               <article className="group flex min-h-full flex-col px-0 py-9 md:px-8 md:py-12 lg:px-12 lg:py-14">
                 <div className="flex items-center justify-between gap-6">

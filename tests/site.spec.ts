@@ -11,7 +11,7 @@ const viewports = [
 
 test("estrutura, imagens e navegação principal", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/");
+  await page.goto("/pt/");
   await page.waitForLoadState("networkidle");
 
   const heading = page.locator("h1");
@@ -42,7 +42,7 @@ test("estrutura, imagens e navegação principal", async ({ page }) => {
 test("sem overflow horizontal nos tamanhos pedidos", async ({ page }) => {
   for (const viewport of viewports) {
     await page.setViewportSize(viewport);
-    await page.goto("/");
+    await page.goto("/pt/");
     await page.waitForLoadState("networkidle");
     const dimensions = await page.evaluate(() => ({
       viewport: window.innerWidth,
@@ -56,7 +56,7 @@ test("sem overflow horizontal nos tamanhos pedidos", async ({ page }) => {
 
 test("menu móvel fecha por Escape e por navegação", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
-  await page.goto("/");
+  await page.goto("/pt/");
   await page.waitForLoadState("networkidle");
 
   const openButton = page.getByRole("button", { name: "Abrir menu" });
@@ -89,7 +89,7 @@ test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
     await route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
   });
   await page.setViewportSize({ width: 1024, height: 900 });
-  await page.goto("/#orcamento");
+  await page.goto("/pt/#orcamento");
   await page.waitForLoadState("networkidle");
   const form = page.getByRole("form", { name: "Formulário de pedido de orçamento" });
 
@@ -116,15 +116,29 @@ test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
 });
 
 test("não publica contactos vazios ou links falsos", async ({ page }) => {
-  await page.goto("/#contacto");
+  await page.goto("/pt/#contacto");
   await expect(page.locator('#contacto a[href^="tel:"]')).toHaveCount(0);
   await expect(page.locator('#contacto a[href^="mailto:"]')).toHaveCount(0);
   await expect(page.locator('a[href*="wa.me"]')).toHaveCount(0);
 });
 
 test("publica metadados canónicos e de partilha corretos", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://thecreative1.github.io/Serifil/");
-  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", "https://thecreative1.github.io/Serifil/");
-  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://thecreative1.github.io/Serifil/images/hero-serigrafia.webp");
+  await page.goto("/pt/");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/pt/");
+  await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/");
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", "https://serifil.com/pt/");
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://serifil.com/og.png");
+});
+
+test("publica a versão inglesa completa e permite trocar de idioma", async ({ page }) => {
+  await page.goto("/en/");
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("We print ideas.");
+  await expect(page.getByRole("navigation", { name: "Main navigation" })).toBeVisible();
+  await expect(page.getByRole("form", { name: "Quote request form" })).toBeVisible();
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/en/");
+
+  await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "pt" }).click();
+  await expect(page).toHaveURL(/\/pt\/$/);
+  await expect(page.locator("html")).toHaveAttribute("lang", "pt-PT");
 });

@@ -14,13 +14,42 @@ await cp(outputDir, clientDir, { recursive: true });
 
 const worker = `export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/") {
+      const savedLocale = request.headers
+        .get("Cookie")
+        ?.split(";")
+        .map((value) => value.trim())
+        .find((value) => value.startsWith("serifil_locale="))
+        ?.split("=")[1];
+      const portugueseSpeakingCountries = new Set([
+        "PT", "BR", "AO", "MZ", "CV", "GW", "ST", "TL", "MO",
+      ]);
+      const country = request.cf?.country;
+      const locale = savedLocale === "pt" || savedLocale === "en"
+        ? savedLocale
+        : country && portugueseSpeakingCountries.has(country)
+          ? "pt"
+          : "en";
+      const destination = new URL(\`/\${locale}/\`, url);
+      destination.search = url.search;
+
+      return new Response(null, {
+        status: 307,
+        headers: {
+          Location: destination.toString(),
+          Vary: "Cookie",
+        },
+      });
+    }
+
     const response = await env.ASSETS.fetch(request);
 
     if (response.status !== 404) {
       return response;
     }
 
-    const url = new URL(request.url);
     const notFoundRequest = new Request(new URL("/404.html", url), request);
     const notFoundResponse = await env.ASSETS.fetch(notFoundRequest);
 

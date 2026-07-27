@@ -28,6 +28,6 @@ export const brand: BrandConfig = {
   instagram: "",
   address: "",
   openingHours: "",
-  website: "https://thecreative1.github.io/Serifil/",
+  website: "https://serifil.com/",
   quoteEndpoint: "https://formspree.io/f/xzdnyead",
 };
