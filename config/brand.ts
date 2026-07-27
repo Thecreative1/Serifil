@@ -26,7 +26,7 @@ export const brand: BrandConfig = {
   heroLineTwo: "Entregamos resultados.",
   secondaryTagline: "Impressão especializada para o setor do calçado.",
   location: "Guimarães, Portugal",
-  phone: "",
+  phone: "+351 910 508 706",
   email: "",
   whatsapp: "+351 910 508 706",
   instagram: "",

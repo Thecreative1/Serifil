@@ -117,12 +117,14 @@ test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
 
 test("publica apenas contactos configurados e o WhatsApp correto", async ({ page }) => {
   await page.goto("/pt/#contacto");
-  await expect(page.locator('#contacto a[href^="tel:"]')).toHaveCount(0);
   await expect(page.locator('#contacto a[href^="mailto:"]')).toHaveCount(0);
+  const phoneLinks = page.locator('a[href="tel:+351910508706"]');
   const whatsappLinks = page.locator('a[href="https://wa.me/351910508706"]');
+  await expect(phoneLinks).toHaveCount(2);
   await expect(whatsappLinks).toHaveCount(2);
-  await expect(page.locator("#contacto").getByRole("link", { name: "+351 910 508 706" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "WhatsApp" })).toBeVisible();
+  await expect(page.locator("#contacto").getByRole("link", { name: "+351 910 508 706" })).toHaveCount(2);
+  await expect(page.getByRole("link", { name: "Ligar +351 910 508 706" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "WhatsApp +351 910 508 706" })).toBeVisible();
   await expect(whatsappLinks.first()).toHaveAttribute("target", "_blank");
 });
 
