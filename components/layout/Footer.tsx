@@ -1,4 +1,5 @@
 import { brand } from "@/config/brand";
+import { CookiePreferencesButton } from "@/components/analytics/CookiePreferencesButton";
 import { Container } from "@/components/ui/Container";
 import type { SiteContent } from "@/data/i18n";
 
@@ -29,7 +30,10 @@ export function Footer({ copy, headerCopy }: { copy: SiteContent["footer"]; head
         </div>
         <div className="mt-12 flex flex-col gap-3 border-t border-border pt-6 text-xs text-text-secondary sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {brand.name}. {copy.rights}</p>
-          <p>{copy.production}</p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <CookiePreferencesButton label={copy.cookiePreferences} />
+            <p>{copy.production}</p>
+          </div>
         </div>
       </Container>
     </footer>

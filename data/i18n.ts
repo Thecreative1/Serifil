@@ -307,6 +307,15 @@ export const translations = {
       formRequests: "Orçamentos por formulário, telefone ou WhatsApp",
       rights: "Todos os direitos reservados.",
       production: "Produção e personalização em Guimarães.",
+      cookiePreferences: "Preferências de cookies",
+    },
+    analytics: {
+      ariaLabel: "Preferências de analítica",
+      title: "Medição e privacidade",
+      description:
+        "Com a sua autorização, usamos o Google Analytics para perceber como o site é utilizado e melhorar os contactos. Nunca enviamos os dados introduzidos no formulário.",
+      reject: "Recusar",
+      accept: "Aceitar analítica",
     },
   },
   en: {
@@ -608,6 +617,15 @@ export const translations = {
       formRequests: "Quotes via form, phone or WhatsApp",
       rights: "All rights reserved.",
       production: "Production and customisation in Guimarães, Portugal.",
+      cookiePreferences: "Cookie preferences",
+    },
+    analytics: {
+      ariaLabel: "Analytics preferences",
+      title: "Measurement and privacy",
+      description:
+        "With your permission, we use Google Analytics to understand how the site is used and improve contact journeys. We never send the information entered in the form.",
+      reject: "Reject",
+      accept: "Accept analytics",
     },
   },
 };

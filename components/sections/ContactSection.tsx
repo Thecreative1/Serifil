@@ -1,4 +1,5 @@
 import { ArrowUpRight, AtSign, Clock3, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { brand } from "@/config/brand";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
@@ -39,18 +40,22 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
                     <p className="mt-2 text-xl font-bold text-text-primary">{brand.phone || brand.whatsapp}</p>
                     <div className="mt-4 flex flex-wrap gap-2">
                       {brand.phone ? (
-                        <a
+                        <TrackedLink
                           href={`tel:${brand.phone.replace(/\s/g, "")}`}
+                          eventName="click_to_call"
+                          eventParameters={{ link_location: "contact_section" }}
                           aria-label={`${copy.call} ${brand.phone}`}
                           className="inline-flex min-h-11 items-center gap-2 border border-border px-4 text-sm font-bold text-text-primary transition-colors duration-300 hover:border-text-secondary hover:bg-background focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                         >
                           <Phone className="size-4" aria-hidden="true" />
                           {copy.call}
-                        </a>
+                        </TrackedLink>
                       ) : null}
                       {brand.whatsapp ? (
-                        <a
+                        <TrackedLink
                           href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`}
+                          eventName="whatsapp_click"
+                          eventParameters={{ link_location: "contact_section" }}
                           target="_blank"
                           rel="noreferrer"
                           aria-label={`WhatsApp ${brand.whatsapp}`}
@@ -58,7 +63,7 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
                         >
                           <MessageCircle className="size-4" aria-hidden="true" />
                           WhatsApp
-                        </a>
+                        </TrackedLink>
                       ) : null}
                     </div>
                   </div>
@@ -86,15 +91,17 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
                 </p>
                 <p className="mt-5 text-base text-text-secondary">{brand.location}</p>
               </div>
-              <a
+              <TrackedLink
                 href={brand.mapsUrl}
+                eventName="map_click"
+                eventParameters={{ link_location: "contact_section" }}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-10 inline-flex min-h-12 w-fit items-center gap-3 border-b border-text-secondary py-3 text-sm font-bold uppercase tracking-[0.08em] text-text-primary transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
               >
                 {copy.directions}
                 <ArrowUpRight className="size-4" aria-hidden="true" />
-              </a>
+              </TrackedLink>
             </div>
             <div className="relative min-h-[24rem] overflow-hidden bg-surface lg:min-h-[28rem]">
               <div className="industrial-grid absolute inset-0 grid place-items-center opacity-45" aria-hidden="true">

@@ -84,7 +84,90 @@ test("menu móvel fecha por Escape e por navegação", async ({ page }) => {
   await expect(page.locator("#processo h2")).toBeInViewport();
 });
 
+test("carrega o Google Analytics apenas após consentimento e permite revogá-lo", async ({ page }) => {
+  const googleTagRequests: string[] = [];
+  page.on("request", (request) => {
+    if (request.url().startsWith("https://www.googletagmanager.com/gtag/js")) {
+      googleTagRequests.push(request.url());
+    }
+  });
+  await page.route("https://www.googletagmanager.com/gtag/js**", async (route) => {
+    await route.fulfill({ status: 200, contentType: "application/javascript", body: "" });
+  });
+
+  await page.goto("/pt/");
+  const consentPanel = page.getByRole("region", { name: "Preferências de analítica" });
+  await expect(consentPanel).toBeVisible();
+  await expect(consentPanel.getByText("Medição e privacidade")).toBeVisible();
+  expect(googleTagRequests).toEqual([]);
+
+  await consentPanel.getByRole("button", { name: "Recusar" }).click();
+  await expect(consentPanel).toBeHidden();
+  expect(await page.evaluate(() => localStorage.getItem("serifil_analytics_consent"))).toBe("denied");
+  expect(googleTagRequests).toEqual([]);
+
+  await page.getByRole("button", { name: "Preferências de cookies" }).click();
+  await expect(consentPanel).toBeVisible();
+  await consentPanel.getByRole("button", { name: "Aceitar analítica" }).click();
+
+  await expect.poll(() => googleTagRequests.length).toBe(1);
+  expect(googleTagRequests[0]).toContain("id=G-L81181XG3M");
+  expect(await page.evaluate(() => localStorage.getItem("serifil_analytics_consent"))).toBe("granted");
+
+  const preventNavigation = async (selector: string) => {
+    await page.locator(selector).first().evaluate((link) => {
+      link.addEventListener("click", (event) => event.preventDefault(), {
+        capture: true,
+        once: true,
+      });
+    });
+  };
+
+  await preventNavigation('a[href="tel:+351910508706"]');
+  await page.locator('a[href="tel:+351910508706"]').first().click();
+  await preventNavigation('a[href="https://wa.me/351910508706"]');
+  await page.locator('a[href="https://wa.me/351910508706"]').first().click();
+  await preventNavigation('a[href^="https://www.google.com/maps/dir/"]');
+  await page.locator('a[href^="https://www.google.com/maps/dir/"]').click();
+  await preventNavigation('nav[aria-label="Navegação principal"] a[href="/en/"]');
+  await page.locator('nav[aria-label="Navegação principal"] a[href="/en/"]').click();
+
+  const eventNames = await page.evaluate(() =>
+    (window.dataLayer ?? [])
+      .filter((entry) => entry[0] === "event")
+      .map((entry) => entry[1]),
+  );
+  expect(eventNames).toEqual(expect.arrayContaining([
+    "click_to_call",
+    "whatsapp_click",
+    "map_click",
+    "language_change",
+  ]));
+
+  await page.getByRole("button", { name: "Preferências de cookies" }).click();
+  await consentPanel.getByRole("button", { name: "Recusar" }).click();
+  expect(await page.evaluate(() => localStorage.getItem("serifil_analytics_consent"))).toBe("denied");
+
+  const lastConsentUpdate = await page.evaluate(() =>
+    (window.dataLayer ?? []).findLast(
+      (entry) => entry[0] === "consent" && entry[1] === "update",
+    ),
+  );
+  expect(lastConsentUpdate?.[2]).toMatchObject({
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
+});
+
 test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem("serifil_analytics_consent", "granted");
+  });
+  await page.route("https://www.googletagmanager.com/gtag/js**", async (route) => {
+    await route.fulfill({ status: 200, contentType: "application/javascript", body: "" });
+  });
   await page.route("https://formspree.io/f/xzdnyead", async (route) => {
     await route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
   });
@@ -113,6 +196,22 @@ test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Pedido enviado." })).toBeVisible();
   await expect(page.getByText("Recebemos os detalhes do seu projeto e entraremos em contacto assim que possível.")).toBeVisible();
   await expect(page.getByRole("status")).toBeFocused();
+
+  await expect.poll(async () =>
+    page.evaluate(() =>
+      (window.dataLayer ?? []).find(
+        (entry) => entry[0] === "event" && entry[1] === "generate_lead",
+      ),
+    ),
+  ).not.toBeNull();
+  const leadEvent = await page.evaluate(() =>
+    (window.dataLayer ?? []).find(
+      (entry) => entry[0] === "event" && entry[1] === "generate_lead",
+    ),
+  );
+  expect(JSON.stringify(leadEvent)).not.toContain("Empresa Exemplo");
+  expect(JSON.stringify(leadEvent)).not.toContain("producao@example.test");
+  expect(JSON.stringify(leadEvent)).not.toContain("000 000 000");
 });
 
 test("publica apenas contactos configurados e o WhatsApp correto", async ({ page }) => {

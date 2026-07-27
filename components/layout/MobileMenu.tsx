@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { localizedPath } from "@/config/paths";
 import type { Locale, SiteContent } from "@/data/i18n";
+import { trackEvent } from "@/lib/analytics";
 
 type MobileMenuProps = {
   open: boolean;
@@ -77,6 +78,15 @@ export function MobileMenu({ open, onClose, locale, copy }: MobileMenuProps) {
               <a
                 key={language}
                 href={localizedPath(language)}
+                onClick={() => {
+                  if (locale !== language) {
+                    trackEvent("language_change", {
+                      language_from: locale,
+                      language_to: language,
+                      link_location: "mobile_menu",
+                    });
+                  }
+                }}
                 tabIndex={open ? 0 : -1}
                 aria-current={locale === language ? "page" : undefined}
                 className={`flex min-h-12 flex-1 items-center justify-center text-xs font-bold uppercase tracking-[0.1em] ${locale === language ? "bg-text-primary text-background" : "text-text-secondary"}`}

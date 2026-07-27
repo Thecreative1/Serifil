@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { SelectInput, TextArea, TextInput } from "@/components/ui/FormField";
 import { brand } from "@/config/brand";
 import type { SiteContent } from "@/data/i18n";
+import { trackEvent } from "@/lib/analytics";
 
 type FormErrors = Partial<Record<"name" | "email" | "phone" | "service" | "quantity" | "date" | "message" | "privacy", string>>;
 
@@ -81,6 +82,7 @@ export function QuoteForm({ copy }: { copy: SiteContent["quoteForm"] }) {
 
       if (!response.ok) throw new Error("Form submission failed");
 
+      trackEvent("generate_lead", { form_name: "quote_request" });
       setStatus("success");
       form.reset();
     } catch {

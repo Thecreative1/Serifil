@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { brand } from "@/config/brand";
 import { localizedPath } from "@/config/paths";
 import type { Locale, SiteContent } from "@/data/i18n";
+import { trackEvent } from "@/lib/analytics";
 import { MobileMenu } from "./MobileMenu";
 
 export function Header({ locale, copy }: { locale: Locale; copy: SiteContent["header"] }) {
@@ -42,6 +43,15 @@ export function Header({ locale, copy }: { locale: Locale; copy: SiteContent["he
                 <a
                   key={language}
                   href={localizedPath(language)}
+                  onClick={() => {
+                    if (locale !== language) {
+                      trackEvent("language_change", {
+                        language_from: locale,
+                        language_to: language,
+                        link_location: "header",
+                      });
+                    }
+                  }}
                   aria-current={locale === language ? "page" : undefined}
                   className={`grid min-h-10 min-w-10 place-items-center text-[0.68rem] font-bold uppercase tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${locale === language ? "bg-text-primary text-background" : "text-text-secondary hover:text-text-primary"}`}
                 >

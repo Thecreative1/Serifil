@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Archivo, Inter } from "next/font/google";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { brand } from "@/config/brand";
 import { isLocale, locales, translations, type Locale } from "@/data/i18n";
 import "../globals.css";
@@ -93,7 +94,10 @@ export default async function LocaleLayout({
 
   return (
     <html lang={translations[locale].htmlLang} className={`${archivo.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        <GoogleAnalytics copy={translations[locale].analytics} />
+        {children}
+      </body>
     </html>
   );
 }
