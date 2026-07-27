@@ -40,6 +40,12 @@ export default async function Home({
     ...(brand.email ? { email: brand.email } : {}),
     url: `${brand.website}${locale}/`,
     inLanguage: copy.htmlLang,
+    hasMap: brand.mapsUrl,
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: brand.latitude,
+      longitude: brand.longitude,
+    },
   };
 
   return (

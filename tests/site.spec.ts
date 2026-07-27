@@ -122,6 +122,22 @@ test("não publica contactos vazios ou links falsos", async ({ page }) => {
   await expect(page.locator('a[href*="wa.me"]')).toHaveCount(0);
 });
 
+test("apresenta a localização e direções de forma acessível", async ({ page }) => {
+  await page.goto("/pt/#contacto");
+
+  const directions = page.getByRole("link", { name: "Obter direções" });
+  await expect(directions).toHaveAttribute(
+    "href",
+    "https://www.google.com/maps/dir/?api=1&destination=41.4279368%2C-8.2991756",
+  );
+  await expect(directions).toHaveAttribute("target", "_blank");
+
+  const map = page.locator('iframe[title="Mapa com a localização da SERIFIL em Guimarães"]');
+  await expect(map).toHaveCount(1);
+  await expect(map).toHaveAttribute("loading", "lazy");
+  await expect(map).toHaveAttribute("src", /41\.4279368,-8\.2991756/);
+});
+
 test("publica metadados canónicos e de partilha corretos", async ({ page }) => {
   await page.goto("/pt/");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/pt/");
@@ -136,6 +152,7 @@ test("publica a versão inglesa completa e permite trocar de idioma", async ({ p
   await expect(page.getByRole("heading", { level: 1 })).toContainText("We print ideas.");
   await expect(page.getByRole("navigation", { name: "Main navigation" })).toBeVisible();
   await expect(page.getByRole("form", { name: "Quote request form" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Get directions" })).toBeVisible();
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/en/");
 
   await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "pt" }).click();

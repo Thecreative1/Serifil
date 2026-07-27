@@ -1,4 +1,4 @@
-import { AtSign, Clock3, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, AtSign, Clock3, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { brand } from "@/config/brand";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
@@ -9,7 +9,6 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
     { label: copy.phone, value: brand.phone, href: brand.phone ? `tel:${brand.phone.replace(/\s/g, "")}` : "", icon: Phone },
     { label: copy.email, value: brand.email, href: brand.email ? `mailto:${brand.email}` : "", icon: Mail },
     { label: copy.whatsapp, value: brand.whatsapp, href: brand.whatsapp ? `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}` : "", icon: MessageCircle },
-    { label: copy.address, value: brand.address, href: "", icon: MapPin },
     { label: copy.hours, value: brand.openingHours, href: "", icon: Clock3 },
     { label: copy.instagram, value: brand.instagram, href: brand.instagram, icon: AtSign },
   ];
@@ -28,7 +27,11 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
             <div className="border-y border-border">
               <div className="flex items-start gap-5 py-7">
                 <MapPin className="mt-1 size-5 shrink-0 text-accent" aria-hidden="true" />
-                <div><p className="text-xs font-bold uppercase tracking-[0.12em] text-text-secondary">{copy.location}</p><p className="mt-2 text-xl font-bold text-text-primary">{brand.location}</p></div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-text-secondary">{copy.location}</p>
+                  <p className="mt-2 max-w-[34ch] text-xl font-bold text-text-primary">{brand.address}</p>
+                  <p className="mt-1 text-sm text-text-secondary">{brand.location}</p>
+                </div>
               </div>
               {available.map((item) => {
                 const Icon = item.icon;
@@ -39,6 +42,48 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </Reveal>
+        <Reveal className="mt-16 lg:mt-24">
+          <div className="grid overflow-hidden border border-border bg-background lg:grid-cols-[0.55fr_1.45fr]">
+            <div className="flex min-h-72 flex-col justify-between p-7 sm:p-10 lg:min-h-[28rem] lg:p-12">
+              <div>
+                <p className="section-kicker text-accent">{copy.visit}</p>
+                <p className="mt-8 max-w-[18ch] text-[clamp(2rem,4vw,4.2rem)] leading-[0.94] font-bold tracking-[-0.05em] text-text-primary">
+                  {brand.address}
+                </p>
+                <p className="mt-5 text-base text-text-secondary">{brand.location}</p>
+              </div>
+              <a
+                href={brand.mapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-10 inline-flex min-h-12 w-fit items-center gap-3 border-b border-text-secondary py-3 text-sm font-bold uppercase tracking-[0.08em] text-text-primary transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              >
+                {copy.directions}
+                <ArrowUpRight className="size-4" aria-hidden="true" />
+              </a>
+            </div>
+            <div className="relative min-h-[24rem] overflow-hidden bg-surface lg:min-h-[28rem]">
+              <div className="industrial-grid absolute inset-0 grid place-items-center opacity-45" aria-hidden="true">
+                <div className="grid place-items-center gap-3 text-center">
+                  <span className="grid size-12 place-items-center bg-accent text-light-text">
+                    <MapPin className="size-5" />
+                  </span>
+                  <span className="text-xs font-bold tracking-[0.12em] text-text-secondary">
+                    {brand.latitude}, {brand.longitude}
+                  </span>
+                </div>
+              </div>
+              <iframe
+                title={copy.mapTitle}
+                src={brand.mapEmbedUrl}
+                className="absolute inset-0 h-full w-full border-0"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </Reveal>

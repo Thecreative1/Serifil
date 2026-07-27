@@ -8,6 +8,11 @@ test("capturas visuais completas", async ({ page }) => {
     for (let index = 0; index < await images.count(); index += 1) {
       await images.nth(index).scrollIntoViewIfNeeded();
     }
+    const frames = page.locator("iframe");
+    for (let index = 0; index < await frames.count(); index += 1) {
+      await frames.nth(index).scrollIntoViewIfNeeded();
+    }
+    await page.waitForTimeout(800);
     await page.evaluate(() => window.scrollTo(0, 0));
   };
 

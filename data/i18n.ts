@@ -290,6 +290,9 @@ export const translations = {
       address: "Morada",
       hours: "Horário",
       instagram: "Instagram",
+      visit: "VISITE-NOS",
+      directions: "Obter direções",
+      mapTitle: "Mapa com a localização da SERIFIL em Guimarães",
     },
     footer: {
       tagline: "Imprimimos ideias. Entregamos resultados.",
@@ -582,6 +585,9 @@ export const translations = {
       address: "Address",
       hours: "Opening hours",
       instagram: "Instagram",
+      visit: "VISIT US",
+      directions: "Get directions",
+      mapTitle: "Map showing SERIFIL's location in Guimarães",
     },
     footer: {
       tagline: "We print ideas. We deliver results.",
