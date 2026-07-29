@@ -1,9 +1,24 @@
+import { Plus } from "lucide-react";
 import { brand } from "@/config/brand";
 import { CookiePreferencesButton } from "@/components/analytics/CookiePreferencesButton";
 import { Container } from "@/components/ui/Container";
 import type { SiteContent } from "@/data/i18n";
 
 export function Footer({ copy, headerCopy }: { copy: SiteContent["footer"]; headerCopy: SiteContent["header"] }) {
+  const legalDetails: Array<{ label: string; value: string; href?: string }> = [
+    { label: copy.legal.commercialName, value: brand.name },
+    { label: copy.legal.owner, value: brand.legalOwner },
+    { label: copy.legal.taxId, value: brand.taxId },
+    { label: copy.legal.activity, value: copy.legal.activityValue },
+    { label: copy.legal.address, value: `${brand.address}, ${brand.location}` },
+    ...(brand.email
+      ? [{ label: copy.legal.email, value: brand.email, href: `mailto:${brand.email}` }]
+      : []),
+    ...(brand.phone
+      ? [{ label: copy.legal.phone, value: brand.phone, href: `tel:${brand.phone.replace(/\s/g, "")}` }]
+      : []),
+  ];
+
   return (
     <footer className="border-t border-border bg-[#0c0d0b] py-12 sm:py-16">
       <Container>
@@ -28,6 +43,31 @@ export function Footer({ copy, headerCopy }: { copy: SiteContent["footer"]; head
             </ul>
           </div>
         </div>
+        <details className="group mt-12 border-y border-border">
+          <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-6 py-4 text-xs font-bold uppercase tracking-[0.12em] text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent [&::-webkit-details-marker]:hidden">
+            {copy.legal.title}
+            <Plus className="size-4 shrink-0 transition-transform duration-300 group-open:rotate-45" aria-hidden="true" />
+          </summary>
+          <dl className="grid gap-x-12 gap-y-6 border-t border-border py-6 sm:grid-cols-2 lg:grid-cols-3">
+            {legalDetails.map((item) => (
+              <div key={item.label}>
+                <dt className="text-[0.68rem] font-bold uppercase tracking-[0.12em] text-text-secondary">
+                  {item.label}
+                </dt>
+                <dd className="mt-2 text-sm leading-6 text-text-primary">
+                  {item.href ? (
+                    <a
+                      className="underline decoration-border underline-offset-4 transition-colors hover:decoration-text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                      href={item.href}
+                    >
+                      {item.value}
+                    </a>
+                  ) : item.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </details>
         <div className="mt-12 flex flex-col gap-3 border-t border-border pt-6 text-xs text-text-secondary sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {brand.name}. {copy.rights}</p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">

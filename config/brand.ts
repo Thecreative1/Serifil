@@ -17,6 +17,8 @@ type BrandConfig = {
   longitude: number;
   mapsUrl: string;
   mapEmbedUrl: string;
+  legalOwner: string;
+  taxId: string;
 };
 
 export const brand: BrandConfig = {
@@ -38,4 +40,6 @@ export const brand: BrandConfig = {
   longitude: -8.2991756,
   mapsUrl: "https://www.google.com/maps/dir/?api=1&destination=41.4279368%2C-8.2991756",
   mapEmbedUrl: "https://www.google.com/maps?q=41.4279368,-8.2991756&z=17&output=embed",
+  legalOwner: "Lisete da Silva Araújo",
+  taxId: "250 796 210",
 };

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-29T00:00:00.000Z",
+  "generatedAt": "2026-07-29T20:00:00.000Z",
   "title": "Design System: SERIFIL",
   "extensions": {
     "colorMeta": {
@@ -207,6 +207,14 @@
       "description": "Controlo segmentado que inverte a opção ativa.",
       "html": "<nav class=\"ds-language\" aria-label=\"Escolher idioma\"><a class=\"ds-active\" href=\"#\">PT</a><a href=\"#\">EN</a></nav>",
       "css": ".ds-language { display:flex; width:max-content; border:1px solid var(--border,#30332f); background:var(--background,#111210); } .ds-language a { display:grid; min-width:40px; min-height:40px; place-items:center; color:var(--text-secondary,#a6aaa4); font:700 11px/1 var(--font-inter),Arial,sans-serif; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; transition:color 300ms ease-out,background-color 300ms ease-out; } .ds-language a:hover { color:var(--text-primary,#f5f1e8); } .ds-language .ds-active { background:var(--text-primary,#f5f1e8); color:var(--background,#111210); } .ds-language a:focus-visible { outline:2px solid var(--accent,#e85b2a); outline-offset:2px; }"
+    },
+    {
+      "name": "Legal Disclosure",
+      "kind": "custom",
+      "refersTo": "legal-disclosure",
+      "description": "Informação legal discreta, fechada por defeito e acessível sem JavaScript.",
+      "html": "<details class=\"ds-legal\"><summary>INFORMAÇÃO LEGAL <span aria-hidden=\"true\">＋</span></summary><dl><div><dt>NOME COMERCIAL</dt><dd>SERIFIL</dd></div><div><dt>TITULAR DA ATIVIDADE</dt><dd>Lisete da Silva Araújo</dd></div><div><dt>NIF</dt><dd>250 796 210</dd></div></dl></details>",
+      "css": ".ds-legal { border-top:1px solid var(--border,#30332f); border-bottom:1px solid var(--border,#30332f); background:var(--background,#111210); color:var(--text-primary,#f5f1e8); font-family:var(--font-inter),Arial,sans-serif; } .ds-legal summary { display:flex; min-height:48px; cursor:pointer; list-style:none; align-items:center; justify-content:space-between; gap:24px; color:var(--text-secondary,#a6aaa4); font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; transition:color 300ms ease-out; } .ds-legal summary::-webkit-details-marker { display:none; } .ds-legal summary:hover { color:var(--text-primary,#f5f1e8); } .ds-legal summary:focus-visible { outline:2px solid var(--accent,#e85b2a); outline-offset:4px; } .ds-legal summary span { font-size:18px; transition:transform 300ms ease-out; } .ds-legal[open] summary span { transform:rotate(45deg); } .ds-legal dl { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px 48px; margin:0; border-top:1px solid var(--border,#30332f); padding:24px 0; } .ds-legal dt { color:var(--text-secondary,#a6aaa4); font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; } .ds-legal dd { margin:8px 0 0; color:var(--text-primary,#f5f1e8); font-size:14px; line-height:1.5; } @media(max-width:720px){.ds-legal dl{grid-template-columns:1fr 1fr;}}"
     }
   ],
   "narrative": {
@@ -259,7 +267,8 @@
       "Do limitar corpo de texto a 46ch–65ch e preservar o contraste de escala entre títulos e descrições.",
       "Do alternar carvão e papel técnico apenas quando a narrativa muda entre produção e explicação.",
       "Do preservar foco visível, teclado completo, alvos mínimos de 44px e redução de movimento.",
-      "Do manter todos os componentes quadrados e estruturados por linhas de 1px."
+      "Do manter todos os componentes quadrados e estruturados por linhas de 1px.",
+      "Do apresentar informação legal no disclosure nativo do rodapé, fechada por defeito e sempre acessível por teclado."
     ],
     "donts": [
       "Don't fazer o site parecer uma loja barata de t-shirts, uma gráfica antiga, um catálogo genérico de brindes, um template de agência ou um site automaticamente produzido por inteligência artificial.",
@@ -269,7 +278,8 @@
       "Don't criar grelhas repetidas de cartões idênticos com ícone, título e texto.",
       "Don't aplicar sombras a cartões ou campos normais.",
       "Don't animar propriedades de layout ou introduzir bounce e elastic.",
-      "Don't repetir pequenos kickers em maiúsculas acima de cada elemento."
+      "Don't repetir pequenos kickers em maiúsculas acima de cada elemento.",
+      "Don't esconder informação legal num modal, exigir JavaScript para a consultar ou publicar placeholders."
     ]
   }
 }

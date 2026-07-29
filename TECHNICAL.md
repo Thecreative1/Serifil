@@ -103,6 +103,7 @@ Regra de alteração:
 `config/brand.ts` é a fonte de verdade para:
 
 - nome e descritor;
+- titular da atividade e NIF;
 - localização e morada;
 - telefone, WhatsApp, email, Instagram e horário;
 - website canónico;
@@ -110,6 +111,8 @@ Regra de alteração:
 - coordenadas e URLs Google Maps.
 
 Valores vazios escondem contactos opcionais. Nunca espalhar estes valores por componentes. O telefone e WhatsApp aparecem em testes como contrato explícito e precisam de atualização simultânea.
+
+A informação legal é apresentada no rodapé por um elemento HTML `details`, fechado por defeito e sem dependência de JavaScript. O email legal só é renderizado quando `brand.email` contém um valor real; nunca publicar o label vazio ou um placeholder.
 
 ## 5. Sistema visual
 
@@ -241,6 +244,7 @@ Contratos preservados:
 - foco visível de 2px;
 - alvos de toque de pelo menos 44px, normalmente 48px;
 - menu mobile com focus trap, Escape e devolução de foco;
+- informação legal consultável por teclado através de disclosure nativo;
 - labels persistentes em todos os campos;
 - erros programaticamente associados;
 - alt text específico na imagem de produção;

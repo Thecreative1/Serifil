@@ -219,7 +219,7 @@ test("publica apenas contactos configurados e o WhatsApp correto", async ({ page
   await expect(page.locator('#contacto a[href^="mailto:"]')).toHaveCount(0);
   const phoneLinks = page.locator('a[href="tel:+351910508706"]');
   const whatsappLinks = page.locator('a[href="https://wa.me/351910508706"]');
-  await expect(phoneLinks).toHaveCount(2);
+  await expect(phoneLinks).toHaveCount(3);
   await expect(whatsappLinks).toHaveCount(2);
   const contact = page.locator("#contacto");
   await expect(contact.getByText("+351 910 508 706", { exact: true })).toHaveCount(1);
@@ -227,6 +227,33 @@ test("publica apenas contactos configurados e o WhatsApp correto", async ({ page
   await expect(contact.getByRole("link", { name: "WhatsApp +351 910 508 706" })).toBeVisible();
   await expect(page.getByText("Orçamentos por formulário, telefone ou WhatsApp")).toBeVisible();
   await expect(whatsappLinks.first()).toHaveAttribute("target", "_blank");
+});
+
+test("disponibiliza informação legal discreta e bilingue no rodapé", async ({ page }) => {
+  await page.goto("/pt/");
+
+  const portugueseLegal = page.locator("footer details");
+  const portugueseSummary = portugueseLegal.locator("summary");
+  await expect(portugueseSummary).toHaveText(/Informação legal/);
+  await expect(portugueseLegal).not.toHaveAttribute("open");
+
+  await portugueseSummary.click();
+  await expect(portugueseLegal).toHaveAttribute("open");
+  await expect(portugueseLegal.getByText("SERIFIL", { exact: true })).toBeVisible();
+  await expect(portugueseLegal.getByText("Lisete da Silva Araújo")).toBeVisible();
+  await expect(portugueseLegal.getByText("250 796 210")).toBeVisible();
+  await expect(portugueseLegal.getByText("Serigrafia, impressão e personalização")).toBeVisible();
+  await expect(portugueseLegal.getByText("Travessa Bernardino Jordão 90, Urgezes, Guimarães, Portugal")).toBeVisible();
+  await expect(portugueseLegal.getByRole("link", { name: "+351 910 508 706" })).toHaveAttribute("href", "tel:+351910508706");
+  await expect(portugueseLegal.getByText("Email", { exact: true })).toHaveCount(0);
+
+  await page.goto("/en/");
+  const englishLegal = page.locator("footer details");
+  await englishLegal.locator("summary").click();
+  await expect(englishLegal.getByText("Legal information")).toBeVisible();
+  await expect(englishLegal.getByText("Screen printing, printing and customisation")).toBeVisible();
+  await expect(englishLegal.getByText("Lisete da Silva Araújo")).toBeVisible();
+  await expect(englishLegal.getByText("250 796 210")).toBeVisible();
 });
 
 test("apresenta a localização e direções de forma acessível", async ({ page }) => {

@@ -87,6 +87,12 @@ components:
     textColor: "{colors.ink-dark}"
     rounded: "{rounded.square}"
     padding: "56px"
+  legal-disclosure:
+    backgroundColor: "{colors.workshop-charcoal}"
+    textColor: "{colors.muted-steel}"
+    typography: "{typography.label}"
+    rounded: "{rounded.square}"
+    padding: "16px 0"
 ---
 
 # Design System: SERIFIL
@@ -224,6 +230,10 @@ O hero combina uma fotografia real de serigrafia, overlay escuro horizontal, gre
 
 Revelações usam apenas opacity e translateY de 24px durante 700ms, com `cubic-bezier(0.16, 1, 0.3, 1)`. O marquee é linear durante 36s. `prefers-reduced-motion: reduce` reduz animações e transições a 0.01ms e mantém o conteúdo visível.
 
+### Legal Disclosure
+
+A informação legal vive no rodapé dentro de um elemento `details` fechado por defeito. O summary tem altura mínima de 48px, texto Label em `muted-steel` e um ícone Plus que roda 45 graus quando aberto. O conteúdo usa uma grelha factual sem cartões, com labels curtas em maiúsculas e valores Inter de 14px. A interação é nativa, funciona por teclado e não depende de JavaScript.
+
 ## 6. Do's and Don'ts
 
 ### Do:
@@ -235,6 +245,7 @@ Revelações usam apenas opacity e translateY de 24px durante 700ms, com `cubic-
 - **Do** alternar carvão e papel técnico apenas quando a narrativa muda entre produção e explicação.
 - **Do** preservar foco visível, teclado completo, alvos mínimos de 44px e redução de movimento.
 - **Do** manter todos os componentes quadrados e estruturados por linhas de 1px.
+- **Do** apresentar informação legal no disclosure nativo do rodapé, fechada por defeito e sempre acessível por teclado.
 
 ### Don't:
 
@@ -246,3 +257,4 @@ Revelações usam apenas opacity e translateY de 24px durante 700ms, com `cubic-
 - **Don't** aplicar sombras a cartões ou campos normais.
 - **Don't** animar propriedades de layout ou introduzir bounce e elastic.
 - **Don't** repetir pequenos kickers em maiúsculas acima de cada elemento.
+- **Don't** esconder informação legal num modal, exigir JavaScript para a consultar ou publicar placeholders.
