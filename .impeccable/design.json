@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-29T00:00:00.000Z",
+  "title": "Design System: SERIFIL",
+  "extensions": {
+    "colorMeta": {
+      "workshop-charcoal": {
+        "role": "neutral",
+        "displayName": "Carvão de Oficina",
+        "canonical": "#111210",
+        "tonalRamp": ["oklch(15% 0.008 135)", "oklch(26% 0.008 135)", "oklch(38% 0.008 135)", "oklch(50% 0.008 135)", "oklch(62% 0.008 135)", "oklch(74% 0.008 135)", "oklch(86% 0.008 135)", "oklch(95% 0.006 135)"]
+      },
+      "machine-surface": {
+        "role": "neutral",
+        "displayName": "Superfície de Máquina",
+        "canonical": "#1b1d1a",
+        "tonalRamp": ["oklch(15% 0.010 135)", "oklch(26% 0.010 135)", "oklch(38% 0.010 135)", "oklch(50% 0.010 135)", "oklch(62% 0.010 135)", "oklch(74% 0.009 135)", "oklch(86% 0.008 135)", "oklch(95% 0.006 135)"]
+      },
+      "raised-machine-surface": {
+        "role": "neutral",
+        "displayName": "Superfície de Máquina Elevada",
+        "canonical": "#242722",
+        "tonalRamp": ["oklch(15% 0.012 135)", "oklch(26% 0.012 135)", "oklch(38% 0.012 135)", "oklch(50% 0.011 135)", "oklch(62% 0.010 135)", "oklch(74% 0.009 135)", "oklch(86% 0.008 135)", "oklch(95% 0.006 135)"]
+      },
+      "warm-ink": {
+        "role": "neutral",
+        "displayName": "Tinta Quente",
+        "canonical": "#f5f1e8",
+        "tonalRamp": ["oklch(15% 0.014 78)", "oklch(26% 0.014 78)", "oklch(38% 0.014 78)", "oklch(50% 0.014 78)", "oklch(62% 0.013 78)", "oklch(74% 0.012 78)", "oklch(86% 0.010 78)", "oklch(95% 0.008 78)"]
+      },
+      "muted-steel": {
+        "role": "neutral",
+        "displayName": "Aço Suave",
+        "canonical": "#a6aaa4",
+        "tonalRamp": ["oklch(15% 0.010 135)", "oklch(26% 0.010 135)", "oklch(38% 0.010 135)", "oklch(50% 0.010 135)", "oklch(62% 0.009 135)", "oklch(74% 0.008 135)", "oklch(86% 0.007 135)", "oklch(95% 0.005 135)"]
+      },
+      "printing-orange": {
+        "role": "primary",
+        "displayName": "Laranja de Impressão",
+        "canonical": "#e85b2a",
+        "tonalRamp": ["oklch(15% 0.16 42)", "oklch(26% 0.17 42)", "oklch(38% 0.18 42)", "oklch(50% 0.19 42)", "oklch(62% 0.20 42)", "oklch(74% 0.17 42)", "oklch(86% 0.11 42)", "oklch(95% 0.05 42)"]
+      },
+      "printing-orange-hover": {
+        "role": "primary",
+        "displayName": "Laranja de Impressão Vivo",
+        "canonical": "#ff6b35",
+        "tonalRamp": ["oklch(15% 0.17 42)", "oklch(26% 0.18 42)", "oklch(38% 0.19 42)", "oklch(50% 0.20 42)", "oklch(62% 0.21 42)", "oklch(74% 0.18 42)", "oklch(86% 0.12 42)", "oklch(95% 0.05 42)"]
+      },
+      "machine-border": {
+        "role": "neutral",
+        "displayName": "Linha de Máquina",
+        "canonical": "#30332f",
+        "tonalRamp": ["oklch(15% 0.009 135)", "oklch(26% 0.009 135)", "oklch(38% 0.009 135)", "oklch(50% 0.009 135)", "oklch(62% 0.008 135)", "oklch(74% 0.007 135)", "oklch(86% 0.006 135)", "oklch(95% 0.004 135)"]
+      },
+      "technical-paper": {
+        "role": "neutral",
+        "displayName": "Papel Técnico",
+        "canonical": "#eee9df",
+        "tonalRamp": ["oklch(15% 0.018 76)", "oklch(26% 0.018 76)", "oklch(38% 0.018 76)", "oklch(50% 0.017 76)", "oklch(62% 0.016 76)", "oklch(74% 0.014 76)", "oklch(86% 0.011 76)", "oklch(95% 0.008 76)"]
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Tinta Escura",
+        "canonical": "#171916",
+        "tonalRamp": ["oklch(15% 0.010 135)", "oklch(26% 0.010 135)", "oklch(38% 0.010 135)", "oklch(50% 0.009 135)", "oklch(62% 0.008 135)", "oklch(74% 0.007 135)", "oklch(86% 0.006 135)", "oklch(95% 0.004 135)"]
+      },
+      "paper-muted": {
+        "role": "neutral",
+        "displayName": "Papel Atenuado",
+        "canonical": "#63675f",
+        "tonalRamp": ["oklch(15% 0.012 105)", "oklch(26% 0.012 105)", "oklch(38% 0.012 105)", "oklch(50% 0.011 105)", "oklch(62% 0.010 105)", "oklch(74% 0.009 105)", "oklch(86% 0.007 105)", "oklch(95% 0.005 105)"]
+      },
+      "field-placeholder": {
+        "role": "neutral",
+        "displayName": "Placeholder Industrial",
+        "canonical": "#858a82",
+        "tonalRamp": ["oklch(15% 0.012 135)", "oklch(26% 0.012 135)", "oklch(38% 0.012 135)", "oklch(50% 0.011 135)", "oklch(62% 0.010 135)", "oklch(74% 0.009 135)", "oklch(86% 0.007 135)", "oklch(95% 0.005 135)"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "H1 de impacto, em Archivo black e maiúsculas."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Títulos principais de secção com escala fluida."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Títulos de serviços, trabalhos e blocos destacados."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Descrições, instruções e texto funcional legível."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Kickers, números, categorias e ações curtas."
+      }
+    },
+    "shadows": [
+      {
+        "name": "floating-contact",
+        "value": "0 10px 32px rgba(0, 0, 0, 0.28)",
+        "purpose": "Separar atalhos fixos de telefone e WhatsApp do conteúdo."
+      },
+      {
+        "name": "consent-elevated",
+        "value": "0 -18px 45px rgba(0, 0, 0, 0.32)",
+        "purpose": "Elevar o painel de consentimento a partir do limite inferior."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-expressive-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entradas do hero e revelações ao fazer scroll."
+      },
+      {
+        "name": "hero-enter",
+        "value": "900ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entrada escalonada do conteúdo inicial."
+      },
+      {
+        "name": "reveal",
+        "value": "700ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Opacity e translateY de 24px para secções."
+      },
+      {
+        "name": "state-transition",
+        "value": "300ms ease-out",
+        "purpose": "Hover, foco visual e abertura do menu."
+      },
+      {
+        "name": "marquee",
+        "value": "36s linear infinite",
+        "purpose": "Movimento contínuo da faixa de especialidades."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação principal para pedido de orçamento ou avanço no fluxo.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">PEDIR ORÇAMENTO <span aria-hidden=\"true\">↗</span></a>",
+      "css": ".ds-btn-primary { display:inline-flex; min-height:48px; align-items:center; justify-content:center; gap:12px; background:var(--accent,#e85b2a); color:var(--light-text,#171916); padding:12px 20px; border:0; border-radius:0; font-family:var(--font-inter),Arial,sans-serif; font-size:14px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; transition:background-color 300ms ease-out; } .ds-btn-primary:hover { background:var(--accent-hover,#ff6b35); } .ds-btn-primary:focus-visible { outline:2px solid var(--accent,#e85b2a); outline-offset:4px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ação secundária sobre fundos escuros.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">VER TRABALHOS <span aria-hidden=\"true\">↗</span></a>",
+      "css": ".ds-btn-secondary { display:inline-flex; min-height:48px; align-items:center; justify-content:center; gap:12px; background:rgba(17,18,16,.5); color:var(--text-primary,#f5f1e8); padding:12px 20px; border:1px solid var(--border,#30332f); border-radius:0; font-family:var(--font-inter),Arial,sans-serif; font-size:14px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; transition:background-color 300ms ease-out,border-color 300ms ease-out; } .ds-btn-secondary:hover { background:var(--surface,#1b1d1a); border-color:var(--text-secondary,#a6aaa4); } .ds-btn-secondary:focus-visible { outline:2px solid var(--accent,#e85b2a); outline-offset:4px; }"
+    },
+    {
+      "name": "Dark Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ação escura reservada para blocos de papel técnico.",
+      "html": "<a class=\"ds-btn-dark\" href=\"#\">PEDIR ORÇAMENTO <span aria-hidden=\"true\">↗</span></a>",
+      "css": ".ds-btn-dark { display:inline-flex; min-height:48px; align-items:center; justify-content:center; gap:12px; background:var(--light-text,#171916); color:var(--text-primary,#f5f1e8); padding:12px 20px; border:0; border-radius:0; font-family:var(--font-inter),Arial,sans-serif; font-size:14px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; transition:background-color 300ms ease-out; } .ds-btn-dark:hover { background:#2a2d28; } .ds-btn-dark:focus-visible { outline:2px solid var(--accent,#e85b2a); outline-offset:4px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo de formulário robusto com label persistente e foco laranja.",
+      "html": "<label class=\"ds-field\"><span>Nome</span><input placeholder=\"Introduza o nome\"></label>",
+      "css": ".ds-field { display:grid; gap:8px; color:var(--text-primary,#f5f1e8); font-family:var(--font-inter),Arial,sans-serif; font-size:14px; font-weight:700; } .ds-field input { min-height:48px; width:100%; border:1px solid var(--border,#30332f); border-radius:0; background:var(--surface,#1b1d1a); color:var(--text-primary,#f5f1e8); padding:12px 16px; font:400 16px/1.5 var(--font-inter),Arial,sans-serif; outline:none; transition:border-color 300ms ease-out; } .ds-field input::placeholder { color:var(--field-placeholder,#858a82); } .ds-field input:hover { border-color:#4d514b; } .ds-field input:focus-visible { border-color:var(--accent,#e85b2a); box-shadow:0 0 0 1px var(--accent,#e85b2a); }"
+    },
+    {
+      "name": "Section Heading",
+      "kind": "custom",
+      "description": "Cabeçalho assimétrico com kicker e título Archivo de grande escala.",
+      "html": "<div class=\"ds-section-heading\"><p>ESPECIALIDADE PRINCIPAL</p><div><h2>Impressão e personalização para diferentes setores.</h2><span>Produção acompanhada com comunicação direta.</span></div></div>",
+      "css": ".ds-section-heading { display:grid; grid-template-columns:minmax(0,.75fr) minmax(0,1.6fr); gap:64px; color:var(--text-primary,#f5f1e8); } .ds-section-heading>p { margin:0; color:var(--accent,#e85b2a); font:800 12px/1.5 var(--font-inter),Arial,sans-serif; letter-spacing:.16em; text-transform:uppercase; } .ds-section-heading h2 { max-width:13ch; margin:0; font:700 clamp(38px,6vw,93px)/.94 var(--font-archivo),Arial,sans-serif; letter-spacing:-.055em; } .ds-section-heading span { display:block; max-width:62ch; margin-top:24px; color:var(--text-secondary,#a6aaa4); font:400 16px/1.75 var(--font-inter),Arial,sans-serif; } @media(max-width:720px){.ds-section-heading{grid-template-columns:1fr;gap:28px;}}"
+    },
+    {
+      "name": "Primary Service Block",
+      "kind": "card",
+      "refersTo": "service-primary",
+      "description": "Bloco laranja que comunica a especialidade de maior prioridade.",
+      "html": "<article class=\"ds-service-primary\"><div><span>PRINCIPAL ESPECIALIDADE</span><strong>01</strong></div><h3>Sacos em PVC, tecido e TNT</h3><p>Impressão de logótipos e elementos de marca para apresentação e proteção.</p></article>",
+      "css": ".ds-service-primary { display:flex; min-height:520px; flex-direction:column; background:var(--accent,#e85b2a); color:var(--light-text,#171916); padding:56px; border:0; border-radius:0; font-family:var(--font-inter),Arial,sans-serif; } .ds-service-primary>div { display:flex; justify-content:space-between; gap:20px; font-size:12px; font-weight:900; letter-spacing:.14em; text-transform:uppercase; } .ds-service-primary h3 { max-width:12ch; margin:80px 0 0; font:900 clamp(48px,6vw,109px)/.88 var(--font-archivo),Arial,sans-serif; letter-spacing:-.065em; } .ds-service-primary p { max-width:52ch; margin:32px 0 0; color:#3a2017; font-size:16px; line-height:1.75; }"
+    },
+    {
+      "name": "Language Switch",
+      "kind": "nav",
+      "description": "Controlo segmentado que inverte a opção ativa.",
+      "html": "<nav class=\"ds-language\" aria-label=\"Escolher idioma\"><a class=\"ds-active\" href=\"#\">PT</a><a href=\"#\">EN</a></nav>",
+      "css": ".ds-language { display:flex; width:max-content; border:1px solid var(--border,#30332f); background:var(--background,#111210); } .ds-language a { display:grid; min-width:40px; min-height:40px; place-items:center; color:var(--text-secondary,#a6aaa4); font:700 11px/1 var(--font-inter),Arial,sans-serif; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; transition:color 300ms ease-out,background-color 300ms ease-out; } .ds-language a:hover { color:var(--text-primary,#f5f1e8); } .ds-language .ds-active { background:var(--text-primary,#f5f1e8); color:var(--background,#111210); } .ds-language a:focus-visible { outline:2px solid var(--accent,#e85b2a); outline-offset:2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "A Oficina de Precisão",
+    "overview": "O site deve parecer a extensão digital de uma oficina organizada: matéria escura, linhas de construção visíveis, papel técnico quente e um laranja que lembra tinta de impressão. A composição transmite rigor sem ficar fria, usando escala tipográfica, imagens reais de produção e contacto direto para aproximar o visitante do trabalho.\n\nO sistema é industrial, quadrado e deliberadamente gráfico. A hierarquia nasce do contraste entre grandes títulos Archivo e texto Inter muito legível, não de ornamentos. O site rejeita a aparência de uma loja barata de t-shirts, uma gráfica antiga, um catálogo genérico de brindes, um template de agência ou um site automaticamente produzido por inteligência artificial.\n\nO contentor principal tem largura máxima de 1440px, com margens laterais de 20px em mobile, 32px a partir de 640px e 48px a partir de 1024px. As secções respiram verticalmente em três ritmos: 80px, 112px e 144px. A composição alterna superfícies escuras com blocos claros de papel técnico e usa grelhas assimétricas para dar prioridade ao conteúdo mais importante.",
+    "keyCharacteristics": [
+      "Escuro industrial com uma única voz laranja forte.",
+      "Tipografia condensada por tracking negativo e grande contraste de escala.",
+      "Cantos totalmente quadrados, linhas finas e superfícies planas.",
+      "Fotografia real de produção como prova de competência.",
+      "Ritmo editorial direto, mas sem estética de revista ou decoração nostálgica.",
+      "Movimento curto, progressivo e sempre removível por preferência do utilizador."
+    ],
+    "rules": [
+      {
+        "name": "The One Ink Rule",
+        "body": "O laranja é reservado a ações, orientação, prioridade e estado. Nunca criar gradientes, brilho néon ou uma segunda cor saturada concorrente.",
+        "section": "colors"
+      },
+      {
+        "name": "The Alternating Material Rule",
+        "body": "O fundo escuro representa máquina e produção; o papel técnico claro representa explicação e processo. A alternância deve reforçar a narrativa, não formar um padrão decorativo previsível.",
+        "section": "colors"
+      },
+      {
+        "name": "The Compressed Headline Rule",
+        "body": "Títulos Archivo usam tracking negativo e line-height apertado como assinatura. Nunca aplicar este tratamento ao corpo de texto.",
+        "section": "typography"
+      },
+      {
+        "name": "The Readable Production Rule",
+        "body": "Informação técnica, formulários e descrições ficam em Inter com line-height generoso. Nunca usar maiúsculas em parágrafos.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat by Default Rule",
+        "body": "Cartões, serviços, campos e navegação não recebem sombra. Se um bloco normal parece flutuar, a sombra está errada.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Pixel Structure Rule",
+        "body": "Separação estrutural usa linhas de 1px em machine-border ou equivalentes claros. Barras laterais coloridas são proibidas.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do manter o laranja printing-orange ligado a ação, orientação, prioridade ou estado.",
+      "Do usar fotografia real de produção com alt text específico e útil.",
+      "Do manter o contentor máximo de 1440px e os ritmos de secção de 80px, 112px e 144px.",
+      "Do limitar corpo de texto a 46ch–65ch e preservar o contraste de escala entre títulos e descrições.",
+      "Do alternar carvão e papel técnico apenas quando a narrativa muda entre produção e explicação.",
+      "Do preservar foco visível, teclado completo, alvos mínimos de 44px e redução de movimento.",
+      "Do manter todos os componentes quadrados e estruturados por linhas de 1px."
+    ],
+    "donts": [
+      "Don't fazer o site parecer uma loja barata de t-shirts, uma gráfica antiga, um catálogo genérico de brindes, um template de agência ou um site automaticamente produzido por inteligência artificial.",
+      "Don't usar excesso de cor, efeitos decorativos sem função, fotografias corporativas genéricas, promessas vagas ou dados comerciais inventados.",
+      "Don't usar gradientes no texto, vidro decorativo, brilho néon ou cantos arredondados.",
+      "Don't usar border-left ou border-right com mais de 1px como faixa colorida de destaque.",
+      "Don't criar grelhas repetidas de cartões idênticos com ícone, título e texto.",
+      "Don't aplicar sombras a cartões ou campos normais.",
+      "Don't animar propriedades de layout ou introduzir bounce e elastic.",
+      "Don't repetir pequenos kickers em maiúsculas acima de cada elemento."
+    ]
+  }
+}
