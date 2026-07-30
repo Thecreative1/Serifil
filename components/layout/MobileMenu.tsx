@@ -11,11 +11,14 @@ type MobileMenuProps = {
   onClose: () => void;
   locale: Locale;
   copy: SiteContent["header"];
+  homeHref?: string;
+  languageHrefs?: Record<Locale, string>;
 };
 
-export function MobileMenu({ open, onClose, locale, copy }: MobileMenuProps) {
+export function MobileMenu({ open, onClose, locale, copy, homeHref, languageHrefs }: MobileMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const sectionHref = (href: string) => homeHref ? `${homeHref}${href}` : href;
 
   useEffect(() => {
     if (!open) return;
@@ -65,7 +68,7 @@ export function MobileMenu({ open, onClose, locale, copy }: MobileMenuProps) {
         <ul className="divide-y divide-border border-y border-border">
           {copy.nav.map((link, index) => (
             <li key={link.href}>
-              <a href={link.href} onClick={onClose} tabIndex={open ? 0 : -1} className="flex min-h-16 items-center justify-between py-3 text-[clamp(1.5rem,8vw,2.3rem)] font-bold tracking-[-0.04em] text-text-primary focus-visible:outline-2 focus-visible:outline-accent">
+              <a href={sectionHref(link.href)} onClick={onClose} tabIndex={open ? 0 : -1} className="flex min-h-16 items-center justify-between py-3 text-[clamp(1.5rem,8vw,2.3rem)] font-bold tracking-[-0.04em] text-text-primary focus-visible:outline-2 focus-visible:outline-accent">
                 {link.label}
                 <span className="text-xs font-normal tracking-wider text-text-secondary">0{index + 1}</span>
               </a>
@@ -77,7 +80,7 @@ export function MobileMenu({ open, onClose, locale, copy }: MobileMenuProps) {
             {(["pt", "en"] as const).map((language) => (
               <a
                 key={language}
-                href={localizedPath(language)}
+                href={languageHrefs?.[language] ?? localizedPath(language)}
                 onClick={() => {
                   if (locale !== language) {
                     trackEvent("language_change", {
@@ -95,7 +98,7 @@ export function MobileMenu({ open, onClose, locale, copy }: MobileMenuProps) {
               </a>
             ))}
           </div>
-          <a href="#orcamento" onClick={onClose} tabIndex={open ? 0 : -1} className="flex min-h-14 items-center justify-center bg-accent px-5 font-bold uppercase tracking-wider text-light-text focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+          <a href={sectionHref("#orcamento")} onClick={onClose} tabIndex={open ? 0 : -1} className="flex min-h-14 items-center justify-center bg-accent px-5 font-bold uppercase tracking-wider text-light-text focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
             {copy.quote}
           </a>
         </div>

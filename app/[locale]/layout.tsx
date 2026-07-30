@@ -52,7 +52,7 @@ export async function generateMetadata({
       languages: {
         "pt-PT": `${brand.website}pt/`,
         en: `${brand.website}en/`,
-        "x-default": brand.website,
+        "x-default": `${brand.website}pt/`,
       },
     },
     openGraph: {

@@ -288,6 +288,7 @@ test("publica metadados canónicos e de partilha corretos", async ({ page }) => 
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/pt/");
   await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/");
+  await expect(page.locator('link[hreflang="x-default"]')).toHaveAttribute("href", "https://serifil.com/pt/");
   await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", "https://serifil.com/pt/");
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://serifil.com/og.png");
   await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute("content", "SERIFIL");
@@ -309,6 +310,8 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   const sitemap = await sitemapResponse.text();
   expect(sitemap).toContain("<loc>https://serifil.com/pt/</loc>");
   expect(sitemap).toContain("<loc>https://serifil.com/en/</loc>");
+  expect(sitemap).toContain("<loc>https://serifil.com/pt/servicos/sacos-tnt/</loc>");
+  expect(sitemap).toContain("<loc>https://serifil.com/en/servicos/non-woven-bags/</loc>");
   expect(sitemap).toContain('hreflang="pt-PT"');
   expect(sitemap).toContain('hreflang="en"');
   expect(sitemap).toContain('hreflang="x-default"');
@@ -338,6 +341,122 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(structuredData.hasOfferCatalog.itemListElement).toHaveLength(6);
   expect(structuredData.hasOfferCatalog.itemListElement[0].itemOffered.name).toBe("Sacos em PVC, tecido e TNT");
   expect(structuredData.hasOfferCatalog.itemListElement[2].itemOffered.name).toBe("Componentes para calçado");
+});
+
+const serviceRoutes = [
+  {
+    locale: "pt",
+    path: "/pt/servicos/serigrafia-pvc/",
+    alternate: "/en/servicos/pvc-screen-printing/",
+    xDefault: "/pt/servicos/serigrafia-pvc/",
+    heading: "Impressão em PVC, preparada para o suporte real.",
+  },
+  {
+    locale: "pt",
+    path: "/pt/servicos/serigrafia-tecido/",
+    alternate: "/en/servicos/fabric-screen-printing/",
+    xDefault: "/pt/servicos/serigrafia-tecido/",
+    heading: "Impressão em tecido, pensada para a peça e para o uso.",
+  },
+  {
+    locale: "pt",
+    path: "/pt/servicos/sacos-tnt/",
+    alternate: "/en/servicos/non-woven-bags/",
+    xDefault: "/pt/servicos/sacos-tnt/",
+    heading: "TNT: o tecido não tecido que também comunica a sua marca.",
+  },
+  {
+    locale: "pt",
+    path: "/pt/servicos/componentes-calcado/",
+    alternate: "/en/servicos/footwear-components/",
+    xDefault: "/pt/servicos/componentes-calcado/",
+    heading: "Impressão preparada para integrar o componente.",
+  },
+  {
+    locale: "en",
+    path: "/en/servicos/pvc-screen-printing/",
+    alternate: "/pt/servicos/serigrafia-pvc/",
+    xDefault: "/pt/servicos/serigrafia-pvc/",
+    heading: "PVC printing, prepared for the actual substrate.",
+  },
+  {
+    locale: "en",
+    path: "/en/servicos/fabric-screen-printing/",
+    alternate: "/pt/servicos/serigrafia-tecido/",
+    xDefault: "/pt/servicos/serigrafia-tecido/",
+    heading: "Fabric printing designed around the item and its use.",
+  },
+  {
+    locale: "en",
+    path: "/en/servicos/non-woven-bags/",
+    alternate: "/pt/servicos/sacos-tnt/",
+    xDefault: "/pt/servicos/sacos-tnt/",
+    heading: "Non-woven material that carries your brand.",
+  },
+  {
+    locale: "en",
+    path: "/en/servicos/footwear-components/",
+    alternate: "/pt/servicos/componentes-calcado/",
+    xDefault: "/pt/servicos/componentes-calcado/",
+    heading: "Printing prepared to become part of the component.",
+  },
+];
+
+test("publica páginas de serviço bilingues com metadados e ligações recíprocas", async ({ page }) => {
+  for (const route of serviceRoutes) {
+    await page.goto(route.path);
+    await expect(page.locator("html")).toHaveAttribute("lang", route.locale === "pt" ? "pt-PT" : "en");
+    await expect(page.locator("h1")).toHaveCount(1);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(route.heading);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://serifil.com${route.path}`);
+    await expect(page.locator('link[hreflang="x-default"]')).toHaveAttribute("href", `https://serifil.com${route.xDefault}`);
+
+    const alternateLanguage = route.locale === "pt" ? "en" : "pt-PT";
+    await expect(page.locator(`link[hreflang="${alternateLanguage}"]`)).toHaveAttribute(
+      "href",
+      `https://serifil.com${route.alternate}`,
+    );
+
+    const structuredDataText = await page.locator('script[type="application/ld+json"]').textContent();
+    const structuredData = JSON.parse(structuredDataText ?? "{}") as {
+      "@graph": Array<{ "@type": string }>;
+    };
+    expect(structuredData["@graph"].some((item) => item["@type"] === "Service")).toBe(true);
+    expect(structuredData["@graph"].some((item) => item["@type"] === "BreadcrumbList")).toBe(true);
+  }
+});
+
+test("liga a página principal aos guias de materiais e explica TNT sem misturar idiomas", async ({ page }) => {
+  await page.goto("/pt/");
+  await expect(page.getByRole("link", { name: /Sacos em TNT/ }).first()).toHaveAttribute(
+    "href",
+    "/pt/servicos/sacos-tnt/",
+  );
+  await page.goto("/pt/servicos/sacos-tnt/");
+  await expect(page.getByRole("heading", { name: "O que é TNT?" })).toBeVisible();
+  await expect(page.getByText(/não é formada por tecelagem ou tricotagem/)).toBeVisible();
+
+  await page.goto("/en/servicos/non-woven-bags/");
+  await expect(page.getByRole("heading", { name: "What is a non-woven?" })).toBeVisible();
+  await expect(page.locator("body")).not.toContainText(/\bTNT\b/);
+  await expect(page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "pt" })).toHaveAttribute(
+    "href",
+    "/pt/servicos/sacos-tnt/",
+  );
+});
+
+test("páginas de serviço não criam overflow horizontal", async ({ page }) => {
+  for (const viewport of [{ width: 320, height: 720 }, { width: 1440, height: 900 }]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/pt/servicos/sacos-tnt/");
+    const dimensions = await page.evaluate(() => ({
+      viewport: window.innerWidth,
+      document: document.documentElement.scrollWidth,
+      body: document.body.scrollWidth,
+    }));
+    expect(dimensions.document).toBeLessThanOrEqual(dimensions.viewport + 1);
+    expect(dimensions.body).toBeLessThanOrEqual(dimensions.viewport + 1);
+  }
 });
 
 test("comunica materiais, setores e componentes de calçado nas duas línguas", async ({ page }) => {

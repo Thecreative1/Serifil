@@ -1,13 +1,15 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import type { SiteContent } from "@/data/i18n";
+import type { Locale, SiteContent } from "@/data/i18n";
+import { getServicePath, serviceKeys, servicePages, servicePageUi } from "@/data/service-pages";
 
-export function Services({ copy }: { copy: SiteContent["services"] }) {
+export function Services({ locale, copy }: { locale: Locale; copy: SiteContent["services"] }) {
   const primaryService = copy.items.find((service) => service.emphasis === "primary");
   const supportingServices = copy.items.filter((service) => service.emphasis === "supporting");
   const complementaryServices = copy.items.filter((service) => service.emphasis === "complementary");
+  const guideUi = servicePageUi[locale];
 
   if (!primaryService) return null;
 
@@ -56,6 +58,33 @@ export function Services({ copy }: { copy: SiteContent["services"] }) {
               </Reveal>
             ))}
           </div>
+        </div>
+
+        <div className="mt-20 grid gap-10 border-t border-border pt-10 lg:mt-28 lg:grid-cols-12 lg:gap-16 lg:pt-14">
+          <Reveal className="lg:col-span-4">
+            <p className="section-kicker text-accent">{guideUi.materialGuides}</p>
+            <h3 className="mt-7 max-w-[13ch] text-[clamp(2.2rem,4vw,4.4rem)] leading-[0.94] font-bold tracking-[-0.055em] text-text-primary">
+              {guideUi.materialGuidesDescription}
+            </h3>
+          </Reveal>
+          <nav className="border-t border-border lg:col-span-8" aria-label={guideUi.materialGuides}>
+            {serviceKeys.map((key, index) => {
+              const guide = servicePages[locale][key];
+              return (
+                <Reveal key={key}>
+                  <a
+                    href={getServicePath(locale, key)}
+                    className="group grid min-h-20 grid-cols-[3rem_minmax(0,1fr)_auto] items-center gap-4 border-b border-border py-5 text-text-primary transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:grid-cols-[4rem_minmax(0,1fr)_8rem_auto] sm:gap-6"
+                  >
+                    <span className="text-xs font-bold text-accent">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="text-xl font-bold tracking-[-0.025em] sm:text-2xl">{guide.shortName}</span>
+                    <span className="hidden text-right text-xs font-bold uppercase tracking-[0.1em] text-text-secondary sm:block">{guideUi.learnMore}</span>
+                    <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                  </a>
+                </Reveal>
+              );
+            })}
+          </nav>
         </div>
 
         <div className="mt-20 lg:mt-28">

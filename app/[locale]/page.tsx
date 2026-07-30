@@ -86,8 +86,8 @@ export default async function Home({
         <Hero copy={copy.hero} />
         <Marquee copy={copy.marquee} />
         <Introduction copy={copy.introduction} />
-        <Services copy={copy.services} />
-        <Portfolio copy={copy.portfolio} />
+        <Services locale={locale} copy={copy.services} />
+        <Portfolio locale={locale} copy={copy.portfolio} />
         <Benefits copy={copy.benefits} />
         <Process copy={copy.process} />
         <About copy={copy.about} />
