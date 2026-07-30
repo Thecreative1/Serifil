@@ -4,7 +4,15 @@ import { CookiePreferencesButton } from "@/components/analytics/CookiePreference
 import { Container } from "@/components/ui/Container";
 import type { SiteContent } from "@/data/i18n";
 
-export function Footer({ copy, headerCopy }: { copy: SiteContent["footer"]; headerCopy: SiteContent["header"] }) {
+export function Footer({
+  copy,
+  headerCopy,
+  homeHref,
+}: {
+  copy: SiteContent["footer"];
+  headerCopy: SiteContent["header"];
+  homeHref?: string;
+}) {
   const legalDetails: Array<{ label: string; value: string; href?: string }> = [
     { label: copy.legal.commercialName, value: brand.name },
     { label: copy.legal.owner, value: brand.legalOwner },
@@ -18,6 +26,7 @@ export function Footer({ copy, headerCopy }: { copy: SiteContent["footer"]; head
       ? [{ label: copy.legal.phone, value: brand.phone, href: `tel:${brand.phone.replace(/\s/g, "")}` }]
       : []),
   ];
+  const sectionHref = (href: string) => homeHref ? `${homeHref}${href}` : href;
 
   return (
     <footer className="border-t border-border bg-[#0c0d0b] py-12 sm:py-16">
@@ -32,7 +41,7 @@ export function Footer({ copy, headerCopy }: { copy: SiteContent["footer"]; head
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-text-secondary">{copy.navigation}</p>
             <ul className="mt-5 grid gap-3">
-              {headerCopy.nav.map((link) => <li key={link.href}><a className="text-sm text-text-primary underline-offset-4 hover:underline" href={link.href}>{link.label}</a></li>)}
+              {headerCopy.nav.map((link) => <li key={link.href}><a className="text-sm text-text-primary underline-offset-4 hover:underline" href={sectionHref(link.href)}>{link.label}</a></li>)}
             </ul>
           </div>
           <div>

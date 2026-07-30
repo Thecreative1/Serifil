@@ -8,10 +8,18 @@ import type { Locale, SiteContent } from "@/data/i18n";
 import { trackEvent } from "@/lib/analytics";
 import { MobileMenu } from "./MobileMenu";
 
-export function Header({ locale, copy }: { locale: Locale; copy: SiteContent["header"] }) {
+type HeaderProps = {
+  locale: Locale;
+  copy: SiteContent["header"];
+  homeHref?: string;
+  languageHrefs?: Record<Locale, string>;
+};
+
+export function Header({ locale, copy, homeHref, languageHrefs }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const sectionHref = (href: string) => homeHref ? `${homeHref}${href}` : href;
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
     window.requestAnimationFrame(() => menuButtonRef.current?.focus({ preventScroll: true }));
@@ -28,13 +36,13 @@ export function Header({ locale, copy }: { locale: Locale; copy: SiteContent["he
     <>
       <header className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${scrolled ? "border-border bg-background/95" : "border-transparent bg-background/20"}`}>
         <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:h-24 lg:px-12">
-          <a href="#inicio" className="flex items-center gap-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent" aria-label={copy.homeLabel}>
+          <a href={homeHref ?? "#inicio"} className="flex items-center gap-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent" aria-label={copy.homeLabel}>
             <span className="text-xl font-black tracking-[-0.04em] text-text-primary sm:text-2xl">{brand.name}</span>
             <span className="hidden border-l border-border pl-4 text-[0.65rem] leading-4 uppercase tracking-[0.15em] text-text-secondary sm:block">{copy.descriptor}</span>
           </a>
           <nav className="hidden items-center gap-6 lg:flex" aria-label={copy.navigationLabel}>
             {copy.nav.map((link) => (
-              <a key={link.href} href={link.href} className="text-sm font-semibold text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+              <a key={link.href} href={sectionHref(link.href)} className="text-sm font-semibold text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
                 {link.label}
               </a>
             ))}
@@ -42,7 +50,7 @@ export function Header({ locale, copy }: { locale: Locale; copy: SiteContent["he
               {(["pt", "en"] as const).map((language) => (
                 <a
                   key={language}
-                  href={localizedPath(language)}
+                  href={languageHrefs?.[language] ?? localizedPath(language)}
                   onClick={() => {
                     if (locale !== language) {
                       trackEvent("language_change", {
@@ -59,7 +67,7 @@ export function Header({ locale, copy }: { locale: Locale; copy: SiteContent["he
                 </a>
               ))}
             </div>
-            <a href="#orcamento" className="bg-accent px-5 py-3 text-sm font-bold uppercase tracking-[0.06em] text-light-text transition-colors hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+            <a href={sectionHref("#orcamento")} className="bg-accent px-5 py-3 text-sm font-bold uppercase tracking-[0.06em] text-light-text transition-colors hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
               {copy.quote}
             </a>
           </nav>
@@ -69,7 +77,14 @@ export function Header({ locale, copy }: { locale: Locale; copy: SiteContent["he
         </div>
       </header>
       <div id="mobile-menu">
-        <MobileMenu open={menuOpen} onClose={closeMenu} locale={locale} copy={copy} />
+        <MobileMenu
+          open={menuOpen}
+          onClose={closeMenu}
+          locale={locale}
+          copy={copy}
+          homeHref={homeHref}
+          languageHrefs={languageHrefs}
+        />
       </div>
     </>
   );

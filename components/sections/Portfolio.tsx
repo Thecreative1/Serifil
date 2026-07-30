@@ -1,11 +1,16 @@
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { assetPath } from "@/config/paths";
-import type { SiteContent } from "@/data/i18n";
+import type { Locale, SiteContent } from "@/data/i18n";
+import { getServicePath, servicePageUi, type ServiceKey } from "@/data/service-pages";
 
-export function Portfolio({ copy }: { copy: SiteContent["portfolio"] }) {
+const portfolioServiceKeys: ServiceKey[] = ["pvc", "fabric", "nonwoven"];
+
+export function Portfolio({ locale, copy }: { locale: Locale; copy: SiteContent["portfolio"] }) {
+  const ui = servicePageUi[locale];
   return (
     <section id="trabalhos" className="scroll-mt-20 bg-surface py-20 sm:py-28 lg:scroll-mt-24 lg:py-36">
       <Container>
@@ -26,6 +31,13 @@ export function Portfolio({ copy }: { copy: SiteContent["portfolio"] }) {
                   <p className="mt-8 border-t border-border pt-4 text-xs font-semibold uppercase tracking-[0.1em] text-text-secondary">
                     {item.technique}
                   </p>
+                  <a
+                    href={getServicePath(locale, portfolioServiceKeys[index])}
+                    className="group mt-7 inline-flex min-h-11 items-center gap-3 border-b border-text-secondary py-2 text-sm font-bold uppercase tracking-[0.08em] text-text-primary transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                  >
+                    {ui.learnMore}
+                    <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                  </a>
                 </div>
 
                 <div className="grid grid-cols-2 gap-px bg-border lg:col-span-8">
