@@ -38,9 +38,9 @@ data/
 lib/
   analytics.ts           consent mode e eventos sem dados pessoais
 public/
-  images/                imagem real do hero
+  images/                imagem real do hero e trabalhos otimizados
 scripts/
-  prepare-sites-build.mjs preparação de dist/client e dist/server
+  optimize-portfolio-images.mjs preparação WebP das fotografias de trabalhos
 tests/
   site.spec.ts           contratos funcionais e de conteúdo
   visual.spec.ts         capturas completas desktop e mobile
@@ -59,7 +59,7 @@ Os ficheiros `data/services.ts`, `data/portfolio.ts`, `data/benefits.ts` e `data
 3. Preferências do navegador.
 4. Português quando algum idioma começa por `pt`; inglês nos restantes casos.
 
-No artefacto de alojamento, `scripts/prepare-sites-build.mjs` cria um worker que trata `/` antes dos assets. A ordem é cookie, país Cloudflare de língua portuguesa e inglês como fallback. O redirect é 307 e preserva a query string.
+No GitHub Pages, a página estática em `/` escolhe o idioma no cliente e encaminha para a rota localizada correspondente.
 
 ### `/pt/` e `/en/`
 
@@ -255,6 +255,7 @@ Contratos preservados:
 ## 11. Performance e assets
 
 - A imagem do hero usa `next/image`, `priority`, `sizes="100vw"` e formatos AVIF/WebP quando disponíveis.
+- As fotografias de trabalhos são normalizadas para WebP 1600×1200px pelo script `optimize-portfolio-images.mjs` e carregadas de forma diferida com `next/image`.
 - A exportação estática usa imagens não otimizadas em runtime, adequada ao alojamento sem servidor Next.
 - O mapa usa iframe lazy.
 - Fontes usam `display: "swap"`.
@@ -275,14 +276,9 @@ npm run start
 npm run test:e2e
 ```
 
-`npm run build` executa:
+`npm run build` executa `next build` e cria a exportação estática em `out/`. O workflow `.github/workflows/deploy-pages.yml` envia esse diretório para o GitHub Pages e publica-o quando há alterações na branch `main`.
 
-1. `next build`, criando `out/`;
-2. `scripts/prepare-sites-build.mjs`;
-3. cópia de `out/` para `dist/client/`;
-4. criação de `dist/server/index.js` com redirect localizado e fallback 404.
-
-Não editar `out/` ou `dist/` manualmente. São artefactos regeneráveis.
+Não editar `out/` manualmente. É um artefacto regenerável.
 
 ## 13. Testes e critérios de conclusão
 

@@ -11,6 +11,20 @@ const localizedUrls = {
 const images = [
   `${brand.website}images/hero-serigrafia.webp`,
   `${brand.website}og.png`,
+  ...[
+    "pvc-01",
+    "pvc-02",
+    "pvc-03",
+    "tecido-01",
+    "tecido-02",
+    "tecido-03",
+    "tecido-04",
+    "tnt-01",
+    "tnt-02",
+    "tnt-03",
+    "tnt-04",
+    "tnt-05",
+  ].map((name) => `${brand.website}images/trabalhos/${name}.webp`),
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

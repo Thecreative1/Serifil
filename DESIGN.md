@@ -226,6 +226,12 @@ O serviço principal ocupa mais área e usa fundo laranja integral. Serviços de
 
 O hero combina uma fotografia real de serigrafia, overlay escuro horizontal, grelha industrial subtil e H1 de escala extrema. A fotografia fica em `object-cover` com foco horizontal em 62%. O texto entra em quatro passos entre 0ms e 340ms, com duração de 900ms.
 
+### Galeria de Trabalhos
+
+A galeria organiza produção real por material, com uma coluna de contexto técnico e uma grelha fotográfica à direita. Todas as fotografias usam formato 4:3, recorte central consistente e separação por linhas de 1px. Em mobile, a grelha mantém duas colunas para permitir comparar acabamentos sem alongar excessivamente a página.
+
+As imagens são publicadas em WebP com 1600×1200px, carregamento diferido e texto alternativo específico. A edição deve preservar a aparência real dos materiais: corrigir orientação, uniformizar o recorte e comprimir, sem filtros que alterem cores ou acabamentos.
+
 ### Motion
 
 Revelações usam apenas opacity e translateY de 24px durante 700ms, com `cubic-bezier(0.16, 1, 0.3, 1)`. O marquee é linear durante 36s. `prefers-reduced-motion: reduce` reduz animações e transições a 0.01ms e mantém o conteúdo visível.
@@ -240,6 +246,7 @@ A informação legal vive no rodapé dentro de um elemento `details` fechado por
 
 - **Do** manter o laranja `printing-orange` ligado a ação, orientação, prioridade ou estado.
 - **Do** usar fotografia real de produção com alt text específico e útil.
+- **Do** tratar fotografias de portefólio num formato 4:3 consistente, preservando cor e textura reais.
 - **Do** manter o contentor máximo de 1440px e os ritmos de secção de 80px, 112px e 144px.
 - **Do** limitar corpo de texto a 46ch–65ch e preservar o contraste de escala entre títulos e descrições.
 - **Do** alternar carvão e papel técnico apenas quando a narrativa muda entre produção e explicação.
