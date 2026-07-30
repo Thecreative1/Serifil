@@ -445,7 +445,7 @@ test("liga a página principal aos guias de materiais e explica TNT sem misturar
   );
 });
 
-test("páginas de serviço não criam overflow horizontal", async ({ page }) => {
+test("páginas de serviço não criam overflow horizontal nem sobreposição na galeria", async ({ page }) => {
   for (const viewport of [{ width: 320, height: 720 }, { width: 1440, height: 900 }]) {
     await page.setViewportSize(viewport);
     await page.goto("/pt/servicos/sacos-tnt/");
@@ -457,6 +457,16 @@ test("páginas de serviço não criam overflow horizontal", async ({ page }) => 
     expect(dimensions.document).toBeLessThanOrEqual(dimensions.viewport + 1);
     expect(dimensions.body).toBeLessThanOrEqual(dimensions.viewport + 1);
   }
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/pt/servicos/serigrafia-pvc/");
+  const galleryTitle = page.getByRole("heading", { name: "Transparência, cor e leitura." });
+  const gallerySection = page.locator("section").filter({ has: galleryTitle });
+  const titleBox = await galleryTitle.boundingBox();
+  const firstImageBox = await gallerySection.locator("figure").first().boundingBox();
+  expect(titleBox).not.toBeNull();
+  expect(firstImageBox).not.toBeNull();
+  expect((titleBox?.x ?? 0) + (titleBox?.width ?? 0)).toBeLessThan(firstImageBox?.x ?? 0);
 });
 
 test("comunica materiais, setores e componentes de calçado nas duas línguas", async ({ page }) => {

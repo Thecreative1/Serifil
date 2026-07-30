@@ -29,7 +29,7 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
 
   return (
     <main id="inicio">
-      <section className="relative overflow-hidden border-b border-border bg-background pt-28 sm:pt-32 lg:pt-40">
+      <section className="relative overflow-hidden border-b border-border bg-background pt-24 sm:pt-28 lg:pt-32">
         <div className="industrial-grid pointer-events-none absolute inset-0 opacity-20" aria-hidden="true" />
         <Container className="relative">
           <nav aria-label={ui.breadcrumbsLabel}>
@@ -56,16 +56,16 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
             </ol>
           </nav>
 
-          <div className="grid gap-12 py-12 sm:py-16 lg:grid-cols-12 lg:items-end lg:gap-12 lg:py-24">
+          <div className="grid gap-10 pt-10 pb-14 sm:pt-12 sm:pb-16 lg:grid-cols-12 lg:items-center lg:gap-12 lg:pt-14 lg:pb-20">
             <div className="lg:col-span-7">
               <p className="section-kicker text-accent">{page.eyebrow}</p>
-              <h1 className="mt-7 max-w-[12ch] text-[clamp(3.4rem,7.4vw,7.8rem)] leading-[0.86] font-black tracking-[-0.07em] text-text-primary">
+              <h1 className="mt-6 max-w-[13ch] text-[clamp(3.2rem,6.4vw,6.9rem)] leading-[0.88] font-black tracking-[-0.07em] text-text-primary">
                 {page.title}
               </h1>
-              <p className="mt-8 max-w-[58ch] text-lg leading-8 text-text-secondary sm:text-xl">
+              <p className="mt-7 max-w-[58ch] text-lg leading-8 text-text-secondary sm:text-xl">
                 {page.lead}
               </p>
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button href={quotePath}>{ui.quote}</Button>
                 <Button href={workPath} variant="secondary">{ui.seeWork}</Button>
               </div>
@@ -176,13 +176,13 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
           <Container>
             <Reveal>
               <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-                <div className="lg:col-span-4">
+                <div className="min-w-0 lg:col-span-5">
                   <p className="section-kicker text-accent">{page.gallery.eyebrow}</p>
                   <h2 className="mt-8 max-w-[11ch] text-[clamp(2.6rem,4.8vw,5.2rem)] leading-[0.92] font-bold tracking-[-0.06em] text-text-primary">
                     {page.gallery.title}
                   </h2>
                 </div>
-                <div className="grid grid-cols-2 gap-px bg-border lg:col-span-8">
+                <div className="grid min-w-0 grid-cols-2 gap-px bg-border lg:col-span-7">
                   {page.gallery.images.map((image, index) => (
                     <figure key={image.src} className="relative aspect-[4/3] overflow-hidden bg-surface">
                       <Image
