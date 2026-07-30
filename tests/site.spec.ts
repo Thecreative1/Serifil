@@ -18,7 +18,7 @@ test("estrutura, imagens e navegação principal", async ({ page }) => {
   await expect(heading).toHaveCount(1);
   await expect(heading).toContainText("Imprimimos ideias.");
   await expect(heading).toContainText("Entregamos resultados.");
-  await expect(page.locator("img")).toHaveCount(1);
+  await expect(page.locator("img")).toHaveCount(13);
 
   const images = page.locator("img");
   for (let index = 0; index < await images.count(); index += 1) {
@@ -29,6 +29,9 @@ test("estrutura, imagens e navegação principal", async ({ page }) => {
     items.every((image) => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0),
   );
   expect(imageHealth).toBe(true);
+  await expect(page.locator("#trabalhos").getByRole("heading", { name: "Impressão em PVC transparente" })).toBeVisible();
+  await expect(page.locator("#trabalhos").getByRole("heading", { name: "Capas e peças em tecido" })).toBeVisible();
+  await expect(page.locator("#trabalhos").getByRole("heading", { name: "Sacos personalizados em TNT" })).toBeVisible();
 
   await page.getByRole("navigation", { name: "Navegação principal" }).getByRole("link", { name: "Serviços" }).click();
   await expect(page.locator("#servicos h2")).toBeInViewport();

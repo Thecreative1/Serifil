@@ -122,51 +122,85 @@ export const translations = {
       ],
     },
     portfolio: {
-      eyebrow: "APLICAÇÕES",
-      title: "Soluções para empresas, marcas e diferentes setores.",
+      eyebrow: "TRABALHOS",
+      title: "Produção real, material a material.",
       description:
-        "Cada trabalho é acompanhado desde o ficheiro inicial até ao resultado final, com atenção ao material, à técnica e à aplicação pretendida, incluindo soluções específicas para o setor do calçado.",
+        "Uma seleção de trabalhos produzidos pela SERIFIL em PVC, tecido e TNT, com impressão adaptada ao material e à aplicação de cada projeto.",
       items: [
         {
-          category: "Sacos",
-          name: "Sacos em PVC, tecido e TNT",
-          technique: "Serigrafia em diferentes materiais",
+          category: "PVC",
+          name: "Impressão em PVC transparente",
+          technique: "Serigrafia sobre PVC",
           description:
-            "Personalização de sacos para apresentação, proteção, embalagem, hotelaria, comércio e ações promocionais.",
+            "Aplicação de logótipos, elementos gráficos e informação técnica em peças transparentes para apresentação, embalagem e proteção.",
+          images: [
+            {
+              src: "/images/trabalhos/pvc-01.webp",
+              alt: "Peça em PVC transparente com impressão ornamental dourada",
+            },
+            {
+              src: "/images/trabalhos/pvc-02.webp",
+              alt: "Embalagem transparente em PVC personalizada com logótipo",
+            },
+            {
+              src: "/images/trabalhos/pvc-03.webp",
+              alt: "Detalhe de informação técnica impressa sobre PVC transparente",
+            },
+          ],
         },
         {
-          category: "Vestuário",
-          name: "Capas e porta-fatos",
-          technique: "Impressão em tecido e TNT",
-          description:
-            "Aplicação de logótipos em capas e porta-fatos destinados a vestuário, hotelaria, lojas e confeção.",
-        },
-        {
-          category: "Calçado",
-          name: "Componentes para calçado",
-          technique: "Impressão em componentes",
-          description:
-            "Impressão e personalização de palmilhas, palas e outros componentes utilizados na produção de calçado.",
-        },
-        {
-          category: "Têxtil",
-          name: "Roupa profissional",
+          category: "Tecido",
+          name: "Capas e peças em tecido",
           technique: "Serigrafia têxtil",
           description:
-            "Personalização de vestuário profissional para empresas, equipas, restauração, construção e outros setores.",
+            "Personalização de capas, sacos e outros suportes têxteis, com impressão de marca preparada para cada formato e cor de base.",
+          images: [
+            {
+              src: "/images/trabalhos/tecido-01.webp",
+              alt: "Tecido preto personalizado com impressão dourada",
+            },
+            {
+              src: "/images/trabalhos/tecido-02.webp",
+              alt: "Capa em tecido preto com logótipo branco",
+            },
+            {
+              src: "/images/trabalhos/tecido-03.webp",
+              alt: "Peça em tecido claro com impressão tipográfica preta",
+            },
+            {
+              src: "/images/trabalhos/tecido-04.webp",
+              alt: "Tecido cinzento-escuro personalizado com logótipo dourado",
+            },
+          ],
         },
         {
-          category: "Empresas",
-          name: "Produções personalizadas",
-          technique: "Produção por projeto",
+          category: "TNT",
+          name: "Sacos personalizados em TNT",
+          technique: "Serigrafia sobre não tecido",
           description:
-            "Soluções personalizadas para empresas, marcas, hotelaria, campanhas, eventos e outras aplicações.",
-        },
-        {
-          category: "Sinalética",
-          name: "Placas gravadas",
-          technique: "Gravação laser",
-          description: "Gravação precisa em madeira e acrílico para placas e sinalética.",
+            "Produção de sacos e capas em TNT com logótipos, mensagens e grafismos para apresentação, proteção e comunicação de marca.",
+          images: [
+            {
+              src: "/images/trabalhos/tnt-01.webp",
+              alt: "Saco preto em TNT com mensagem natalícia dourada",
+            },
+            {
+              src: "/images/trabalhos/tnt-02.webp",
+              alt: "Saco preto em TNT com logótipo impresso a duas cores",
+            },
+            {
+              src: "/images/trabalhos/tnt-03.webp",
+              alt: "Saco preto em TNT com impressão branca",
+            },
+            {
+              src: "/images/trabalhos/tnt-04.webp",
+              alt: "Saco azul em TNT com logótipo branco",
+            },
+            {
+              src: "/images/trabalhos/tnt-05.webp",
+              alt: "Saco preto em TNT com impressão verde e branca",
+            },
+          ],
         },
       ],
     },
@@ -444,51 +478,85 @@ export const translations = {
       ],
     },
     portfolio: {
-      eyebrow: "APPLICATIONS",
-      title: "Solutions for businesses, brands and different industries.",
+      eyebrow: "OUR WORK",
+      title: "Real production, material by material.",
       description:
-        "Every project is supported from the initial artwork to the final result, with close attention to the material, technique and intended application, including specialist solutions for the footwear sector.",
+        "A selection of work produced by SERIFIL in PVC, fabric and non-woven materials, with printing adapted to the material and intended application of each project.",
       items: [
         {
-          category: "Bags",
-          name: "PVC, fabric and non-woven bags",
-          technique: "Screen printing on different materials",
+          category: "PVC",
+          name: "Printing on clear PVC",
+          technique: "Screen printing on PVC",
           description:
-            "Custom bags for presentation, protection, packaging, hospitality, retail and promotional campaigns.",
+            "Logos, graphics and technical information printed on clear pieces for presentation, packaging and protection.",
+          images: [
+            {
+              src: "/images/trabalhos/pvc-01.webp",
+              alt: "Clear PVC piece with an ornamental gold print",
+            },
+            {
+              src: "/images/trabalhos/pvc-02.webp",
+              alt: "Clear PVC packaging customised with a logo",
+            },
+            {
+              src: "/images/trabalhos/pvc-03.webp",
+              alt: "Detail of technical information printed on clear PVC",
+            },
+          ],
         },
         {
-          category: "Clothing",
-          name: "Covers and garment bags",
-          technique: "Printing on fabric and non-woven materials",
-          description:
-            "Logos printed on covers and garment bags for clothing, hospitality, retail and manufacturing.",
-        },
-        {
-          category: "Footwear",
-          name: "Footwear components",
-          technique: "Component printing",
-          description:
-            "Printing and customisation of insoles, uppers and other components used in footwear production.",
-        },
-        {
-          category: "Textiles",
-          name: "Workwear",
+          category: "Fabric",
+          name: "Fabric covers and pieces",
           technique: "Textile screen printing",
           description:
-            "Custom workwear for businesses, teams, hospitality, construction and other industries.",
+            "Custom covers, bags and other textile pieces, with brand printing prepared for each format and base colour.",
+          images: [
+            {
+              src: "/images/trabalhos/tecido-01.webp",
+              alt: "Black fabric customised with a gold print",
+            },
+            {
+              src: "/images/trabalhos/tecido-02.webp",
+              alt: "Black fabric cover with a white logo",
+            },
+            {
+              src: "/images/trabalhos/tecido-03.webp",
+              alt: "Light fabric piece with black typographic printing",
+            },
+            {
+              src: "/images/trabalhos/tecido-04.webp",
+              alt: "Dark grey fabric customised with a gold logo",
+            },
+          ],
         },
         {
-          category: "Businesses",
-          name: "Custom production",
-          technique: "Project-based production",
+          category: "Non-woven",
+          name: "Custom non-woven bags",
+          technique: "Screen printing on non-woven material",
           description:
-            "Custom solutions for businesses, brands, hospitality, campaigns, events and other applications.",
-        },
-        {
-          category: "Signage",
-          name: "Engraved signs",
-          technique: "Laser engraving",
-          description: "Precise engraving on wood and acrylic for plaques and signage.",
+            "Bags and covers produced in non-woven material with logos, messages and graphics for presentation, protection and brand communication.",
+          images: [
+            {
+              src: "/images/trabalhos/tnt-01.webp",
+              alt: "Black non-woven bag with a gold Christmas message",
+            },
+            {
+              src: "/images/trabalhos/tnt-02.webp",
+              alt: "Black non-woven bag with a two-colour logo",
+            },
+            {
+              src: "/images/trabalhos/tnt-03.webp",
+              alt: "Black non-woven bag with white printing",
+            },
+            {
+              src: "/images/trabalhos/tnt-04.webp",
+              alt: "Blue non-woven bag with a white logo",
+            },
+            {
+              src: "/images/trabalhos/tnt-05.webp",
+              alt: "Black non-woven bag with green and white printing",
+            },
+          ],
         },
       ],
     },
