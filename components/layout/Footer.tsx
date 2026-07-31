@@ -48,6 +48,13 @@ export function Footer({
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-text-secondary">{copy.information}</p>
             <ul className="mt-5 grid gap-3 text-sm text-text-primary">
               <li>{brand.location}</li>
+              {brand.email ? (
+                <li>
+                  <a className="underline decoration-border underline-offset-4 transition-colors hover:decoration-text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent" href={`mailto:${brand.email}`}>
+                    {brand.email}
+                  </a>
+                </li>
+              ) : null}
               <li>{copy.formRequests}</li>
             </ul>
           </div>

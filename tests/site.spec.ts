@@ -219,17 +219,23 @@ test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
 
 test("publica apenas contactos configurados e o WhatsApp correto", async ({ page }) => {
   await page.goto("/pt/#contacto");
-  await expect(page.locator('#contacto a[href^="mailto:"]')).toHaveCount(0);
+  const emailLinks = page.locator('a[href="mailto:geral@serifil.com"]');
   const phoneLinks = page.locator('a[href="tel:+351910508706"]');
   const whatsappLinks = page.locator('a[href="https://wa.me/351910508706"]');
+  await expect(emailLinks).toHaveCount(3);
   await expect(phoneLinks).toHaveCount(3);
   await expect(whatsappLinks).toHaveCount(2);
   const contact = page.locator("#contacto");
+  await expect(contact.getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
   await expect(contact.getByText("+351 910 508 706", { exact: true })).toHaveCount(1);
   await expect(contact.getByRole("link", { name: "Ligar +351 910 508 706" })).toBeVisible();
   await expect(contact.getByRole("link", { name: "WhatsApp +351 910 508 706" })).toBeVisible();
-  await expect(page.getByText("Orçamentos por formulário, telefone ou WhatsApp")).toBeVisible();
+  await expect(page.getByText("Orçamentos por formulário, e-mail, telefone ou WhatsApp")).toBeVisible();
   await expect(whatsappLinks.first()).toHaveAttribute("target", "_blank");
+
+  await page.goto("/en/#contacto");
+  await expect(page.locator("#contacto").getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
+  await expect(page.getByText("Quotes via form, email, phone or WhatsApp")).toBeVisible();
 });
 
 test("disponibiliza informação legal discreta e bilingue no rodapé", async ({ page }) => {
@@ -247,8 +253,9 @@ test("disponibiliza informação legal discreta e bilingue no rodapé", async ({
   await expect(portugueseLegal.getByText("250 796 210")).toBeVisible();
   await expect(portugueseLegal.getByText("Serigrafia, impressão e personalização")).toBeVisible();
   await expect(portugueseLegal.getByText("Travessa Bernardino Jordão 90, Urgezes, Guimarães, Portugal")).toBeVisible();
+  await expect(portugueseLegal.getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
   await expect(portugueseLegal.getByRole("link", { name: "+351 910 508 706" })).toHaveAttribute("href", "tel:+351910508706");
-  await expect(portugueseLegal.getByText("Email", { exact: true })).toHaveCount(0);
+  await expect(portugueseLegal.getByText("E-mail", { exact: true })).toHaveCount(1);
 
   await page.goto("/en/");
   const englishLegal = page.locator("footer details");
@@ -257,6 +264,7 @@ test("disponibiliza informação legal discreta e bilingue no rodapé", async ({
   await expect(englishLegal.getByText("Screen printing, printing and customisation")).toBeVisible();
   await expect(englishLegal.getByText("Lisete da Silva Araújo")).toBeVisible();
   await expect(englishLegal.getByText("250 796 210")).toBeVisible();
+  await expect(englishLegal.getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
 });
 
 test("apresenta a localização e direções de forma acessível", async ({ page }) => {
@@ -290,7 +298,7 @@ test("publica metadados canónicos e de partilha corretos", async ({ page }) => 
   await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/");
   await expect(page.locator('link[hreflang="x-default"]')).toHaveAttribute("href", "https://serifil.com/pt/");
   await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", "https://serifil.com/pt/");
-  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://serifil.com/og.png");
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://serifil.com/og.jpg");
   await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute("content", "SERIFIL");
   await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /index/);
@@ -316,7 +324,7 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(sitemap).toContain('hreflang="en"');
   expect(sitemap).toContain('hreflang="x-default"');
   expect(sitemap).toContain("<image:loc>https://serifil.com/images/hero-serigrafia.webp</image:loc>");
-  expect(sitemap).toContain("<image:loc>https://serifil.com/og.png</image:loc>");
+  expect(sitemap).toContain("<image:loc>https://serifil.com/og.jpg</image:loc>");
 
   const rootResponse = await request.get("/");
   const rootHtml = await rootResponse.text();
@@ -328,6 +336,7 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   const structuredData = JSON.parse(structuredDataText ?? "{}") as {
     "@type": string;
     "@id": string;
+    email: string;
     address: { addressRegion: string };
     contactPoint: { telephone: string; availableLanguage: string[] };
     hasOfferCatalog: { itemListElement: Array<{ itemOffered: { name: string } }> };
@@ -335,6 +344,7 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
 
   expect(structuredData["@type"]).toBe("LocalBusiness");
   expect(structuredData["@id"]).toBe("https://serifil.com/#business");
+  expect(structuredData.email).toBe("geral@serifil.com");
   expect(structuredData.address.addressRegion).toBe("Braga");
   expect(structuredData.contactPoint.telephone).toBe("+351 910 508 706");
   expect(structuredData.contactPoint.availableLanguage).toEqual(["Portuguese", "English"]);
@@ -511,10 +521,66 @@ test("publica a versão inglesa completa e permite trocar de idioma", async ({ p
   await expect(page.getByRole("navigation", { name: "Main navigation" })).toBeVisible();
   await expect(page.getByRole("form", { name: "Quote request form" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Get directions" })).toBeVisible();
-  await expect(page.getByText("Quotes via form, phone or WhatsApp")).toBeVisible();
+  await expect(page.getByText("Quotes via form, email, phone or WhatsApp")).toBeVisible();
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/en/");
 
   await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "pt" }).click();
   await expect(page).toHaveURL(/\/pt\/$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "pt-PT");
+});
+
+test("oferece atalhos de conteúdo e semântica acessível nos dois tipos de página", async ({ page, context }) => {
+  await page.goto("/pt/");
+
+  const homeSkipLink = page.getByRole("link", { name: "Saltar para o conteúdo" });
+  await page.keyboard.press("Tab");
+  await expect(homeSkipLink).toBeFocused();
+  await homeSkipLink.press("Enter");
+  await expect(page.locator("#conteudo-principal")).toBeFocused();
+  await expect(page.getByRole("group", { name: /Especialidades da Serifil/ })).toHaveCount(1);
+
+  const servicePage = await context.newPage();
+  await servicePage.goto("/en/servicos/pvc-screen-printing/");
+  const serviceSkipLink = servicePage.getByRole("link", { name: "Skip to content" });
+  await servicePage.keyboard.press("Tab");
+  await expect(serviceSkipLink).toBeFocused();
+  await serviceSkipLink.press("Enter");
+  await expect(servicePage.locator("#conteudo-principal")).toBeFocused();
+
+  const contrastRatios = await servicePage.locator("section.bg-accent dd").evaluateAll((items) => {
+    const luminance = (color: string) => {
+      const [red, green, blue] = color.match(/[\d.]+/g)?.slice(0, 3).map(Number) ?? [0, 0, 0];
+      const channels = [red, green, blue].map((channel) => {
+        const value = channel / 255;
+        return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+      });
+      return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+    };
+
+    return items.map((item) => {
+      const foreground = luminance(getComputedStyle(item).color);
+      const section = item.closest("section");
+      const background = luminance(getComputedStyle(section ?? item).backgroundColor);
+      const lighter = Math.max(foreground, background);
+      const darker = Math.min(foreground, background);
+      return (lighter + 0.05) / (darker + 0.05);
+    });
+  });
+
+  expect(contrastRatios.length).toBeGreaterThan(0);
+  expect(Math.min(...contrastRatios)).toBeGreaterThanOrEqual(4.5);
+  await servicePage.close();
+});
+
+test("apresenta uma página 404 personalizada, bilingue e não indexável", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  const response = await page.goto("/rota-inexistente-auditoria/");
+
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Página não encontrada.");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Page not found.");
+  await expect(page.getByRole("link", { name: "Continuar em português" })).toHaveAttribute("href", "/pt/");
+  await expect(page.getByRole("link", { name: "Continue in English" })).toHaveAttribute("href", "/en/");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(321);
 });

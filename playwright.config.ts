@@ -6,14 +6,14 @@ export default defineConfig({
   workers: 1,
   reporter: "list",
   use: {
-    baseURL: "http://localhost:3000",
+    baseURL: "http://127.0.0.1:3100",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },
   webServer: {
-    command: "npm run dev",
-    url: "http://localhost:3000",
-    reuseExistingServer: true,
+    command: "npm run serve:test",
+    url: "http://127.0.0.1:3100",
+    reuseExistingServer: false,
     timeout: 120_000,
   },
 });

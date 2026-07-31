@@ -29,7 +29,7 @@ export const brand: BrandConfig = {
   secondaryTagline: "Serigrafia e personalização em PVC, tecido e TNT.",
   location: "Guimarães, Portugal",
   phone: "+351 910 508 706",
-  email: "",
+  email: "geral@serifil.com",
   whatsapp: "+351 910 508 706",
   instagram: "",
   address: "Travessa Bernardino Jordão 90, Urgezes",

@@ -26,7 +26,7 @@ export async function generateMetadata({
   const locale = localeParam as Locale;
   const copy = translations[locale];
   const canonical = `${brand.website}${locale}/`;
-  const imageUrl = `${brand.website}og.png`;
+  const imageUrl = `${brand.website}og.jpg`;
 
   return {
     metadataBase: new URL(brand.website),
@@ -65,8 +65,8 @@ export async function generateMetadata({
       url: canonical,
       images: [{
         url: imageUrl,
-        width: 1732,
-        height: 909,
+        width: 1200,
+        height: 630,
         alt: copy.meta.imageAlt,
       }],
     },

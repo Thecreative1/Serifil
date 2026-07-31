@@ -27,4 +27,9 @@ test("capturas visuais completas", async ({ page }) => {
   await page.waitForLoadState("networkidle");
   await loadImages();
   await page.screenshot({ path: "test-results/serifil-mobile-complete.png", fullPage: true });
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/rota-inexistente-auditoria/");
+  await page.waitForLoadState("networkidle");
+  await page.screenshot({ path: "test-results/serifil-404-complete.png", fullPage: true });
 });

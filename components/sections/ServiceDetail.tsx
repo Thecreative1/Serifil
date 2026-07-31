@@ -28,7 +28,7 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
     .map((key) => servicePages[locale][key]);
 
   return (
-    <main id="inicio">
+    <main id="conteudo-principal" tabIndex={-1}>
       <section className="relative overflow-hidden border-b border-border bg-background pt-24 sm:pt-28 lg:pt-32">
         <div className="industrial-grid pointer-events-none absolute inset-0 opacity-20" aria-hidden="true" />
         <Container className="relative">
@@ -94,7 +94,7 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
             {page.facts.map((fact) => (
               <div key={fact.label} className="py-8 lg:px-9 lg:py-10 first:lg:pl-0 last:lg:pr-0">
                 <dt className="text-[0.7rem] font-black uppercase tracking-[0.14em]">{fact.label}</dt>
-                <dd className="mt-3 max-w-[38ch] text-base leading-7 text-[#3a2017]">{fact.value}</dd>
+                <dd className="mt-3 max-w-[38ch] text-base leading-7">{fact.value}</dd>
               </div>
             ))}
           </dl>

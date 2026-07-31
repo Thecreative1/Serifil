@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "serve:test": "next build && node scripts/serve-static.mjs",
     "lint": "eslint .",
     "test:e2e": "playwright test"
   },

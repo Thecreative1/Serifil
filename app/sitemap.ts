@@ -17,7 +17,7 @@ const localizedUrls = {
 };
 const images = [
   `${brand.website}images/hero-serigrafia.webp`,
-  `${brand.website}og.png`,
+  `${brand.website}og.jpg`,
   ...[
     "pvc-01",
     "pvc-02",

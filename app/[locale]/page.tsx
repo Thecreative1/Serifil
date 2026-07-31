@@ -35,7 +35,7 @@ export default async function Home({
     "@id": businessId,
     name: brand.name,
     description: copy.businessDescription,
-    image: `${brand.website}og.png`,
+    image: `${brand.website}og.jpg`,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Guimarães",
@@ -82,7 +82,7 @@ export default async function Home({
       <LocalePreference locale={locale} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <Header locale={locale} copy={copy.header} />
-      <main>
+      <main id="conteudo-principal" tabIndex={-1}>
         <Hero copy={copy.hero} />
         <Marquee copy={copy.marquee} />
         <Introduction copy={copy.introduction} />

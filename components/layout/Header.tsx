@@ -34,6 +34,12 @@ export function Header({ locale, copy, homeHref, languageHrefs }: HeaderProps) {
 
   return (
     <>
+      <a
+        href="#conteudo-principal"
+        className="fixed top-3 left-4 z-[80] -translate-y-[160%] bg-text-primary px-4 py-3 text-sm font-bold text-background shadow-[0_10px_28px_rgba(0,0,0,0.32)] transition-transform duration-200 focus:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
+        {copy.skipToContent}
+      </a>
       <header className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${scrolled ? "border-border bg-background/95" : "border-transparent bg-background/20"}`}>
         <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:h-24 lg:px-12">
           <a href={homeHref ?? "#inicio"} className="flex items-center gap-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent" aria-label={copy.homeLabel}>
