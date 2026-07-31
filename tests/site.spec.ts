@@ -5,6 +5,7 @@ const viewports = [
   { width: 375, height: 812 },
   { width: 768, height: 1024 },
   { width: 1024, height: 768 },
+  { width: 1280, height: 800 },
   { width: 1440, height: 900 },
   { width: 1920, height: 1080 },
 ];
@@ -18,6 +19,7 @@ test("estrutura, imagens e navegação principal", async ({ page }) => {
   await expect(heading).toHaveCount(1);
   await expect(heading).toContainText("Imprimimos ideias.");
   await expect(heading).toContainText("Entregamos resultados.");
+  await expect(page.locator('header svg[viewBox="0 0 1000 1000"]')).toHaveCount(1);
   await expect(page.locator("img")).toHaveCount(13);
 
   const images = page.locator("img");
@@ -54,6 +56,17 @@ test("sem overflow horizontal nos tamanhos pedidos", async ({ page }) => {
     }));
     expect(dimensions.document, `${viewport.width}px document overflow`).toBeLessThanOrEqual(dimensions.viewport + 1);
     expect(dimensions.body, `${viewport.width}px body overflow`).toBeLessThanOrEqual(dimensions.viewport + 1);
+
+    if (viewport.width >= 1024) {
+      const brandBox = await page.locator("header > div > a").first().boundingBox();
+      const navigationBox = await page.getByRole("navigation", { name: "Navegação principal" }).boundingBox();
+      expect(brandBox).not.toBeNull();
+      expect(navigationBox).not.toBeNull();
+      expect(
+        (brandBox?.x ?? 0) + (brandBox?.width ?? 0),
+        `${viewport.width}px header overlap`,
+      ).toBeLessThanOrEqual((navigationBox?.x ?? 0) - 16);
+    }
   }
 });
 
@@ -306,6 +319,17 @@ test("publica metadados canónicos e de partilha corretos", async ({ page }) => 
 });
 
 test("publica robots, sitemap localizado e dados estruturados completos", async ({ page, request }) => {
+  const faviconResponse = await request.get("/icon.svg");
+  expect(faviconResponse.ok()).toBeTruthy();
+  expect(await faviconResponse.text()).toContain('viewBox="0 0 1000 1000"');
+
+  const appleIconResponse = await request.get("/apple-icon.png");
+  expect(appleIconResponse.ok()).toBeTruthy();
+  expect(appleIconResponse.headers()["content-type"]).toContain("image/png");
+
+  const logoResponse = await request.get("/images/brand/serifil-symbol.svg");
+  expect(logoResponse.ok()).toBeTruthy();
+
   const robotsResponse = await request.get("/robots.txt");
   expect(robotsResponse.ok()).toBeTruthy();
   const robots = await robotsResponse.text();
@@ -337,6 +361,7 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
     "@type": string;
     "@id": string;
     email: string;
+    logo: string;
     address: { addressRegion: string };
     contactPoint: { telephone: string; availableLanguage: string[] };
     hasOfferCatalog: { itemListElement: Array<{ itemOffered: { name: string } }> };
@@ -345,6 +370,7 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(structuredData["@type"]).toBe("LocalBusiness");
   expect(structuredData["@id"]).toBe("https://serifil.com/#business");
   expect(structuredData.email).toBe("geral@serifil.com");
+  expect(structuredData.logo).toBe("https://serifil.com/images/brand/serifil-symbol.svg");
   expect(structuredData.address.addressRegion).toBe("Braga");
   expect(structuredData.contactPoint.telephone).toBe("+351 910 508 706");
   expect(structuredData.contactPoint.availableLanguage).toEqual(["Portuguese", "English"]);

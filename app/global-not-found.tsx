@@ -3,6 +3,7 @@ import { Archivo, Inter } from "next/font/google";
 import { ArrowUpRight } from "lucide-react";
 import { brand } from "@/config/brand";
 import { localizedPath } from "@/config/paths";
+import { BrandMark } from "@/components/ui/BrandMark";
 import "./globals.css";
 
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap" });
@@ -22,10 +23,11 @@ export default function GlobalNotFound() {
           <div className="relative mx-auto flex w-full max-w-[1440px] flex-col">
             <a
               href={localizedPath("pt")}
-              className="w-fit text-xl font-black tracking-[-0.04em] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:text-2xl"
+              className="flex w-fit items-center gap-3 text-xl font-black tracking-[-0.04em] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:text-2xl"
               aria-label="SERIFIL, voltar ao site"
             >
-              {brand.name}
+              <BrandMark className="h-10 w-auto text-accent" />
+              <span>{brand.name}</span>
             </a>
 
             <div className="my-auto grid gap-12 py-20 lg:grid-cols-12 lg:items-end lg:gap-16">

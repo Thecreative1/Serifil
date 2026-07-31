@@ -7,6 +7,7 @@ import { localizedPath } from "@/config/paths";
 import type { Locale, SiteContent } from "@/data/i18n";
 import { trackEvent } from "@/lib/analytics";
 import { MobileMenu } from "./MobileMenu";
+import { BrandMark } from "@/components/ui/BrandMark";
 
 type HeaderProps = {
   locale: Locale;
@@ -42,9 +43,10 @@ export function Header({ locale, copy, homeHref, languageHrefs }: HeaderProps) {
       </a>
       <header className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${scrolled ? "border-border bg-background/95" : "border-transparent bg-background/20"}`}>
         <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:h-24 lg:px-12">
-          <a href={homeHref ?? "#inicio"} className="flex items-center gap-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent" aria-label={copy.homeLabel}>
+          <a href={homeHref ?? "#inicio"} className="group flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:gap-4" aria-label={copy.homeLabel}>
+            <BrandMark className="h-9 w-auto shrink-0 text-accent transition-transform duration-300 ease-out group-hover:-translate-y-0.5 sm:h-10" />
             <span className="text-xl font-black tracking-[-0.04em] text-text-primary sm:text-2xl">{brand.name}</span>
-            <span className="hidden border-l border-border pl-4 text-[0.65rem] leading-4 uppercase tracking-[0.15em] text-text-secondary sm:block">{copy.descriptor}</span>
+            <span className="hidden border-l border-border pl-4 text-[0.65rem] leading-4 uppercase tracking-[0.15em] text-text-secondary xl:block">{copy.descriptor}</span>
           </a>
           <nav className="hidden items-center gap-6 lg:flex" aria-label={copy.navigationLabel}>
             {copy.nav.map((link) => (

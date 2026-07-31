@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { localizedPath } from "@/config/paths";
 import type { Locale, SiteContent } from "@/data/i18n";
 import { trackEvent } from "@/lib/analytics";
+import { BrandMark } from "@/components/ui/BrandMark";
 
 type MobileMenuProps = {
   open: boolean;
@@ -59,7 +60,10 @@ export function MobileMenu({ open, onClose, locale, copy, homeHref, languageHref
   return (
     <div ref={menuRef} role="dialog" aria-modal="true" aria-label={copy.mobileDialogLabel} className={`fixed inset-0 z-[60] bg-background transition-opacity duration-300 lg:hidden ${open ? "visible opacity-100" : "invisible opacity-0"}`} aria-hidden={!open}>
       <div className="flex h-24 items-center justify-between border-b border-border px-5 sm:px-8">
-        <span className="text-xl font-bold tracking-[-0.03em] text-text-primary">SERIFIL</span>
+        <span className="flex items-center gap-3">
+          <BrandMark className="h-9 w-auto text-accent" />
+          <span className="text-xl font-bold tracking-[-0.03em] text-text-primary">SERIFIL</span>
+        </span>
         <button ref={closeRef} type="button" onClick={onClose} className="grid size-12 place-items-center border border-border text-text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent" aria-label={copy.closeMenu}>
           <X aria-hidden="true" />
         </button>

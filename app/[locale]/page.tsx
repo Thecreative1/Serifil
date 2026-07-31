@@ -36,6 +36,7 @@ export default async function Home({
     name: brand.name,
     description: copy.businessDescription,
     image: `${brand.website}og.jpg`,
+    logo: `${brand.website}images/brand/serifil-symbol.svg`,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Guimarães",

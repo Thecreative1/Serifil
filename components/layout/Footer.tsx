@@ -3,6 +3,7 @@ import { brand } from "@/config/brand";
 import { CookiePreferencesButton } from "@/components/analytics/CookiePreferencesButton";
 import { Container } from "@/components/ui/Container";
 import type { SiteContent } from "@/data/i18n";
+import { BrandMark } from "@/components/ui/BrandMark";
 
 export function Footer({
   copy,
@@ -33,7 +34,10 @@ export function Footer({
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1.4fr_0.7fr_0.7fr]">
           <div>
-            <p className="text-3xl font-black tracking-[-0.05em] text-text-primary">{brand.name}</p>
+            <div className="flex items-center gap-4">
+              <BrandMark className="h-14 w-auto text-accent" />
+              <p className="text-3xl font-black tracking-[-0.05em] text-text-primary">{brand.name}</p>
+            </div>
             <p className="mt-2 text-sm uppercase tracking-[0.12em] text-text-secondary">{headerCopy.descriptor}</p>
             <p className="mt-8 max-w-md text-xl font-semibold leading-snug text-text-primary">{copy.tagline}</p>
             <p className="mt-3 text-sm text-text-secondary">{brand.location}</p>
