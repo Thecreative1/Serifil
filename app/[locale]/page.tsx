@@ -16,6 +16,7 @@ import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { QuoteForm } from "@/components/sections/QuoteForm";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { brand } from "@/config/brand";
+import { businessId, getBusinessIdentity } from "@/config/seo";
 import { isLocale, translations } from "@/data/i18n";
 
 export default async function Home({
@@ -28,41 +29,13 @@ export default async function Home({
 
   const copy = translations[locale];
   const canonical = `${brand.website}${locale}/`;
-  const businessId = `${brand.website}#business`;
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": businessId,
-    name: brand.name,
-    description: copy.businessDescription,
-    image: `${brand.website}og.jpg`,
-    logo: `${brand.website}images/brand/serifil-symbol.svg`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Guimarães",
-      addressRegion: "Braga",
-      addressCountry: "PT",
-      ...(brand.address ? { streetAddress: brand.address } : {}),
-    },
-    ...(brand.phone ? { telephone: brand.phone } : {}),
-    ...(brand.email ? { email: brand.email } : {}),
-    ...(brand.phone ? {
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: brand.phone,
-        contactType: "sales",
-        availableLanguage: ["Portuguese", "English"],
-      },
-    } : {}),
-    url: brand.website,
-    mainEntityOfPage: canonical,
-    inLanguage: copy.htmlLang,
-    hasMap: brand.mapsUrl,
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: brand.latitude,
-      longitude: brand.longitude,
-    },
+    ...getBusinessIdentity({
+      description: copy.businessDescription,
+      inLanguage: copy.htmlLang,
+      mainEntityOfPage: canonical,
+    }),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: copy.services.title,

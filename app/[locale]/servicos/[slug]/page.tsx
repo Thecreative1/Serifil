@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { LocalePreference } from "@/components/LocalePreference";
 import { ServiceDetail } from "@/components/sections/ServiceDetail";
 import { brand } from "@/config/brand";
+import { getBusinessIdentity } from "@/config/seo";
 import { isLocale, locales, translations } from "@/data/i18n";
 import {
   getServiceAlternates,
@@ -102,20 +103,11 @@ export default async function ServicePage({
         description: page.metaDescription,
         url: canonical,
         image: absoluteUrl(page.image.src),
-        provider: {
-          "@type": "LocalBusiness",
-          "@id": `${brand.website}#business`,
-          name: brand.name,
-          url: brand.website,
-          telephone: brand.phone,
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: brand.address,
-            addressLocality: "Guimarães",
-            addressRegion: "Braga",
-            addressCountry: "PT",
-          },
-        },
+        provider: getBusinessIdentity({
+          description: copy.businessDescription,
+          inLanguage: copy.htmlLang,
+          mainEntityOfPage: absoluteUrl(homePath),
+        }),
         areaServed: {
           "@type": "City",
           name: "Guimarães",

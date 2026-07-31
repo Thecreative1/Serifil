@@ -298,10 +298,10 @@ test("apresenta a localização e direções de forma acessível", async ({ page
 
 test("publica metadados canónicos e de partilha corretos", async ({ page }) => {
   await page.goto("/pt/");
-  await expect(page).toHaveTitle("Serifil | Serigrafia em PVC, Tecido e TNT em Guimarães");
+  await expect(page).toHaveTitle("SERIFIL | Serigrafia em PVC, Tecido e TNT em Guimarães");
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     "content",
-    "Impressão e personalização em PVC, tecido e TNT para sacos, capas, porta-fatos e outras aplicações, incluindo diferentes componentes para calçado. Produção em Guimarães para empresas e marcas.",
+    "A SERIFIL é uma empresa de serigrafia e personalização em Guimarães, especializada em PVC, tecido e TNT para sacos, capas e componentes para calçado.",
   );
   await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
     "content",
@@ -319,16 +319,18 @@ test("publica metadados canónicos e de partilha corretos", async ({ page }) => 
 });
 
 test("publica robots, sitemap localizado e dados estruturados completos", async ({ page, request }) => {
-  const faviconResponse = await request.get("/icon.svg");
+  const faviconResponse = await request.get("/favicon.ico");
   expect(faviconResponse.ok()).toBeTruthy();
-  expect(await faviconResponse.text()).toContain('viewBox="0 0 1000 1000"');
+  expect(faviconResponse.headers()["content-type"]).toMatch(/image\/(?:x-icon|vnd\.microsoft\.icon)/);
+  expect(Array.from((await faviconResponse.body()).subarray(0, 4))).toEqual([0, 0, 1, 0]);
 
   const appleIconResponse = await request.get("/apple-icon.png");
   expect(appleIconResponse.ok()).toBeTruthy();
   expect(appleIconResponse.headers()["content-type"]).toContain("image/png");
 
-  const logoResponse = await request.get("/images/brand/serifil-symbol.svg");
+  const logoResponse = await request.get("/images/brand/serifil-logo-512.png");
   expect(logoResponse.ok()).toBeTruthy();
+  expect(logoResponse.headers()["content-type"]).toContain("image/png");
 
   const robotsResponse = await request.get("/robots.txt");
   expect(robotsResponse.ok()).toBeTruthy();
@@ -353,7 +355,8 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   const rootResponse = await request.get("/");
   const rootHtml = await rootResponse.text();
   expect(rootHtml).toContain('"@type":"WebSite"');
-  expect(rootHtml).toContain('"alternateName":["Serifil","serifil.com"]');
+  expect(rootHtml).toContain('"alternateName":["Serifil","Serifil Serigrafia","Serifil Guimarães","serifil.com"]');
+  expect(rootHtml).toContain('"publisher":{"@id":"https://serifil.com/#business"}');
 
   await page.goto("/pt/");
   const structuredDataText = await page.locator('script[type="application/ld+json"]').textContent();
@@ -361,7 +364,11 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
     "@type": string;
     "@id": string;
     email: string;
-    logo: string;
+    alternateName: string[];
+    taxID: string;
+    vatID: string;
+    knowsAbout: string[];
+    logo: { url: string; width: number; height: number };
     address: { addressRegion: string };
     contactPoint: { telephone: string; availableLanguage: string[] };
     hasOfferCatalog: { itemListElement: Array<{ itemOffered: { name: string } }> };
@@ -370,7 +377,13 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(structuredData["@type"]).toBe("LocalBusiness");
   expect(structuredData["@id"]).toBe("https://serifil.com/#business");
   expect(structuredData.email).toBe("geral@serifil.com");
-  expect(structuredData.logo).toBe("https://serifil.com/images/brand/serifil-symbol.svg");
+  expect(structuredData.alternateName).toContain("Serifil Guimarães");
+  expect(structuredData.taxID).toBe("250796210");
+  expect(structuredData.vatID).toBe("PT250796210");
+  expect(structuredData.knowsAbout).toContain("Serigrafia");
+  expect(structuredData.logo.url).toBe("https://serifil.com/images/brand/serifil-logo-512.png");
+  expect(structuredData.logo.width).toBe(512);
+  expect(structuredData.logo.height).toBe(512);
   expect(structuredData.address.addressRegion).toBe("Braga");
   expect(structuredData.contactPoint.telephone).toBe("+351 910 508 706");
   expect(structuredData.contactPoint.availableLanguage).toEqual(["Portuguese", "English"]);
@@ -523,7 +536,7 @@ test("comunica materiais, setores e componentes de calçado nas duas línguas", 
   ]);
 
   await page.goto("/en/");
-  await expect(page).toHaveTitle("Serifil | PVC, Fabric and Non-Woven Screen Printing");
+  await expect(page).toHaveTitle("SERIFIL | PVC, Fabric and Non-Woven Screen Printing");
   await expect(page.getByText("SPECIALISTS IN SCREEN PRINTING AND CUSTOMISATION")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Footwear components" }).first()).toBeVisible();
   await expect(page.getByText(/insoles, vamps and other components/).first()).toBeVisible();

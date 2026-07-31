@@ -10,16 +10,16 @@ export const translations = {
   pt: {
     htmlLang: "pt-PT",
     meta: {
-      title: "Serifil | Serigrafia em PVC, Tecido e TNT em Guimarães",
+      title: "SERIFIL | Serigrafia em PVC, Tecido e TNT em Guimarães",
       description:
-        "Impressão e personalização em PVC, tecido e TNT para sacos, capas, porta-fatos e outras aplicações, incluindo diferentes componentes para calçado. Produção em Guimarães para empresas e marcas.",
+        "A SERIFIL é uma empresa de serigrafia e personalização em Guimarães, especializada em PVC, tecido e TNT para sacos, capas e componentes para calçado.",
       openGraphDescription:
         "Impressão personalizada em PVC, tecido e TNT para empresas, marcas e diferentes setores de atividade, incluindo soluções para o setor do calçado.",
       imageAlt: "Processo de serigrafia na SERIFIL",
       locale: "pt_PT",
     },
     businessDescription:
-      "Serigrafia e personalização em PVC, tecido e TNT para sacos, capas e outras aplicações, incluindo diferentes componentes para calçado.",
+      "A SERIFIL é uma empresa de serigrafia e personalização em Guimarães, Portugal, especializada em impressão sobre PVC, tecido e TNT para empresas e marcas.",
     header: {
       descriptor: "Serigrafia & Personalização",
       homeLabel: "SERIFIL, voltar ao início",
@@ -249,7 +249,7 @@ export const translations = {
     },
     about: {
       eyebrow: "A SERIFIL",
-      title: "Experiência de produção. Nova ambição.",
+      title: "Serigrafia e personalização em Guimarães.",
       description:
         "A Serifil é uma empresa de serigrafia e personalização em Guimarães, com experiência em impressão sobre PVC, tecido e TNT. Produzimos sacos, capas, porta-fatos, artigos têxteis e outras soluções para empresas, fábricas e marcas de diferentes setores. Trabalhamos também com o setor do calçado, nomeadamente na personalização de sacos, palmilhas, palas e outros componentes.",
       principles: [
@@ -367,16 +367,16 @@ export const translations = {
   en: {
     htmlLang: "en",
     meta: {
-      title: "Serifil | PVC, Fabric and Non-Woven Screen Printing",
+      title: "SERIFIL | PVC, Fabric and Non-Woven Screen Printing",
       description:
-        "Printing and customisation on PVC, fabric and non-woven materials for bags, covers and other applications, including a range of footwear components. Production in Guimarães, Portugal, for businesses and brands across a range of industries.",
+        "SERIFIL is a screen-printing and customisation company in Guimarães, Portugal, specialising in PVC, fabric and non-woven materials for businesses and brands.",
       openGraphDescription:
         "Custom printing on PVC, fabric and non-woven materials for businesses and brands across a range of industries, including specialist solutions for the footwear sector.",
       imageAlt: "Screen-printing process at SERIFIL",
       locale: "en_GB",
     },
     businessDescription:
-      "Screen printing and customisation on PVC, fabric and non-woven materials for bags, covers and other applications, including a range of footwear components.",
+      "SERIFIL is a screen-printing and customisation company in Guimarães, Portugal, specialising in PVC, fabric and non-woven materials for businesses and brands.",
     header: {
       descriptor: "Screen Printing & Customisation",
       homeLabel: "SERIFIL, back to the top",
@@ -606,7 +606,7 @@ export const translations = {
     },
     about: {
       eyebrow: "SERIFIL",
-      title: "Production experience. New ambition.",
+      title: "Screen printing and customisation in Guimarães.",
       description:
         "Serifil is a screen-printing and customisation company based in Guimarães, Portugal, with experience printing on PVC, fabric and non-woven materials. We produce bags, covers, garment bags, textile items and other solutions for businesses, manufacturers and brands across a range of industries. We also serve the footwear sector, including the customisation of shoe bags, insoles, vamps and other components.",
       principles: [

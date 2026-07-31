@@ -37,7 +37,10 @@ export default function LocaleRedirect() {
           <BrandMark className="h-12 w-auto text-accent" />
           <p className="text-2xl font-black tracking-[-0.04em]">SERIFIL</p>
         </div>
-        <p className="mt-4 text-sm text-text-secondary">A escolher o idioma · Choosing your language</p>
+        <p className="mx-auto mt-4 max-w-md text-sm leading-6 text-text-secondary">
+          Empresa de serigrafia e personalização em Guimarães, Portugal.
+        </p>
+        <p className="mt-3 text-sm text-text-secondary">A escolher o idioma · Choosing your language</p>
         <nav className="mt-7 flex justify-center gap-3" aria-label="Escolher idioma · Choose language">
           <a className="border border-border px-5 py-3 font-bold hover:border-accent" href={localizedPath("pt")}>Português</a>
           <a className="border border-border px-5 py-3 font-bold hover:border-accent" href={localizedPath("en")}>English</a>

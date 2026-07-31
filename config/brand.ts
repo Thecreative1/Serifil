@@ -9,6 +9,7 @@ type BrandConfig = {
   email: string;
   whatsapp: string;
   instagram: string;
+  socialProfiles: string[];
   address: string;
   openingHours: string;
   website: string;
@@ -32,6 +33,7 @@ export const brand: BrandConfig = {
   email: "geral@serifil.com",
   whatsapp: "+351 910 508 706",
   instagram: "",
+  socialProfiles: [],
   address: "Travessa Bernardino Jordão 90, Urgezes",
   openingHours: "",
   website: "https://serifil.com/",
