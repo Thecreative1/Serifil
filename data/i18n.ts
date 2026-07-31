@@ -165,7 +165,7 @@ export const translations = {
             },
             {
               src: "/images/trabalhos/tecido-03.webp",
-              alt: "Peça em tecido claro com impressão tipográfica preta",
+              alt: "Peça em tecido claro com texto impresso a preto",
             },
             {
               src: "/images/trabalhos/tecido-04.webp",
@@ -223,7 +223,7 @@ export const translations = {
         },
         {
           title: "Prazos claros",
-          description: "A data necessária é considerada logo na análise inicial do pedido.",
+          description: "A data pretendida é considerada logo na análise inicial do pedido.",
         },
         {
           title: "Solução adaptada",
@@ -240,7 +240,7 @@ export const translations = {
         {
           number: "03",
           title: "Aprovação",
-          description: "Confirmamos o design, as dimensões, as cores e os detalhes técnicos.",
+          description: "Confirmamos a arte final, as dimensões, as cores e os detalhes técnicos.",
         },
         { number: "04", title: "Produção", description: "O trabalho entra em produção depois da aprovação." },
         { number: "05", title: "Entrega", description: "A encomenda é preparada para levantamento ou envio." },
@@ -289,7 +289,7 @@ export const translations = {
       message: "Mensagem",
       messagePlaceholder:
         "Indique o produto, o material, as medidas, a quantidade, o número de cores e outras informações úteis.",
-      privacy: "Autorizo o tratamento destes dados para resposta ao pedido de orçamento.",
+      privacy: "Autorizo o tratamento destes dados para que a SERIFIL possa responder ao meu pedido de orçamento.",
       submissionError: "Não foi possível enviar o pedido. Verifique a ligação e tente novamente.",
       submitting: "A enviar pedido",
       submit: "Enviar pedido",
@@ -312,7 +312,7 @@ export const translations = {
         date: "Indique a data pretendida.",
         pastDate: "Escolha uma data a partir de hoje.",
         message: "Descreva o projeto com pelo menos 15 caracteres.",
-        privacy: "É necessário aceitar o tratamento dos dados deste pedido.",
+        privacy: "É necessário autorizar o tratamento destes dados para enviar o pedido.",
       },
     },
     contact: {
@@ -350,7 +350,7 @@ export const translations = {
         activity: "Atividade",
         activityValue: "Serigrafia, impressão e personalização",
         address: "Morada do estabelecimento",
-        email: "Email",
+        email: "E-mail",
         phone: "Telefone",
       },
     },
@@ -358,9 +358,9 @@ export const translations = {
       ariaLabel: "Preferências de analítica",
       title: "Medição e privacidade",
       description:
-        "Com a sua autorização, usamos o Google Analytics para perceber como o site é utilizado e melhorar os contactos. Nunca enviamos os dados introduzidos no formulário.",
+        "Com a sua autorização, usamos o Google Analytics para perceber como o site é utilizado, melhorar o site e facilitar o contacto. Nunca enviamos os dados introduzidos no formulário.",
       reject: "Recusar",
-      accept: "Aceitar analítica",
+      accept: "Aceitar cookies analíticos",
     },
   },
   en: {
@@ -368,14 +368,14 @@ export const translations = {
     meta: {
       title: "Serifil | PVC, Fabric and Non-Woven Screen Printing",
       description:
-        "Printing and customisation on PVC, fabric and non-woven materials for bags, covers and other applications, including different footwear components. Produced in Guimarães, Portugal, for businesses and brands across different industries.",
+        "Printing and customisation on PVC, fabric and non-woven materials for bags, covers and other applications, including a range of footwear components. Production in Guimarães, Portugal, for businesses and brands across a range of industries.",
       openGraphDescription:
-        "Custom printing on PVC, fabric and non-woven materials for businesses, brands and different industries, including specialist solutions for the footwear sector.",
+        "Custom printing on PVC, fabric and non-woven materials for businesses and brands across a range of industries, including specialist solutions for the footwear sector.",
       imageAlt: "Screen-printing process at SERIFIL",
       locale: "en_GB",
     },
     businessDescription:
-      "Screen printing and customisation on PVC, fabric and non-woven materials for bags, covers and other applications, including different footwear components.",
+      "Screen printing and customisation on PVC, fabric and non-woven materials for bags, covers and other applications, including a range of footwear components.",
     header: {
       descriptor: "Screen Printing & Customisation",
       homeLabel: "SERIFIL, back to the top",
@@ -399,7 +399,7 @@ export const translations = {
       lineOne: "We print ideas.",
       lineTwo: "We deliver results.",
       description:
-        "Printing and customisation on PVC, fabric and non-woven materials for bags, covers, garment bags and other applications for businesses and brands, as well as different footwear components.",
+        "Printing and customisation on PVC, fabric and non-woven materials for bags, covers, garment bags and other applications for businesses and brands, as well as a range of footwear components.",
       quote: "Request a quote",
       work: "View our work",
       specialties: "PVC · Fabric · Non-woven · Components · Customisation",
@@ -415,13 +415,13 @@ export const translations = {
       eyebrow: "FROM IDEA TO FINAL RESULT",
       title: "Printing adapted to different materials and applications.",
       description:
-        "We work with businesses and brands across different industries, including the footwear sector, printing on PVC, fabric and non-woven materials for bags, covers, garment bags and other applications, as well as on different components used in footwear production, with technical guidance and direct communication.",
+        "We work with businesses and brands across a range of industries, including the footwear sector, printing on PVC, fabric and non-woven materials for bags, covers, garment bags and other applications, as well as on a range of components used in footwear production, with technical guidance and direct communication.",
     },
     services: {
       eyebrow: "CORE SPECIALITY",
-      title: "Printing and customisation for different industries.",
+      title: "Printing and customisation for a range of industries.",
       description:
-        "We produce customised bags, covers, garment bags and other items in PVC, fabric and non-woven materials, including printing on different components for the footwear industry.",
+        "We produce customised bags, covers, garment bags and other items in PVC, fabric and non-woven materials, including printing on a range of components for the footwear industry.",
       otherServices: "OTHER SERVICES",
       quote: "Request a quote",
       shortQuote: "Quote",
@@ -447,7 +447,7 @@ export const translations = {
           number: "03",
           title: "Footwear components",
           description:
-            "Printing and customisation of insoles, uppers and other components used in footwear production.",
+            "Printing and customisation of insoles, vamps and other components used in footwear production.",
           emphasis: "supporting",
           label: "Specialist production",
         },
@@ -479,7 +479,7 @@ export const translations = {
     },
     portfolio: {
       eyebrow: "OUR WORK",
-      title: "Real production, material by material.",
+      title: "Real work, one material at a time.",
       description:
         "A selection of work produced by SERIFIL in PVC, fabric and non-woven materials, with printing adapted to the material and intended application of each project.",
       items: [
@@ -488,7 +488,7 @@ export const translations = {
           name: "Printing on clear PVC",
           technique: "Screen printing on PVC",
           description:
-            "Logos, graphics and technical information printed on clear pieces for presentation, packaging and protection.",
+            "Logos, graphics and technical information printed on clear PVC items for presentation, packaging and protection.",
           images: [
             {
               src: "/images/trabalhos/pvc-01.webp",
@@ -506,10 +506,10 @@ export const translations = {
         },
         {
           category: "Fabric",
-          name: "Fabric covers and pieces",
+          name: "Fabric covers and textile items",
           technique: "Textile screen printing",
           description:
-            "Custom covers, bags and other textile pieces, with brand printing prepared for each format and base colour.",
+            "Customised covers, bags and other textile items, with each print adapted to the item format and base colour.",
           images: [
             {
               src: "/images/trabalhos/tecido-01.webp",
@@ -521,7 +521,7 @@ export const translations = {
             },
             {
               src: "/images/trabalhos/tecido-03.webp",
-              alt: "Light fabric piece with black typographic printing",
+              alt: "Light fabric item with black printed lettering",
             },
             {
               src: "/images/trabalhos/tecido-04.webp",
@@ -606,7 +606,7 @@ export const translations = {
       eyebrow: "SERIFIL",
       title: "Production experience. New ambition.",
       description:
-        "Serifil is a screen-printing and customisation company based in Guimarães, Portugal, with experience printing on PVC, fabric and non-woven materials. We produce bags, covers, garment bags, textile items and other solutions for businesses, factories and brands across different industries. We also serve the footwear sector, including the customisation of shoe bags, insoles, uppers and other components.",
+        "Serifil is a screen-printing and customisation company based in Guimarães, Portugal, with experience printing on PVC, fabric and non-woven materials. We produce bags, covers, garment bags, textile items and other solutions for businesses, manufacturers and brands across a range of industries. We also serve the footwear sector, including the customisation of shoe bags, insoles, vamps and other components.",
       principles: [
         ["01", "Local production"],
         ["02", "Direct communication"],
@@ -622,7 +622,7 @@ export const translations = {
     },
     quoteForm: {
       eyebrow: "QUOTE REQUEST",
-      title: "Tell us what you need to produce.",
+      title: "Tell us what you need us to produce.",
       description:
         "The more detail you provide about the material, quantity and date, the more precise our initial assessment can be.",
       noteOne: "Include the product, material, quantity and required date.",
@@ -630,7 +630,7 @@ export const translations = {
       successTitle: "Request sent.",
       successDescription:
         "We have received your project details and will contact you as soon as possible.",
-      anotherRequest: "Create another request",
+      anotherRequest: "Start another request",
       formLabel: "Quote request form",
       optional: "optional",
       name: "Name",
@@ -645,7 +645,7 @@ export const translations = {
       message: "Message",
       messagePlaceholder:
         "Include the product, material, dimensions, quantity, number of print colours and any other useful details.",
-      privacy: "I authorise the use of this data to reply to my quote request.",
+      privacy: "I consent to the processing of this data so that SERIFIL can respond to my quote request.",
       submissionError: "We could not send your request. Check your connection and try again.",
       submitting: "Sending request",
       submit: "Send request",
@@ -668,7 +668,7 @@ export const translations = {
         date: "Enter the required date.",
         pastDate: "Choose today or a future date.",
         message: "Describe your project in at least 15 characters.",
-        privacy: "You must accept the use of this data for your request.",
+        privacy: "You must consent to the processing of this data to send your request.",
       },
     },
     contact: {
@@ -713,7 +713,7 @@ export const translations = {
       ariaLabel: "Analytics preferences",
       title: "Measurement and privacy",
       description:
-        "With your permission, we use Google Analytics to understand how the site is used and improve contact journeys. We never send the information entered in the form.",
+        "With your permission, we use Google Analytics to understand how the site is used, improve the site and make it easier to contact us. We never send the information entered in the form.",
       reject: "Reject",
       accept: "Accept analytics",
     },

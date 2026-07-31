@@ -104,7 +104,7 @@ export const servicePageUi: Record<Locale, ServicePageUi> = {
     services: "Serviços",
     quote: "Pedir orçamento",
     seeWork: "Ver trabalhos",
-    realWork: "Produção real da SERIFIL",
+    realWork: "Trabalho produzido pela SERIFIL",
     relatedEyebrow: "OUTROS MATERIAIS E APLICAÇÕES",
     relatedTitle: "Explore as restantes soluções.",
     relatedDescription:
@@ -121,7 +121,7 @@ export const servicePageUi: Record<Locale, ServicePageUi> = {
     services: "Services",
     quote: "Request a quote",
     seeWork: "See our work",
-    realWork: "Real production by SERIFIL",
+    realWork: "Work produced by SERIFIL",
     relatedEyebrow: "OTHER MATERIALS AND APPLICATIONS",
     relatedTitle: "Explore our other solutions.",
     relatedDescription:
@@ -130,7 +130,7 @@ export const servicePageUi: Record<Locale, ServicePageUi> = {
     materialGuides: "Material and technique guides",
     materialGuidesDescription:
       "Understand how each substrate is approached and what information helps us prepare your project.",
-    quoteTitle: "Have a project for this material?",
+    quoteTitle: "Have a project involving this material?",
   },
 };
 
@@ -145,7 +145,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     eyebrow: "SERIGRAFIA EM PVC · GUIMARÃES",
     title: "Impressão em PVC, preparada para o suporte real.",
     lead:
-      "Personalização direta de logótipos, elementos gráficos e informação técnica em peças de PVC transparente ou colorido.",
+      "Personalização de peças de PVC transparente ou colorido com logótipos, elementos gráficos e informação técnica.",
     image: {
       src: "/images/trabalhos/pvc-01.webp",
       alt: "Peças de PVC transparente com impressão ornamental dourada produzidas pela SERIFIL",
@@ -185,17 +185,17 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
         {
           title: "Preparação da arte",
           description:
-            "Confirmamos dimensões, posição e cores. Quando existem várias cores, cada uma precisa da sua separação.",
+            "Confirmamos dimensões, posição e cores. Quando existem várias cores, cada cor requer uma separação própria.",
         },
         {
-          title: "Tela e impressão",
+          title: "Preparação da tela e impressão",
           description:
             "A imagem é preparada na tela e a tinta é transferida para o PVC através da malha.",
         },
         {
           title: "Secagem e verificação",
           description:
-            "O método de secagem e a compatibilidade são definidos em função do material e do resultado pretendido.",
+            "O método de secagem é definido e a compatibilidade é verificada em função do material e do resultado pretendido.",
         },
       ],
     },
@@ -246,7 +246,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
         {
           question: "É possível imprimir em PVC transparente?",
           answer:
-            "Sim. A transparência e a cor do suporte entram na preparação, porque influenciam a leitura das cores e do grafismo.",
+            "Sim. A transparência e a cor do suporte são consideradas na preparação, porque influenciam a leitura das cores e do grafismo.",
         },
         {
           question: "Todas as peças de PVC são iguais?",
@@ -295,7 +295,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
         "A tinta é aplicada com uma raclete através de uma tela de malha fina. Cada cor do desenho é impressa separadamente e alinhada com as restantes.",
       steps: [
         {
-          title: "Leitura do tecido",
+          title: "Avaliação do tecido",
           description:
             "Observamos composição, cor, textura, formato da peça e condições de utilização.",
         },
@@ -312,7 +312,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
         {
           title: "Impressão e cura",
           description:
-            "A tinta é transferida e o processo de cura é adaptado ao conjunto entre tinta, tecido e utilização.",
+            "A tinta é transferida e o processo de cura é adaptado à combinação de tinta, tecido e utilização prevista.",
         },
       ],
     },
@@ -339,7 +339,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
         },
         {
           src: "/images/trabalhos/tecido-03.webp",
-          alt: "Peça em tecido claro com impressão tipográfica preta",
+          alt: "Peça em tecido claro com texto impresso a preto",
         },
         {
           src: "/images/trabalhos/tecido-04.webp",
@@ -377,7 +377,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
         {
           question: "O que devo indicar sobre a lavagem?",
           answer:
-            "Explique como a peça será utilizada e lavada. A resistência final depende do conjunto entre material, tinta, cura e cuidados posteriores.",
+            "Explique como a peça será utilizada e lavada. A durabilidade final depende do material, da tinta, da cura e dos cuidados posteriores.",
         },
       ],
     },
@@ -456,7 +456,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
       images: [
         {
           src: "/images/trabalhos/tnt-02.webp",
-          alt: "Saco em TNT claro com logótipo impresso",
+          alt: "Saco preto em TNT com logótipo impresso a duas cores",
         },
         {
           src: "/images/trabalhos/tnt-03.webp",
@@ -476,7 +476,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
       eyebrow: "PREPARAR O PEDIDO",
       title: "Dados para orçamentar sacos em TNT.",
       description:
-        "Se o saco já estiver definido, envie uma fotografia ou amostra. Se ainda estiver em escolha, indique a aplicação prevista.",
+        "Se o saco já estiver definido, envie uma fotografia ou amostra. Se ainda não tiver escolhido o saco ou o material, indique a aplicação prevista.",
       items: [
         { label: "Formato", value: "Medidas do saco, tipo de asa, costuras e dobras." },
         { label: "Material", value: "Cor, gramagem e composição, quando disponíveis." },
@@ -515,7 +515,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     metaDescription:
       "Impressão e personalização de palmilhas, palas e outros componentes para a indústria do calçado. Produção em Guimarães.",
     eyebrow: "SETOR DO CALÇADO · GUIMARÃES",
-    title: "Impressão preparada para integrar o componente.",
+    title: "Impressão adaptada a cada componente.",
     lead:
       "Personalização de palmilhas, palas e outros componentes utilizados na produção de calçado, com avaliação do material e da fase de montagem.",
     image: {
@@ -532,7 +532,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     facts: [
       { label: "COMPONENTES", value: "Palmilhas, palas e outras peças sujeitas a avaliação." },
       { label: "IMPRESSÃO", value: "Marca, identificação e elementos gráficos." },
-      { label: "CONTEXTO", value: "Produção para empresas e indústria do calçado." },
+      { label: "CONTEXTO", value: "Produção para empresas da indústria do calçado." },
     ],
     technique: {
       eyebrow: "COMO FUNCIONA",
@@ -564,7 +564,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     },
     applications: {
       eyebrow: "APLICAÇÕES",
-      title: "Identificação dentro do processo de calçado.",
+      title: "Impressão e identificação de componentes de calçado.",
       description:
         "A lista é indicativa. Outros componentes podem ser analisados mediante amostra.",
       items: [
@@ -653,8 +653,8 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       steps: [
         { title: "PVC assessment", description: "We identify the item, surface, transparency, flexibility and intended use." },
         { title: "Artwork preparation", description: "We confirm size, position and colours. Multi-colour work requires a separation for each colour." },
-        { title: "Screen and print", description: "The image is prepared on the screen and ink is transferred through the mesh onto the PVC." },
-        { title: "Drying and verification", description: "Drying and compatibility are defined according to the material and intended result." },
+        { title: "Screen preparation and printing", description: "The image is prepared on the screen and ink is transferred through the mesh onto the PVC." },
+        { title: "Drying and verification", description: "The drying method is defined and compatibility is verified according to the material and intended result." },
       ],
     },
     applications: {
@@ -690,7 +690,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       ],
     },
     questions: {
-      eyebrow: "FREQUENT QUESTIONS",
+      eyebrow: "FREQUENTLY ASKED QUESTIONS",
       title: "Before printing on PVC.",
       items: [
         { question: "Can you print on clear PVC?", answer: "Yes. Transparency and substrate colour are part of the preparation because they affect how colours and graphics are perceived." },
@@ -714,7 +714,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     introduction: {
       title: "Fabric is not a single substrate.",
       paragraphs: [
-        "Composition, weave, texture, colour and finish change how ink is deposited. A smooth fabric and a more open fabric may require different decisions even when they receive the same graphic.",
+        "Composition, weave, texture, colour and finish change how ink is deposited. A smooth fabric and a more open weave may require different print preparation even when they receive the same artwork.",
         "Preparation considers the item, print area and intended use. For articles exposed to washing or abrasion, this information is essential when choosing and validating the solution.",
       ],
     },
@@ -729,8 +729,8 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       description:
         "Ink is applied with a squeegee through a fine-mesh screen. Each colour in the design is printed separately and aligned with the others.",
       steps: [
-        { title: "Reading the fabric", description: "We consider composition, colour, texture, item format and conditions of use." },
-        { title: "Colour separation", description: "Artwork is adjusted to the print size and prepared by colour." },
+        { title: "Fabric assessment", description: "We consider composition, colour, texture, item format and conditions of use." },
+        { title: "Colour separation", description: "Artwork is adjusted to the print size and colour-separated for printing." },
         { title: "Positioning", description: "The item is placed consistently to keep the print within the defined area." },
         { title: "Printing and curing", description: "Ink is transferred and the curing process is adapted to the ink, fabric and intended use." },
       ],
@@ -749,17 +749,17 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     },
     gallery: {
       eyebrow: "FABRIC WORK",
-      title: "Different bases, the same attention to detail.",
+      title: "Different fabrics, the same attention to detail.",
       images: [
         { src: "/images/trabalhos/tecido-02.webp", alt: "Black fabric cover with a white logo" },
-        { src: "/images/trabalhos/tecido-03.webp", alt: "Light fabric item with black typographic printing" },
+        { src: "/images/trabalhos/tecido-03.webp", alt: "Light fabric item with black printed lettering" },
         { src: "/images/trabalhos/tecido-04.webp", alt: "Dark fabric customised with a printed brand" },
       ],
     },
     preparation: {
       eyebrow: "PREPARE YOUR REQUEST",
       title: "Information that helps us decide.",
-      description: "The more we know about the item and its use, the more direct the assessment can be.",
+      description: "The more we know about the item and its use, the more efficiently and accurately we can assess it.",
       items: [
         { label: "Article", value: "Item type, fabric composition and colour." },
         { label: "Quantity", value: "Approximate number and size variations." },
@@ -769,12 +769,12 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       ],
     },
     questions: {
-      eyebrow: "FREQUENT QUESTIONS",
+      eyebrow: "FREQUENTLY ASKED QUESTIONS",
       title: "Before customising fabric.",
       items: [
         { question: "Does screen printing work on every fabric?", answer: "Many fabrics can be printed, but composition, texture, finish and item format need assessment. A sample helps confirm the solution." },
-        { question: "Can you print several colours?", answer: "Yes. Each colour is prepared and printed separately, which should be considered in the artwork and quotation." },
-        { question: "What should I say about washing?", answer: "Explain how the item will be used and washed. Final resistance depends on the material, ink, curing and aftercare together." },
+        { question: "Can you print several colours?", answer: "Yes. Each colour is prepared and printed separately, which should be considered in the artwork and quote." },
+        { question: "What should I say about washing?", answer: "Explain how the item will be used and washed. Final durability depends on the material, ink, curing and aftercare." },
       ],
     },
   },
@@ -806,10 +806,10 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       eyebrow: "HOW IT WORKS",
       title: "Screen printing on non-woven material.",
       description:
-        "Print is transferred through a screen. Material weight, texture and porosity are considered to control ink deposit and graphic legibility.",
+        "Ink is transferred through a screen. Material weight, texture and porosity are considered to control ink deposit and artwork legibility.",
       steps: [
         { title: "Identify the material", description: "We confirm the item, weight when available, colour, texture and finish." },
-        { title: "Prepare the graphic", description: "Artwork is sized and separated by print colour." },
+        { title: "Prepare the artwork", description: "Artwork is sized and colour-separated for printing." },
         { title: "Position the item", description: "We define a print area compatible with seams, handles, folds and usable space." },
         { title: "Print and dry", description: "Ink passes through the screen and drying is adjusted to the supplied substrate." },
       ],
@@ -838,8 +838,8 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     },
     preparation: {
       eyebrow: "PREPARE YOUR REQUEST",
-      title: "Details for quoting non-woven bags.",
-      description: "If the bag is already defined, send a photograph or sample. If not, tell us about its intended use.",
+      title: "Information needed to quote non-woven bags.",
+      description: "If you have already selected the bag, send a photograph or sample. If not, tell us about its intended use.",
       items: [
         { label: "Format", value: "Bag size, handle type, seams and folds." },
         { label: "Material", value: "Colour, weight and composition, when available." },
@@ -849,10 +849,10 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       ],
     },
     questions: {
-      eyebrow: "FREQUENT QUESTIONS",
+      eyebrow: "FREQUENTLY ASKED QUESTIONS",
       title: "The essentials about non-wovens.",
       items: [
-        { question: "Is a non-woven a plastic or a fabric?", answer: "Non-woven describes a fibrous structure. It can be made from different raw materials, including polymers, so the composition of the actual article should be confirmed." },
+        { question: "Is a non-woven a plastic or a fabric?", answer: "Non-woven describes a fibrous structure. It can be made from different raw materials, including polymers, so the composition of the specific item should be confirmed." },
         { question: "Is non-woven material the same as conventional fabric?", answer: "No. Conventional fabric is woven or knitted. In a non-woven, fibres are consolidated through other processes." },
         { question: "Can you print bags of different weights?", answer: "Yes, but weight, texture and porosity change how the substrate behaves. The item should be assessed before production." },
       ],
@@ -864,39 +864,39 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     shortName: "Footwear components",
     metaTitle: "Printing on Footwear Components | Serifil",
     metaDescription:
-      "Printing and customisation of insoles, uppers and other components for the footwear industry. Production in Guimarães, Portugal.",
+      "Printing and customisation of insoles, vamps and other components for the footwear industry. Production in Guimarães, Portugal.",
     eyebrow: "FOOTWEAR INDUSTRY · GUIMARÃES",
-    title: "Printing prepared to become part of the component.",
+    title: "Printing adapted to each footwear component.",
     lead:
-      "Customisation of insoles, uppers and other footwear production components, with assessment of the material and assembly stage.",
+      "Customisation of insoles, vamps and other components used in footwear production, with assessment of the material and assembly stage.",
     image: { src: "/images/hero-serigrafia.webp", alt: "Ink being applied through a screen during the screen printing process" },
     introduction: {
       title: "The component defines the preparation.",
       paragraphs: [
-        "In footwear production, print may be applied to components with different materials, shapes and finishes. Graphic position and the production stage at which the item is printed should be considered from the start.",
-        "We work from the client’s item and specification. A sample allows us to assess the usable area, positioning, surface compatibility and handling during production.",
+        "In footwear production, print may be applied to components made from different materials and with different shapes and finishes. The position of the artwork and the production stage at which the item is printed should be considered from the start.",
+        "We work from the supplied item and the client’s specification. A sample allows us to assess the usable area, positioning, surface compatibility and handling during production.",
       ],
     },
     facts: [
-      { label: "COMPONENTS", value: "Insoles, uppers and other items subject to assessment." },
+      { label: "COMPONENTS", value: "Insoles, vamps and other items subject to assessment." },
       { label: "PRINT", value: "Branding, identification and graphic elements." },
-      { label: "CONTEXT", value: "Production for businesses and the footwear industry." },
+      { label: "CONTEXT", value: "Production for businesses in the footwear industry." },
     ],
     technique: {
       eyebrow: "HOW IT WORKS",
       title: "From sample to production run.",
       description:
-        "Screen printing transfers ink through a prepared screen. Component format influences support, positioning and repeatability.",
+        "Screen printing transfers ink through a prepared screen. The component format influences how the item is held, positioned and reproduced consistently.",
       steps: [
-        { title: "Receive the sample", description: "We review material, format, finish, usable area and the intended print stage." },
-        { title: "Define the marking", description: "We confirm dimensions, position, orientation and number of colours." },
-        { title: "Technical preparation", description: "The screen and support method are prepared for the supplied item." },
-        { title: "Production", description: "Print is repeated according to the approved reference and the organisation defined for the run." },
+        { title: "Sample assessment", description: "We review material, format, finish, usable area and the stage at which the item will be printed." },
+        { title: "Define the print", description: "We confirm dimensions, position, orientation and number of colours." },
+        { title: "Technical preparation", description: "The screen and holding method are prepared for the supplied item." },
+        { title: "Production", description: "The print is repeated according to the approved reference and the agreed production setup for the run." },
       ],
     },
     applications: {
       eyebrow: "APPLICATIONS",
-      title: "Identification within footwear production.",
+      title: "Printing and identification for footwear components.",
       description: "This list is indicative. Other components can be assessed from a sample.",
       items: [
         "Insoles",
@@ -924,11 +924,11 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       ],
     },
     questions: {
-      eyebrow: "FREQUENT QUESTIONS",
+      eyebrow: "FREQUENTLY ASKED QUESTIONS",
       title: "Before printing a component.",
       items: [
-        { question: "Which components can be customised?", answer: "SERIFIL works with insoles, uppers and other components. Feasibility depends on material, geometry and available area." },
-        { question: "Is a sample required?", answer: "It is recommended, especially for a new reference. A sample allows us to assess item support, surface and positioning." },
+        { question: "Which components can be customised?", answer: "SERIFIL works with insoles, vamps and other components. Feasibility depends on material, geometry and available area." },
+        { question: "Is a sample required?", answer: "It is recommended, especially for a new reference. A sample allows us to assess how the item can be held during printing, as well as its surface and positioning." },
         { question: "Can you work with several references?", answer: "Yes, provided each reference is identified with its artwork, dimensions, quantity and print position." },
       ],
     },

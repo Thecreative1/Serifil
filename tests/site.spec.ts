@@ -111,7 +111,7 @@ test("carrega o Google Analytics apenas após consentimento e permite revogá-lo
 
   await page.getByRole("button", { name: "Preferências de cookies" }).click();
   await expect(consentPanel).toBeVisible();
-  await consentPanel.getByRole("button", { name: "Aceitar analítica" }).click();
+  await consentPanel.getByRole("button", { name: "Aceitar cookies analíticos" }).click();
 
   await expect.poll(() => googleTagRequests.length).toBe(1);
   expect(googleTagRequests[0]).toContain("id=G-L81181XG3M");
@@ -370,7 +370,7 @@ const serviceRoutes = [
     path: "/pt/servicos/componentes-calcado/",
     alternate: "/en/servicos/footwear-components/",
     xDefault: "/pt/servicos/componentes-calcado/",
-    heading: "Impressão preparada para integrar o componente.",
+    heading: "Impressão adaptada a cada componente.",
   },
   {
     locale: "en",
@@ -398,7 +398,7 @@ const serviceRoutes = [
     path: "/en/servicos/footwear-components/",
     alternate: "/pt/servicos/componentes-calcado/",
     xDefault: "/pt/servicos/componentes-calcado/",
-    heading: "Printing prepared to become part of the component.",
+    heading: "Printing adapted to each footwear component.",
   },
 ];
 
@@ -490,7 +490,7 @@ test("comunica materiais, setores e componentes de calçado nas duas línguas", 
   await expect(page).toHaveTitle("Serifil | PVC, Fabric and Non-Woven Screen Printing");
   await expect(page.getByText("SPECIALISTS IN SCREEN PRINTING AND CUSTOMISATION")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Footwear components" }).first()).toBeVisible();
-  await expect(page.getByText(/insoles, uppers and other components/).first()).toBeVisible();
+  await expect(page.getByText(/insoles, vamps and other components/).first()).toBeVisible();
   await expect(page.locator("body")).not.toContainText(/\bTNT\b/);
   await expect(page.getByLabel("Required service").locator("option")).toHaveText([
     "Select an option",

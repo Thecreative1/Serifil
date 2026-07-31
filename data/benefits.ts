@@ -13,7 +13,7 @@ export const benefits = [
   },
   {
     title: "Prazos claros",
-    description: "A data necessária é considerada logo na análise inicial do pedido.",
+    description: "A data pretendida é considerada logo na análise inicial do pedido.",
   },
   {
     title: "Solução adaptada",
