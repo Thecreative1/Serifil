@@ -45,6 +45,7 @@ export function getBusinessIdentity({
     },
     ...(brand.phone ? { telephone: brand.phone } : {}),
     ...(brand.email ? { email: brand.email } : {}),
+    ...(brand.openingHours ? { openingHours: brand.openingHours } : {}),
     ...(taxId ? { taxID: taxId, vatID: `PT${taxId}` } : {}),
     address: {
       "@type": "PostalAddress",

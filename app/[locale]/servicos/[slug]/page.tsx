@@ -43,7 +43,11 @@ export async function generateMetadata({
 
   const alternates = getServiceAlternates(page.key);
   const canonical = absoluteUrl(getServicePath(localeParam, page.key));
-  const imageUrl = absoluteUrl(page.image.src);
+  const shareImage = page.image ?? {
+    src: "/og.jpg",
+    alt: translations[localeParam].meta.imageAlt,
+  };
+  const imageUrl = absoluteUrl(shareImage.src);
 
   return {
     title: page.metaTitle,
@@ -66,14 +70,14 @@ export async function generateMetadata({
       alternateLocale: localeParam === "pt" ? ["en_GB"] : ["pt_PT"],
       images: [{
         url: imageUrl,
-        alt: page.image.alt,
+        alt: shareImage.alt,
       }],
     },
     twitter: {
       card: "summary_large_image",
       title: page.metaTitle,
       description: page.metaDescription,
-      images: [{ url: imageUrl, alt: page.image.alt }],
+      images: [{ url: imageUrl, alt: shareImage.alt }],
     },
   };
 }
@@ -102,7 +106,7 @@ export default async function ServicePage({
         name: page.shortName,
         description: page.metaDescription,
         url: canonical,
-        image: absoluteUrl(page.image.src),
+        image: absoluteUrl(page.image?.src ?? "/og.jpg"),
         provider: getBusinessIdentity({
           description: copy.businessDescription,
           inLanguage: copy.htmlLang,
@@ -129,6 +133,18 @@ export default async function ServicePage({
             item: canonical,
           },
         ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${canonical}#faq`,
+        mainEntity: page.questions.items.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
       },
     ],
   };

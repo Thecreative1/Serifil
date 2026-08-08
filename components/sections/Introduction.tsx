@@ -11,7 +11,7 @@ export function Introduction({ copy }: { copy: SiteContent["introduction"] }) {
             <p className="section-kicker text-light-muted">{copy.eyebrow}</p>
             <div>
               <h2 className="max-w-[12ch] text-[clamp(3rem,8vw,7.4rem)] leading-[0.88] font-bold tracking-[-0.065em]">{copy.title}</h2>
-              <p className="mt-8 max-w-[62ch] text-lg leading-8 text-[#555951] sm:text-xl">{copy.description}</p>
+              <p className="mt-8 max-w-[62ch] text-lg leading-8 text-light-body sm:text-xl">{copy.description}</p>
             </div>
           </div>
         </Reveal>

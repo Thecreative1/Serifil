@@ -133,13 +133,13 @@ export function QuoteForm({ copy }: { copy: SiteContent["quoteForm"] }) {
               <TextArea id="message" name="message" label={copy.message} placeholder={copy.messagePlaceholder} error={errors.message} required />
               <div>
                 <label className="flex cursor-pointer items-start gap-3 text-sm leading-6 text-text-secondary">
-                  <input name="privacy" type="checkbox" className="mt-1 size-5 shrink-0 accent-[#e85b2a] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent" aria-invalid={Boolean(errors.privacy)} aria-describedby={errors.privacy ? "privacy-error" : undefined} />
+                  <input name="privacy" type="checkbox" className="mt-1 size-5 shrink-0 accent-accent-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent" aria-invalid={Boolean(errors.privacy)} aria-describedby={errors.privacy ? "privacy-error" : undefined} />
                   <span>{copy.privacy}</span>
                 </label>
-                {errors.privacy ? <p id="privacy-error" role="alert" className="mt-2 text-sm text-[#ff9c78]">{errors.privacy}</p> : null}
+                {errors.privacy ? <p id="privacy-error" role="alert" className="mt-2 text-sm text-error-text">{errors.privacy}</p> : null}
               </div>
               {status === "error" ? (
-                <div className="flex items-start gap-3 border border-[#7f3f2b] bg-[#261713] p-4 text-sm leading-6 text-[#ffb49a]" role="alert">
+                <div className="flex items-start gap-3 border border-error-border bg-error-surface p-4 text-sm leading-6 text-error-text-strong" role="alert">
                   <AlertCircle className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
                   <p>{copy.submissionError}</p>
                 </div>

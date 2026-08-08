@@ -35,7 +35,7 @@ export const brand: BrandConfig = {
   instagram: "",
   socialProfiles: [],
   address: "Travessa Bernardino Jordão 90, Urgezes",
-  openingHours: "",
+  openingHours: "Mo-Fr 09:00-18:00",
   website: "https://serifil.com/",
   quoteEndpoint: "https://formspree.io/f/xzdnyead",
   latitude: 41.4279368,

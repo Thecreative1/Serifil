@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { Archivo, Inter } from "next/font/google";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
@@ -10,6 +10,10 @@ const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", displa
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const dynamicParams = false;
+
+export const viewport: Viewport = {
+  themeColor: "#111210",
+};
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));

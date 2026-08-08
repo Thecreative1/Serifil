@@ -8,6 +8,7 @@
     "start": "next start",
     "serve:test": "next build && node scripts/serve-static.mjs",
     "generate:brand-icons": "node scripts/generate-brand-icons.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs",
     "lint": "eslint .",
     "test:e2e": "playwright test"
   },

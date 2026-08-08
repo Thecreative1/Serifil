@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Archivo, Inter } from "next/font/google";
 import { ArrowUpRight } from "lucide-react";
 import { brand } from "@/config/brand";
@@ -8,6 +8,10 @@ import "./globals.css";
 
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+
+export const viewport: Viewport = {
+  themeColor: "#111210",
+};
 
 export const metadata: Metadata = {
   title: `Página não encontrada | ${brand.name}`,

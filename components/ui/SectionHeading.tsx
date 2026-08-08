@@ -15,7 +15,7 @@ export function SectionHeading({ eyebrow, title, description, light = false, cla
           {title}
         </h2>
         {description ? (
-          <p className={`mt-6 max-w-[62ch] text-base leading-7 sm:text-lg ${light ? "text-[#555951]" : "text-text-secondary"}`}>
+          <p className={`mt-6 max-w-[62ch] text-base leading-7 sm:text-lg ${light ? "text-light-body" : "text-text-secondary"}`}>
             {description}
           </p>
         ) : null}

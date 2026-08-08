@@ -30,7 +30,7 @@ export function Footer({
   const sectionHref = (href: string) => homeHref ? `${homeHref}${href}` : href;
 
   return (
-    <footer className="border-t border-border bg-[#0c0d0b] py-12 sm:py-16">
+    <footer className="border-t border-border bg-background-deep py-12 sm:py-16">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1.4fr_0.7fr_0.7fr]">
           <div>

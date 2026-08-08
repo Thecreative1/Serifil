@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Archivo, Inter } from "next/font/google";
 import { brand } from "@/config/brand";
 import { businessId, businessAlternateNames, getBusinessIdentity } from "@/config/seo";
@@ -6,6 +6,10 @@ import "../globals.css";
 
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+
+export const viewport: Viewport = {
+  themeColor: "#111210",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(brand.website),

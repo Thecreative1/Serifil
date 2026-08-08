@@ -18,35 +18,41 @@ O site é uma landing page longa. A estrutura visual é composta no servidor e a
 ## 2. Mapa de diretórios
 
 ```text
+.github/workflows/
+  ci.yml                 lint e testes E2E em pull requests e branches
+  deploy-pages.yml       lint, testes, build e deploy para GitHub Pages
 app/
   (root)/                entrada em / e escolha automática de idioma
   [locale]/              páginas estáticas /pt/ e /en/
+  [locale]/servicos/     páginas de serviço bilingues por slug
   globals.css            tokens, base, grelha e movimento
+  manifest.ts            manifest.webmanifest com nome, ícone e theme color
   robots.ts              robots.txt
   sitemap.ts             sitemap localizado e imagens
 components/
   analytics/             consentimento, Google Analytics e links medidos
   layout/                header, menu mobile e footer
-  sections/              secções da landing page
+  sections/              secções da landing page, detalhe de serviço e mapa
   ui/                    primitives reutilizáveis
 config/
   analytics.ts           ID, chave de consentimento e evento interno
-  brand.ts               contactos, localização, URL e Formspree
+  brand.ts               contactos, horário, localização, URL e Formspree
   paths.ts               caminhos de assets e rotas localizadas
 data/
-  i18n.ts                fonte ativa de todo o conteúdo PT e EN
+  i18n.ts                fonte de todo o conteúdo PT e EN da landing page
+  service-pages.ts       conteúdo bilingue das páginas de serviço
 lib/
   analytics.ts           consent mode e eventos sem dados pessoais
 public/
-  images/                imagem real do hero e trabalhos otimizados
+  images/                hero e trabalhos em WebP com variantes responsivas
 scripts/
-  optimize-portfolio-images.mjs preparação WebP das fotografias de trabalhos
+  optimize-images.mjs    bases WebP 1600×1200 e variantes 480/960 (e hero)
 tests/
   site.spec.ts           contratos funcionais e de conteúdo
   visual.spec.ts         capturas completas desktop e mobile
 ```
 
-Os ficheiros `data/services.ts`, `data/portfolio.ts`, `data/benefits.ts` e `data/process.ts` não são importados pela aplicação atual. São cópias antigas em português e podem divergir. Até serem removidos ou religados explicitamente, `data/i18n.ts` é a única fonte de verdade de conteúdo apresentado.
+`data/i18n.ts` é a única fonte de verdade do conteúdo apresentado na landing page; `data/service-pages.ts` é a fonte das páginas de serviço. As cópias antigas (`data/services.ts`, `data/portfolio.ts`, `data/benefits.ts`, `data/process.ts`) foram removidas por não serem importadas.
 
 ## 3. Rotas e renderização
 
@@ -122,20 +128,34 @@ Tokens CSS ativos:
 
 ```css
 --background: #111210;
+--background-deep: #0c0d0b;
 --surface: #1b1d1a;
 --surface-light: #242722;
 --text-primary: #f5f1e8;
 --text-secondary: #a6aaa4;
---accent: #e85b2a;
---accent-hover: #ff6b35;
+--text-on-media: #d5d2ca;
+--text-on-media-soft: #c2c3bd;
+--accent: #ff5c00;
+--accent-hover: #ff7330;
+--accent-deep: #e85b2a;
+--accent-ink: #3a2017;
+--ink-hover: #2a2d28;
 --border: #30332f;
+--border-strong: #4d514b;
 --light-background: #eee9df;
 --light-text: #171916;
 --light-muted: #63675f;
+--light-body: #555951;
+--light-border: #c9c3b8;
+--light-border-soft: #b9b3a8;
 --field-placeholder: #858a82;
+--error-text: #ff9c78;
+--error-text-strong: #ffb49a;
+--error-border: #7f3f2b;
+--error-surface: #261713;
 ```
 
-Os tokens são mapeados para Tailwind por `@theme inline`. Novas cores reutilizadas devem nascer como token. Valores únicos só são aceitáveis para estados específicos, por exemplo erros e overlays de fotografia.
+Os tokens são mapeados para Tailwind por `@theme inline`. Toda a cor usada em componentes deve nascer como token; não escrever valores hex diretamente em classes. As únicas exceções são os overlays `rgba()` documentados (gradiente do hero, sombras e grelha industrial).
 
 O contentor canónico está em `components/ui/Container.tsx`: largura máxima de 1440px e padding lateral responsivo de 20px, 32px e 48px.
 
@@ -155,6 +175,7 @@ Secções de conteúdo, footer e primitives sem estado permanecem server compone
 - `TrackedLink`: eventos de analítica.
 - `CookiePreferencesButton`: reabertura das preferências.
 - `LocalePreference`: persistência do idioma.
+- `MapEmbed`: mapa Google carregado apenas após clique explícito, com foco no iframe.
 
 ### Primitives
 
@@ -163,6 +184,7 @@ Secções de conteúdo, footer e primitives sem estado permanecem server compone
 - `FormField`: label, input, select, textarea e erro.
 - `Reveal`: entrada progressiva com fallback visível.
 - `SectionHeading`: hierarquia e grelha canónica.
+- `WorkImage`: `<img>` com `srcSet` responsivo (480/960/1600) para fotografias 4:3 de trabalhos.
 
 Reutilize primitives antes de duplicar classes. Uma nova variante recorrente deve ser adicionada ao primitive e documentada em `DESIGN.md`.
 
@@ -208,6 +230,7 @@ Eventos permitidos:
 - `generate_lead`
 - `language_change`
 - `map_click`
+- `map_load`
 - `whatsapp_click`
 
 Todos incluem `page_language`. Parâmetros devem descrever contexto de interação, nunca conteúdo de formulário ou identificadores pessoais.
@@ -221,9 +244,9 @@ Cada locale publica:
 - hreflang `pt-PT`, `en` e `x-default`;
 - Open Graph e Twitter card;
 - robots index/follow;
-- JSON-LD `LocalBusiness` com catálogo de seis serviços.
+- JSON-LD `LocalBusiness` com catálogo de seis serviços e `openingHours` de `config/brand.ts`.
 
-A raiz publica JSON-LD `WebSite`. `app/sitemap.ts` inclui páginas localizadas e assets visuais. `app/robots.ts` permite crawling e aponta para o sitemap.
+As páginas de serviço publicam JSON-LD `Service`, `BreadcrumbList` e `FAQPage` (gerada a partir de `questions` em `data/service-pages.ts`). A raiz publica JSON-LD `WebSite`. `app/sitemap.ts` inclui páginas localizadas e assets visuais, sem `lastModified` artificial. `app/robots.ts` permite crawling e aponta para o sitemap. `app/manifest.ts` publica o manifest com o ícone e o theme color da marca.
 
 Quando mudar domínio, serviços, contacto ou imagem:
 
@@ -254,10 +277,10 @@ Contratos preservados:
 
 ## 11. Performance e assets
 
-- A imagem do hero usa `next/image`, `priority`, `sizes="100vw"` e formatos AVIF/WebP quando disponíveis.
-- As fotografias de trabalhos são normalizadas para WebP 1600×1200px pelo script `optimize-portfolio-images.mjs` e carregadas de forma diferida com `next/image`.
-- A exportação estática usa imagens não otimizadas em runtime, adequada ao alojamento sem servidor Next.
-- O mapa usa iframe lazy.
+- Como a exportação estática não otimiza imagens em runtime, todas as fotografias usam `<img>` com `srcSet` manual e `sizes` reais.
+- O hero usa `fetchPriority="high"` com variantes de 480, 828, 960 e 1280px além da base de 1672px.
+- As fotografias de trabalhos são normalizadas para WebP 1600×1200px com variantes de 480 e 960px pelo script `scripts/optimize-images.mjs` (`npm run optimize:images`) e renderizadas por `WorkImage` com carregamento diferido.
+- O mapa Google só é carregado após clique no botão do bloco de contacto (`MapEmbed`); nenhum pedido sai para o Google antes disso.
 - Fontes usam `display: "swap"`.
 - Animações limitam-se principalmente a `opacity` e `transform`.
 - `overflow-x: clip` é proteção, não substituto para corrigir componentes largos.
@@ -276,7 +299,7 @@ npm run start
 npm run test:e2e
 ```
 
-`npm run build` executa `next build` e cria a exportação estática em `out/`. O workflow `.github/workflows/deploy-pages.yml` envia esse diretório para o GitHub Pages e publica-o quando há alterações na branch `main`.
+`npm run build` executa `next build` e cria a exportação estática em `out/`. O workflow `.github/workflows/deploy-pages.yml` corre lint e testes E2E antes do build e só depois envia o diretório para o GitHub Pages, quando há alterações na branch `main`. O workflow `.github/workflows/ci.yml` corre lint e testes E2E em pull requests e nas restantes branches; um deploy nunca deve acontecer com testes vermelhos.
 
 Não editar `out/` manualmente. É um artefacto regenerável.
 
@@ -290,8 +313,9 @@ Não editar `out/` manualmente. É um artefacto regenerável.
 - consentimento, revogação e eventos;
 - validação e sucesso do formulário;
 - ausência de dados pessoais na analítica;
-- contactos e mapa;
-- metadata, robots, sitemap e JSON-LD;
+- contactos, horário e mapa carregado apenas após clique;
+- metadata, robots, sitemap e JSON-LD (incluindo FAQPage nas páginas de serviço);
+- páginas de serviço bilingues, incluindo gravação e corte laser;
 - conteúdo PT/EN e troca de idioma.
 
 `tests/visual.spec.ts` gera:

@@ -3,17 +3,31 @@ name: SERIFIL
 description: Uma oficina de precisão digital para serigrafia e personalização em Guimarães.
 colors:
   workshop-charcoal: "#111210"
+  workshop-shadow: "#0c0d0b"
   machine-surface: "#1b1d1a"
   raised-machine-surface: "#242722"
   warm-ink: "#f5f1e8"
   muted-steel: "#a6aaa4"
+  ink-on-photo: "#d5d2ca"
+  steel-on-photo: "#c2c3bd"
   printing-orange: "#ff5c00"
   printing-orange-hover: "#ff7330"
+  printing-orange-deep: "#e85b2a"
+  ink-on-orange: "#3a2017"
+  ink-dark-hover: "#2a2d28"
   machine-border: "#30332f"
+  machine-border-hover: "#4d514b"
   technical-paper: "#eee9df"
   ink-dark: "#171916"
   paper-muted: "#63675f"
+  paper-body: "#555951"
+  paper-border: "#c9c3b8"
+  paper-line: "#b9b3a8"
   field-placeholder: "#858a82"
+  alert-salmon: "#ff9c78"
+  alert-salmon-bright: "#ffb49a"
+  alert-border: "#7f3f2b"
+  alert-surface: "#261713"
 typography:
   display:
     fontFamily: "Archivo, Arial, sans-serif"
@@ -138,6 +152,20 @@ A paleta combina carvão esverdeado, tinta marfim, superfícies de máquina e la
 - **Papel Atenuado** (`paper-muted`): texto secundário sobre superfícies claras.
 - **Placeholder Industrial** (`field-placeholder`): texto de apoio dentro dos campos.
 
+### Functional
+
+Tons derivados com papel único, sempre disponíveis como tokens CSS — nunca repetir estes valores à mão:
+
+- **Sombra de Oficina** (`workshop-shadow`): fundo do rodapé, um degrau abaixo do carvão.
+- **Tinta sobre Fotografia** (`ink-on-photo` / `steel-on-photo`): texto legível sobre a fotografia do hero.
+- **Laranja Profundo** (`printing-orange-deep`): cor do controlo nativo da checkbox.
+- **Tinta sobre Laranja** (`ink-on-orange`): parágrafos dentro do bloco de serviço laranja.
+- **Tinta Escura Hover** (`ink-dark-hover`): hover dos botões escuros.
+- **Linha de Máquina Hover** (`machine-border-hover`): hover das bordas dos campos.
+- **Corpo de Papel** (`paper-body`): parágrafos sobre papel técnico.
+- **Linha de Papel** (`paper-border` / `paper-line`): divisórias sobre papel técnico.
+- **Alertas** (`alert-salmon`, `alert-salmon-bright`, `alert-border`, `alert-surface`): mensagens de erro do formulário em tom salmão sobre superfície escura avermelhada.
+
 **The One Ink Rule.** O laranja é reservado a ações, orientação, prioridade e estado. Nunca criar gradientes, brilho néon ou uma segunda cor saturada concorrente.
 
 **The Alternating Material Rule.** O fundo escuro representa máquina e produção; o papel técnico claro representa explicação e processo. A alternância deve reforçar a narrativa, não formar um padrão decorativo previsível.
@@ -230,11 +258,15 @@ O hero combina uma fotografia real de serigrafia, overlay escuro horizontal, gre
 
 A galeria organiza produção real por material, com uma coluna de contexto técnico e uma grelha fotográfica à direita. Todas as fotografias usam formato 4:3, recorte central consistente e separação por linhas de 1px. Em mobile, a grelha mantém duas colunas para permitir comparar acabamentos sem alongar excessivamente a página.
 
-As imagens são publicadas em WebP com 1600×1200px, carregamento diferido e texto alternativo específico. A edição deve preservar a aparência real dos materiais: corrigir orientação, uniformizar o recorte e comprimir, sem filtros que alterem cores ou acabamentos.
+As imagens são publicadas em WebP com base 1600×1200px e variantes responsivas de 480px e 960px, servidas por `srcSet` com carregamento diferido e texto alternativo específico. A edição deve preservar a aparência real dos materiais: corrigir orientação, uniformizar o recorte e comprimir, sem filtros que alterem cores ou acabamentos. O script `scripts/optimize-images.mjs` regenera bases e variantes.
 
 ### Motion
 
 Revelações usam apenas opacity e translateY de 24px durante 700ms, com `cubic-bezier(0.16, 1, 0.3, 1)`. O marquee é linear durante 36s. `prefers-reduced-motion: reduce` reduz animações e transições a 0.01ms e mantém o conteúdo visível.
+
+### Map Loader
+
+O mapa da secção de contacto não carrega automaticamente. O bloco mostra o placeholder de grelha industrial com coordenadas, um botão laranja "Carregar mapa interativo" e uma nota curta a explicar que o Google Maps só é contactado após o clique. Depois do clique, o iframe ocupa o bloco e recebe o foco. O atalho "Obter direções" continua sempre disponível ao lado.
 
 ### Legal Disclosure
 

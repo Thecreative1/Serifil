@@ -35,12 +35,9 @@ const images = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-
   const homePages: MetadataRoute.Sitemap = [
     {
       url: localizedUrls["pt-PT"],
-      lastModified,
       changeFrequency: "monthly",
       priority: 1,
       alternates: { languages: localizedUrls },
@@ -48,7 +45,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: localizedUrls.en,
-      lastModified,
       changeFrequency: "monthly",
       priority: 1,
       alternates: { languages: localizedUrls },
@@ -62,7 +58,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       const alternates = getServiceAlternates(key);
       return {
         url: new URL(getServicePath(locale, key), brand.website).toString(),
-        lastModified,
         changeFrequency: "monthly" as const,
         priority: 0.8,
         alternates: {
@@ -73,7 +68,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
           },
         },
         images: [
-          page.image,
+          ...(page.image ? [page.image] : []),
           ...page.gallery.images,
         ].map((image) => new URL(image.src, brand.website).toString()),
       };

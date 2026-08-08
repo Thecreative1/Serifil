@@ -1,6 +1,6 @@
 import type { Locale } from "@/data/i18n";
 
-export const serviceKeys = ["pvc", "fabric", "nonwoven", "footwear"] as const;
+export const serviceKeys = ["pvc", "fabric", "nonwoven", "footwear", "laser"] as const;
 
 export type ServiceKey = (typeof serviceKeys)[number];
 
@@ -18,7 +18,7 @@ export type ServicePageContent = {
   eyebrow: string;
   title: string;
   lead: string;
-  image: ServiceImage;
+  image?: ServiceImage;
   introduction: {
     title: string;
     paragraphs: string[];
@@ -88,12 +88,14 @@ const slugs: Record<Locale, Record<ServiceKey, string>> = {
     fabric: "serigrafia-tecido",
     nonwoven: "sacos-tnt",
     footwear: "componentes-calcado",
+    laser: "gravacao-corte-laser",
   },
   en: {
     pvc: "pvc-screen-printing",
     fabric: "fabric-screen-printing",
     nonwoven: "non-woven-bags",
     footwear: "footwear-components",
+    laser: "laser-engraving-cutting",
   },
 };
 
@@ -615,6 +617,110 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
       ],
     },
   },
+  laser: {
+    key: "laser",
+    slug: slugs.pt.laser,
+    shortName: "Gravação e corte laser",
+    metaTitle: "Gravação e Corte Laser em Madeira e Acrílico | Serifil",
+    metaDescription:
+      "Gravação e corte laser de madeira, acrílico e outros materiais para placas, brindes, decoração, protótipos e sinalética. Produção em Guimarães.",
+    eyebrow: "GRAVAÇÃO E CORTE LASER · GUIMARÃES",
+    title: "Gravação e corte guiados pelo desenho.",
+    lead:
+      "Gravação e corte de madeira, acrílico e outros materiais para placas, brindes, decoração, protótipos e sinalética.",
+    introduction: {
+      title: "Como funciona a gravação e o corte laser?",
+      paragraphs: [
+        "A gravação e o corte laser partem de um desenho digital. Na gravação, o feixe marca a superfície do material; no corte, atravessa a espessura da peça seguindo o contorno definido no ficheiro.",
+        "Cada material reage de forma diferente. Madeira, acrílico e outros suportes têm comportamentos próprios, por isso o material, a espessura e o resultado pretendido são avaliados antes da produção.",
+      ],
+    },
+    facts: [
+      { label: "MATERIAIS", value: "Madeira, acrílico e outros materiais sujeitos a avaliação." },
+      { label: "PROCESSO", value: "Gravação de superfícies e corte de contornos a partir de desenho digital." },
+      { label: "APLICAÇÃO", value: "Placas, brindes, decoração, protótipos e sinalética." },
+    ],
+    technique: {
+      eyebrow: "COMO FUNCIONA",
+      title: "Do ficheiro à peça final.",
+      description:
+        "O laser segue o desenho preparado em computador. Gravação e corte podem ser combinados na mesma peça, desde que o ficheiro distinga as duas operações.",
+      steps: [
+        {
+          title: "Avaliação do material",
+          description:
+            "Confirmamos o material, a espessura e as dimensões da peça pretendida.",
+        },
+        {
+          title: "Preparação do ficheiro",
+          description:
+            "O desenho é preparado em formato vetorial, separando zonas de gravação e linhas de corte.",
+        },
+        {
+          title: "Ensaio e afinação",
+          description:
+            "Os parâmetros são ajustados ao material apresentado antes de avançar para a série.",
+        },
+        {
+          title: "Produção e verificação",
+          description:
+            "As peças são gravadas ou cortadas de acordo com a referência aprovada e verificadas no final.",
+        },
+      ],
+    },
+    applications: {
+      eyebrow: "APLICAÇÕES",
+      title: "Onde usamos a gravação e o corte laser.",
+      description:
+        "A lista é indicativa. Outros projetos podem ser avaliados a partir do desenho e do material.",
+      items: [
+        "Placas de identificação e sinalética",
+        "Brindes e ofertas personalizadas",
+        "Peças de decoração",
+        "Protótipos e ensaios de forma",
+        "Recortes para projetos gráficos",
+      ],
+    },
+    gallery: {
+      eyebrow: "TÉCNICA",
+      title: "O desenho define a gravação e o corte.",
+      images: [],
+    },
+    preparation: {
+      eyebrow: "PREPARAR O PEDIDO",
+      title: "O que enviar para avaliação.",
+      description:
+        "Estes dados permitem confirmar a viabilidade e preparar o orçamento.",
+      items: [
+        { label: "Desenho", value: "Ficheiro vetorial ou esboço com as medidas da peça." },
+        { label: "Material", value: "Tipo de material e espessura, quando conhecidos." },
+        { label: "Operação", value: "Gravação, corte ou combinação das duas." },
+        { label: "Quantidade", value: "Número aproximado de unidades." },
+        { label: "Prazo", value: "Data pretendida para a produção." },
+      ],
+    },
+    questions: {
+      eyebrow: "PERGUNTAS FREQUENTES",
+      title: "Antes de gravar ou cortar.",
+      items: [
+        {
+          question: "Que materiais podem ser gravados ou cortados?",
+          answer:
+            "Trabalhamos madeira, acrílico e outros materiais. A viabilidade depende do material e da espessura, por isso cada caso é confirmado antes da produção.",
+        },
+        {
+          question: "Preciso de enviar um ficheiro vetorial?",
+          answer:
+            "É o formato ideal, sobretudo para corte. Se tiver apenas uma imagem ou um esboço, envie-o na mesma: indicamos o que falta para preparar o trabalho.",
+        },
+        {
+          question: "É possível combinar gravação e corte na mesma peça?",
+          answer:
+            "Sim. O ficheiro deve distinguir as zonas de gravação das linhas de corte, e essa separação é confirmada na aprovação.",
+        },
+      ],
+    },
+  },
 };
 
 const englishPages: Record<ServiceKey, ServicePageContent> = {
@@ -930,6 +1036,92 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
         { question: "Which components can be customised?", answer: "SERIFIL works with insoles, vamps and other components. Feasibility depends on material, geometry and available area." },
         { question: "Is a sample required?", answer: "It is recommended, especially for a new reference. A sample allows us to assess how the item can be held during printing, as well as its surface and positioning." },
         { question: "Can you work with several references?", answer: "Yes, provided each reference is identified with its artwork, dimensions, quantity and print position." },
+      ],
+    },
+  },
+  laser: {
+    ...portuguesePages.laser,
+    slug: slugs.en.laser,
+    shortName: "Laser engraving and cutting",
+    metaTitle: "Laser Engraving and Cutting in Wood and Acrylic | Serifil",
+    metaDescription:
+      "Laser engraving and cutting of wood, acrylic and other materials for signs, gifts, decoration and prototypes. Production in Guimarães, Portugal.",
+    eyebrow: "LASER ENGRAVING AND CUTTING · GUIMARÃES",
+    title: "Engraving and cutting, guided by the drawing.",
+    lead:
+      "Laser engraving and cutting of wood, acrylic and other materials for signs, gifts, decoration and prototypes.",
+    introduction: {
+      title: "How do laser engraving and cutting work?",
+      paragraphs: [
+        "Laser engraving and cutting start from a digital drawing. When engraving, the beam marks the surface of the material; when cutting, it passes through the thickness of the piece along the outline defined in the file.",
+        "Each material behaves differently. Wood, acrylic and other substrates respond in their own way, so the material, thickness and intended result are assessed before production.",
+      ],
+    },
+    facts: [
+      { label: "MATERIALS", value: "Wood, acrylic and other materials, subject to assessment." },
+      { label: "PROCESS", value: "Surface engraving and outline cutting from a digital drawing." },
+      { label: "APPLICATION", value: "Signs, gifts, decoration, prototypes and signage." },
+    ],
+    technique: {
+      eyebrow: "HOW IT WORKS",
+      title: "From file to finished piece.",
+      description:
+        "The laser follows the drawing prepared on a computer. Engraving and cutting can be combined on the same piece, provided the file distinguishes the two operations.",
+      steps: [
+        { title: "Material assessment", description: "We confirm the material, thickness and dimensions of the intended piece." },
+        { title: "File preparation", description: "The drawing is prepared in vector format, separating engraving areas from cutting lines." },
+        { title: "Test and adjustment", description: "Parameters are adjusted to the supplied material before moving on to the production run." },
+        { title: "Production and verification", description: "Pieces are engraved or cut according to the approved reference and checked at the end." },
+      ],
+    },
+    applications: {
+      eyebrow: "APPLICATIONS",
+      title: "Where laser engraving and cutting are used.",
+      description: "This list is indicative. Other projects can be assessed from the drawing and material.",
+      items: [
+        "Identification plates and signage",
+        "Personalised gifts",
+        "Decorative pieces",
+        "Prototypes and form studies",
+        "Cut-outs for graphic projects",
+      ],
+    },
+    gallery: {
+      eyebrow: "TECHNIQUE",
+      title: "The drawing defines the engraving and the cut.",
+      images: [],
+    },
+    preparation: {
+      eyebrow: "PREPARE YOUR REQUEST",
+      title: "What to send for assessment.",
+      description: "These details allow us to confirm feasibility and prepare the quote.",
+      items: [
+        { label: "Drawing", value: "Vector file or sketch with the piece measurements." },
+        { label: "Material", value: "Material type and thickness, when known." },
+        { label: "Operation", value: "Engraving, cutting or a combination of both." },
+        { label: "Quantity", value: "Approximate number of units." },
+        { label: "Deadline", value: "Required production date." },
+      ],
+    },
+    questions: {
+      eyebrow: "FREQUENTLY ASKED QUESTIONS",
+      title: "Before engraving or cutting.",
+      items: [
+        {
+          question: "Which materials can be engraved or cut?",
+          answer:
+            "We work with wood, acrylic and other materials. Feasibility depends on the material and thickness, so each case is confirmed before production.",
+        },
+        {
+          question: "Do I need to send a vector file?",
+          answer:
+            "It is the ideal format, especially for cutting. If you only have an image or a sketch, send it anyway and we will tell you what is needed to prepare the job.",
+        },
+        {
+          question: "Can engraving and cutting be combined on the same piece?",
+          answer:
+            "Yes. The file should distinguish engraving areas from cutting lines, and that separation is confirmed during approval.",
+        },
       ],
     },
   },
