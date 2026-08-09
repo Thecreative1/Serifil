@@ -104,6 +104,12 @@ export default async function ServicePage({
         "@type": "Service",
         "@id": `${canonical}#service`,
         name: page.shortName,
+        ...(localeParam === "pt" && page.key === "pvc"
+          ? {
+              alternateName: ["Impressão em plástico", "Impressão em plástico PVC"],
+              serviceType: "Impressão serigráfica em plástico PVC",
+            }
+          : {}),
         description: page.metaDescription,
         url: canonical,
         image: absoluteUrl(page.image?.src ?? "/og.jpg"),

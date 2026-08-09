@@ -141,16 +141,16 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     key: "pvc",
     slug: slugs.pt.pvc,
     shortName: "Serigrafia em PVC",
-    metaTitle: "Serigrafia em PVC para Sacos e Embalagens | Serifil",
+    metaTitle: "Impressão em Plástico (PVC) para Sacos | Serifil",
     metaDescription:
-      "Impressão serigráfica em PVC transparente ou colorido para sacos, capas, embalagem e proteção. Produção personalizada em Guimarães.",
+      "Impressão em plástico PVC transparente ou colorido para sacos, capas e embalagens. Serigrafia personalizada em Guimarães.",
     eyebrow: "SERIGRAFIA EM PVC · GUIMARÃES",
     title: "Impressão em PVC, preparada para o suporte real.",
     lead:
       "Personalização de peças de PVC transparente ou colorido com logótipos, elementos gráficos e informação técnica.",
     image: {
       src: "/images/trabalhos/pvc-01.webp",
-      alt: "Peças de PVC transparente com impressão ornamental dourada produzidas pela SERIFIL",
+      alt: "Peças transparentes de plástico PVC com impressão ornamental dourada produzidas pela SERIFIL",
     },
     introduction: {
       title: "O que é o PVC e porque exige preparação?",
@@ -220,11 +220,11 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
       images: [
         {
           src: "/images/trabalhos/pvc-02.webp",
-          alt: "Embalagem transparente em PVC personalizada com logótipo",
+          alt: "Embalagem transparente de plástico PVC personalizada com logótipo",
         },
         {
           src: "/images/trabalhos/pvc-03.webp",
-          alt: "Informação técnica impressa sobre uma peça em PVC transparente",
+          alt: "Informação técnica impressa sobre uma peça de plástico PVC transparente",
         },
       ],
     },
