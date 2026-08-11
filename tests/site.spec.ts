@@ -235,19 +235,24 @@ test("publica apenas contactos configurados e o WhatsApp correto", async ({ page
   const emailLinks = page.locator('a[href="mailto:geral@serifil.com"]');
   const phoneLinks = page.locator('a[href="tel:+351910508706"]');
   const whatsappLinks = page.locator('a[href="https://wa.me/351910508706"]');
+  const instagramLinks = page.locator('a[href="https://www.instagram.com/serifil_serigrafia/"]');
   await expect(emailLinks).toHaveCount(3);
   await expect(phoneLinks).toHaveCount(3);
   await expect(whatsappLinks).toHaveCount(2);
+  await expect(instagramLinks).toHaveCount(2);
   const contact = page.locator("#contacto");
   await expect(contact.getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
+  await expect(contact.getByRole("link", { name: "@serifil_serigrafia", exact: true })).toHaveAttribute("href", "https://www.instagram.com/serifil_serigrafia/");
   await expect(contact.getByText("+351 910 508 706", { exact: true })).toHaveCount(1);
   await expect(contact.getByRole("link", { name: "Ligar +351 910 508 706" })).toBeVisible();
   await expect(contact.getByRole("link", { name: "WhatsApp +351 910 508 706" })).toBeVisible();
   await expect(page.getByText("Orçamentos por formulário, e-mail, telefone ou WhatsApp")).toBeVisible();
   await expect(whatsappLinks.first()).toHaveAttribute("target", "_blank");
+  await expect(instagramLinks.first()).toHaveAttribute("target", "_blank");
 
   await page.goto("/en/#contacto");
   await expect(page.locator("#contacto").getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
+  await expect(page.locator("#contacto").getByRole("link", { name: "@serifil_serigrafia", exact: true })).toHaveAttribute("href", "https://www.instagram.com/serifil_serigrafia/");
   await expect(page.getByText("Quotes via form, email, phone or WhatsApp")).toBeVisible();
 });
 
@@ -364,6 +369,7 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
     "@type": string;
     "@id": string;
     email: string;
+    sameAs: string[];
     alternateName: string[];
     taxID: string;
     vatID: string;
@@ -377,6 +383,7 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(structuredData["@type"]).toBe("LocalBusiness");
   expect(structuredData["@id"]).toBe("https://serifil.com/#business");
   expect(structuredData.email).toBe("geral@serifil.com");
+  expect(structuredData.sameAs).toContain("https://www.instagram.com/serifil_serigrafia/");
   expect(structuredData.alternateName).toContain("Serifil Guimarães");
   expect(structuredData.taxID).toBe("250796210");
   expect(structuredData.vatID).toBe("PT250796210");

@@ -9,7 +9,7 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
   const contactItems = [
     { label: copy.email, value: brand.email, href: brand.email ? `mailto:${brand.email}` : "", icon: Mail, external: false },
     { label: copy.hours, value: brand.openingHours, href: "", icon: Clock3, external: false },
-    { label: copy.instagram, value: brand.instagram, href: brand.instagram, icon: AtSign, external: true },
+    { label: copy.instagram, value: brand.instagram ? brand.instagramHandle : "", href: brand.instagram, icon: AtSign, external: true },
   ];
   const available = contactItems.filter((item) => item.value);
 

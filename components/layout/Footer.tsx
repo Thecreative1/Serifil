@@ -59,6 +59,19 @@ export function Footer({
                   </a>
                 </li>
               ) : null}
+              {brand.instagram ? (
+                <li>
+                  <a
+                    className="underline decoration-border underline-offset-4 transition-colors hover:decoration-text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                    href={brand.instagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Instagram ${brand.instagramHandle}`}
+                  >
+                    {brand.instagramHandle}
+                  </a>
+                </li>
+              ) : null}
               <li>{copy.formRequests}</li>
             </ul>
           </div>
