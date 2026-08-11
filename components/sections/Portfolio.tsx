@@ -1,9 +1,8 @@
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { assetPath } from "@/config/paths";
+import { WorkImage } from "@/components/ui/WorkImage";
 import type { Locale, SiteContent } from "@/data/i18n";
 import { getServicePath, servicePageUi, type ServiceKey } from "@/data/service-pages";
 
@@ -43,12 +42,10 @@ export function Portfolio({ locale, copy }: { locale: Locale; copy: SiteContent[
                 <div className="grid grid-cols-2 gap-px bg-border lg:col-span-8">
                   {item.images.map((image, imageIndex) => (
                     <figure key={image.src} className="relative aspect-[4/3] overflow-hidden bg-background">
-                      <Image
-                        src={assetPath(image.src)}
+                      <WorkImage
+                        src={image.src}
                         alt={image.alt}
-                        fill
                         sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 45vw"
-                        className="object-cover"
                       />
                       <figcaption className="sr-only">{image.alt}</figcaption>
                       <span

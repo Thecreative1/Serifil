@@ -33,7 +33,7 @@ npm run build
 npm run test:e2e
 ```
 
-O build produz exportação estática em `out/` e prepara o artefacto de alojamento em `dist/`.
+O build produz exportação estática em `out/` e prepara o artefacto de alojamento em `dist/`. No GitHub, o workflow `ci.yml` corre lint e testes em pull requests, e o `deploy-pages.yml` só publica em `serifil.com` depois de lint e testes passarem.
 
 ## Fontes de verdade
 
@@ -44,8 +44,9 @@ O build produz exportação estática em `out/` e prepara o artefacto de alojame
 | Cores e estilos globais | `app/globals.css` |
 | Componentes reutilizáveis | `components/ui/` |
 | Estrutura da página | `app/[locale]/page.tsx` |
-| Conteúdo PT e EN | `data/i18n.ts` |
-| Contactos, localização e endpoint do formulário | `config/brand.ts` |
+| Conteúdo PT e EN da landing | `data/i18n.ts` |
+| Páginas de serviço PT e EN | `data/service-pages.ts` |
+| Contactos, horário, localização e endpoint do formulário | `config/brand.ts` |
 | Analítica e consentimento | `config/analytics.ts`, `lib/analytics.ts` |
 | Contratos de comportamento | `tests/site.spec.ts` |
 | Capturas de regressão | `tests/visual.spec.ts` |

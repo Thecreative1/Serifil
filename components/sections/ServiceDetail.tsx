@@ -1,9 +1,9 @@
-import Image from "next/image";
 import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { assetPath, localizedPath } from "@/config/paths";
+import { WorkImage } from "@/components/ui/WorkImage";
+import { localizedPath } from "@/config/paths";
 import type { Locale } from "@/data/i18n";
 import {
   getServicePath,
@@ -57,7 +57,7 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
           </nav>
 
           <div className="grid gap-10 pt-10 pb-14 sm:pt-12 sm:pb-16 lg:grid-cols-12 lg:items-center lg:gap-12 lg:pt-14 lg:pb-20">
-            <div className="lg:col-span-7">
+            <div className={page.image ? "lg:col-span-7" : "lg:col-span-9"}>
               <p className="section-kicker text-accent">{page.eyebrow}</p>
               <h1 className="mt-6 max-w-[13ch] text-[clamp(3.2rem,6.4vw,6.9rem)] leading-[0.88] font-black tracking-[-0.07em] text-text-primary">
                 {page.title}
@@ -71,26 +71,26 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
               </div>
             </div>
 
-            <figure className="relative aspect-[4/3] overflow-hidden border border-border bg-surface lg:col-span-5">
-              <Image
-                src={assetPath(page.image.src)}
-                alt={page.image.alt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 38vw, 100vw"
-                className="object-cover"
-              />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-background/90 px-4 py-3 text-[0.68rem] font-bold uppercase tracking-[0.1em] text-text-secondary">
-                {ui.realWork}
-              </figcaption>
-            </figure>
+            {page.image ? (
+              <figure className="relative aspect-[4/3] overflow-hidden border border-border bg-surface lg:col-span-5">
+                <WorkImage
+                  src={page.image.src}
+                  alt={page.image.alt}
+                  priority
+                  sizes="(min-width: 1024px) 38vw, 100vw"
+                />
+                <figcaption className="absolute inset-x-0 bottom-0 bg-background/90 px-4 py-3 text-[0.68rem] font-bold uppercase tracking-[0.1em] text-text-secondary">
+                  {ui.realWork}
+                </figcaption>
+              </figure>
+            ) : null}
           </div>
         </Container>
       </section>
 
       <section className="bg-accent text-light-text">
         <Container>
-          <dl className="grid divide-y divide-[#171916]/25 lg:grid-cols-3 lg:divide-x lg:divide-y-0">
+          <dl className="grid divide-y divide-light-text/25 lg:grid-cols-3 lg:divide-x lg:divide-y-0">
             {page.facts.map((fact) => (
               <div key={fact.label} className="py-8 lg:px-9 lg:py-10 first:lg:pl-0 last:lg:pr-0">
                 <dt className="text-[0.7rem] font-black uppercase tracking-[0.14em]">{fact.label}</dt>
@@ -110,7 +110,7 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
                 <h2 className="max-w-[15ch] text-[clamp(2.7rem,5.6vw,5.8rem)] leading-[0.92] font-bold tracking-[-0.06em] text-light-text">
                   {page.introduction.title}
                 </h2>
-                <div className="mt-9 grid gap-6 text-lg leading-8 text-[#555951]">
+                <div className="mt-9 grid gap-6 text-lg leading-8 text-light-body">
                   {page.introduction.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 </div>
               </div>
@@ -185,12 +185,10 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
                 <div className="grid min-w-0 grid-cols-2 gap-px bg-border lg:col-span-7">
                   {page.gallery.images.map((image, index) => (
                     <figure key={image.src} className="relative aspect-[4/3] overflow-hidden bg-surface">
-                      <Image
-                        src={assetPath(image.src)}
+                      <WorkImage
+                        src={image.src}
                         alt={image.alt}
-                        fill
                         sizes="(min-width: 1024px) 31vw, 48vw"
-                        className="object-cover"
                       />
                       <span className="absolute right-0 bottom-0 bg-background/90 px-2.5 py-1.5 text-[0.625rem] font-bold tracking-[0.12em] text-text-secondary" aria-hidden="true">
                         {String(index + 1).padStart(2, "0")}
@@ -215,9 +213,9 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
                 </h2>
                 <p className="mt-7 max-w-[50ch] text-base leading-7 text-light-muted">{page.preparation.description}</p>
               </div>
-              <dl className="border-t border-[#c9c3b8] lg:col-span-7">
+              <dl className="border-t border-light-border lg:col-span-7">
                 {page.preparation.items.map((item) => (
-                  <div key={item.label} className="grid gap-3 border-b border-[#c9c3b8] py-6 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-8">
+                  <div key={item.label} className="grid gap-3 border-b border-light-border py-6 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-8">
                     <dt className="text-xs font-black uppercase tracking-[0.12em] text-light-text">{item.label}</dt>
                     <dd className="max-w-[54ch] text-base leading-7 text-light-muted">{item.value}</dd>
                   </div>

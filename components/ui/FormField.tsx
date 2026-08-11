@@ -17,7 +17,7 @@ export function FieldShell({ id, label, optional, optionalLabel = "opcional", er
       </label>
       {children}
       {error ? (
-        <p id={`${id}-error`} className="text-sm text-[#ff9c78]" role="alert">
+        <p id={`${id}-error`} className="text-sm text-error-text" role="alert">
           {error}
         </p>
       ) : null}
@@ -25,7 +25,7 @@ export function FieldShell({ id, label, optional, optionalLabel = "opcional", er
   );
 }
 
-const fieldClass = "min-h-12 w-full border border-border bg-surface px-4 py-3 text-base text-text-primary outline-none transition-colors placeholder:text-field-placeholder hover:border-[#4d514b] focus:border-accent focus:ring-1 focus:ring-accent";
+const fieldClass = "min-h-12 w-full border border-border bg-surface px-4 py-3 text-base text-text-primary outline-none transition-colors placeholder:text-field-placeholder hover:border-border-strong focus:border-accent focus:ring-1 focus:ring-accent";
 
 export function TextInput({ id, label, optional, optionalLabel, error, inputRef, ...props }: BaseProps & InputHTMLAttributes<HTMLInputElement> & { inputRef?: Ref<HTMLInputElement> }) {
   return (

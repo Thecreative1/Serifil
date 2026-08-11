@@ -80,7 +80,7 @@ export function MobileMenu({ open, onClose, locale, copy, homeHref, languageHref
           ))}
         </ul>
         <div className="grid gap-4">
-          <div className="flex border border-border" aria-label={copy.languageLabel}>
+          <div role="group" className="flex border border-border" aria-label={copy.languageLabel}>
             {(["pt", "en"] as const).map((language) => (
               <a
                 key={language}

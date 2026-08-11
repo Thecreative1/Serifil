@@ -3,13 +3,14 @@ import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { brand } from "@/config/brand";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { MapEmbed } from "@/components/sections/MapEmbed";
 import type { SiteContent } from "@/data/i18n";
 
 export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
   const contactItems = [
     { label: copy.email, value: brand.email, href: brand.email ? `mailto:${brand.email}` : "", icon: Mail, external: false },
-    { label: copy.hours, value: brand.openingHours, href: "", icon: Clock3, external: false },
-    { label: copy.instagram, value: brand.instagram, href: brand.instagram, icon: AtSign, external: true },
+    { label: copy.hours, value: brand.openingHours ? copy.hoursValue : "", href: "", icon: Clock3, external: false },
+    { label: copy.instagram, value: brand.instagram ? brand.instagramHandle : "", href: brand.instagram, icon: AtSign, external: true },
   ];
   const available = contactItems.filter((item) => item.value);
 
@@ -103,26 +104,13 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
                 <ArrowUpRight className="size-4" aria-hidden="true" />
               </TrackedLink>
             </div>
-            <div className="relative min-h-[24rem] overflow-hidden bg-surface lg:min-h-[28rem]">
-              <div className="industrial-grid absolute inset-0 grid place-items-center opacity-45" aria-hidden="true">
-                <div className="grid place-items-center gap-3 text-center">
-                  <span className="grid size-12 place-items-center bg-accent text-light-text">
-                    <MapPin className="size-5" />
-                  </span>
-                  <span className="text-xs font-bold tracking-[0.12em] text-text-secondary">
-                    {brand.latitude}, {brand.longitude}
-                  </span>
-                </div>
-              </div>
-              <iframe
-                title={copy.mapTitle}
-                src={brand.mapEmbedUrl}
-                className="absolute inset-0 h-full w-full border-0"
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
+            <MapEmbed
+              title={copy.mapTitle}
+              loadLabel={copy.mapLoad}
+              note={copy.mapNote}
+              src={brand.mapEmbedUrl}
+              coordinatesLabel={`${brand.latitude}, ${brand.longitude}`}
+            />
           </div>
         </Reveal>
       </Container>

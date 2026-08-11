@@ -6,6 +6,7 @@ export type AnalyticsEventName =
   | "generate_lead"
   | "language_change"
   | "map_click"
+  | "map_load"
   | "whatsapp_click";
 
 type AnalyticsEventParameters = Record<string, string | number | boolean>;

@@ -235,19 +235,26 @@ test("publica apenas contactos configurados e o WhatsApp correto", async ({ page
   const emailLinks = page.locator('a[href="mailto:geral@serifil.com"]');
   const phoneLinks = page.locator('a[href="tel:+351910508706"]');
   const whatsappLinks = page.locator('a[href="https://wa.me/351910508706"]');
+  const instagramLinks = page.locator('a[href="https://www.instagram.com/serifil_serigrafia/"]');
   await expect(emailLinks).toHaveCount(3);
   await expect(phoneLinks).toHaveCount(3);
   await expect(whatsappLinks).toHaveCount(2);
+  await expect(instagramLinks).toHaveCount(2);
   const contact = page.locator("#contacto");
   await expect(contact.getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
+  await expect(contact.getByRole("link", { name: "@serifil_serigrafia", exact: true })).toHaveAttribute("href", "https://www.instagram.com/serifil_serigrafia/");
   await expect(contact.getByText("+351 910 508 706", { exact: true })).toHaveCount(1);
   await expect(contact.getByRole("link", { name: "Ligar +351 910 508 706" })).toBeVisible();
   await expect(contact.getByRole("link", { name: "WhatsApp +351 910 508 706" })).toBeVisible();
+  await expect(contact.getByText("Segunda a sexta, 9:00–18:00")).toBeVisible();
   await expect(page.getByText("Orçamentos por formulário, e-mail, telefone ou WhatsApp")).toBeVisible();
   await expect(whatsappLinks.first()).toHaveAttribute("target", "_blank");
+  await expect(instagramLinks.first()).toHaveAttribute("target", "_blank");
 
   await page.goto("/en/#contacto");
   await expect(page.locator("#contacto").getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
+  await expect(page.locator("#contacto").getByRole("link", { name: "@serifil_serigrafia", exact: true })).toHaveAttribute("href", "https://www.instagram.com/serifil_serigrafia/");
+  await expect(page.locator("#contacto").getByText("Monday to Friday, 9:00–18:00")).toBeVisible();
   await expect(page.getByText("Quotes via form, email, phone or WhatsApp")).toBeVisible();
 });
 
@@ -280,7 +287,15 @@ test("disponibiliza informação legal discreta e bilingue no rodapé", async ({
   await expect(englishLegal.getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
 });
 
-test("apresenta a localização e direções de forma acessível", async ({ page }) => {
+test("apresenta a localização e direções e só carrega o mapa Google após clique", async ({ page }) => {
+  const mapRequests: string[] = [];
+  page.on("request", (request) => {
+    if (request.url().includes("google.com/maps")) mapRequests.push(request.url());
+  });
+  await page.route("https://www.google.com/maps**", async (route) => {
+    await route.fulfill({ status: 200, contentType: "text/html", body: "<html><body>map</body></html>" });
+  });
+
   await page.goto("/pt/#contacto");
 
   const directions = page.getByRole("link", { name: "Obter direções" });
@@ -291,9 +306,16 @@ test("apresenta a localização e direções de forma acessível", async ({ page
   await expect(directions).toHaveAttribute("target", "_blank");
 
   const map = page.locator('iframe[title="Mapa com a localização da SERIFIL em Guimarães"]');
+  const loadButton = page.getByRole("button", { name: "Carregar mapa interativo" });
+  await expect(loadButton).toBeVisible();
+  await expect(map).toHaveCount(0);
+  expect(mapRequests).toEqual([]);
+
+  await loadButton.click();
   await expect(map).toHaveCount(1);
-  await expect(map).toHaveAttribute("loading", "lazy");
   await expect(map).toHaveAttribute("src", /41\.4279368,-8\.2991756/);
+  await expect.poll(() => mapRequests.length).toBeGreaterThan(0);
+  await expect(loadButton).toHaveCount(0);
 });
 
 test("publica metadados canónicos e de partilha corretos", async ({ page }) => {
@@ -346,6 +368,8 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(sitemap).toContain("<loc>https://serifil.com/en/</loc>");
   expect(sitemap).toContain("<loc>https://serifil.com/pt/servicos/sacos-tnt/</loc>");
   expect(sitemap).toContain("<loc>https://serifil.com/en/servicos/non-woven-bags/</loc>");
+  expect(sitemap).toContain("<loc>https://serifil.com/pt/servicos/gravacao-corte-laser/</loc>");
+  expect(sitemap).toContain("<loc>https://serifil.com/en/servicos/laser-engraving-cutting/</loc>");
   expect(sitemap).toContain('hreflang="pt-PT"');
   expect(sitemap).toContain('hreflang="en"');
   expect(sitemap).toContain('hreflang="x-default"');
@@ -364,6 +388,8 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
     "@type": string;
     "@id": string;
     email: string;
+    openingHours: string;
+    sameAs: string[];
     alternateName: string[];
     taxID: string;
     vatID: string;
@@ -377,6 +403,8 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(structuredData["@type"]).toBe("LocalBusiness");
   expect(structuredData["@id"]).toBe("https://serifil.com/#business");
   expect(structuredData.email).toBe("geral@serifil.com");
+  expect(structuredData.openingHours).toBe("Mo-Fr 09:00-18:00");
+  expect(structuredData.sameAs).toContain("https://www.instagram.com/serifil_serigrafia/");
   expect(structuredData.alternateName).toContain("Serifil Guimarães");
   expect(structuredData.taxID).toBe("250796210");
   expect(structuredData.vatID).toBe("PT250796210");
@@ -422,6 +450,13 @@ const serviceRoutes = [
     heading: "Impressão adaptada a cada componente.",
   },
   {
+    locale: "pt",
+    path: "/pt/servicos/gravacao-corte-laser/",
+    alternate: "/en/servicos/laser-engraving-cutting/",
+    xDefault: "/pt/servicos/gravacao-corte-laser/",
+    heading: "Gravação e corte guiados pelo desenho.",
+  },
+  {
     locale: "en",
     path: "/en/servicos/pvc-screen-printing/",
     alternate: "/pt/servicos/serigrafia-pvc/",
@@ -449,6 +484,13 @@ const serviceRoutes = [
     xDefault: "/pt/servicos/componentes-calcado/",
     heading: "Printing adapted to each footwear component.",
   },
+  {
+    locale: "en",
+    path: "/en/servicos/laser-engraving-cutting/",
+    alternate: "/pt/servicos/gravacao-corte-laser/",
+    xDefault: "/pt/servicos/gravacao-corte-laser/",
+    heading: "Engraving and cutting, guided by the drawing.",
+  },
 ];
 
 test("publica páginas de serviço bilingues com metadados e ligações recíprocas", async ({ page }) => {
@@ -468,10 +510,12 @@ test("publica páginas de serviço bilingues com metadados e ligações recípro
 
     const structuredDataText = await page.locator('script[type="application/ld+json"]').textContent();
     const structuredData = JSON.parse(structuredDataText ?? "{}") as {
-      "@graph": Array<{ "@type": string }>;
+      "@graph": Array<{ "@type": string; mainEntity?: Array<{ name: string }> }>;
     };
     expect(structuredData["@graph"].some((item) => item["@type"] === "Service")).toBe(true);
     expect(structuredData["@graph"].some((item) => item["@type"] === "BreadcrumbList")).toBe(true);
+    const faq = structuredData["@graph"].find((item) => item["@type"] === "FAQPage");
+    expect(faq?.mainEntity?.length ?? 0).toBeGreaterThan(0);
   }
 });
 

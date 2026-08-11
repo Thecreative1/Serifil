@@ -10,9 +10,9 @@ type ButtonProps = {
 };
 
 const variants = {
-  primary: "bg-accent text-[#171916] hover:bg-accent-hover",
+  primary: "bg-accent text-light-text hover:bg-accent-hover",
   secondary: "border border-border bg-background/50 text-text-primary hover:border-text-secondary hover:bg-surface",
-  dark: "bg-[#171916] text-[#f5f1e8] hover:bg-[#2a2d28]",
+  dark: "bg-light-text text-text-primary hover:bg-ink-hover",
 };
 
 export function Button({ href, children, variant = "primary", className = "", ariaLabel }: ButtonProps) {

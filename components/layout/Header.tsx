@@ -54,7 +54,7 @@ export function Header({ locale, copy, homeHref, languageHrefs }: HeaderProps) {
                 {link.label}
               </a>
             ))}
-            <div className="flex items-center border border-border" aria-label={copy.languageLabel}>
+            <div role="group" className="flex items-center border border-border" aria-label={copy.languageLabel}>
               {(["pt", "en"] as const).map((language) => (
                 <a
                   key={language}
