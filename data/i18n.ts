@@ -182,10 +182,6 @@ export const translations = {
             "Produção de sacos e capas em TNT com logótipos, mensagens e grafismos para apresentação, proteção e comunicação de marca.",
           images: [
             {
-              src: "/images/trabalhos/tnt-01.webp",
-              alt: "Saco preto em TNT com mensagem natalícia dourada",
-            },
-            {
               src: "/images/trabalhos/tnt-02.webp",
               alt: "Saco preto em TNT com logótipo impresso a duas cores",
             },
@@ -538,10 +534,6 @@ export const translations = {
           description:
             "Bags and covers produced in non-woven material with logos, messages and graphics for presentation, protection and brand communication.",
           images: [
-            {
-              src: "/images/trabalhos/tnt-01.webp",
-              alt: "Black non-woven bag with a gold Christmas message",
-            },
             {
               src: "/images/trabalhos/tnt-02.webp",
               alt: "Black non-woven bag with a two-colour logo",

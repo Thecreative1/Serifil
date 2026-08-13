@@ -394,8 +394,8 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     lead:
       "Impressão de logótipos e grafismos em sacos, capas e outras peças de tecido não tecido para empresas e marcas.",
     image: {
-      src: "/images/trabalhos/tnt-01.webp",
-      alt: "Saco em tecido não tecido personalizado com impressão",
+      src: "/images/trabalhos/tnt-05.webp",
+      alt: "Saco preto em TNT com impressão verde e branca",
     },
     introduction: {
       title: "O que é TNT?",
@@ -464,11 +464,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
         },
         {
           src: "/images/trabalhos/tnt-04.webp",
-          alt: "Detalhe de impressão serigráfica sobre TNT",
-        },
-        {
-          src: "/images/trabalhos/tnt-05.webp",
-          alt: "Conjunto de sacos em TNT com impressão personalizada",
+          alt: "Saco azul em TNT com logótipo branco",
         },
       ],
     },
@@ -789,7 +785,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     title: "Non-woven material that carries your brand.",
     lead:
       "Printing of logos and graphics on bags, covers and other non-woven items for businesses and brands.",
-    image: { src: "/images/trabalhos/tnt-01.webp", alt: "Non-woven bag with custom printing" },
+    image: { src: "/images/trabalhos/tnt-05.webp", alt: "Black non-woven bag with green and white printing" },
     introduction: {
       title: "What is a non-woven?",
       paragraphs: [
@@ -830,10 +826,9 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       eyebrow: "NON-WOVEN WORK",
       title: "Colour, contrast and production scale.",
       images: [
-        { src: "/images/trabalhos/tnt-02.webp", alt: "Light non-woven bag with a printed logo" },
+        { src: "/images/trabalhos/tnt-02.webp", alt: "Black non-woven bag with a two-colour logo" },
         { src: "/images/trabalhos/tnt-03.webp", alt: "Custom non-woven bags produced for a brand" },
-        { src: "/images/trabalhos/tnt-04.webp", alt: "Detail of screen printing on non-woven material" },
-        { src: "/images/trabalhos/tnt-05.webp", alt: "Set of non-woven bags with custom printing" },
+        { src: "/images/trabalhos/tnt-04.webp", alt: "Blue non-woven bag with a white logo" },
       ],
     },
     preparation: {

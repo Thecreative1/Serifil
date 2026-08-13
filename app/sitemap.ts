@@ -26,7 +26,6 @@ const images = [
     "tecido-02",
     "tecido-03",
     "tecido-04",
-    "tnt-01",
     "tnt-02",
     "tnt-03",
     "tnt-04",
