@@ -58,6 +58,15 @@ h3,
   font-family: var(--font-archivo), Arial, sans-serif;
 }
 
+/* Headings use negative tracking, which also shrinks the gap on both sides of
+   each space — "comunica a sua" starts to read as one word. Compensate the
+   space character so word boundaries stay legible at tight tracking. */
+h1,
+h2,
+h3 {
+  word-spacing: 0.07em;
+}
+
 ::selection {
   background: var(--accent);
   color: var(--light-text);
