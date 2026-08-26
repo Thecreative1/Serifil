@@ -20,7 +20,7 @@ test("estrutura, imagens e navegação principal", async ({ page }) => {
   await expect(heading).toContainText("Imprimimos ideias.");
   await expect(heading).toContainText("Entregamos resultados.");
   await expect(page.locator('header svg[viewBox="0 0 1000 1000"]')).toHaveCount(1);
-  await expect(page.locator("img")).toHaveCount(13);
+  await expect(page.locator("img")).toHaveCount(12);
 
   const images = page.locator("img");
   for (let index = 0; index < await images.count(); index += 1) {
