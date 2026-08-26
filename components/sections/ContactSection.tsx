@@ -4,6 +4,7 @@ import { brand } from "@/config/brand";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import type { SiteContent } from "@/data/i18n";
+import { whatsappUrl } from "@/lib/whatsapp";
 
 export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
   const contactItems = [
@@ -53,7 +54,7 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
                       ) : null}
                       {brand.whatsapp ? (
                         <TrackedLink
-                          href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`}
+                          href={whatsappUrl(copy.whatsappMessage)}
                           eventName="whatsapp_click"
                           eventParameters={{ link_location: "contact_section" }}
                           target="_blank"

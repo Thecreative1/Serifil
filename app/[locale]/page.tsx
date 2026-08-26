@@ -18,6 +18,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { brand } from "@/config/brand";
 import { businessId, getBusinessIdentity } from "@/config/seo";
 import { isLocale, translations } from "@/data/i18n";
+import { whatsappUrl } from "@/lib/whatsapp";
 
 export default async function Home({
   params,
@@ -86,7 +87,7 @@ export default async function Home({
           ) : null}
           {brand.whatsapp ? (
             <TrackedLink
-              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`}
+              href={whatsappUrl(copy.contact.whatsappMessageFloating)}
               eventName="whatsapp_click"
               eventParameters={{ link_location: "floating_contact" }}
               target="_blank"

@@ -112,6 +112,15 @@ Regra de alteração:
 
 Valores vazios escondem contactos opcionais. Nunca espalhar estes valores por componentes. O telefone e WhatsApp aparecem em testes como contrato explícito e precisam de atualização simultânea.
 
+Os links de WhatsApp são construídos exclusivamente por `lib/whatsapp.ts`. `whatsappUrl(mensagem?)` normaliza `brand.whatsapp` para dígitos e codifica a mensagem com `encodeURIComponent`. Nunca montar um `wa.me` à mão num componente.
+
+As mensagens pré-preenchidas vivem em `data/i18n.ts`, em `contact`, e seguem a regra dos dois idiomas na mesma alteração:
+
+- `whatsappMessage` — botão da secção de contacto, convida a descrever o projeto;
+- `whatsappMessageFloating` — atalho flutuante, mensagem curta de entrada.
+
+Manter os textos curtos e sem emojis. O `aria-label` dos links continua a ser `WhatsApp <telefone>` e nunca inclui a mensagem, porque os testes selecionam por esse nome acessível. Os testes fazem match por prefixo (`a[href^="https://wa.me/351910508706"]`) e verificam o `?text=` esperado nos dois idiomas.
+
 A informação legal é apresentada no rodapé por um elemento HTML `details`, fechado por defeito e sem dependência de JavaScript. O email legal só é renderizado quando `brand.email` contém um valor real; nunca publicar o label vazio ou um placeholder.
 
 ## 5. Sistema visual

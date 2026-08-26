@@ -141,8 +141,8 @@ test("carrega o Google Analytics apenas após consentimento e permite revogá-lo
 
   await preventNavigation('a[href="tel:+351910508706"]');
   await page.locator('a[href="tel:+351910508706"]').first().click();
-  await preventNavigation('a[href="https://wa.me/351910508706"]');
-  await page.locator('a[href="https://wa.me/351910508706"]').first().click();
+  await preventNavigation('a[href^="https://wa.me/351910508706"]');
+  await page.locator('a[href^="https://wa.me/351910508706"]').first().click();
   await preventNavigation('a[href^="https://www.google.com/maps/dir/"]');
   await page.locator('a[href^="https://www.google.com/maps/dir/"]').click();
   await preventNavigation('nav[aria-label="Navegação principal"] a[href="/en/"]');
@@ -234,7 +234,7 @@ test("publica apenas contactos configurados e o WhatsApp correto", async ({ page
   await page.goto("/pt/#contacto");
   const emailLinks = page.locator('a[href="mailto:geral@serifil.com"]');
   const phoneLinks = page.locator('a[href="tel:+351910508706"]');
-  const whatsappLinks = page.locator('a[href="https://wa.me/351910508706"]');
+  const whatsappLinks = page.locator('a[href^="https://wa.me/351910508706"]');
   const instagramLinks = page.locator('a[href="https://www.instagram.com/serifil_serigrafia/"]');
   await expect(emailLinks).toHaveCount(3);
   await expect(phoneLinks).toHaveCount(3);
@@ -249,11 +249,23 @@ test("publica apenas contactos configurados e o WhatsApp correto", async ({ page
   await expect(page.getByText("Orçamentos por formulário, e-mail, telefone ou WhatsApp")).toBeVisible();
   await expect(whatsappLinks.first()).toHaveAttribute("target", "_blank");
   await expect(instagramLinks.first()).toHaveAttribute("target", "_blank");
+  await expect(contact.getByRole("link", { name: "WhatsApp +351 910 508 706" })).toHaveAttribute(
+    "href",
+    `https://wa.me/351910508706?text=${encodeURIComponent("Olá SERIFIL! Queria pedir um orçamento. O meu projeto é:")}`,
+  );
+  await expect(whatsappLinks.last()).toHaveAttribute(
+    "href",
+    `https://wa.me/351910508706?text=${encodeURIComponent("Olá SERIFIL! Vi o vosso site e queria pedir um orçamento.")}`,
+  );
 
   await page.goto("/en/#contacto");
   await expect(page.locator("#contacto").getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
   await expect(page.locator("#contacto").getByRole("link", { name: "@serifil_serigrafia", exact: true })).toHaveAttribute("href", "https://www.instagram.com/serifil_serigrafia/");
   await expect(page.getByText("Quotes via form, email, phone or WhatsApp")).toBeVisible();
+  await expect(page.locator("#contacto").getByRole("link", { name: "WhatsApp +351 910 508 706" })).toHaveAttribute(
+    "href",
+    `https://wa.me/351910508706?text=${encodeURIComponent("Hello SERIFIL! I'd like a quote. My project is:")}`,
+  );
 });
 
 test("disponibiliza informação legal discreta e bilingue no rodapé", async ({ page }) => {
