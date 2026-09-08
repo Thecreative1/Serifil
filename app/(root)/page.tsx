@@ -38,7 +38,7 @@ export default function LocaleRedirect() {
           <p className="text-2xl font-black tracking-[-0.04em]">SERIFIL</p>
         </div>
         <p className="mx-auto mt-4 max-w-md text-sm leading-6 text-text-secondary">
-          Empresa de serigrafia e personalização em Guimarães, Portugal.
+          Empresa de serigrafia e impressão industrial em Guimarães, Portugal.
         </p>
         <p className="mt-3 text-sm text-text-secondary">A escolher o idioma · Choosing your language</p>
         <nav className="mt-7 flex justify-center gap-3" aria-label="Escolher idioma · Choose language">

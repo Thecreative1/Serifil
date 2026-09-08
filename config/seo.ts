@@ -29,7 +29,7 @@ export function getBusinessIdentity({
     alternateName: businessAlternateNames,
     description,
     disambiguatingDescription:
-      "Empresa portuguesa de serigrafia e personalização sediada em Guimarães, identificada pelo website oficial serifil.com.",
+      "Empresa portuguesa de serigrafia e impressão industrial sediada em Guimarães, identificada pelo website oficial serifil.com.",
     url: brand.website,
     mainEntityOfPage,
     inLanguage,
@@ -66,11 +66,16 @@ export function getBusinessIdentity({
     ],
     knowsAbout: [
       "Serigrafia",
+      "Serigrafia industrial",
+      "Impressão industrial",
       "Impressão em PVC",
       "Impressão em tecido",
       "Impressão em TNT",
+      "Impressão em componentes",
       "Sacos personalizados",
+      "Porta-fatos personalizados",
       "Componentes para calçado",
+      "Serigrafia para calçado",
     ],
     ...(brand.socialProfiles.length ? { sameAs: brand.socialProfiles } : {}),
     ...(brand.phone

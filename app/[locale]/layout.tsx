@@ -35,7 +35,7 @@ export async function generateMetadata({
     description: copy.meta.description,
     creator: brand.name,
     publisher: brand.name,
-    category: locale === "pt" ? "Serigrafia e personalização" : "Screen printing and customisation",
+    category: locale === "pt" ? "Serigrafia e impressão industrial" : "Screen printing and industrial printing",
     robots: {
       index: true,
       follow: true,

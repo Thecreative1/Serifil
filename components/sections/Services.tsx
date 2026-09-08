@@ -35,7 +35,7 @@ export function Services({ locale, copy }: { locale: Locale; copy: SiteContent["
                 {primaryService.title}
               </h3>
               <p className="mt-8 max-w-[52ch] text-base leading-7 text-[#3a2017] sm:text-lg">{primaryService.description}</p>
-              <a href="#orcamento" aria-label={`${copy.quoteLabel} ${primaryService.title}`} className="mt-12 inline-flex min-h-12 w-fit items-center gap-3 border border-light-text/40 bg-light-text px-5 py-3 text-sm font-bold uppercase tracking-[0.08em] text-text-primary transition-colors hover:bg-[#2a2d28] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-light-text">
+              <a href="#orcamento" aria-label={`${copy.quoteLabel} ${primaryService.title}`} className="mt-12 inline-flex min-h-12 w-fit items-center gap-3 border border-light-text/40 lg:mt-auto lg:pt-0 bg-light-text px-5 py-3 text-sm font-bold uppercase tracking-[0.08em] text-text-primary transition-colors hover:bg-[#2a2d28] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-light-text">
                 {copy.quote} <ArrowUpRight className="size-4" aria-hidden="true" />
               </a>
             </article>

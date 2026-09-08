@@ -9,50 +9,66 @@ export type Service = {
 export const services: Service[] = [
   {
     number: "01",
-    title: "Sacos em PVC, tecido e TNT",
+    title: "Serigrafia Industrial",
     description:
-      "Impressão de logótipos e elementos de marca em sacos para apresentação, proteção, acondicionamento e utilização promocional.",
+      "Impressão serigráfica sobre peças, componentes e suportes fornecidos pelo cliente ou integrados em projetos de produção, com preparação técnica para cada material.",
     emphasis: "primary",
-    label: "Principal especialidade",
+    label: "Especialidade principal",
   },
   {
     number: "02",
-    title: "Capas e porta-fatos",
+    title: "Impressão em PVC",
     description:
-      "Impressão em capas e porta-fatos de tecido ou TNT para vestuário, hotelaria, comércio, marcas e confeção.",
+      "Impressão sobre PVC transparente ou colorido para embalagem, proteção, apresentação de produto e peças técnicas.",
     emphasis: "supporting",
-    label: "Produção frequente",
+    label: "Capacidade de impressão",
   },
   {
     number: "03",
-    title: "Componentes para calçado",
+    title: "Impressão em Têxtil",
     description:
-      "Impressão e personalização de palmilhas, palas e outros componentes utilizados na produção de calçado.",
+      "Serigrafia sobre tecido para vestuário, roupa profissional, capas, sacos, têxtil-lar e outras peças de produção.",
     emphasis: "supporting",
-    label: "Produção especializada",
+    label: "Capacidade de impressão",
   },
   {
     number: "04",
-    title: "Serigrafia têxtil e roupa profissional",
+    title: "Impressão em TNT",
     description:
-      "Impressão em t-shirts, sweatshirts, uniformes, vestuário profissional e outros artigos têxteis.",
-    emphasis: "complementary",
-    label: "Serviço complementar",
+      "Impressão sobre tecido não tecido para sacos, capas e soluções de proteção e comunicação de marca.",
+    emphasis: "supporting",
+    label: "Capacidade de impressão",
   },
   {
     number: "05",
-    title: "Produção personalizada para empresas",
+    title: "Impressão em Componentes",
     description:
-      "Impressão de artigos para empresas, marcas, hotelaria, comércio, associações, campanhas e eventos, adaptada a cada projeto.",
+      "Impressão e personalização de palmilhas, palas e outros componentes utilizados em linhas de produção, nomeadamente na indústria do calçado.",
     emphasis: "complementary",
-    label: "Serviço complementar",
+    label: "Aplicação",
   },
   {
     number: "06",
-    title: "Gravação e corte laser",
+    title: "Sacos Personalizados",
     description:
-      "Gravação e corte de madeira, acrílico e outros materiais para placas, brindes, decoração, protótipos e sinalética.",
+      "Personalização e fornecimento de sacos para aplicações industriais, comerciais e promocionais, em PVC, têxtil ou TNT.",
     emphasis: "complementary",
-    label: "Serviço complementar",
+    label: "Aplicação",
+  },
+  {
+    number: "07",
+    title: "Porta-fatos e Capas",
+    description:
+      "Impressão em porta-fatos, capas e coberturas de proteção para vestuário, confeção, hotelaria e comércio.",
+    emphasis: "complementary",
+    label: "Aplicação",
+  },
+  {
+    number: "08",
+    title: "Projetos Especiais e Produção Personalizada",
+    description:
+      "Soluções desenvolvidas em conjunto para requisitos específicos, incluindo séries especiais, artigos para campanhas e eventos, gravação e corte laser.",
+    emphasis: "complementary",
+    label: "Produção",
   },
 ];

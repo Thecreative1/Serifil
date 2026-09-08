@@ -17,8 +17,8 @@ test("estrutura, imagens e navegação principal", async ({ page }) => {
 
   const heading = page.locator("h1");
   await expect(heading).toHaveCount(1);
-  await expect(heading).toContainText("Imprimimos ideias.");
-  await expect(heading).toContainText("Entregamos resultados.");
+  await expect(heading).toContainText("Serigrafia e impressão");
+  await expect(heading).toContainText("industrial em");
   await expect(page.locator('header svg[viewBox="0 0 1000 1000"]')).toHaveCount(1);
   await expect(page.locator("img")).toHaveCount(12);
 
@@ -195,16 +195,20 @@ test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
   await form.getByRole("button", { name: "Enviar pedido" }).click();
   await expect(page.getByText("Indique o seu nome.")).toBeVisible();
   await expect(page.getByText("Introduza um endereço de e-mail válido.")).toBeVisible();
-  await page.getByLabel("Data pretendida").fill("2020-01-01");
+  await page.getByLabel("Prazo pretendido").fill("2020-01-01");
   await form.getByRole("button", { name: "Enviar pedido" }).click();
   await expect(page.getByText("Escolha uma data a partir de hoje.")).toBeVisible();
 
   await page.getByLabel("Nome").fill("Empresa Exemplo");
   await page.getByLabel("E-mail").fill("producao@example.test");
   await page.getByLabel("Telefone").fill("000 000 000");
-  await page.getByLabel("Serviço pretendido").selectOption({ label: "Sacos em PVC, tecido e TNT" });
+  await page.getByLabel("Serviço pretendido").selectOption({ label: "Serigrafia industrial" });
   await page.getByLabel("Quantidade aproximada").fill("500");
-  await page.getByLabel("Data pretendida").fill("2030-12-20");
+  await page.getByLabel("Material ou suporte").fill("TNT 80 gr");
+  await page.getByLabel("Dimensões").fill("30 x 40 cm");
+  await page.getByLabel("Número de cores").fill("1 cor");
+  await page.getByLabel("Fornecimento do material").selectOption({ label: "Forneço o material" });
+  await page.getByLabel("Prazo pretendido").fill("2030-12-20");
   await page.getByLabel("Mensagem").fill("Precisamos de sacos impressos a uma cor para uma série de produção.");
   await page.getByRole("checkbox").check();
   await form.getByRole("button", { name: "Enviar pedido" }).click();
@@ -281,7 +285,7 @@ test("disponibiliza informação legal discreta e bilingue no rodapé", async ({
   await expect(portugueseLegal.getByText("SERIFIL", { exact: true })).toBeVisible();
   await expect(portugueseLegal.getByText("Lisete da Silva Araújo")).toBeVisible();
   await expect(portugueseLegal.getByText("250 796 210")).toBeVisible();
-  await expect(portugueseLegal.getByText("Serigrafia, impressão e personalização")).toBeVisible();
+  await expect(portugueseLegal.getByText("Serigrafia, impressão industrial e personalização")).toBeVisible();
   await expect(portugueseLegal.getByText("Travessa Bernardino Jordão 90, Urgezes, Guimarães, Portugal")).toBeVisible();
   await expect(portugueseLegal.getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
   await expect(portugueseLegal.getByRole("link", { name: "+351 910 508 706" })).toHaveAttribute("href", "tel:+351910508706");
@@ -291,7 +295,7 @@ test("disponibiliza informação legal discreta e bilingue no rodapé", async ({
   const englishLegal = page.locator("footer details");
   await englishLegal.locator("summary").click();
   await expect(englishLegal.getByText("Legal information")).toBeVisible();
-  await expect(englishLegal.getByText("Screen printing, printing and customisation")).toBeVisible();
+  await expect(englishLegal.getByText("Screen printing, industrial printing and customisation")).toBeVisible();
   await expect(englishLegal.getByText("Lisete da Silva Araújo")).toBeVisible();
   await expect(englishLegal.getByText("250 796 210")).toBeVisible();
   await expect(englishLegal.getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
@@ -315,14 +319,14 @@ test("apresenta a localização e direções de forma acessível", async ({ page
 
 test("publica metadados canónicos e de partilha corretos", async ({ page }) => {
   await page.goto("/pt/");
-  await expect(page).toHaveTitle("SERIFIL | Serigrafia em PVC, Tecido e TNT em Guimarães");
+  await expect(page).toHaveTitle("Serigrafia e Impressão Industrial em Guimarães | SERIFIL");
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     "content",
-    "A SERIFIL é uma empresa de serigrafia e personalização em Guimarães, especializada em PVC, tecido e TNT para sacos, capas e componentes para calçado.",
+    "SERIFIL – Serigrafia e impressão industrial em Guimarães. Impressão em PVC, têxtil, TNT, componentes, sacos, porta-fatos e outros suportes para empresas.",
   );
   await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
     "content",
-    "Impressão personalizada em PVC, tecido e TNT para empresas, marcas e diferentes setores de atividade, incluindo soluções para o setor do calçado.",
+    "Serigrafia e impressão industrial para empresas em Guimarães. Impressão em PVC, têxtil, TNT e componentes, sobre materiais fornecidos pelo cliente ou em projetos completos.",
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/pt/");
   await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/");
@@ -406,9 +410,12 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(structuredData.address.addressRegion).toBe("Braga");
   expect(structuredData.contactPoint.telephone).toBe("+351 910 508 706");
   expect(structuredData.contactPoint.availableLanguage).toEqual(["Portuguese", "English"]);
-  expect(structuredData.hasOfferCatalog.itemListElement).toHaveLength(6);
-  expect(structuredData.hasOfferCatalog.itemListElement[0].itemOffered.name).toBe("Sacos em PVC, tecido e TNT");
-  expect(structuredData.hasOfferCatalog.itemListElement[2].itemOffered.name).toBe("Componentes para calçado");
+  expect(structuredData.hasOfferCatalog.itemListElement).toHaveLength(8);
+  expect(structuredData.hasOfferCatalog.itemListElement[0].itemOffered.name).toBe("Serigrafia Industrial");
+  expect(structuredData.hasOfferCatalog.itemListElement.map((offer) => offer.itemOffered.name)).toEqual(
+    expect.arrayContaining(["Impressão em PVC", "Impressão em Componentes", "Sacos Personalizados", "Porta-fatos e Capas"]),
+  );
+  expect(structuredData.knowsAbout).toContain("Impressão industrial");
 });
 
 const serviceRoutes = [
@@ -539,35 +546,52 @@ test("páginas de serviço não criam overflow horizontal nem sobreposição na 
 
 test("comunica materiais, setores e componentes de calçado nas duas línguas", async ({ page }) => {
   await page.goto("/pt/");
-  await expect(page.getByText("ESPECIALISTAS EM SERIGRAFIA E PERSONALIZAÇÃO")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Impressão adaptada a diferentes materiais e aplicações." })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Componentes para calçado" }).first()).toBeVisible();
+  await expect(page.getByText("SERIGRAFIA E IMPRESSÃO INDUSTRIAL PARA EMPRESAS", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "A sua produção. A nossa impressão." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Serigrafia Industrial" }).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sacos Personalizados" }).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: "O cliente fornece o material" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Projeto completo" })).toBeVisible();
+  await expect(page.locator("#setores")).toContainText("Calçado");
+  await expect(page.locator("#setores")).toContainText("Têxtil-lar");
   await expect(page.getByText(/palmilhas, palas e outros componentes/).first()).toBeVisible();
   await expect(page.getByLabel("Serviço pretendido").locator("option")).toHaveText([
     "Selecione uma opção",
-    "Sacos em PVC, tecido e TNT",
-    "Capas e porta-fatos",
-    "Componentes para calçado",
-    "Serigrafia têxtil e roupa profissional",
-    "Produção personalizada para empresas",
-    "Gravação ou corte laser",
+    "Serigrafia industrial",
+    "Impressão em PVC",
+    "Impressão em têxtil",
+    "Impressão em TNT",
+    "Impressão em componentes",
+    "Sacos personalizados",
+    "Porta-fatos e capas",
+    "Projetos especiais e produção personalizada",
     "Outro",
+  ]);
+  await expect(page.getByLabel("Fornecimento do material").locator("option")).toHaveText([
+    "Selecione uma opção",
+    "Forneço o material",
+    "Preciso do fornecimento do material",
+    "A definir",
   ]);
 
   await page.goto("/en/");
-  await expect(page).toHaveTitle("SERIFIL | PVC, Fabric and Non-Woven Screen Printing");
-  await expect(page.getByText("SPECIALISTS IN SCREEN PRINTING AND CUSTOMISATION")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Footwear components" }).first()).toBeVisible();
+  await expect(page).toHaveTitle("Industrial Screen Printing in Guimarães | SERIFIL");
+  await expect(page.getByText("INDUSTRIAL SCREEN PRINTING FOR BUSINESSES")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Component Printing" }).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: "The client supplies the material" })).toBeVisible();
+  await expect(page.locator("#setores")).toContainText("Home textiles");
   await expect(page.getByText(/insoles, vamps and other components/).first()).toBeVisible();
   await expect(page.locator("body")).not.toContainText(/\bTNT\b/);
   await expect(page.getByLabel("Required service").locator("option")).toHaveText([
     "Select an option",
-    "PVC, fabric and non-woven bags",
-    "Covers and garment bags",
-    "Footwear components",
-    "Textile printing and workwear",
-    "Custom production for businesses",
-    "Laser engraving or cutting",
+    "Industrial screen printing",
+    "PVC printing",
+    "Textile printing",
+    "Non-woven printing",
+    "Component printing",
+    "Custom bags",
+    "Garment bags and covers",
+    "Special projects and custom production",
     "Other",
   ]);
 });
@@ -575,7 +599,7 @@ test("comunica materiais, setores e componentes de calçado nas duas línguas", 
 test("publica a versão inglesa completa e permite trocar de idioma", async ({ page }) => {
   await page.goto("/en/");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("We print ideas.");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Industrial screen");
   await expect(page.getByRole("navigation", { name: "Main navigation" })).toBeVisible();
   await expect(page.getByRole("form", { name: "Quote request form" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Get directions" })).toBeVisible();

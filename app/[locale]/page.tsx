@@ -8,6 +8,8 @@ import { Hero } from "@/components/sections/Hero";
 import { Marquee } from "@/components/sections/Marquee";
 import { Introduction } from "@/components/sections/Introduction";
 import { Services } from "@/components/sections/Services";
+import { WorkModes } from "@/components/sections/WorkModes";
+import { Sectors } from "@/components/sections/Sectors";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Benefits } from "@/components/sections/Benefits";
 import { Process } from "@/components/sections/Process";
@@ -62,6 +64,8 @@ export default async function Home({
         <Marquee copy={copy.marquee} />
         <Introduction copy={copy.introduction} />
         <Services locale={locale} copy={copy.services} />
+        <WorkModes copy={copy.workModes} />
+        <Sectors copy={copy.sectors} />
         <Portfolio locale={locale} copy={copy.portfolio} />
         <Benefits copy={copy.benefits} />
         <Process copy={copy.process} />

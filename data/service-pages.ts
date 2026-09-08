@@ -80,6 +80,7 @@ type ServicePageUi = {
   materialGuides: string;
   materialGuidesDescription: string;
   quoteTitle: string;
+  contact: string;
 };
 
 const slugs: Record<Locale, Record<ServiceKey, string>> = {
@@ -114,6 +115,7 @@ export const servicePageUi: Record<Locale, ServicePageUi> = {
     materialGuidesDescription:
       "Perceba como trabalhamos cada suporte e que informação ajuda a preparar o seu projeto.",
     quoteTitle: "Tem um projeto neste material?",
+    contact: "Fale connosco sobre o seu projeto",
   },
   en: {
     breadcrumbsLabel: "Breadcrumb navigation",
@@ -131,6 +133,7 @@ export const servicePageUi: Record<Locale, ServicePageUi> = {
     materialGuidesDescription:
       "Understand how each substrate is approached and what information helps us prepare your project.",
     quoteTitle: "Have a project involving this material?",
+    contact: "Talk to us about your project",
   },
 };
 

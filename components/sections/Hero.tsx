@@ -14,16 +14,17 @@ export function Hero({ copy }: { copy: SiteContent["hero"] }) {
       <Container className="relative flex min-h-[680px] flex-col justify-end pb-9 pt-24 lg:min-h-[calc(100vh-6rem)] lg:pb-12">
         <div className="max-w-[1050px]">
           <p className="hero-enter text-xs font-bold uppercase tracking-[0.17em] text-accent sm:text-sm">{copy.eyebrow}</p>
-          <h1 className="mt-6 max-w-[14ch] text-[clamp(3.25rem,9.8vw,9.2rem)] leading-[0.82] font-black uppercase tracking-[-0.075em] text-text-primary">
+          <h1 className="mt-6 max-w-[14ch] text-[clamp(2.2rem,9.8vw,9.2rem)] leading-[0.82] font-black uppercase tracking-[-0.075em] text-text-primary">
             <span className="block">{copy.lineOne}</span>
             <span className="block">{copy.lineTwo}</span>
           </h1>
           <div className="hero-enter hero-delay-2 mt-8 grid gap-7 lg:grid-cols-[minmax(0,46rem)_auto] lg:items-end lg:gap-12">
             <div>
               <p className="max-w-[65ch] text-base leading-7 text-[#d5d2ca] sm:text-lg">{copy.description}</p>
+              <p className="mt-4 max-w-[65ch] text-base leading-7 text-[#aeaba3]">{copy.descriptionSecondary}</p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Button href="#orcamento">{copy.quote}</Button>
-                <Button href="#trabalhos" variant="secondary">{copy.work}</Button>
+                <Button href="#servicos" variant="secondary">{copy.work}</Button>
               </div>
             </div>
           </div>

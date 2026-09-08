@@ -35,9 +35,9 @@ export function TextInput({ id, label, optional, optionalLabel, error, inputRef,
   );
 }
 
-export function SelectInput({ id, label, error, children, ...props }: BaseProps & SelectHTMLAttributes<HTMLSelectElement>) {
+export function SelectInput({ id, label, optional, optionalLabel, error, children, ...props }: BaseProps & SelectHTMLAttributes<HTMLSelectElement>) {
   return (
-    <FieldShell id={id} label={label} error={error}>
+    <FieldShell id={id} label={label} optional={optional} optionalLabel={optionalLabel} error={error}>
       <select id={id} className={fieldClass} aria-invalid={Boolean(error)} aria-describedby={error ? `${id}-error` : undefined} {...props}>
         {children}
       </select>

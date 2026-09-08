@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 export const metadata: Metadata = {
   metadataBase: new URL(brand.website),
   title: "SERIFIL",
-  description: "A SERIFIL é uma empresa de serigrafia e personalização em Guimarães, Portugal.",
+  description: "A SERIFIL é uma empresa de serigrafia e impressão industrial em Guimarães, Portugal.",
   applicationName: brand.name,
   creator: brand.name,
   publisher: brand.name,
@@ -41,7 +41,7 @@ export default function RedirectLayout({ children }: Readonly<{ children: React.
       },
       getBusinessIdentity({
         description:
-          "A SERIFIL é uma empresa portuguesa de serigrafia e personalização em Guimarães, especializada em impressão sobre PVC, tecido e TNT.",
+          "A SERIFIL é uma empresa portuguesa de serigrafia e impressão industrial em Guimarães, especializada em impressão sobre PVC, têxtil, TNT e componentes.",
         inLanguage: "pt-PT",
         mainEntityOfPage: `${brand.website}pt/`,
       }),

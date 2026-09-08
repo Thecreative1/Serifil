@@ -25,10 +25,10 @@ type BrandConfig = {
 
 export const brand: BrandConfig = {
   name: "SERIFIL",
-  descriptor: "Serigrafia & Personalização",
-  heroLineOne: "Imprimimos ideias.",
-  heroLineTwo: "Entregamos resultados.",
-  secondaryTagline: "Serigrafia e personalização em PVC, tecido e TNT.",
+  descriptor: "Serigrafia & Impressão Industrial",
+  heroLineOne: "Serigrafia e impressão",
+  heroLineTwo: "industrial em Guimarães",
+  secondaryTagline: "A sua produção. A nossa impressão.",
   location: "Guimarães, Portugal",
   phone: "+351 910 508 706",
   email: "geral@serifil.com",

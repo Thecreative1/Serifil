@@ -10,18 +10,18 @@ export const translations = {
   pt: {
     htmlLang: "pt-PT",
     meta: {
-      title: "SERIFIL | Serigrafia em PVC, Tecido e TNT em Guimarães",
+      title: "Serigrafia e Impressão Industrial em Guimarães | SERIFIL",
       description:
-        "A SERIFIL é uma empresa de serigrafia e personalização em Guimarães, especializada em PVC, tecido e TNT para sacos, capas e componentes para calçado.",
+        "SERIFIL – Serigrafia e impressão industrial em Guimarães. Impressão em PVC, têxtil, TNT, componentes, sacos, porta-fatos e outros suportes para empresas.",
       openGraphDescription:
-        "Impressão personalizada em PVC, tecido e TNT para empresas, marcas e diferentes setores de atividade, incluindo soluções para o setor do calçado.",
-      imageAlt: "Processo de serigrafia na SERIFIL",
+        "Serigrafia e impressão industrial para empresas em Guimarães. Impressão em PVC, têxtil, TNT e componentes, sobre materiais fornecidos pelo cliente ou em projetos completos.",
+      imageAlt: "Processo de serigrafia industrial na SERIFIL",
       locale: "pt_PT",
     },
     businessDescription:
-      "A SERIFIL é uma empresa de serigrafia e personalização em Guimarães, Portugal, especializada em impressão sobre PVC, tecido e TNT para empresas e marcas.",
+      "A SERIFIL é uma empresa de serigrafia e impressão industrial em Guimarães, Portugal, especializada em impressão sobre PVC, têxtil, TNT e componentes para empresas, fábricas e marcas.",
     header: {
-      descriptor: "Serigrafia & Personalização",
+      descriptor: "Serigrafia & Impressão Industrial",
       homeLabel: "SERIFIL, voltar ao início",
       skipToContent: "Saltar para o conteúdo",
       navigationLabel: "Navegação principal",
@@ -40,86 +40,139 @@ export const translations = {
       ],
     },
     hero: {
-      eyebrow: "ESPECIALISTAS EM SERIGRAFIA E PERSONALIZAÇÃO",
-      lineOne: "Imprimimos ideias.",
-      lineTwo: "Entregamos resultados.",
+      eyebrow: "SERIGRAFIA E IMPRESSÃO INDUSTRIAL PARA EMPRESAS",
+      lineOne: "Serigrafia e impressão",
+      lineTwo: "industrial em Guimarães",
       description:
-        "Impressão e personalização em PVC, tecido e TNT para sacos, capas, porta-fatos e outras aplicações destinadas a empresas e marcas, além de diferentes componentes para calçado.",
+        "Impressão em PVC, têxtil, TNT, componentes e diferentes suportes para produção industrial.",
+      descriptionSecondary:
+        "Trabalhamos sobre materiais fornecidos pelo cliente ou em projetos completos com fornecimento e personalização do suporte.",
       quote: "Pedir orçamento",
-      work: "Ver trabalhos",
-      specialties: "PVC · Tecido · TNT · Componentes · Personalização",
+      work: "Conhecer serviços",
+      specialties: "PVC · Têxtil · TNT · Componentes · Sacos · Porta-fatos",
       imageAlt: "Processo de serigrafia com tinta a ser puxada através de uma tela",
       continueLabel: "Continuar para a introdução",
     },
     marquee: {
-      line: "PVC · TECIDO · TNT · SACOS PERSONALIZADOS · CAPAS · PORTA-FATOS · COMPONENTES · SETOR DO CALÇADO · PRODUÇÃO EM GUIMARÃES ·",
+      line: "SERIGRAFIA INDUSTRIAL · PVC · TÊXTIL · TNT · COMPONENTES · SACOS PERSONALIZADOS · PORTA-FATOS · CAPAS · PROJETOS ESPECIAIS · PRODUÇÃO EM GUIMARÃES ·",
       label:
-        "Especialidades da Serifil: impressão em PVC, tecido e TNT, sacos personalizados, capas, porta-fatos e diferentes componentes para o setor do calçado",
+        "Especialidades da Serifil: serigrafia industrial, impressão em PVC, têxtil e TNT, componentes, sacos personalizados, porta-fatos, capas e projetos especiais",
     },
     introduction: {
-      eyebrow: "DA IDEIA AO RESULTADO FINAL",
-      title: "Impressão adaptada a diferentes materiais e aplicações.",
+      eyebrow: "SERIGRAFIA E IMPRESSÃO INDUSTRIAL",
+      title: "A sua produção. A nossa impressão.",
       description:
-        "Trabalhamos com empresas e marcas de diferentes setores, incluindo o setor do calçado, realizando impressão em PVC, tecido e TNT para sacos, capas, porta-fatos e outras aplicações, assim como em diferentes componentes utilizados na produção de calçado, com acompanhamento técnico e comunicação direta.",
+        "A SERIFIL é especializada em serigrafia e impressão industrial para empresas. Trabalhamos com diferentes materiais, formatos e aplicações, desde componentes e peças fornecidas pelo cliente até projetos completos que incluem o fornecimento e personalização do suporte.",
     },
     services: {
-      eyebrow: "ESPECIALIDADE PRINCIPAL",
-      title: "Impressão e personalização para diferentes setores.",
+      eyebrow: "O QUE FAZEMOS",
+      title: "Capacidade de impressão para produção industrial.",
       description:
-        "Produzimos sacos, capas, porta-fatos e outros artigos personalizados em PVC, tecido e TNT, incluindo impressão em diferentes componentes para o setor do calçado.",
-      otherServices: "OUTROS SERVIÇOS",
+        "Realizamos serigrafia e personalização em sacos, capas, porta-fatos, componentes e outros suportes, fornecidos pelo cliente ou integrados em projetos de produção.",
+      otherServices: "APLICAÇÕES E PRODUTOS",
       quote: "Pedir orçamento",
       shortQuote: "Orçamento",
       quoteLabel: "Pedir orçamento para",
       items: [
         {
           number: "01",
-          title: "Sacos em PVC, tecido e TNT",
+          title: "Serigrafia Industrial",
           description:
-            "Impressão de logótipos e elementos de marca em sacos para apresentação, proteção, acondicionamento e utilização promocional.",
+            "Impressão serigráfica sobre peças, componentes e suportes fornecidos pelo cliente ou integrados em projetos de produção, com preparação técnica para cada material.",
           emphasis: "primary",
-          label: "Principal especialidade",
+          label: "Especialidade principal",
         },
         {
           number: "02",
-          title: "Capas e porta-fatos",
+          title: "Impressão em PVC",
           description:
-            "Impressão em capas e porta-fatos de tecido ou TNT para vestuário, hotelaria, comércio, marcas e confeção.",
+            "Impressão sobre PVC transparente ou colorido para embalagem, proteção, apresentação de produto e peças técnicas.",
           emphasis: "supporting",
-          label: "Produção frequente",
+          label: "Capacidade de impressão",
         },
         {
           number: "03",
-          title: "Componentes para calçado",
+          title: "Impressão em Têxtil",
           description:
-            "Impressão e personalização de palmilhas, palas e outros componentes utilizados na produção de calçado.",
+            "Serigrafia sobre tecido para vestuário, roupa profissional, capas, sacos, têxtil-lar e outras peças de produção.",
           emphasis: "supporting",
-          label: "Produção especializada",
+          label: "Capacidade de impressão",
         },
         {
           number: "04",
-          title: "Serigrafia têxtil e roupa profissional",
+          title: "Impressão em TNT",
           description:
-            "Impressão em t-shirts, sweatshirts, uniformes, vestuário profissional e outros artigos têxteis.",
-          emphasis: "complementary",
-          label: "Serviço complementar",
+            "Impressão sobre tecido não tecido para sacos, capas e soluções de proteção e comunicação de marca.",
+          emphasis: "supporting",
+          label: "Capacidade de impressão",
         },
         {
           number: "05",
-          title: "Produção personalizada para empresas",
+          title: "Impressão em Componentes",
           description:
-            "Impressão de artigos para empresas, marcas, hotelaria, comércio, associações, campanhas e eventos, adaptada a cada projeto.",
+            "Impressão e personalização de palmilhas, palas e outros componentes utilizados em linhas de produção, nomeadamente na indústria do calçado.",
           emphasis: "complementary",
-          label: "Serviço complementar",
+          label: "Aplicação",
         },
         {
           number: "06",
-          title: "Gravação e corte laser",
+          title: "Sacos Personalizados",
           description:
-            "Gravação e corte de madeira, acrílico e outros materiais para placas, brindes, decoração, protótipos e sinalética.",
+            "Personalização e fornecimento de sacos para aplicações industriais, comerciais e promocionais, em PVC, têxtil ou TNT.",
           emphasis: "complementary",
-          label: "Serviço complementar",
+          label: "Aplicação",
         },
+        {
+          number: "07",
+          title: "Porta-fatos e Capas",
+          description:
+            "Impressão em porta-fatos, capas e coberturas de proteção para vestuário, confeção, hotelaria e comércio.",
+          emphasis: "complementary",
+          label: "Aplicação",
+        },
+        {
+          number: "08",
+          title: "Projetos Especiais e Produção Personalizada",
+          description:
+            "Soluções desenvolvidas em conjunto para requisitos específicos, incluindo séries especiais, artigos para campanhas e eventos, gravação e corte laser.",
+          emphasis: "complementary",
+          label: "Produção",
+        },
+      ],
+    },
+    workModes: {
+      eyebrow: "COMO TRABALHAMOS",
+      title: "Duas formas de avançar com o seu projeto.",
+      items: [
+        {
+          label: "OPÇÃO 1",
+          title: "O cliente fornece o material",
+          description:
+            "Recebemos as peças, componentes ou suportes e realizamos a impressão de acordo com as especificações do projeto.",
+        },
+        {
+          label: "OPÇÃO 2",
+          title: "Projeto completo",
+          description:
+            "Quando necessário, podemos estudar soluções que incluam o fornecimento do suporte e respetiva personalização.",
+        },
+      ],
+      note:
+        "O fornecimento de materiais ou produtos depende das características, quantidades e requisitos de cada projeto.",
+    },
+    sectors: {
+      eyebrow: "SETORES",
+      title: "Produção para empresas e indústria.",
+      description:
+        "Trabalhamos em regime B2B com empresas, fábricas e marcas que precisam de impressão integrada na sua produção.",
+      items: [
+        "Calçado",
+        "Têxtil",
+        "Têxtil-lar",
+        "Embalagem",
+        "Componentes industriais",
+        "Comércio e distribuição",
+        "Marcas e produtores",
       ],
     },
     portfolio: {
@@ -245,9 +298,9 @@ export const translations = {
     },
     about: {
       eyebrow: "A SERIFIL",
-      title: "Serigrafia e personalização em Guimarães.",
+      title: "Serigrafia e impressão industrial em Guimarães.",
       description:
-        "A Serifil é uma empresa de serigrafia e personalização em Guimarães, com experiência em impressão sobre PVC, tecido e TNT. Produzimos sacos, capas, porta-fatos, artigos têxteis e outras soluções para empresas, fábricas e marcas de diferentes setores. Trabalhamos também com o setor do calçado, nomeadamente na personalização de sacos, palmilhas, palas e outros componentes.",
+        "A Serifil é uma empresa de serigrafia e impressão industrial em Guimarães, com experiência em impressão sobre PVC, têxtil, TNT e componentes. Trabalhamos sobre peças e suportes fornecidos pelo cliente e, quando o projeto o justifica, estudamos soluções completas que incluem o fornecimento e personalização de sacos, porta-fatos, capas e outros suportes para empresas, fábricas e marcas de diferentes setores, incluindo o calçado.",
       principles: [
         ["01", "Produção local"],
         ["02", "Comunicação direta"],
@@ -256,18 +309,19 @@ export const translations = {
     },
     quoteCta: {
       eyebrow: "VAMOS PRODUZIR",
-      title: "Precisa de impressão personalizada?",
+      title: "Precisa de impressão para a sua produção?",
       description:
-        "Indique o produto, o material, as medidas, a quantidade e as cores de impressão para receber uma análise inicial.",
+        "Indique o material, as medidas, a quantidade e o número de cores. Diga-nos também se fornece o material ou se precisa do fornecimento do suporte.",
       button: "Pedir orçamento",
+      secondaryButton: "Fale connosco sobre o seu projeto",
     },
     quoteForm: {
       eyebrow: "PEDIDO DE ORÇAMENTO",
       title: "Conte-nos o que pretende produzir.",
       description:
-        "Quanto mais informação enviar sobre o material, a quantidade e a data, mais clara poderá ser a análise inicial.",
-      noteOne: "Indique o produto, o material, a quantidade e a data pretendida.",
-      noteTwo: "Depois do primeiro contacto poderá enviar os ficheiros de produção.",
+        "Quanto mais informação enviar sobre o material, as dimensões, a quantidade e as cores, mais clara poderá ser a análise inicial.",
+      noteOne: "Indique o material ou suporte, as dimensões, a quantidade e o número de cores.",
+      noteTwo: "Diga-nos se fornece o material ou se precisa também do fornecimento do produto.",
       successTitle: "Pedido enviado.",
       successDescription:
         "Recebemos os detalhes do seu projeto e entraremos em contacto assim que possível.",
@@ -282,22 +336,36 @@ export const translations = {
       selectOption: "Selecione uma opção",
       quantity: "Quantidade aproximada",
       quantityPlaceholder: "Ex.: 250 unidades",
-      date: "Data pretendida",
+      material: "Material ou suporte",
+      materialPlaceholder: "Ex.: PVC, tecido, TNT, componente",
+      dimensions: "Dimensões",
+      dimensionsPlaceholder: "Ex.: 30 x 40 cm",
+      colors: "Número de cores",
+      colorsPlaceholder: "Ex.: 2 cores",
+      supply: "Fornecimento do material",
+      supplyOptions: [
+        "Forneço o material",
+        "Preciso do fornecimento do material",
+        "A definir",
+      ],
+      date: "Prazo pretendido",
       message: "Mensagem",
       messagePlaceholder:
-        "Indique o produto, o material, as medidas, a quantidade, o número de cores e outras informações úteis.",
+        "Descreva o projeto: material ou suporte, medidas, quantidade, número de cores, se fornece o material e o prazo pretendido.",
       privacy: "Autorizo o tratamento destes dados para que a SERIFIL possa responder ao meu pedido de orçamento.",
       submissionError: "Não foi possível enviar o pedido. Verifique a ligação e tente novamente.",
       submitting: "A enviar pedido",
       submit: "Enviar pedido",
       subject: "Novo pedido de orçamento através do site Serifil",
       serviceOptions: [
-        "Sacos em PVC, tecido e TNT",
-        "Capas e porta-fatos",
-        "Componentes para calçado",
-        "Serigrafia têxtil e roupa profissional",
-        "Produção personalizada para empresas",
-        "Gravação ou corte laser",
+        "Serigrafia industrial",
+        "Impressão em PVC",
+        "Impressão em têxtil",
+        "Impressão em TNT",
+        "Impressão em componentes",
+        "Sacos personalizados",
+        "Porta-fatos e capas",
+        "Projetos especiais e produção personalizada",
         "Outro",
       ],
       errors: {
@@ -334,12 +402,12 @@ export const translations = {
       mapTitle: "Mapa com a localização da SERIFIL em Guimarães",
     },
     footer: {
-      tagline: "Imprimimos ideias. Entregamos resultados.",
+      tagline: "A sua produção. A nossa impressão.",
       navigation: "Navegação",
       information: "Informação",
       formRequests: "Orçamentos por formulário, e-mail, telefone ou WhatsApp",
       rights: "Todos os direitos reservados.",
-      production: "Produção e personalização em Guimarães.",
+      production: "Serigrafia e impressão industrial em Guimarães.",
       cookiePreferences: "Preferências de cookies",
       legal: {
         title: "Informação legal",
@@ -347,7 +415,7 @@ export const translations = {
         owner: "Titular da atividade",
         taxId: "NIF",
         activity: "Atividade",
-        activityValue: "Serigrafia, impressão e personalização",
+        activityValue: "Serigrafia, impressão industrial e personalização",
         address: "Morada do estabelecimento",
         email: "E-mail",
         phone: "Telefone",
@@ -365,18 +433,18 @@ export const translations = {
   en: {
     htmlLang: "en",
     meta: {
-      title: "SERIFIL | PVC, Fabric and Non-Woven Screen Printing",
+      title: "Industrial Screen Printing in Guimarães | SERIFIL",
       description:
-        "SERIFIL is a screen-printing and customisation company in Guimarães, Portugal, specialising in PVC, fabric and non-woven materials for businesses and brands.",
+        "SERIFIL – Industrial screen printing in Guimarães, Portugal. Printing on PVC, textiles, non-woven materials, components, bags, garment bags and other substrates for businesses.",
       openGraphDescription:
-        "Custom printing on PVC, fabric and non-woven materials for businesses and brands across a range of industries, including specialist solutions for the footwear sector.",
-      imageAlt: "Screen-printing process at SERIFIL",
+        "Industrial screen printing for businesses in Guimarães. Printing on PVC, textiles, non-woven materials and components, on materials supplied by the client or as complete projects.",
+      imageAlt: "Industrial screen-printing process at SERIFIL",
       locale: "en_GB",
     },
     businessDescription:
-      "SERIFIL is a screen-printing and customisation company in Guimarães, Portugal, specialising in PVC, fabric and non-woven materials for businesses and brands.",
+      "SERIFIL is a screen-printing and industrial printing company in Guimarães, Portugal, specialising in printing on PVC, textiles, non-woven materials and components for businesses, manufacturers and brands.",
     header: {
-      descriptor: "Screen Printing & Customisation",
+      descriptor: "Screen Printing & Industrial Printing",
       homeLabel: "SERIFIL, back to the top",
       skipToContent: "Skip to content",
       navigationLabel: "Main navigation",
@@ -395,86 +463,139 @@ export const translations = {
       ],
     },
     hero: {
-      eyebrow: "SPECIALISTS IN SCREEN PRINTING AND CUSTOMISATION",
-      lineOne: "We print ideas.",
-      lineTwo: "We deliver results.",
+      eyebrow: "INDUSTRIAL SCREEN PRINTING FOR BUSINESSES",
+      lineOne: "Industrial screen",
+      lineTwo: "printing in Guimarães",
       description:
-        "Printing and customisation on PVC, fabric and non-woven materials for bags, covers, garment bags and other applications for businesses and brands, as well as a range of footwear components.",
+        "Printing on PVC, textiles, non-woven materials, components and other substrates for industrial production.",
+      descriptionSecondary:
+        "We print on materials supplied by the client, or deliver complete projects that include supplying and customising the substrate.",
       quote: "Request a quote",
-      work: "View our work",
-      specialties: "PVC · Fabric · Non-woven · Components · Customisation",
+      work: "Explore services",
+      specialties: "PVC · Textiles · Non-woven · Components · Bags · Garment bags",
       imageAlt: "Ink being pulled across a screen during the screen-printing process",
       continueLabel: "Continue to the introduction",
     },
     marquee: {
-      line: "PVC · FABRIC · NON-WOVEN · CUSTOM BAGS · COVERS · GARMENT BAGS · COMPONENTS · FOOTWEAR SECTOR · MADE IN GUIMARÃES ·",
+      line: "INDUSTRIAL SCREEN PRINTING · PVC · TEXTILES · NON-WOVEN · COMPONENTS · CUSTOM BAGS · GARMENT BAGS · COVERS · SPECIAL PROJECTS · MADE IN GUIMARÃES ·",
       label:
-        "Serifil specialities: printing on PVC, fabric and non-woven materials, custom bags, covers, garment bags and different components for the footwear sector",
+        "Serifil specialities: industrial screen printing, printing on PVC, textiles and non-woven materials, components, custom bags, garment bags, covers and special projects",
     },
     introduction: {
-      eyebrow: "FROM IDEA TO FINAL RESULT",
-      title: "Printing adapted to different materials and applications.",
+      eyebrow: "SCREEN PRINTING AND INDUSTRIAL PRINTING",
+      title: "Your production. Our printing.",
       description:
-        "We work with businesses and brands across a range of industries, including the footwear sector, printing on PVC, fabric and non-woven materials for bags, covers, garment bags and other applications, as well as on a range of components used in footwear production, with technical guidance and direct communication.",
+        "SERIFIL specialises in screen printing and industrial printing for businesses. We work with different materials, formats and applications, from components and parts supplied by the client through to complete projects that include supplying and customising the substrate.",
     },
     services: {
-      eyebrow: "CORE SPECIALITY",
-      title: "Printing and customisation for a range of industries.",
+      eyebrow: "WHAT WE DO",
+      title: "Printing capacity for industrial production.",
       description:
-        "We produce customised bags, covers, garment bags and other items in PVC, fabric and non-woven materials, including printing on a range of components for the footwear industry.",
-      otherServices: "OTHER SERVICES",
+        "We screen print and customise bags, covers, garment bags, components and other substrates, supplied by the client or integrated into production projects.",
+      otherServices: "APPLICATIONS AND PRODUCTS",
       quote: "Request a quote",
       shortQuote: "Quote",
       quoteLabel: "Request a quote for",
       items: [
         {
           number: "01",
-          title: "PVC, fabric and non-woven bags",
+          title: "Industrial Screen Printing",
           description:
-            "Logos and brand elements printed on bags for presentation, protection, packaging and promotional use.",
+            "Screen printing on parts, components and substrates supplied by the client or integrated into production projects, with technical preparation for each material.",
           emphasis: "primary",
-          label: "Core speciality",
+          label: "Core capability",
         },
         {
           number: "02",
-          title: "Covers and garment bags",
+          title: "PVC Printing",
           description:
-            "Printing on fabric and non-woven covers and garment bags for clothing, hospitality, retail, brands and manufacturers.",
+            "Printing on clear or coloured PVC for packaging, protection, product presentation and technical parts.",
           emphasis: "supporting",
-          label: "Regular production",
+          label: "Printing capability",
         },
         {
           number: "03",
-          title: "Footwear components",
+          title: "Textile Printing",
           description:
-            "Printing and customisation of insoles, vamps and other components used in footwear production.",
+            "Screen printing on fabric for clothing, workwear, covers, bags, home textiles and other production items.",
           emphasis: "supporting",
-          label: "Specialist production",
+          label: "Printing capability",
         },
         {
           number: "04",
-          title: "Textile printing and workwear",
+          title: "Non-Woven Printing",
           description:
-            "Printing on T-shirts, sweatshirts, uniforms, professional clothing and other textile items.",
-          emphasis: "complementary",
-          label: "Additional service",
+            "Printing on non-woven material for bags, covers and solutions for protection and brand communication.",
+          emphasis: "supporting",
+          label: "Printing capability",
         },
         {
           number: "05",
-          title: "Custom production for businesses",
+          title: "Component Printing",
           description:
-            "Custom printing for businesses, brands, hospitality, retail, associations, campaigns and events, adapted to each project.",
+            "Printing and customisation of insoles, vamps and other components used on production lines, including the footwear industry.",
           emphasis: "complementary",
-          label: "Additional service",
+          label: "Application",
         },
         {
           number: "06",
-          title: "Laser engraving and cutting",
+          title: "Custom Bags",
           description:
-            "Wood, acrylic and other materials engraved or cut for signs, gifts, decoration and prototypes.",
+            "Customisation and supply of bags for industrial, retail and promotional use, in PVC, fabric or non-woven material.",
           emphasis: "complementary",
-          label: "Additional service",
+          label: "Application",
         },
+        {
+          number: "07",
+          title: "Garment Bags and Covers",
+          description:
+            "Printing on garment bags, covers and protective covers for clothing, manufacturing, hospitality and retail.",
+          emphasis: "complementary",
+          label: "Application",
+        },
+        {
+          number: "08",
+          title: "Special Projects and Custom Production",
+          description:
+            "Solutions developed together for specific requirements, including special runs, items for campaigns and events, laser engraving and cutting.",
+          emphasis: "complementary",
+          label: "Production",
+        },
+      ],
+    },
+    workModes: {
+      eyebrow: "HOW WE WORK",
+      title: "Two ways to move your project forward.",
+      items: [
+        {
+          label: "OPTION 1",
+          title: "The client supplies the material",
+          description:
+            "We receive the parts, components or substrates and print them to the specifications of the project.",
+        },
+        {
+          label: "OPTION 2",
+          title: "Complete project",
+          description:
+            "When needed, we can develop solutions that include supplying the substrate and customising it.",
+        },
+      ],
+      note:
+        "Supplying materials or products depends on the characteristics, quantities and requirements of each project.",
+    },
+    sectors: {
+      eyebrow: "SECTORS",
+      title: "Production for businesses and industry.",
+      description:
+        "We work B2B with businesses, manufacturers and brands that need printing integrated into their production.",
+      items: [
+        "Footwear",
+        "Textiles",
+        "Home textiles",
+        "Packaging",
+        "Industrial components",
+        "Retail and distribution",
+        "Brands and manufacturers",
       ],
     },
     portfolio: {
@@ -600,9 +721,9 @@ export const translations = {
     },
     about: {
       eyebrow: "SERIFIL",
-      title: "Screen printing and customisation in Guimarães.",
+      title: "Industrial screen printing in Guimarães.",
       description:
-        "Serifil is a screen-printing and customisation company based in Guimarães, Portugal, with experience printing on PVC, fabric and non-woven materials. We produce bags, covers, garment bags, textile items and other solutions for businesses, manufacturers and brands across a range of industries. We also serve the footwear sector, including the customisation of shoe bags, insoles, vamps and other components.",
+        "Serifil is a screen-printing and industrial printing company based in Guimarães, Portugal, with experience printing on PVC, textiles, non-woven materials and components. We print on parts and substrates supplied by the client and, when the project calls for it, we study complete solutions that include supplying and customising bags, garment bags, covers and other substrates for businesses, manufacturers and brands across a range of industries, including footwear.",
       principles: [
         ["01", "Local production"],
         ["02", "Direct communication"],
@@ -611,18 +732,19 @@ export const translations = {
     },
     quoteCta: {
       eyebrow: "LET'S MAKE IT",
-      title: "Need custom printing?",
+      title: "Need printing for your production?",
       description:
-        "Tell us the product, material, dimensions, quantity and print colours for an initial assessment.",
+        "Tell us the material, dimensions, quantity and number of print colours. Let us know whether you supply the material or need the substrate supplied as well.",
       button: "Request a quote",
+      secondaryButton: "Talk to us about your project",
     },
     quoteForm: {
       eyebrow: "QUOTE REQUEST",
       title: "Tell us what you need us to produce.",
       description:
-        "The more detail you provide about the material, quantity and date, the more precise our initial assessment can be.",
-      noteOne: "Include the product, material, quantity and required date.",
-      noteTwo: "You can send production artwork after our first contact.",
+        "The more detail you provide about the material, dimensions, quantity and colours, the more precise our initial assessment can be.",
+      noteOne: "Include the material or substrate, dimensions, quantity and number of colours.",
+      noteTwo: "Let us know whether you supply the material or also need the product supplied.",
       successTitle: "Request sent.",
       successDescription:
         "We have received your project details and will contact you as soon as possible.",
@@ -637,22 +759,36 @@ export const translations = {
       selectOption: "Select an option",
       quantity: "Approximate quantity",
       quantityPlaceholder: "E.g. 250 units",
+      material: "Material or substrate",
+      materialPlaceholder: "E.g. PVC, fabric, non-woven, component",
+      dimensions: "Dimensions",
+      dimensionsPlaceholder: "E.g. 30 x 40 cm",
+      colors: "Number of colours",
+      colorsPlaceholder: "E.g. 2 colours",
+      supply: "Material supply",
+      supplyOptions: [
+        "I supply the material",
+        "I need the material supplied",
+        "To be defined",
+      ],
       date: "Required date",
       message: "Message",
       messagePlaceholder:
-        "Include the product, material, dimensions, quantity, number of print colours and any other useful details.",
+        "Describe the project: material or substrate, dimensions, quantity, number of colours, whether you supply the material and the required date.",
       privacy: "I consent to the processing of this data so that SERIFIL can respond to my quote request.",
       submissionError: "We could not send your request. Check your connection and try again.",
       submitting: "Sending request",
       submit: "Send request",
       subject: "New quote request from the Serifil website",
       serviceOptions: [
-        "PVC, fabric and non-woven bags",
-        "Covers and garment bags",
-        "Footwear components",
-        "Textile printing and workwear",
-        "Custom production for businesses",
-        "Laser engraving or cutting",
+        "Industrial screen printing",
+        "PVC printing",
+        "Textile printing",
+        "Non-woven printing",
+        "Component printing",
+        "Custom bags",
+        "Garment bags and covers",
+        "Special projects and custom production",
         "Other",
       ],
       errors: {
@@ -688,12 +824,12 @@ export const translations = {
       mapTitle: "Map showing SERIFIL's location in Guimarães",
     },
     footer: {
-      tagline: "We print ideas. We deliver results.",
+      tagline: "Your production. Our printing.",
       navigation: "Navigation",
       information: "Information",
       formRequests: "Quotes via form, email, phone or WhatsApp",
       rights: "All rights reserved.",
-      production: "Production and customisation in Guimarães, Portugal.",
+      production: "Screen printing and industrial printing in Guimarães, Portugal.",
       cookiePreferences: "Cookie preferences",
       legal: {
         title: "Legal information",
@@ -701,7 +837,7 @@ export const translations = {
         owner: "Business owner",
         taxId: "Portuguese tax number (NIF)",
         activity: "Activity",
-        activityValue: "Screen printing, printing and customisation",
+        activityValue: "Screen printing, industrial printing and customisation",
         address: "Business address",
         email: "Email",
         phone: "Telephone",

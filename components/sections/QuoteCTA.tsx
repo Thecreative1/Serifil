@@ -14,7 +14,10 @@ export function QuoteCTA({ copy }: { copy: SiteContent["quoteCta"] }) {
               <h2 className="mt-8 max-w-[12ch] text-[clamp(2.5rem,8vw,7.6rem)] leading-[0.86] font-bold tracking-[-0.07em] text-light-text">{copy.title}</h2>
               <p className="mt-7 max-w-[56ch] text-lg leading-8 text-[#555951]">{copy.description}</p>
             </div>
-            <Button href="#orcamento" variant="dark" className="lg:mb-2">{copy.button}</Button>
+            <div className="flex flex-col gap-3 sm:flex-row lg:mb-2 lg:flex-col lg:items-stretch xl:flex-row">
+              <Button href="#orcamento" variant="dark">{copy.button}</Button>
+              <Button href="#contacto" variant="light">{copy.secondaryButton}</Button>
+            </div>
           </div>
         </Reveal>
       </Container>

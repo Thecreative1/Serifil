@@ -129,6 +129,17 @@ export function QuoteForm({ copy }: { copy: SiteContent["quoteForm"] }) {
                 </SelectInput>
                 <TextInput id="quantity" name="quantity" label={copy.quantity} inputMode="numeric" placeholder={copy.quantityPlaceholder} error={errors.quantity} required />
               </div>
+              <div className="grid gap-6 sm:grid-cols-2">
+                <TextInput id="material" name="material" label={copy.material} placeholder={copy.materialPlaceholder} optional optionalLabel={copy.optional} />
+                <TextInput id="dimensions" name="dimensions" label={copy.dimensions} placeholder={copy.dimensionsPlaceholder} optional optionalLabel={copy.optional} />
+              </div>
+              <div className="grid gap-6 sm:grid-cols-2">
+                <TextInput id="colors" name="colors" label={copy.colors} placeholder={copy.colorsPlaceholder} optional optionalLabel={copy.optional} />
+                <SelectInput id="supply" name="supply" label={copy.supply} optional optionalLabel={copy.optional} defaultValue="">
+                  <option value="">{copy.selectOption}</option>
+                  {copy.supplyOptions.map((option) => <option key={option}>{option}</option>)}
+                </SelectInput>
+              </div>
               <TextInput inputRef={dateInputRef} id="date" name="date" type="date" label={copy.date} error={errors.date} required />
               <TextArea id="message" name="message" label={copy.message} placeholder={copy.messagePlaceholder} error={errors.message} required />
               <div>

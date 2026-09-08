@@ -22,6 +22,7 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
   const ui = servicePageUi[locale];
   const homePath = localizedPath(locale);
   const quotePath = localizedPath(locale, "#orcamento");
+  const contactPath = localizedPath(locale, "#contacto");
   const workPath = localizedPath(locale, "#trabalhos");
   const relatedPages = serviceKeys
     .filter((key) => key !== page.key)
@@ -286,7 +287,15 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
             <h2 className="max-w-[15ch] text-[clamp(2.7rem,5vw,5.8rem)] leading-[0.9] font-black tracking-[-0.06em]">
               {ui.quoteTitle}
             </h2>
-            <Button href={quotePath} variant="dark">{ui.quote}</Button>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button href={quotePath} variant="dark">{ui.quote}</Button>
+              <a
+                href={contactPath}
+                className="group inline-flex min-h-12 items-center justify-center gap-3 border border-[#171916]/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.08em] text-light-text transition-colors duration-300 hover:border-[#171916] hover:bg-[#171916]/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-light-text"
+              >
+                {ui.contact}
+              </a>
+            </div>
           </div>
         </Container>
       </section>
