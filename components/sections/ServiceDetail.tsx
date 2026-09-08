@@ -81,9 +81,11 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
                 sizes="(min-width: 1024px) 38vw, 100vw"
                 className="object-cover"
               />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-background/90 px-4 py-3 text-[0.68rem] font-bold uppercase tracking-[0.1em] text-text-secondary">
-                {ui.realWork}
-              </figcaption>
+              {page.image.illustrative ? null : (
+                <figcaption className="absolute inset-x-0 bottom-0 bg-background/90 px-4 py-3 text-[0.68rem] font-bold uppercase tracking-[0.1em] text-text-secondary">
+                  {ui.realWork}
+                </figcaption>
+              )}
             </figure>
           </div>
         </Container>

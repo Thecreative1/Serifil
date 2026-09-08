@@ -7,6 +7,8 @@ export type ServiceKey = (typeof serviceKeys)[number];
 type ServiceImage = {
   src: string;
   alt: string;
+  /** Fotografia ilustrativa do processo: não é um trabalho produzido pela SERIFIL. */
+  illustrative?: boolean;
 };
 
 export type ServicePageContent = {
@@ -520,6 +522,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     image: {
       src: "/images/hero-serigrafia.webp",
       alt: "Aplicação de tinta através de uma tela no processo de serigrafia",
+      illustrative: true,
     },
     introduction: {
       title: "O componente define a preparação.",
@@ -867,7 +870,11 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     title: "Printing adapted to each footwear component.",
     lead:
       "Customisation of insoles, vamps and other components used in footwear production, with assessment of the material and assembly stage.",
-    image: { src: "/images/hero-serigrafia.webp", alt: "Ink being applied through a screen during the screen printing process" },
+    image: {
+      src: "/images/hero-serigrafia.webp",
+      alt: "Ink being applied through a screen during the screen printing process",
+      illustrative: true,
+    },
     introduction: {
       title: "The component defines the preparation.",
       paragraphs: [
