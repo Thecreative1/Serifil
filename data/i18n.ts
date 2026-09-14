@@ -459,6 +459,7 @@ export const translations = {
         { href: "#servicos", label: "Services" },
         { href: "#trabalhos", label: "Work" },
         { href: "#processo", label: "Process" },
+        { href: "/en/guias/", label: "Guides" },
         { href: "#sobre", label: "About" },
         { href: "#contacto", label: "Contact" },
       ],

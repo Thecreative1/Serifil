@@ -14,9 +14,10 @@ type MobileMenuProps = {
   copy: SiteContent["header"];
   homeHref?: string;
   languageHrefs?: Record<Locale, string>;
+  activeHref?: string;
 };
 
-export function MobileMenu({ open, onClose, locale, copy, homeHref, languageHrefs }: MobileMenuProps) {
+export function MobileMenu({ open, onClose, locale, copy, homeHref, languageHrefs, activeHref }: MobileMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const sectionHref = (href: string) => homeHref && href.startsWith("#") ? `${homeHref}${href}` : href;
@@ -72,7 +73,7 @@ export function MobileMenu({ open, onClose, locale, copy, homeHref, languageHref
         <ul className="divide-y divide-border border-y border-border">
           {copy.nav.map((link, index) => (
             <li key={link.href}>
-              <a href={sectionHref(link.href)} onClick={onClose} tabIndex={open ? 0 : -1} className="flex min-h-16 items-center justify-between py-3 text-[clamp(1.5rem,8vw,2.3rem)] font-bold tracking-[-0.04em] text-text-primary focus-visible:outline-2 focus-visible:outline-accent">
+              <a href={sectionHref(link.href)} onClick={onClose} tabIndex={open ? 0 : -1} aria-current={link.href === activeHref ? "true" : undefined} className={`flex min-h-16 items-center justify-between py-3 text-[clamp(1.5rem,8vw,2.3rem)] font-bold tracking-[-0.04em] focus-visible:outline-2 focus-visible:outline-accent ${link.href === activeHref ? "text-accent" : "text-text-primary"}`}>
                 {link.label}
                 <span className="text-xs font-normal tracking-wider text-text-secondary">0{index + 1}</span>
               </a>

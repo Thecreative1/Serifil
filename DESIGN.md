@@ -210,7 +210,7 @@ Campos devem parecer ferramentas claras e robustas.
 
 ### Navigation
 
-A navegação desktop é uma barra fixa de 80px, aumentando para 96px em ecrãs largos. Antes do scroll tem carvão translúcido; depois ganha fundo quase opaco e linha inferior. O seletor de idioma é uma unidade segmentada e o idioma ativo inverte tinta e fundo.
+A navegação desktop é uma barra fixa de 80px, aumentando para 96px em ecrãs largos. Antes do scroll tem carvão translúcido; depois ganha fundo quase opaco e linha inferior. O seletor de idioma é uma unidade segmentada e o idioma ativo inverte tinta e fundo. O item da secção atual (Serviços nas páginas de serviço, Guias nos guias) fica em tinta principal com sublinhado laranja de 2px; no menu móvel fica em laranja. Os menus PT e EN têm sempre os mesmos itens, pela mesma ordem, e os atalhos flutuantes de Ligar e WhatsApp aparecem em todas as páginas.
 
 Em mobile, o botão tem alvo de 48px e abre um diálogo de ecrã inteiro. O diálogo bloqueia scroll, prende o foco, fecha por Escape e devolve o foco ao botão de origem.
 

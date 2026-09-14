@@ -113,7 +113,7 @@ export const servicePageUi: Record<Locale, ServicePageUi> = {
     relatedDescription:
       "Cada suporte pede uma preparação própria. Consulte as páginas relacionadas ou envie-nos uma amostra para avaliação.",
     learnMore: "Saber mais",
-    materialGuides: "Guias de materiais e técnicas",
+    materialGuides: "Materiais e aplicações",
     materialGuidesDescription:
       "Perceba como trabalhamos cada suporte e que informação ajuda a preparar o seu projeto.",
     quoteTitle: "Tem um projeto neste material?",
@@ -131,7 +131,7 @@ export const servicePageUi: Record<Locale, ServicePageUi> = {
     relatedDescription:
       "Each substrate requires its own preparation. Explore the related pages or send us a sample for assessment.",
     learnMore: "Learn more",
-    materialGuides: "Material and technique guides",
+    materialGuides: "Materials and applications",
     materialGuidesDescription:
       "Understand how each substrate is approached and what information helps us prepare your project.",
     quoteTitle: "Have a project involving this material?",

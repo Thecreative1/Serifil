@@ -14,9 +14,11 @@ type HeaderProps = {
   copy: SiteContent["header"];
   homeHref?: string;
   languageHrefs?: Record<Locale, string>;
+  /** `href` do item de navegação da secção atual, tal como aparece em `copy.nav`. */
+  activeHref?: string;
 };
 
-export function Header({ locale, copy, homeHref, languageHrefs }: HeaderProps) {
+export function Header({ locale, copy, homeHref, languageHrefs, activeHref }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -49,11 +51,19 @@ export function Header({ locale, copy, homeHref, languageHrefs }: HeaderProps) {
             <span className="hidden border-l border-border pl-4 text-[0.65rem] leading-4 uppercase tracking-[0.15em] text-text-secondary xl:block">{copy.descriptor}</span>
           </a>
           <nav className="hidden items-center gap-4 lg:flex min-[1360px]:gap-6" aria-label={copy.navigationLabel}>
-            {copy.nav.map((link) => (
-              <a key={link.href} href={sectionHref(link.href)} className="text-sm font-semibold text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
-                {link.label}
-              </a>
-            ))}
+            {copy.nav.map((link) => {
+              const active = link.href === activeHref;
+              return (
+                <a
+                  key={link.href}
+                  href={sectionHref(link.href)}
+                  aria-current={active ? "true" : undefined}
+                  className={`text-sm font-semibold transition-colors hover:text-text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${active ? "text-text-primary underline decoration-accent decoration-2 underline-offset-[10px]" : "text-text-secondary"}`}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
             <div className="flex items-center border border-border" aria-label={copy.languageLabel}>
               {(["pt", "en"] as const).map((language) => (
                 <a
@@ -92,6 +102,7 @@ export function Header({ locale, copy, homeHref, languageHrefs }: HeaderProps) {
           copy={copy}
           homeHref={homeHref}
           languageHrefs={languageHrefs}
+          activeHref={activeHref}
         />
       </div>
     </>

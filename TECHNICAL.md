@@ -36,7 +36,7 @@ config/
 data/
   i18n.ts                fonte ativa de todo o conteúdo PT e EN
   service-pages.ts       páginas de serviço PT e EN
-  guides.ts              guias editoriais (só PT) e estado de publicação
+  guides.ts              guias editoriais PT e EN e estado de publicação
 lib/
   analytics.ts           consent mode e eventos sem dados pessoais
 public/
@@ -83,16 +83,23 @@ No GitHub Pages, a página estática em `/` escolhe o idioma no cliente e encami
 
 Não adicionar um idioma sem atualizar `locales`, `translations`, metadata, sitemap, redirects, seletor de idioma e testes.
 
-### `/pt/guias/` e `/pt/guias/<slug>/`
+### `/pt/guias/`, `/en/guias/` e `/<locale>/guias/<slug>/`
 
-Secção editorial "Guias de Serigrafia", só em português. O conteúdo vive em `data/guides.ts`:
+Secção editorial "Guias de Serigrafia" / "Screen Printing Guides", em português e inglês, com o mesmo padrão das páginas de serviço (segmento `guias` partilhado, slug traduzido). O conteúdo vive em `data/guides.ts`:
 
-- `guideLocales` limita os idiomas publicados (`/en/guias/` não é gerado e devolve 404);
+- `guideLocales` define os idiomas; cada guia tem `key`, que liga as versões PT e EN para hreflang, sitemap e seletor de idioma;
+- um guia novo só deve ser publicado quando existir nos dois idiomas, para os menus PT e EN continuarem iguais;
 - cada guia tem `status`; apenas `published` gera página, entra na listagem, no JSON-LD e no sitemap. Rascunhos incompletos ficam como `draft`;
 - o corpo é uma lista de secções com blocos tipados (`paragraph`, `note`, `checklist`, `comparison`, `process`, `figure`, `gallery`), renderizados por `components/sections/GuideArticle.tsx`;
 - ligações internas no texto usam a sintaxe `[texto](/caminho/)`, construídas com `getServicePath` para não divergirem das rotas.
 
-Cada guia publica canonical, Open Graph `article`, JSON-LD `Article` e `BreadcrumbList`; o índice publica `CollectionPage`. O link "Guias" do menu PT é um caminho absoluto: `Header`, `MobileMenu` e `Footer` só prefixam `homeHref` a âncoras `#`.
+Cada guia publica canonical, hreflang recíproco (`x-default` para PT), Open Graph `article`, JSON-LD `Article` e `BreadcrumbList`; o índice publica `CollectionPage`. O link "Guias"/"Guides" do menu é um caminho absoluto: `Header`, `MobileMenu` e `Footer` só prefixam `homeHref` a âncoras `#`.
+
+### Menus e contacto rápido
+
+- `Header` recebe `activeHref` com o `href` do item da secção atual (`#servicos` nas páginas de serviço, `/<locale>/guias/` nos guias). O item fica com `aria-current="true"` no desktop e no menu móvel. A home não marca nenhum item.
+- `components/layout/FloatingContact.tsx` (Ligar e WhatsApp) é usado na home, nas páginas de serviço e nos guias.
+- O teste "mantém menus consistentes" verifica o item ativo, o contacto flutuante, a mesma estrutura de menu em PT e EN e a ausência de sobreposição do header a 1024, 1280 e 1440px nas duas línguas.
 
 As fotografias da oficina estão em `public/images/guias/`, geradas por `scripts/optimize-guide-images.mjs` a partir de `../fotos serifil/guias/`. As legendas distinguem trabalho produzido (`credit: "work"`) de equipamento (`credit: "workshop"`).
 

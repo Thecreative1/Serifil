@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/Header";
+import { FloatingContact } from "@/components/layout/FloatingContact";
 import { Footer } from "@/components/layout/Footer";
 import { LocalePreference } from "@/components/LocalePreference";
 import { GuideArticle } from "@/components/sections/GuideArticle";
 import { brand } from "@/config/brand";
 import { absoluteUrl, businessId, getBusinessIdentity } from "@/config/seo";
 import {
+  getGuideHreflangPaths,
   getGuideImages,
   getGuideIndexPath,
+  getGuideLanguageHrefs,
   getGuidePath,
   getPublishedGuide,
   getPublishedGuides,
@@ -24,6 +27,10 @@ export function generateStaticParams() {
   return guideLocales.flatMap((locale) =>
     getPublishedGuides(locale).map((guide) => ({ locale, slug: guide.slug })),
   );
+}
+
+function absoluteLanguages(paths: Record<string, string>) {
+  return Object.fromEntries(Object.entries(paths).map(([language, path]) => [language, absoluteUrl(path)]));
 }
 
 export async function generateMetadata({
@@ -51,7 +58,7 @@ export async function generateMetadata({
     description: guide.metaDescription,
     alternates: {
       canonical,
-      languages: { "pt-PT": canonical, "x-default": canonical },
+      languages: absoluteLanguages(getGuideHreflangPaths(guide.key)),
     },
     openGraph: {
       title: guide.metaTitle,
@@ -59,7 +66,8 @@ export async function generateMetadata({
       siteName: brand.name,
       type: "article",
       url: canonical,
-      locale: "pt_PT",
+      locale: ui.ogLocale,
+      alternateLocale: guideLocales.filter((item) => item !== locale).map((item) => guidesUi[item].ogLocale),
       publishedTime: guide.datePublished,
       modifiedTime: guide.dateModified,
       section: ui.sectionName,
@@ -144,9 +152,11 @@ export default async function GuidePage({
         locale={locale}
         copy={copy.header}
         homeHref={homePath}
-        languageHrefs={{ pt: guidePath, en: "/en/" }}
+        languageHrefs={getGuideLanguageHrefs(guide.key)}
+        activeHref={indexPath}
       />
       <GuideArticle locale={locale} guide={guide} otherGuides={otherGuides} />
+      <FloatingContact copy={copy.contact} />
       <Footer copy={copy.footer} headerCopy={copy.header} homeHref={homePath} />
     </>
   );

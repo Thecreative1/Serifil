@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
 import { brand } from "@/config/brand";
 import {
+  getGuideHreflangPaths,
   getGuideImages,
+  getGuideIndexHreflangPaths,
   getGuideIndexPath,
   getGuidePath,
   getPublishedGuides,
@@ -16,6 +18,12 @@ import {
 } from "@/data/service-pages";
 
 export const dynamic = "force-static";
+
+function absoluteLanguages(paths: Record<string, string>) {
+  return Object.fromEntries(
+    Object.entries(paths).map(([language, path]) => [language, new URL(path, brand.website).toString()]),
+  );
+}
 
 const localizedUrls = {
   "pt-PT": `${brand.website}pt/`,
@@ -101,12 +109,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(latestModification),
         changeFrequency: "monthly" as const,
         priority: 0.6,
+        alternates: { languages: absoluteLanguages(getGuideIndexHreflangPaths()) },
       },
       ...guides.map((guide) => ({
         url: new URL(getGuidePath(locale, guide.slug), brand.website).toString(),
         lastModified: new Date(guide.dateModified),
         changeFrequency: "yearly" as const,
         priority: 0.7,
+        alternates: { languages: absoluteLanguages(getGuideHreflangPaths(guide.key)) },
         images: getGuideImages(guide).map((image) => new URL(image.src, brand.website).toString()),
       })),
     ];

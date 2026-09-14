@@ -661,7 +661,10 @@ test("publica a secção de guias em português com artigo completo, SEO e liga�
     "/pt/guias/",
   );
   await page.goto("/en/");
-  await expect(page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: /Guia|Guide/ })).toHaveCount(0);
+  await expect(page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Guides" })).toHaveAttribute(
+    "href",
+    "/en/guias/",
+  );
 
   await page.goto("/pt/guias/");
   await expect(page.locator("html")).toHaveAttribute("lang", "pt-PT");
@@ -727,10 +730,11 @@ test("publica a secção de guias em português com artigo completo, SEO e liga�
     expect((await request.get(path)).ok(), path).toBe(true);
   }
 
-  expect((await request.get("/en/guias/")).status()).toBe(404);
   const sitemap = await (await request.get("/sitemap.xml")).text();
   expect(sitemap).toContain("<loc>https://serifil.com/pt/guias/</loc>");
   expect(sitemap).toContain("<loc>https://serifil.com/pt/guias/fotolitos/</loc>");
+  expect(sitemap).toContain("<loc>https://serifil.com/en/guias/</loc>");
+  expect(sitemap).toContain("<loc>https://serifil.com/en/guias/film-positives/</loc>");
   expect(sitemap).toContain("<image:loc>https://serifil.com/images/guias/filmadora-fotolitos.webp</image:loc>");
 });
 
@@ -755,6 +759,92 @@ test("guias não criam overflow horizontal e mantêm a navegação móvel", asyn
   const mobileNavigation = page.getByRole("navigation", { name: "Navegação móvel" });
   await expect(mobileNavigation.getByRole("link", { name: "Serviços" })).toHaveAttribute("href", "/pt/#servicos");
   await expect(mobileNavigation.getByRole("link", { name: "Guias" })).toHaveAttribute("href", "/pt/guias/");
+});
+
+test("publica o guia em inglês com hreflang recíproco e ligações válidas", async ({ page, request }) => {
+  await page.goto("/pt/guias/fotolitos/");
+  await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/guias/film-positives/");
+  await expect(page.getByRole("navigation", { name: "Navegação principal" }).getByRole("link", { name: "en", exact: true })).toHaveAttribute(
+    "href",
+    "/en/guias/film-positives/",
+  );
+
+  await page.goto("/en/guias/film-positives/");
+  const title = "Film positives: what they are and what they do in screen printing";
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.locator("h1")).toHaveCount(1);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(title);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/en/guias/film-positives/");
+  await expect(page.locator('link[hreflang="pt-PT"]')).toHaveAttribute("href", "https://serifil.com/pt/guias/fotolitos/");
+  await expect(page.locator('link[hreflang="x-default"]')).toHaveAttribute("href", "https://serifil.com/pt/guias/fotolitos/");
+  await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute("content", "en_GB");
+  await expect(page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "pt" })).toHaveAttribute(
+    "href",
+    "/pt/guias/fotolitos/",
+  );
+  await expect(page.locator("main").getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", "/en/#orcamento");
+  await expect(page.locator("body")).not.toContainText(/\bTNT\b|fotolito|Pedir orçamento/);
+
+  const structuredData = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent() ?? "{}") as {
+    "@graph": Array<{ "@type": string; headline?: string; inLanguage?: string }>;
+  };
+  const article = structuredData["@graph"].find((item) => item["@type"] === "Article");
+  expect(article?.headline).toBe(title);
+  expect(article?.inLanguage).toBe("en");
+
+  const internalPaths = await page.locator("main").locator('a[href^="/"]').evaluateAll((links) =>
+    [...new Set(links.map((link) => (link.getAttribute("href") ?? "").split("#")[0]))],
+  );
+  for (const path of internalPaths) {
+    expect((await request.get(path)).ok(), path).toBe(true);
+  }
+
+  await page.goto("/en/guias/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Screen Printing Guides");
+  await expect(page.locator('link[hreflang="pt-PT"]')).toHaveAttribute("href", "https://serifil.com/pt/guias/");
+  await expect(page.getByRole("link", { name: title })).toHaveAttribute("href", "/en/guias/film-positives/");
+});
+
+test("mantém menus consistentes: item ativo, contacto rápido e sem sobreposição nas duas línguas", async ({ page }) => {
+  await page.goto("/pt/");
+  await expect(page.getByRole("navigation", { name: "Navegação principal" }).locator('a[aria-current="true"]')).toHaveCount(0);
+
+  const cases = [
+    { path: "/pt/servicos/sacos-tnt/", navigation: "Navegação principal", active: "Serviços" },
+    { path: "/pt/guias/", navigation: "Navegação principal", active: "Guias" },
+    { path: "/pt/guias/fotolitos/", navigation: "Navegação principal", active: "Guias" },
+    { path: "/en/servicos/non-woven-bags/", navigation: "Main navigation", active: "Services" },
+    { path: "/en/guias/film-positives/", navigation: "Main navigation", active: "Guides" },
+  ];
+  for (const item of cases) {
+    await page.goto(item.path);
+    const navigation = page.getByRole("navigation", { name: item.navigation });
+    await expect(navigation.locator('a[aria-current="true"]'), item.path).toHaveCount(1);
+    await expect(navigation.getByRole("link", { name: item.active, exact: true }), item.path).toHaveAttribute("aria-current", "true");
+    await expect(page.locator('div.fixed a[href^="https://wa.me/351910508706"]'), item.path).toBeVisible();
+    await expect(page.locator('div.fixed a[href="tel:+351910508706"]'), item.path).toBeVisible();
+  }
+
+  const labels = async (path: string, navigation: string) => {
+    await page.goto(path);
+    return page.getByRole("navigation", { name: navigation }).locator("a").evaluateAll((links) =>
+      links.map((link) => link.getAttribute("href")?.replace(/^\/(pt|en)\//, "/") ?? ""),
+    );
+  };
+  expect((await labels("/pt/guias/fotolitos/", "Navegação principal")).slice(0, 6)).toEqual(
+    (await labels("/en/guias/film-positives/", "Main navigation")).slice(0, 6),
+  );
+
+  for (const path of ["/pt/", "/en/"]) {
+    for (const width of [1024, 1280, 1440]) {
+      await page.setViewportSize({ width, height: 800 });
+      await page.goto(path);
+      const navigation = path === "/pt/" ? "Navegação principal" : "Main navigation";
+      const brandBox = await page.locator("header > div > a").first().boundingBox();
+      const navigationBox = await page.getByRole("navigation", { name: navigation }).boundingBox();
+      expect((brandBox?.x ?? 0) + (brandBox?.width ?? 0), `${path} ${width}px`).toBeLessThanOrEqual((navigationBox?.x ?? 0) - 16);
+    }
+  }
 });
 
 test("apresenta uma página 404 personalizada, bilingue e não indexável", async ({ page }) => {

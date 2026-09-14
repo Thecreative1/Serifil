@@ -2,16 +2,20 @@ import type { Locale } from "@/data/i18n";
 import { getServicePath, type ServiceKey } from "@/data/service-pages";
 
 /**
- * Guias editoriais. Só existem em português; para publicar noutro idioma,
- * acrescentar o locale aqui e o conteúdo completo em `guidesByLocale`.
+ * Guias editoriais. Cada guia é publicado em todos os idiomas de `guideLocales`;
+ * `key` liga as versões PT e EN (hreflang e seletor de idioma).
  */
-export const guideLocales = ["pt"] as const satisfies readonly Locale[];
+export const guideLocales = ["pt", "en"] as const satisfies readonly Locale[];
 
 export type GuideLocale = (typeof guideLocales)[number];
 
 export function isGuideLocale(value: string): value is GuideLocale {
   return guideLocales.includes(value as GuideLocale);
 }
+
+export const guideKeys = ["fotolitos"] as const;
+
+export type GuideKey = (typeof guideKeys)[number];
 
 /** Ligações internas dentro do texto: [texto](/caminho/). */
 export const inlineLinkPattern = /\[([^\]]+)\]\((\/[^)\s]*)\)/g;
@@ -56,6 +60,7 @@ export type GuideSection = {
 };
 
 export type Guide = {
+  key: GuideKey;
   slug: string;
   /** Apenas guias `published` geram página, entram na listagem e no sitemap. */
   status: "draft" | "published";
@@ -77,6 +82,9 @@ export type Guide = {
 
 type GuidesUi = {
   htmlLang: string;
+  hreflang: string;
+  dateLocale: string;
+  ogLocale: string;
   sectionName: string;
   metaTitle: string;
   metaDescription: string;
@@ -107,6 +115,9 @@ type GuidesUi = {
 export const guidesUi: Record<GuideLocale, GuidesUi> = {
   pt: {
     htmlLang: "pt-PT",
+    hreflang: "pt-PT",
+    dateLocale: "pt-PT",
+    ogLocale: "pt_PT",
     sectionName: "Guias",
     metaTitle: "Guias de Serigrafia | SERIFIL",
     metaDescription:
@@ -138,53 +149,137 @@ export const guidesUi: Record<GuideLocale, GuidesUi> = {
       "Envie a arte, o suporte, o número de cores e a quantidade aproximada. Com essa informação conseguimos avaliar o pedido e entrar em contacto consigo.",
     quote: "Pedir orçamento",
   },
+  en: {
+    htmlLang: "en",
+    hreflang: "en",
+    dateLocale: "en-GB",
+    ogLocale: "en_GB",
+    sectionName: "Guides",
+    metaTitle: "Screen Printing Guides | SERIFIL",
+    metaDescription:
+      "Practical guides to screen printing and industrial printing: film positives, screens, colours and artwork preparation. From SERIFIL in Guimarães, Portugal.",
+    eyebrow: "SCREEN PRINTING GUIDES",
+    title: "Screen Printing Guides",
+    lead:
+      "Practical explanations of the printing process, to help you prepare each project and understand what affects a quote.",
+    breadcrumbsLabel: "Breadcrumb navigation",
+    home: "Home",
+    listEyebrow: "PUBLISHED GUIDES",
+    listTitle: "From file to printed item.",
+    listDescription:
+      "Each guide explains one stage of screen printing and what is worth knowing before requesting a quote.",
+    readGuide: "Read guide",
+    readingTime: (minutes) => `${minutes} min read`,
+    published: "Published",
+    summaryTitle: "In short",
+    tocTitle: "In this guide",
+    realWork: "Work produced by SERIFIL",
+    workshop: "SERIFIL workshop",
+    relatedServicesEyebrow: "RELATED SERVICES",
+    relatedServicesTitle: "Where we use this process.",
+    relatedServicesDescription:
+      "Artwork preparation is common to every substrate. See what changes with each material.",
+    moreGuidesEyebrow: "MORE GUIDES",
+    quoteTitle: "Have a job to print?",
+    quoteDescription:
+      "Send the artwork, substrate, number of colours and approximate quantity. With that information we can assess your request and get back to you.",
+    quote: "Request a quote",
+  },
 };
 
-const workshopImages = {
-  imagesetter: {
-    src: "/images/guias/filmadora-fotolitos.webp",
-    alt: "Filmadora AGFA AccuSet 1500 com uma folha de película pousada no topo, na oficina da SERIFIL",
-    width: 900,
-    height: 1125,
-    caption:
-      "Filmadora na oficina da SERIFIL. É o equipamento que passa a arte digital para a película que dá origem ao fotolito.",
-    credit: "workshop",
-  },
-  exposure: {
-    src: "/images/guias/mesa-exposicao.webp",
-    alt: "Mesa de exposição iluminada com uma tela pressionada por pesos e, ao lado, uma processadora de película AGFA Rapiline",
-    width: 1440,
-    height: 810,
-    caption:
-      "Mesa de exposição: a tela e o fotolito ficam em contacto, pressionados por pesos, enquanto a luz grava o desenho na emulsão. Ao lado, a processadora de película.",
-    credit: "workshop",
-  },
-  screens: {
-    src: "/images/guias/telas-serigrafia.webp",
-    alt: "Telas de serigrafia de vários tamanhos encostadas à parede, algumas revestidas com emulsão amarela e roxa",
-    width: 1440,
-    height: 810,
-    caption:
-      "Telas de vários formatos. As amarelas e a roxa estão revestidas de emulsão; nas brancas vê-se a malha.",
-    credit: "workshop",
-  },
-  stretcher: {
-    src: "/images/guias/esticador-telas.webp",
-    alt: "Esticador de telas com grampos vermelhos montado sobre uma bancada de madeira",
-    width: 1440,
-    height: 810,
-    caption:
-      "Esticador de telas: a malha é esticada e fixada ao quadro antes de receber a emulsão.",
-    credit: "workshop",
-  },
-} satisfies Record<string, GuideImage>;
+const imageFiles = {
+  imagesetter: { src: "/images/guias/filmadora-fotolitos.webp", width: 900, height: 1125, credit: "workshop" },
+  exposure: { src: "/images/guias/mesa-exposicao.webp", width: 1440, height: 810, credit: "workshop" },
+  screens: { src: "/images/guias/telas-serigrafia.webp", width: 1440, height: 810, credit: "workshop" },
+  stretcher: { src: "/images/guias/esticador-telas.webp", width: 1440, height: 810, credit: "workshop" },
+  nonwovenWork: { src: "/images/trabalhos/tnt-05.webp", width: 1600, height: 1200, credit: "work" },
+  pvcWork: { src: "/images/trabalhos/pvc-03.webp", width: 1600, height: 1200, credit: "work" },
+} as const;
 
-const pvcPath = getServicePath("pt", "pvc");
-const fabricPath = getServicePath("pt", "fabric");
-const nonwovenPath = getServicePath("pt", "nonwoven");
-const footwearPath = getServicePath("pt", "footwear");
+type GuideImageKey = keyof typeof imageFiles;
+
+const imageCopy: Record<GuideLocale, Record<GuideImageKey, { alt: string; caption: string }>> = {
+  pt: {
+    imagesetter: {
+      alt: "Filmadora AGFA AccuSet 1500 com uma folha de película pousada no topo, na oficina da SERIFIL",
+      caption:
+        "Filmadora na oficina da SERIFIL. É o equipamento que passa a arte digital para a película que dá origem ao fotolito.",
+    },
+    exposure: {
+      alt: "Mesa de exposição iluminada com uma tela pressionada por pesos e, ao lado, uma processadora de película AGFA Rapiline",
+      caption:
+        "Mesa de exposição: a tela e o fotolito ficam em contacto, pressionados por pesos, enquanto a luz grava o desenho na emulsão. Ao lado, a processadora de película.",
+    },
+    screens: {
+      alt: "Telas de serigrafia de vários tamanhos encostadas à parede, algumas revestidas com emulsão amarela e roxa",
+      caption:
+        "Telas de vários formatos. As amarelas e a roxa estão revestidas de emulsão; nas brancas vê-se a malha.",
+    },
+    stretcher: {
+      alt: "Esticador de telas com grampos vermelhos montado sobre uma bancada de madeira",
+      caption: "Esticador de telas: a malha é esticada e fixada ao quadro antes de receber a emulsão.",
+    },
+    nonwovenWork: {
+      alt: "Saco preto em TNT com logótipo impresso a verde e branco",
+      caption: "Logótipo a duas cores sobre TNT preto. Cada cor teve a sua própria preparação.",
+    },
+    pvcWork: {
+      alt: "Aviso de segurança em três línguas impresso a preto sobre PVC transparente",
+      caption:
+        "Texto de pequena dimensão sobre PVC transparente. Em detalhes assim, a qualidade do ficheiro nota-se no resultado.",
+    },
+  },
+  en: {
+    imagesetter: {
+      alt: "AGFA AccuSet 1500 imagesetter with a sheet of film resting on top, in the SERIFIL workshop",
+      caption:
+        "Imagesetter in the SERIFIL workshop. It outputs the digital artwork onto the film that becomes the film positive.",
+    },
+    exposure: {
+      alt: "Illuminated exposure unit with a screen held down by weights and, next to it, an AGFA Rapiline film processor",
+      caption:
+        "Exposure unit: the screen and film are held in contact by weights while the light fixes the design in the emulsion. Alongside it, the film processor.",
+    },
+    screens: {
+      alt: "Screen printing screens of various sizes leaning against a wall, some coated with yellow and purple emulsion",
+      caption:
+        "Screens in various sizes. The yellow and purple ones are coated with emulsion; on the white ones you can see the bare mesh.",
+    },
+    stretcher: {
+      alt: "Screen stretcher with red toggle clamps mounted on a wooden workbench",
+      caption: "Screen stretcher: the mesh is stretched and fixed to the frame before it is coated with emulsion.",
+    },
+    nonwovenWork: {
+      alt: "Black non-woven bag with a logo printed in green and white",
+      caption: "Two-colour logo on black non-woven material. Each colour had its own preparation.",
+    },
+    pvcWork: {
+      alt: "Safety warning in three languages printed in black on clear PVC",
+      caption: "Small text printed on clear PVC. With detail like this, the quality of the file shows in the result.",
+    },
+  },
+};
+
+function guideImage(locale: GuideLocale, key: GuideImageKey): GuideImage {
+  return { ...imageFiles[key], ...imageCopy[locale][key] };
+}
+
+const ptPaths = {
+  pvc: getServicePath("pt", "pvc"),
+  fabric: getServicePath("pt", "fabric"),
+  nonwoven: getServicePath("pt", "nonwoven"),
+  footwear: getServicePath("pt", "footwear"),
+};
+
+const enPaths = {
+  pvc: getServicePath("en", "pvc"),
+  fabric: getServicePath("en", "fabric"),
+  nonwoven: getServicePath("en", "nonwoven"),
+  footwear: getServicePath("en", "footwear"),
+};
 
 const fotolitos: Guide = {
+  key: "fotolitos",
   slug: "fotolitos",
   status: "published",
   shortTitle: "Fotolitos",
@@ -199,7 +294,7 @@ const fotolitos: Guide = {
     "Antes de a tinta chegar ao saco, ao PVC ou ao tecido, o desenho tem de ser gravado numa tela. O fotolito é a peça que torna essa passagem possível. Perceber como funciona ajuda a preparar a arte, a ler um orçamento e a planear repetições.",
   datePublished: "2026-09-14",
   dateModified: "2026-09-14",
-  image: workshopImages.exposure,
+  image: guideImage("pt", "exposure"),
   summary: [
     "O fotolito é uma película transparente com o desenho a imprimir em preto opaco.",
     "Serve para gravar o desenho na tela. Não é ele que imprime.",
@@ -222,7 +317,7 @@ const fotolitos: Guide = {
           text:
             "O fotolito não imprime nada nem toca na peça final. É uma ferramenta de preparação, usada antes da impressão para gravar o desenho na tela. Como na serigrafia cada cor é impressa separadamente, um desenho a várias cores dá origem, em regra, a um fotolito por cor.",
         },
-        { type: "figure", image: workshopImages.imagesetter, orientation: "portrait" },
+        { type: "figure", image: guideImage("pt", "imagesetter"), orientation: "portrait" },
       ],
     },
     {
@@ -247,8 +342,7 @@ const fotolitos: Guide = {
             {
               visual: "film",
               title: "Fotolitos",
-              text:
-                "Cada cor é passada para uma película própria, com essa parte do desenho em preto opaco.",
+              text: "Cada cor é passada para uma película própria, com essa parte do desenho em preto opaco.",
             },
             {
               visual: "screen",
@@ -264,7 +358,7 @@ const fotolitos: Guide = {
             },
           ],
         },
-        { type: "figure", image: workshopImages.exposure },
+        { type: "figure", image: guideImage("pt", "exposure") },
       ],
     },
     {
@@ -294,10 +388,7 @@ const fotolitos: Guide = {
                 "Imprimir: a tinta passa pelas zonas abertas da malha.",
               ],
             },
-            {
-              label: "Contacto com a tinta",
-              values: ["Não.", "Sim, em cada peça impressa."],
-            },
+            { label: "Contacto com a tinta", values: ["Não.", "Sim, em cada peça impressa."] },
             {
               label: "Quando é preciso refazer",
               values: [
@@ -307,7 +398,7 @@ const fotolitos: Guide = {
             },
           ],
         },
-        { type: "gallery", images: [workshopImages.screens, workshopImages.stretcher] },
+        { type: "gallery", images: [guideImage("pt", "screens"), guideImage("pt", "stretcher")] },
       ],
     },
     {
@@ -344,7 +435,7 @@ const fotolitos: Guide = {
             },
             {
               title: "Suporte",
-              text: `A cor e a textura do material mudam a forma como as cores aparecem. Em [PVC transparente](${pvcPath}), em [TNT](${nonwovenPath}) ou em [tecido](${fabricPath}), a preparação é pensada para que o desenho se leia bem.`,
+              text: `A cor e a textura do material mudam a forma como as cores aparecem. Em [PVC transparente](${ptPaths.pvc}), em [TNT](${ptPaths.nonwoven}) ou em [tecido](${ptPaths.fabric}), a preparação é pensada para que o desenho se leia bem.`,
             },
             {
               title: "Quantidade",
@@ -353,17 +444,7 @@ const fotolitos: Guide = {
             },
           ],
         },
-        {
-          type: "figure",
-          image: {
-            src: "/images/trabalhos/tnt-05.webp",
-            alt: "Saco preto em TNT com logótipo impresso a verde e branco",
-            width: 1600,
-            height: 1200,
-            caption: "Logótipo a duas cores sobre TNT preto. Cada cor teve a sua própria preparação.",
-            credit: "work",
-          },
-        },
+        { type: "figure", image: guideImage("pt", "nonwovenWork") },
         {
           type: "note",
           text:
@@ -390,8 +471,7 @@ const fotolitos: Guide = {
             },
             {
               title: "Textos convertidos em curvas",
-              text:
-                "Converta os textos em contornos ou envie as fontes utilizadas, para evitar trocas de letra.",
+              text: "Converta os textos em contornos ou envie as fontes utilizadas, para evitar trocas de letra.",
             },
             {
               title: "Cores identificadas",
@@ -414,21 +494,10 @@ const fotolitos: Guide = {
             },
           ],
         },
-        {
-          type: "figure",
-          image: {
-            src: "/images/trabalhos/pvc-03.webp",
-            alt: "Aviso de segurança em três línguas impresso a preto sobre PVC transparente",
-            width: 1600,
-            height: 1200,
-            caption:
-              "Texto de pequena dimensão sobre PVC transparente. Em detalhes assim, a qualidade do ficheiro nota-se no resultado.",
-            credit: "work",
-          },
-        },
+        { type: "figure", image: guideImage("pt", "pvcWork") },
         {
           type: "paragraph",
-          text: `Cada material tem as suas particularidades. Nas páginas de [serigrafia em PVC](${pvcPath}), [serigrafia em tecido](${fabricPath}), [sacos em TNT](${nonwovenPath}) e [componentes para calçado](${footwearPath}) encontra a informação específica a indicar no pedido.`,
+          text: `Cada material tem as suas particularidades. Nas páginas de [serigrafia em PVC](${ptPaths.pvc}), [serigrafia em tecido](${ptPaths.fabric}), [sacos em TNT](${ptPaths.nonwoven}) e [componentes para calçado](${ptPaths.footwear}) encontra a informação específica a indicar no pedido.`,
         },
       ],
     },
@@ -446,8 +515,7 @@ const fotolitos: Guide = {
           items: [
             {
               title: "Identifique a encomenda anterior",
-              text:
-                "Indique a data aproximada ou a referência, ou envie uma fotografia da peça já impressa.",
+              text: "Indique a data aproximada ou a referência, ou envie uma fotografia da peça já impressa.",
             },
             {
               title: "Confirme que a arte é a mesma",
@@ -477,8 +545,274 @@ const fotolitos: Guide = {
   relatedServices: ["pvc", "fabric", "nonwoven", "footwear"],
 };
 
+const filmPositives: Guide = {
+  key: "fotolitos",
+  slug: "film-positives",
+  status: "published",
+  shortTitle: "Film positives",
+  title: "Film positives: what they are and what they do in screen printing",
+  metaTitle: "Film Positives in Screen Printing: What They Are | SERIFIL",
+  metaDescription:
+    "What a film positive is, how it differs from the screen and which files to prepare for a screen printing quote. A practical guide from SERIFIL in Portugal.",
+  excerpt:
+    "What a film positive is, how it differs from the screen, why the number of colours affects the quote and which files to send.",
+  eyebrow: "SCREEN PRINTING GUIDES · PREPARATION",
+  lead:
+    "Before ink reaches a bag, a PVC item or a fabric, the design has to be transferred onto a screen. The film positive is what makes that step possible. Understanding how it works helps you prepare artwork, read a quote and plan repeat orders.",
+  datePublished: "2026-09-14",
+  dateModified: "2026-09-14",
+  image: guideImage("en", "exposure"),
+  summary: [
+    "A film positive is a transparent film with the design printed in opaque black.",
+    "It is used to transfer the design onto the screen. It does not print anything itself.",
+    "As a rule, each colour in the design needs its own film and its own screen.",
+    "Vector files, actual print sizes and identified colours avoid extra preparation.",
+    "For a repeat order, identify the previous job and any change to the artwork.",
+  ],
+  sections: [
+    {
+      id: "what-is-a-film-positive",
+      title: "What is a film positive?",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "A film positive is a transparent sheet on which the design to be printed appears in opaque black. It works like a light mask: the black areas block the light and the clear areas let it through.",
+        },
+        {
+          type: "paragraph",
+          text:
+            "The film never touches the ink or the finished item. It is a preparation tool, used before printing to transfer the design onto the screen. Because each colour is printed separately in screen printing, a multi-colour design usually needs one film per colour.",
+        },
+        { type: "figure", image: guideImage("en", "imagesetter"), orientation: "portrait" },
+      ],
+    },
+    {
+      id: "how-it-is-used",
+      title: "How it is used in the process",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "There are four main stages between the file sent by the client and the printed item. The film positive sits in the middle, linking the digital artwork to the screen.",
+        },
+        {
+          type: "process",
+          caption: "Simplified diagram of the process for a two-colour design.",
+          steps: [
+            {
+              visual: "artwork",
+              title: "Final artwork",
+              text:
+                "The file is checked and set to the actual print size. If the design has several colours, it is separated colour by colour.",
+            },
+            {
+              visual: "film",
+              title: "Film positives",
+              text: "Each colour is output onto its own film, with that part of the design in opaque black.",
+            },
+            {
+              visual: "screen",
+              title: "Screen exposure",
+              text:
+                "The screen, coated with light-sensitive emulsion, is exposed with the film on top. Where the film is black, the emulsion does not harden and is later washed out with water, leaving the mesh open.",
+            },
+            {
+              visual: "print",
+              title: "Printing",
+              text:
+                "The squeegee pushes ink through the open areas of the mesh and the design is transferred to the substrate. Each colour has its own pass.",
+            },
+          ],
+        },
+        { type: "figure", image: guideImage("en", "exposure") },
+      ],
+    },
+    {
+      id: "film-or-screen",
+      title: "Film positive or screen: what is the difference?",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "They are two different items, used at different stages, and they are often confused. The film is used to transfer the design; the screen is used to print it.",
+        },
+        {
+          type: "comparison",
+          columns: ["Film positive", "Screen"],
+          rows: [
+            {
+              label: "What it is",
+              values: [
+                "A transparent film with the design in opaque black.",
+                "A frame with stretched mesh, coated with emulsion.",
+              ],
+            },
+            {
+              label: "What it does",
+              values: [
+                "Transfers the design onto the screen during preparation.",
+                "Prints: ink passes through the open areas of the mesh.",
+              ],
+            },
+            { label: "Contact with ink", values: ["No.", "Yes, for every printed item."] },
+            {
+              label: "When it must be remade",
+              values: [
+                "When the design, size or colour separation changes.",
+                "When the exposed design changes or the job needs a different screen preparation.",
+              ],
+            },
+          ],
+        },
+        { type: "gallery", images: [guideImage("en", "screens"), guideImage("en", "stretcher")] },
+      ],
+    },
+    {
+      id: "colours-and-quotes",
+      title: "How colours and preparation affect the quote",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "Before the first item is printed, there is preparation work: checking the artwork, producing the films, exposing the screens and registering each colour. That work depends mainly on the design, not on the quantity.",
+        },
+        {
+          type: "checklist",
+          items: [
+            {
+              title: "Number of colours",
+              text:
+                "As a rule, each colour needs its own film, its own screen and its own printing pass, with the colours aligned to one another. A three-colour logo needs more preparation than the same logo in one colour.",
+            },
+            {
+              title: "Size and print positions",
+              text:
+                "The size of the design determines the size of the film and screen. Printing in more than one position, such as front and back, may add preparation and passes.",
+            },
+            {
+              title: "State of the artwork",
+              text:
+                "A print-ready vector file saves work. A low-resolution image, live text or undefined colours may mean the artwork has to be prepared before the films are made.",
+            },
+            {
+              title: "Detail and gradients",
+              text:
+                "Very fine lines, small text, photographs and gradients need more care and do not suit every substrate. They are worth assessing before the design is finalised.",
+            },
+            {
+              title: "Substrate",
+              text: `The colour and texture of the material change how colours appear. On [clear PVC](${enPaths.pvc}), [non-woven material](${enPaths.nonwoven}) or [fabric](${enPaths.fabric}), preparation is planned so that the design reads well.`,
+            },
+            {
+              title: "Quantity",
+              text:
+                "Because preparation happens before production, its share of the cost per item tends to be higher for small quantities.",
+            },
+          ],
+        },
+        { type: "figure", image: guideImage("en", "nonwovenWork") },
+        {
+          type: "note",
+          text:
+            "This guide is not a quote. For an accurate assessment, tell us about the artwork, substrate, number of colours, print size and approximate quantity.",
+        },
+      ],
+    },
+    {
+      id: "files-to-send",
+      title: "Which files to send",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "The more complete the information, the fewer questions remain before the films are made. Use this list to prepare what you send.",
+        },
+        {
+          type: "checklist",
+          items: [
+            {
+              title: "Vector artwork",
+              text: "For example vector PDF, AI, EPS or SVG. Vector files stay sharp at any size.",
+            },
+            {
+              title: "Text converted to outlines",
+              text: "Convert text to outlines or send the fonts used, to avoid font substitution.",
+            },
+            {
+              title: "Identified colours",
+              text:
+                "Say how many colours the design has and, if colour matching matters, give a reference for each one, for example Pantone.",
+            },
+            {
+              title: "Size and position",
+              text: "Final print size and position on the item. A photo or sketch with the position marked helps.",
+            },
+            {
+              title: "Substrate details",
+              text: "Type of material, colour and, if possible, a photo or sample of the item.",
+            },
+            {
+              title: "If you only have an image",
+              text:
+                "Send the highest-quality version you have, as JPG or PNG. The artwork may need preparing before going ahead, which is assessed with your request.",
+            },
+          ],
+        },
+        { type: "figure", image: guideImage("en", "pvcWork") },
+        {
+          type: "paragraph",
+          text: `Each material has its own particularities. The pages on [PVC screen printing](${enPaths.pvc}), [fabric screen printing](${enPaths.fabric}), [non-woven bags](${enPaths.nonwoven}) and [footwear components](${enPaths.footwear}) explain what to include in your request.`,
+        },
+      ],
+    },
+    {
+      id: "repeat-orders",
+      title: "Repeat orders: what to consider",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "When a job is repeated, part of the preparation may already be done. That depends on what stays the same and should be confirmed case by case.",
+        },
+        {
+          type: "checklist",
+          items: [
+            {
+              title: "Identify the previous order",
+              text: "Give the approximate date or reference, or send a photo of the printed item.",
+            },
+            {
+              title: "Check the artwork is identical",
+              text:
+                "A small change, such as a contact detail, a date or a different size, usually means a new film and a new screen exposure for the colour affected.",
+            },
+            {
+              title: "Check colours and substrate",
+              text:
+                "Changing the ink colour, the material or the colour of the item may require adjustments, even with the same design.",
+            },
+            {
+              title: "Ask about previous preparation",
+              text:
+                "Whether films or screens from a previous job can be reused is something to confirm when requesting a quote.",
+            },
+            {
+              title: "Keep the approved artwork",
+              text:
+                "Keeping the final file makes any repeat easier, even if everything has to be prepared again.",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  relatedServices: ["pvc", "fabric", "nonwoven", "footwear"],
+};
+
 const guidesByLocale: Record<GuideLocale, Guide[]> = {
   pt: [fotolitos],
+  en: [filmPositives],
 };
 
 export function getPublishedGuides(locale: GuideLocale) {
@@ -499,8 +833,57 @@ export function getGuidePath(locale: GuideLocale, slug: string) {
   return `/${locale}/guias/${slug}/`;
 }
 
+type LocalePaths = Partial<Record<GuideLocale, string>>;
+
+function toHreflangPaths(paths: LocalePaths) {
+  const languages: Record<string, string> = {};
+  for (const locale of guideLocales) {
+    const path = paths[locale];
+    if (path) languages[guidesUi[locale].hreflang] = path;
+  }
+  const fallback = paths.pt ?? paths.en;
+  if (fallback) languages["x-default"] = fallback;
+  return languages;
+}
+
+function getGuideLocalePaths(key: GuideKey): LocalePaths {
+  const paths: LocalePaths = {};
+  for (const locale of guideLocales) {
+    const guide = getPublishedGuides(locale).find((item) => item.key === key);
+    if (guide) paths[locale] = getGuidePath(locale, guide.slug);
+  }
+  return paths;
+}
+
+function getGuideIndexLocalePaths(): LocalePaths {
+  const paths: LocalePaths = {};
+  for (const locale of guideLocales) {
+    if (getPublishedGuides(locale).length > 0) paths[locale] = getGuideIndexPath(locale);
+  }
+  return paths;
+}
+
+/** Caminhos relativos por código hreflang (pt-PT, en, x-default) de um guia. */
+export function getGuideHreflangPaths(key: GuideKey) {
+  return toHreflangPaths(getGuideLocalePaths(key));
+}
+
+/** Caminhos relativos por código hreflang do índice de guias. */
+export function getGuideIndexHreflangPaths() {
+  return toHreflangPaths(getGuideIndexLocalePaths());
+}
+
+/** Destinos do seletor de idioma: versão equivalente ou, na falta dela, o índice de guias. */
+export function getGuideLanguageHrefs(key?: GuideKey): Record<GuideLocale, string> {
+  const paths = key ? getGuideLocalePaths(key) : getGuideIndexLocalePaths();
+  return {
+    pt: paths.pt ?? getGuideIndexPath("pt"),
+    en: paths.en ?? getGuideIndexPath("en"),
+  };
+}
+
 export function formatGuideDate(locale: GuideLocale, isoDate: string) {
-  return new Intl.DateTimeFormat(guidesUi[locale].htmlLang, {
+  return new Intl.DateTimeFormat(guidesUi[locale].dateLocale, {
     dateStyle: "long",
     timeZone: "UTC",
   }).format(new Date(`${isoDate}T00:00:00Z`));

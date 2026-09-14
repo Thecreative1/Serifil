@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { FloatingContact } from "@/components/layout/FloatingContact";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LocalePreference } from "@/components/LocalePreference";
@@ -150,8 +151,10 @@ export default async function ServicePage({
           pt: alternates["pt-PT"],
           en: alternates.en,
         }}
+        activeHref="#servicos"
       />
       <ServiceDetail locale={localeParam} page={page} />
+      <FloatingContact copy={copy.contact} />
       <Footer copy={copy.footer} headerCopy={copy.header} homeHref={homePath} />
     </>
   );
