@@ -236,7 +236,7 @@ As imagens são publicadas em WebP com 1600×1200px, carregamento diferido e tex
 
 Os guias seguem a mesma gramática das páginas de serviço: hero escuro com breadcrumbs, corpo explicativo em papel técnico e fecho laranja com "Pedir orçamento" e contactos. O corpo usa uma coluna de leitura de 8/12 com índice fixo em desktop, texto até 65ch e secções numeradas separadas por linhas de 1px.
 
-O resumo inicial é um bloco em tinta escura sobre o papel técnico. Esquemas de processo usam SVG plano com as cores da marca (tinta, papel, laranja) e nunca substituem uma fotografia real quando existe. Fotografias de oficina e de trabalhos levam sempre legenda com a origem ("Oficina da SERIFIL" ou "Trabalho produzido pela SERIFIL"). Ícones e pequenos textos sobre papel técnico usam tinta escura, porque o laranja não tem contraste suficiente sobre fundo claro.
+O resumo inicial é um bloco em tinta escura sobre o papel técnico. Esquemas de processo usam SVG plano com as cores da marca (tinta, papel, laranja) e nunca substituem uma fotografia real quando existe. Fotografias de trabalhos e de equipamento levam sempre etiqueta: "Trabalho produzido pela SERIFIL" só para trabalhos da SERIFIL; equipamento e etapas do processo usam "Preparação da impressão" e descrevem a função, sem indicar instalações (o equipamento fotografado é de um parceiro). Ícones e pequenos textos sobre papel técnico usam tinta escura, porque o laranja não tem contraste suficiente sobre fundo claro.
 
 ### Motion
 

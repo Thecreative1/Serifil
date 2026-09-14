@@ -30,8 +30,12 @@ export type GuideImage = {
   width: number;
   height: number;
   caption: string;
-  /** `work`: trabalho produzido pela SERIFIL. `workshop`: equipamento ou oficina. */
-  credit: "work" | "workshop";
+  /**
+   * `work`: trabalho produzido pela SERIFIL.
+   * `process`: equipamento ou etapa do processo. As fotografias de equipamento são de um parceiro
+   * que trabalha para a SERIFIL: nunca indicar que são instalações da SERIFIL.
+   */
+  credit: "work" | "process";
 };
 
 export type GuideProcessVisual = "artwork" | "film" | "screen" | "print";
@@ -102,7 +106,7 @@ type GuidesUi = {
   summaryTitle: string;
   tocTitle: string;
   realWork: string;
-  workshop: string;
+  process: string;
   relatedServicesEyebrow: string;
   relatedServicesTitle: string;
   relatedServicesDescription: string;
@@ -138,7 +142,7 @@ export const guidesUi: Record<GuideLocale, GuidesUi> = {
     summaryTitle: "Em resumo",
     tocTitle: "Neste guia",
     realWork: "Trabalho produzido pela SERIFIL",
-    workshop: "Oficina da SERIFIL",
+    process: "Preparação da impressão",
     relatedServicesEyebrow: "SERVIÇOS RELACIONADOS",
     relatedServicesTitle: "Onde aplicamos este processo.",
     relatedServicesDescription:
@@ -174,7 +178,7 @@ export const guidesUi: Record<GuideLocale, GuidesUi> = {
     summaryTitle: "In short",
     tocTitle: "In this guide",
     realWork: "Work produced by SERIFIL",
-    workshop: "SERIFIL workshop",
+    process: "Print preparation",
     relatedServicesEyebrow: "RELATED SERVICES",
     relatedServicesTitle: "Where we use this process.",
     relatedServicesDescription:
@@ -188,10 +192,10 @@ export const guidesUi: Record<GuideLocale, GuidesUi> = {
 };
 
 const imageFiles = {
-  imagesetter: { src: "/images/guias/filmadora-fotolitos.webp", width: 900, height: 1125, credit: "workshop" },
-  exposure: { src: "/images/guias/mesa-exposicao.webp", width: 1440, height: 810, credit: "workshop" },
-  screens: { src: "/images/guias/telas-serigrafia.webp", width: 1440, height: 810, credit: "workshop" },
-  stretcher: { src: "/images/guias/esticador-telas.webp", width: 1440, height: 810, credit: "workshop" },
+  imagesetter: { src: "/images/guias/filmadora-fotolitos.webp", width: 900, height: 1125, credit: "process" },
+  exposure: { src: "/images/guias/mesa-exposicao.webp", width: 1440, height: 810, credit: "process" },
+  screens: { src: "/images/guias/telas-serigrafia.webp", width: 1440, height: 810, credit: "process" },
+  stretcher: { src: "/images/guias/esticador-telas.webp", width: 1440, height: 810, credit: "process" },
   nonwovenWork: { src: "/images/trabalhos/tnt-05.webp", width: 1600, height: 1200, credit: "work" },
   pvcWork: { src: "/images/trabalhos/pvc-03.webp", width: 1600, height: 1200, credit: "work" },
 } as const;
@@ -201,9 +205,9 @@ type GuideImageKey = keyof typeof imageFiles;
 const imageCopy: Record<GuideLocale, Record<GuideImageKey, { alt: string; caption: string }>> = {
   pt: {
     imagesetter: {
-      alt: "Filmadora AGFA AccuSet 1500 com uma folha de película pousada no topo, na oficina da SERIFIL",
+      alt: "Filmadora AGFA AccuSet 1500 com uma folha de película pousada no topo",
       caption:
-        "Filmadora na oficina da SERIFIL. É o equipamento que passa a arte digital para a película que dá origem ao fotolito.",
+        "Filmadora: o equipamento que passa a arte digital para a película que dá origem ao fotolito.",
     },
     exposure: {
       alt: "Mesa de exposição iluminada com uma tela pressionada por pesos e, ao lado, uma processadora de película AGFA Rapiline",
@@ -231,9 +235,9 @@ const imageCopy: Record<GuideLocale, Record<GuideImageKey, { alt: string; captio
   },
   en: {
     imagesetter: {
-      alt: "AGFA AccuSet 1500 imagesetter with a sheet of film resting on top, in the SERIFIL workshop",
+      alt: "AGFA AccuSet 1500 imagesetter with a sheet of film resting on top",
       caption:
-        "Imagesetter in the SERIFIL workshop. It outputs the digital artwork onto the film that becomes the film positive.",
+        "Imagesetter: the equipment that outputs the digital artwork onto the film that becomes the film positive.",
     },
     exposure: {
       alt: "Illuminated exposure unit with a screen held down by weights and, next to it, an AGFA Rapiline film processor",

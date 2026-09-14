@@ -50,7 +50,7 @@ function GuideFigure({
       />
       <figcaption className="px-4 py-4 sm:px-5">
         <span className="block text-[0.68rem] font-bold uppercase tracking-[0.12em] text-accent">
-          {image.credit === "work" ? ui.realWork : ui.workshop}
+          {image.credit === "work" ? ui.realWork : ui.process}
         </span>
         <span className="mt-2 block text-sm leading-6 text-text-secondary">{image.caption}</span>
       </figcaption>

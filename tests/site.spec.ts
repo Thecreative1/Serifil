@@ -693,6 +693,9 @@ test("publica a secção de guias em português com artigo completo, SEO e liga�
     await expect(page.getByRole("heading", { level: 2, name: heading })).toBeVisible();
   }
 
+  await expect(page.locator("body")).not.toContainText(/oficina da SERIFIL|instalações da SERIFIL/i);
+  await expect(page.getByText("Preparação da impressão").first()).toBeVisible();
+
   const main = page.locator("main");
   await expect(main.getByRole("link", { name: "Pedir orçamento" })).toHaveAttribute("href", "/pt/#orcamento");
   await expect(main.getByRole("link", { name: "serigrafia em PVC", exact: true })).toHaveAttribute("href", "/pt/servicos/serigrafia-pvc/");
@@ -783,7 +786,7 @@ test("publica o guia em inglês com hreflang recíproco e ligações válidas", 
     "/pt/guias/fotolitos/",
   );
   await expect(page.locator("main").getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", "/en/#orcamento");
-  await expect(page.locator("body")).not.toContainText(/\bTNT\b|fotolito|Pedir orçamento/);
+  await expect(page.locator("body")).not.toContainText(/\bTNT\b|fotolito|Pedir orçamento|SERIFIL workshop/);
 
   const structuredData = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent() ?? "{}") as {
     "@graph": Array<{ "@type": string; headline?: string; inLanguage?: string }>;

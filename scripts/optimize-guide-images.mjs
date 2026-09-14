@@ -5,7 +5,7 @@ import sharp from "sharp";
 const sourceDirectory = path.resolve(process.cwd(), "../fotos serifil/guias");
 const outputDirectory = path.resolve(process.cwd(), "public/images/guias");
 
-// Fotografias da oficina: 16:9 para planos gerais, 4:5 para equipamento vertical.
+// Fotografias de equipamento de preparação (parceiro da SERIFIL): 16:9 para planos gerais, 4:5 para equipamento vertical.
 const images = [
   { source: "telas.jpg", output: "telas-serigrafia.webp", width: 1440, height: 810, position: "centre" },
   { source: "esticador.jpg", output: "esticador-telas.webp", width: 1440, height: 810, position: "centre" },

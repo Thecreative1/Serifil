@@ -101,7 +101,7 @@ Cada guia publica canonical, hreflang recíproco (`x-default` para PT), Open Gra
 - `components/layout/FloatingContact.tsx` (Ligar e WhatsApp) é usado na home, nas páginas de serviço e nos guias.
 - O teste "mantém menus consistentes" verifica o item ativo, o contacto flutuante, a mesma estrutura de menu em PT e EN e a ausência de sobreposição do header a 1024, 1280 e 1440px nas duas línguas.
 
-As fotografias da oficina estão em `public/images/guias/`, geradas por `scripts/optimize-guide-images.mjs` a partir de `../fotos serifil/guias/`. As legendas distinguem trabalho produzido (`credit: "work"`) de equipamento (`credit: "workshop"`).
+As fotografias de equipamento estão em `public/images/guias/`, geradas por `scripts/optimize-guide-images.mjs` a partir de `../fotos serifil/guias/`. As legendas distinguem trabalho produzido pela SERIFIL (`credit: "work"`) de equipamento e processo (`credit: "process"`, etiqueta "Preparação da impressão"). O equipamento fotografado pertence a um parceiro que trabalha para a SERIFIL: legendas e textos alternativos descrevem a função do equipamento e nunca o apresentam como instalações da SERIFIL.
 
 ## 4. Fontes de dados
 
