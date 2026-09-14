@@ -307,7 +307,9 @@ npm run start
 npm run test:e2e
 ```
 
-`npm run build` executa `next build` e cria a exportação estática em `out/`. O workflow `.github/workflows/deploy-pages.yml` envia esse diretório para o GitHub Pages e publica-o quando há alterações na branch `main`.
+`npm run build` executa `next build` e cria a exportação estática em `out/`. O workflow `.github/workflows/deploy-pages.yml` envia esse diretório para o GitHub Pages e publica-o **apenas quando há push para a branch `main`**.
+
+Nenhuma outra branch é publicada. As branches `agent/*` e restantes servem para trabalho e revisão: commit ou push nelas não altera serifil.com. O processo de publicação e o diagnóstico "fiz commit mas não vejo" estão em `README.md` → "Publicar no site"; as regras para agentes estão em `AGENTS.md`.
 
 Não editar `out/` manualmente. É um artefacto regenerável.
 
@@ -364,3 +366,9 @@ Rever também ambas as capturas completas quando a mudança toca layout, tipogra
 - Evitar client components desnecessários.
 - Atualizar ou adicionar testes para o novo contrato.
 - Atualizar este documento no mesmo commit.
+
+### Publicação
+
+- Uma alteração só está publicada quando o commit está em `origin/main`; estar noutra branch, mesmo no GitHub, não chega.
+- Confirmar que o run "Deploy to GitHub Pages" desse commit terminou com sucesso.
+- Verificar a URL ao vivo (estado 200 e conteúdo novo) antes de comunicar que está publicado.
