@@ -1,5 +1,12 @@
 import type { MetadataRoute } from "next";
 import { brand } from "@/config/brand";
+import {
+  getGuideImages,
+  getGuideIndexPath,
+  getGuidePath,
+  getPublishedGuides,
+  guideLocales,
+} from "@/data/guides";
 import { locales } from "@/data/i18n";
 import {
   getServiceAlternates,
@@ -79,5 +86,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  return [...homePages, ...detailPages];
+  const guidePages: MetadataRoute.Sitemap = guideLocales.flatMap((locale) => {
+    const guides = getPublishedGuides(locale);
+    if (guides.length === 0) return [];
+
+    const latestModification = guides.reduce(
+      (latest, guide) => (guide.dateModified > latest ? guide.dateModified : latest),
+      guides[0].dateModified,
+    );
+
+    return [
+      {
+        url: new URL(getGuideIndexPath(locale), brand.website).toString(),
+        lastModified: new Date(latestModification),
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      },
+      ...guides.map((guide) => ({
+        url: new URL(getGuidePath(locale, guide.slug), brand.website).toString(),
+        lastModified: new Date(guide.dateModified),
+        changeFrequency: "yearly" as const,
+        priority: 0.7,
+        images: getGuideImages(guide).map((image) => new URL(image.src, brand.website).toString()),
+      })),
+    ];
+  });
+
+  return [...homePages, ...detailPages, ...guidePages];
 }

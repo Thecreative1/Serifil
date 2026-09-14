@@ -654,6 +654,109 @@ test("oferece atalhos de conteúdo e semântica acessível nos dois tipos de pá
   await servicePage.close();
 });
 
+test("publica a secção de guias em português com artigo completo, SEO e ligações válidas", async ({ page, request }) => {
+  await page.goto("/pt/");
+  await expect(page.getByRole("navigation", { name: "Navegação principal" }).getByRole("link", { name: "Guias" })).toHaveAttribute(
+    "href",
+    "/pt/guias/",
+  );
+  await page.goto("/en/");
+  await expect(page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: /Guia|Guide/ })).toHaveCount(0);
+
+  await page.goto("/pt/guias/");
+  await expect(page.locator("html")).toHaveAttribute("lang", "pt-PT");
+  await expect(page).toHaveTitle("Guias de Serigrafia | SERIFIL");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Guias de Serigrafia");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/pt/guias/");
+  await page.getByRole("link", { name: "Fotolitos: o que são e para que servem na serigrafia" }).click();
+  await expect(page).toHaveURL(/\/pt\/guias\/fotolitos\/$/);
+
+  const title = "Fotolitos: o que são e para que servem na serigrafia";
+  await expect(page.locator("h1")).toHaveCount(1);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(title);
+  await expect(page).toHaveTitle(`${title} | SERIFIL`);
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /fotolito/);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/pt/guias/fotolitos/");
+  await expect(page.locator('meta[property="og:type"]')).toHaveAttribute("content", "article");
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://serifil.com/images/guias/mesa-exposicao.webp");
+
+  for (const heading of [
+    "O que é um fotolito?",
+    "Fotolito e tela: qual é a diferença?",
+    "Como as cores e a preparação influenciam o orçamento",
+    "Que ficheiros deve enviar",
+    "Repetir uma encomenda: o que considerar",
+  ]) {
+    await expect(page.getByRole("heading", { level: 2, name: heading })).toBeVisible();
+  }
+
+  const main = page.locator("main");
+  await expect(main.getByRole("link", { name: "Pedir orçamento" })).toHaveAttribute("href", "/pt/#orcamento");
+  await expect(main.getByRole("link", { name: "serigrafia em PVC", exact: true })).toHaveAttribute("href", "/pt/servicos/serigrafia-pvc/");
+  await expect(main.getByRole("link", { name: "WhatsApp +351 910 508 706" })).toHaveAttribute(
+    "href",
+    `https://wa.me/351910508706?text=${encodeURIComponent("Olá SERIFIL! Queria pedir um orçamento. O meu projeto é:")}`,
+  );
+
+  const structuredData = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent() ?? "{}") as {
+    "@graph": Array<{ "@type": string; headline?: string; datePublished?: string; inLanguage?: string }>;
+  };
+  const article = structuredData["@graph"].find((item) => item["@type"] === "Article");
+  expect(article?.headline).toBe(title);
+  expect(article?.datePublished).toBe("2026-09-14");
+  expect(article?.inLanguage).toBe("pt-PT");
+  expect(structuredData["@graph"].some((item) => item["@type"] === "BreadcrumbList")).toBe(true);
+
+  const images = main.locator("img");
+  expect(await images.count()).toBeGreaterThanOrEqual(6);
+  for (let index = 0; index < await images.count(); index += 1) {
+    await images.nth(index).scrollIntoViewIfNeeded();
+    await expect(images.nth(index)).toHaveJSProperty("complete", true);
+  }
+  expect(await images.evaluateAll((items) => items.every((image) => (image as HTMLImageElement).naturalWidth > 0))).toBe(true);
+
+  const invalidAnchors = await main.locator('a[href^="#"]').evaluateAll((links) =>
+    links.map((link) => link.getAttribute("href") ?? "").filter((href) => !document.querySelector(href)),
+  );
+  expect(invalidAnchors).toEqual([]);
+
+  const internalPaths = await main.locator('a[href^="/"]').evaluateAll((links) =>
+    [...new Set(links.map((link) => (link.getAttribute("href") ?? "").split("#")[0]))],
+  );
+  for (const path of internalPaths) {
+    expect((await request.get(path)).ok(), path).toBe(true);
+  }
+
+  expect((await request.get("/en/guias/")).status()).toBe(404);
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(sitemap).toContain("<loc>https://serifil.com/pt/guias/</loc>");
+  expect(sitemap).toContain("<loc>https://serifil.com/pt/guias/fotolitos/</loc>");
+  expect(sitemap).toContain("<image:loc>https://serifil.com/images/guias/filmadora-fotolitos.webp</image:loc>");
+});
+
+test("guias não criam overflow horizontal e mantêm a navegação móvel", async ({ page }) => {
+  for (const viewport of [{ width: 320, height: 720 }, { width: 375, height: 812 }, { width: 1024, height: 768 }, { width: 1440, height: 900 }]) {
+    await page.setViewportSize(viewport);
+    for (const path of ["/pt/guias/", "/pt/guias/fotolitos/"]) {
+      await page.goto(path);
+      const dimensions = await page.evaluate(() => ({
+        viewport: window.innerWidth,
+        document: document.documentElement.scrollWidth,
+        body: document.body.scrollWidth,
+      }));
+      expect(dimensions.document, `${path} ${viewport.width}px`).toBeLessThanOrEqual(dimensions.viewport + 1);
+      expect(dimensions.body, `${path} ${viewport.width}px`).toBeLessThanOrEqual(dimensions.viewport + 1);
+    }
+  }
+
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/pt/guias/fotolitos/");
+  await page.getByRole("button", { name: "Abrir menu" }).click();
+  const mobileNavigation = page.getByRole("navigation", { name: "Navegação móvel" });
+  await expect(mobileNavigation.getByRole("link", { name: "Serviços" })).toHaveAttribute("href", "/pt/#servicos");
+  await expect(mobileNavigation.getByRole("link", { name: "Guias" })).toHaveAttribute("href", "/pt/guias/");
+});
+
 test("apresenta uma página 404 personalizada, bilingue e não indexável", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   const response = await page.goto("/rota-inexistente-auditoria/");

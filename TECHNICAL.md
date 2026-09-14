@@ -35,6 +35,8 @@ config/
   paths.ts               caminhos de assets e rotas localizadas
 data/
   i18n.ts                fonte ativa de todo o conteúdo PT e EN
+  service-pages.ts       páginas de serviço PT e EN
+  guides.ts              guias editoriais (só PT) e estado de publicação
 lib/
   analytics.ts           consent mode e eventos sem dados pessoais
 public/
@@ -80,6 +82,19 @@ No GitHub Pages, a página estática em `/` escolhe o idioma no cliente e encami
 - termina com footer.
 
 Não adicionar um idioma sem atualizar `locales`, `translations`, metadata, sitemap, redirects, seletor de idioma e testes.
+
+### `/pt/guias/` e `/pt/guias/<slug>/`
+
+Secção editorial "Guias de Serigrafia", só em português. O conteúdo vive em `data/guides.ts`:
+
+- `guideLocales` limita os idiomas publicados (`/en/guias/` não é gerado e devolve 404);
+- cada guia tem `status`; apenas `published` gera página, entra na listagem, no JSON-LD e no sitemap. Rascunhos incompletos ficam como `draft`;
+- o corpo é uma lista de secções com blocos tipados (`paragraph`, `note`, `checklist`, `comparison`, `process`, `figure`, `gallery`), renderizados por `components/sections/GuideArticle.tsx`;
+- ligações internas no texto usam a sintaxe `[texto](/caminho/)`, construídas com `getServicePath` para não divergirem das rotas.
+
+Cada guia publica canonical, Open Graph `article`, JSON-LD `Article` e `BreadcrumbList`; o índice publica `CollectionPage`. O link "Guias" do menu PT é um caminho absoluto: `Header`, `MobileMenu` e `Footer` só prefixam `homeHref` a âncoras `#`.
+
+As fotografias da oficina estão em `public/images/guias/`, geradas por `scripts/optimize-guide-images.mjs` a partir de `../fotos serifil/guias/`. As legendas distinguem trabalho produzido (`credit: "work"`) de equipamento (`credit: "workshop"`).
 
 ## 4. Fontes de dados
 

@@ -20,7 +20,7 @@ export function Header({ locale, copy, homeHref, languageHrefs }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const sectionHref = (href: string) => homeHref ? `${homeHref}${href}` : href;
+  const sectionHref = (href: string) => homeHref && href.startsWith("#") ? `${homeHref}${href}` : href;
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
     window.requestAnimationFrame(() => menuButtonRef.current?.focus({ preventScroll: true }));
@@ -48,7 +48,7 @@ export function Header({ locale, copy, homeHref, languageHrefs }: HeaderProps) {
             <span className="text-xl font-black tracking-[-0.04em] text-text-primary sm:text-2xl">{brand.name}</span>
             <span className="hidden border-l border-border pl-4 text-[0.65rem] leading-4 uppercase tracking-[0.15em] text-text-secondary xl:block">{copy.descriptor}</span>
           </a>
-          <nav className="hidden items-center gap-6 lg:flex" aria-label={copy.navigationLabel}>
+          <nav className="hidden items-center gap-4 lg:flex min-[1360px]:gap-6" aria-label={copy.navigationLabel}>
             {copy.nav.map((link) => (
               <a key={link.href} href={sectionHref(link.href)} className="text-sm font-semibold text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
                 {link.label}

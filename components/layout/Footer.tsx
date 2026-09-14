@@ -27,7 +27,7 @@ export function Footer({
       ? [{ label: copy.legal.phone, value: brand.phone, href: `tel:${brand.phone.replace(/\s/g, "")}` }]
       : []),
   ];
-  const sectionHref = (href: string) => homeHref ? `${homeHref}${href}` : href;
+  const sectionHref = (href: string) => homeHref && href.startsWith("#") ? `${homeHref}${href}` : href;
 
   return (
     <footer className="border-t border-border bg-[#0c0d0b] py-12 sm:py-16">

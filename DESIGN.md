@@ -232,6 +232,12 @@ A galeria organiza produção real por material, com uma coluna de contexto téc
 
 As imagens são publicadas em WebP com 1600×1200px, carregamento diferido e texto alternativo específico. A edição deve preservar a aparência real dos materiais: corrigir orientação, uniformizar o recorte e comprimir, sem filtros que alterem cores ou acabamentos.
 
+### Guias
+
+Os guias seguem a mesma gramática das páginas de serviço: hero escuro com breadcrumbs, corpo explicativo em papel técnico e fecho laranja com "Pedir orçamento" e contactos. O corpo usa uma coluna de leitura de 8/12 com índice fixo em desktop, texto até 65ch e secções numeradas separadas por linhas de 1px.
+
+O resumo inicial é um bloco em tinta escura sobre o papel técnico. Esquemas de processo usam SVG plano com as cores da marca (tinta, papel, laranja) e nunca substituem uma fotografia real quando existe. Fotografias de oficina e de trabalhos levam sempre legenda com a origem ("Oficina da SERIFIL" ou "Trabalho produzido pela SERIFIL"). Ícones e pequenos textos sobre papel técnico usam tinta escura, porque o laranja não tem contraste suficiente sobre fundo claro.
+
 ### Motion
 
 Revelações usam apenas opacity e translateY de 24px durante 700ms, com `cubic-bezier(0.16, 1, 0.3, 1)`. O marquee é linear durante 36s. `prefers-reduced-motion: reduce` reduz animações e transições a 0.01ms e mantém o conteúdo visível.

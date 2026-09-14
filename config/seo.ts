@@ -3,6 +3,10 @@ import { brand } from "@/config/brand";
 export const businessId = `${brand.website}#business`;
 export const logoId = `${brand.website}#logo`;
 
+export function absoluteUrl(path: string) {
+  return new URL(path, brand.website).toString();
+}
+
 export const businessAlternateNames = [
   "Serifil",
   "Serifil Serigrafia",

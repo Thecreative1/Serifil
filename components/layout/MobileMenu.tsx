@@ -19,7 +19,7 @@ type MobileMenuProps = {
 export function MobileMenu({ open, onClose, locale, copy, homeHref, languageHrefs }: MobileMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const sectionHref = (href: string) => homeHref ? `${homeHref}${href}` : href;
+  const sectionHref = (href: string) => homeHref && href.startsWith("#") ? `${homeHref}${href}` : href;
 
   useEffect(() => {
     if (!open) return;
