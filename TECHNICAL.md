@@ -95,6 +95,15 @@ Secção editorial "Guias de Serigrafia" / "Screen Printing Guides", em portugu�
 
 Cada guia publica canonical, hreflang recíproco (`x-default` para PT), Open Graph `article`, JSON-LD `Article` e `BreadcrumbList`; o índice publica `CollectionPage`. O link "Guias"/"Guides" do menu é um caminho absoluto: `Header`, `MobileMenu` e `Footer` só prefixam `homeHref` a âncoras `#`.
 
+### `/pt/quadros/` e `/en/quadros/`
+
+Ferramenta "Quadros de serigrafia". O cliente desenha o quadro à escala, arrastando o canto ou partindo de uma medida habitual. Escolhe caixilho novo ou retelagem, a malha, a gravação e a quantidade. Envia o pedido pelo Formspree (campos `quadro_*`) ou por WhatsApp com o resumo.
+
+- É um serviço à parte dos serviços de impressão, porque os quadros são feitos por um parceiro. Não entra em `service-pages.ts`, no catálogo JSON-LD da home nem no formulário principal. Nunca mostra preços nem diz que a SERIFIL fabrica os quadros.
+- Conteúdo, opções e resumo em `data/screens.ts`. Interação em `components/screens/ScreenConfigurator.tsx` (client component; o desenho é SVG com pointer events e os campos numéricos são a alternativa por teclado).
+- `screensPublished` controla a publicação. Com `false`, as páginas são geradas para testes, mas ficam `noindex`, fora do sitemap e sem ligação nos menus. Passar a `true` só com aprovação do utilizador e, nessa altura, acrescentar a ligação nos menus PT e EN.
+- As medidas habituais e as malhas são referências de mercado. Têm de ser confirmadas com o parceiro antes de publicar.
+
 ### Menus e contacto rápido
 
 - `Header` recebe `activeHref` com o `href` do item da secção atual (`#servicos` nas páginas de serviço, `/<locale>/guias/` nos guias). O item fica com `aria-current="true"` no desktop e no menu móvel. A home não marca nenhum item.

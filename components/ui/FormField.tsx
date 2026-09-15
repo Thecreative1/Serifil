@@ -45,9 +45,9 @@ export function SelectInput({ id, label, optional, optionalLabel, error, childre
   );
 }
 
-export function TextArea({ id, label, error, ...props }: BaseProps & TextareaHTMLAttributes<HTMLTextAreaElement>) {
+export function TextArea({ id, label, optional, optionalLabel, error, ...props }: BaseProps & TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return (
-    <FieldShell id={id} label={label} error={error}>
+    <FieldShell id={id} label={label} optional={optional} optionalLabel={optionalLabel} error={error}>
       <textarea id={id} className={`${fieldClass} min-h-36 resize-y`} aria-invalid={Boolean(error)} aria-describedby={error ? `${id}-error` : undefined} {...props} />
     </FieldShell>
   );

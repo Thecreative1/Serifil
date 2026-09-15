@@ -234,6 +234,101 @@ test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
   expect(JSON.stringify(leadEvent)).not.toContain("000 000 000");
 });
 
+test("ferramenta de quadros desenha, resume e envia o pedido sem preços nem publicação", async ({ page, request }) => {
+  let submittedBody = "";
+  await page.addInitScript(() => {
+    localStorage.setItem("serifil_analytics_consent", "denied");
+  });
+  await page.route("https://formspree.io/f/xzdnyead", async (route) => {
+    submittedBody = route.request().postData() ?? "";
+    await route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
+  });
+
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(sitemap).not.toContain("/quadros/");
+  await page.goto("/pt/");
+  await expect(page.locator('a[href="/pt/quadros/"]')).toHaveCount(0);
+
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/pt/quadros/");
+  await expect(page.locator("h1")).toHaveText("Desenhe o seu quadro.");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  await expect(page.locator("main")).not.toContainText(/€|\beuros?\b/i);
+
+  const summary = page.getByRole("region", { name: "O seu pedido" });
+  const widthInput = page.getByLabel("Largura (cm)");
+  await expect(summary).toContainText("50 × 60 cm");
+
+  await page.getByRole("button", { name: "40 × 50", exact: true }).click();
+  await expect(summary).toContainText("40 × 50 cm");
+  await page.getByRole("button", { name: "Rodar" }).click();
+  await expect(summary).toContainText("50 × 40 cm");
+  await widthInput.fill("70");
+  await expect(summary).toContainText("70 × 40 cm");
+  await widthInput.fill("5");
+  await widthInput.press("Enter");
+  await expect(widthInput).toHaveValue("20");
+
+  const handle = page.locator('[data-handle="resize"] rect').last();
+  await handle.scrollIntoViewIfNeeded();
+  const box = await handle.boundingBox();
+  expect(box).not.toBeNull();
+  const start = { x: (box?.x ?? 0) + (box?.width ?? 0) / 2, y: (box?.y ?? 0) + (box?.height ?? 0) / 2 };
+  await page.mouse.move(start.x, start.y);
+  await page.mouse.down();
+  await page.mouse.move(start.x + 120, start.y, { steps: 6 });
+  await page.mouse.up();
+  await expect(widthInput).not.toHaveValue("20");
+  await expect(page.getByLabel("Altura (cm)")).toHaveValue("40");
+
+  await page.getByLabel("Retelagem").check();
+  await page.getByLabel("90T").check();
+  await page.getByLabel("Gravar o desenho na tela").check();
+  await page.getByRole("button", { name: "Mais cores" }).click();
+  await page.getByRole("button", { name: "Mais cores" }).click();
+  await expect(page.locator("#screen-colours")).toHaveText("3");
+  await page.getByRole("button", { name: "Passar para 3 quadros" }).click();
+  await expect(page.locator("#screen-quantity")).toHaveText("3");
+  await expect(summary).toContainText("Retelagem");
+  await expect(summary).toContainText("90T");
+  await expect(summary).toContainText("Com gravação, 3 cores");
+
+  const whatsappHref = await summary.getByRole("link", { name: "Enviar resumo por WhatsApp" }).getAttribute("href");
+  expect(whatsappHref).toContain("https://wa.me/351910508706?text=");
+  expect(decodeURIComponent(whatsappHref?.split("text=")[1] ?? "")).toContain("Malha: 90T");
+
+  const form = page.getByRole("form", { name: "Pedido de quadros de serigrafia" });
+  await form.getByRole("button", { name: "Enviar pedido" }).click();
+  await expect(form.getByText("Indique o seu nome.")).toBeVisible();
+  await form.getByLabel("Nome").fill("Estamparia Exemplo");
+  await form.getByLabel("E-mail").fill("quadros@example.test");
+  await form.getByLabel("Telefone").fill("000 000 000");
+  await form.getByLabel(/Autorizo o tratamento/).check();
+  await form.getByRole("button", { name: "Enviar pedido" }).click();
+  await expect(page.getByRole("heading", { name: "Pedido enviado." })).toBeVisible();
+  expect(submittedBody).toContain("quadro_malha");
+  expect(submittedBody).toContain("90T");
+  expect(submittedBody).toContain("Retelagem");
+
+  await page.goto("/en/quadros/");
+  await expect(page.locator("h1")).toHaveText("Draw your screen.");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/en/quadros/");
+  await expect(page.locator('link[hreflang="pt-PT"]')).toHaveAttribute("href", "https://serifil.com/pt/quadros/");
+  await expect(page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "pt" })).toHaveAttribute(
+    "href",
+    "/pt/quadros/",
+  );
+  await expect(page.getByRole("region", { name: "Your request" })).toContainText("50 × 60 cm");
+
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto("/pt/quadros/");
+  const dimensions = await page.evaluate(() => ({
+    viewport: window.innerWidth,
+    document: document.documentElement.scrollWidth,
+  }));
+  expect(dimensions.document).toBeLessThanOrEqual(dimensions.viewport + 1);
+});
+
 test("publica apenas contactos configurados e o WhatsApp correto", async ({ page }) => {
   await page.goto("/pt/#contacto");
   const emailLinks = page.locator('a[href="mailto:geral@serifil.com"]');
