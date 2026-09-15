@@ -106,12 +106,14 @@ type ScreensCopy = {
   meshUses: Record<Exclude<MeshOption, "unsure">, string>;
   meshUnsure: { title: string; text: string };
   meshNote: string;
+  meshSpec: (mesh: string | null) => string;
   engravingToggle: string;
   engravingText: string;
   colours: string;
   decreaseColours: string;
   increaseColours: string;
   quantityPerColour: (colours: number) => string;
+  quantitySpec: (quantity: number) => string;
   quantity: string;
   decreaseQuantity: string;
   increaseQuantity: string;
@@ -209,6 +211,7 @@ export const screensCopy: Record<Locale, ScreensCopy> = {
       text: "Diga-nos na mensagem o que vai imprimir e a malha fica definida no orçamento.",
     },
     meshNote: "A disponibilidade de cada malha é confirmada no orçamento.",
+    meshSpec: (mesh) => (mesh ? `Malha ${mesh}` : "Malha a definir"),
     engravingToggle: "Gravar o desenho na tela",
     engravingText:
       "A tela é revestida com emulsão e exposta com o fotolito do seu desenho. A gravação é orçamentada à parte.",
@@ -216,6 +219,7 @@ export const screensCopy: Record<Locale, ScreensCopy> = {
     decreaseColours: "Menos cores",
     increaseColours: "Mais cores",
     quantityPerColour: (colours) => `Um quadro por cor: com ${colours} cores são precisos pelo menos ${colours} quadros.`,
+    quantitySpec: (quantity) => `${quantity} ${quantity === 1 ? "quadro" : "quadros"}`,
     quantity: "Número de quadros",
     decreaseQuantity: "Menos quadros",
     increaseQuantity: "Mais quadros",
@@ -323,6 +327,7 @@ export const screensCopy: Record<Locale, ScreensCopy> = {
       text: "Tell us in your message what you will print and the mesh is defined in the quote.",
     },
     meshNote: "Availability of each mesh is confirmed in the quote.",
+    meshSpec: (mesh) => (mesh ? `Mesh ${mesh}` : "Mesh to be defined"),
     engravingToggle: "Expose the design onto the screen",
     engravingText:
       "The screen is coated with emulsion and exposed with the film positive of your design. Exposure is quoted separately.",
@@ -330,6 +335,7 @@ export const screensCopy: Record<Locale, ScreensCopy> = {
     decreaseColours: "Fewer colours",
     increaseColours: "More colours",
     quantityPerColour: (colours) => `One screen per colour: ${colours} colours need at least ${colours} screens.`,
+    quantitySpec: (quantity) => `${quantity} ${quantity === 1 ? "screen" : "screens"}`,
     quantity: "Number of screens",
     decreaseQuantity: "Fewer screens",
     increaseQuantity: "More screens",

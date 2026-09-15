@@ -12,6 +12,7 @@
   --light-background: #eee9df;
   --light-text: #171916;
   --light-muted: #63675f;
+  --light-border: #c9c3b8;
   --field-placeholder: #858a82;
 }
 
@@ -27,6 +28,7 @@
   --color-light-background: var(--light-background);
   --color-light-text: var(--light-text);
   --color-light-muted: var(--light-muted);
+  --color-light-border: var(--light-border);
   --color-field-placeholder: var(--field-placeholder);
   --font-sans: var(--font-inter);
   --font-display: var(--font-archivo);

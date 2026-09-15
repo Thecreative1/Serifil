@@ -173,6 +173,7 @@ Tokens CSS ativos:
 --light-background: #eee9df;
 --light-text: #171916;
 --light-muted: #63675f;
+--light-border: #c9c3b8;
 --field-placeholder: #858a82;
 ```
 

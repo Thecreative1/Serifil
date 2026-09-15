@@ -68,7 +68,7 @@ function GuideBlockView({ locale, block }: { locale: GuideLocale; block: GuideBl
       );
     case "note":
       return (
-        <p className="flex max-w-[65ch] gap-4 border border-[#c9c3b8] bg-[#e6e1d6] p-5 text-base leading-7 text-light-text sm:p-6">
+        <p className="flex max-w-[65ch] gap-4 border border-light-border bg-[#e6e1d6] p-5 text-base leading-7 text-light-text sm:p-6">
           <Info className="mt-1 size-5 shrink-0" aria-hidden="true" />
           <span>
             <InlineText text={block.text} />
@@ -77,11 +77,11 @@ function GuideBlockView({ locale, block }: { locale: GuideLocale; block: GuideBl
       );
     case "checklist":
       return (
-        <dl className="border-t border-[#c9c3b8]">
+        <dl className="border-t border-light-border">
           {block.items.map((item) => (
             <div
               key={item.title}
-              className="grid gap-2 border-b border-[#c9c3b8] py-5 sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] sm:gap-8"
+              className="grid gap-2 border-b border-light-border py-5 sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] sm:gap-8"
             >
               <dt className="flex gap-3 text-base leading-7 font-bold text-light-text">
                 <Check className="mt-1.5 size-4 shrink-0" aria-hidden="true" />
@@ -96,7 +96,7 @@ function GuideBlockView({ locale, block }: { locale: GuideLocale; block: GuideBl
       );
     case "comparison":
       return (
-        <div className="grid gap-px border border-[#c9c3b8] bg-[#c9c3b8] sm:grid-cols-2">
+        <div className="grid gap-px border border-light-border bg-light-border sm:grid-cols-2">
           {block.columns.map((column, columnIndex) => (
             <div key={column} className="bg-light-background p-6 sm:p-8">
               <h3 className="text-3xl leading-none font-bold tracking-[-0.045em] text-light-text">{column}</h3>
@@ -175,12 +175,12 @@ export function GuideArticle({ locale, guide, otherGuides }: GuideArticleProps) 
               <aside className="lg:col-span-3">
                 <nav aria-label={ui.tocTitle} className="lg:sticky lg:top-32">
                   <p className="section-kicker text-light-muted">{ui.tocTitle}</p>
-                  <ol className="mt-5 border-t border-[#c9c3b8]">
+                  <ol className="mt-5 border-t border-light-border">
                     {guide.sections.map((section, index) => (
                       <li key={section.id}>
                         <a
                           href={`#${section.id}`}
-                          className="grid min-h-12 grid-cols-[2rem_minmax(0,1fr)] items-center gap-2 border-b border-[#c9c3b8] py-3 text-sm leading-5 font-semibold text-light-text underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                          className="grid min-h-12 grid-cols-[2rem_minmax(0,1fr)] items-center gap-2 border-b border-light-border py-3 text-sm leading-5 font-semibold text-light-text underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                         >
                           <span className="text-xs font-bold text-light-muted">{String(index + 1).padStart(2, "0")}</span>
                           {section.title}

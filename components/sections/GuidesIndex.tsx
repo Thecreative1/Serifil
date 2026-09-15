@@ -44,7 +44,7 @@ export function GuidesIndex({ locale, guides }: { locale: GuideLocale; guides: G
             </div>
             <ol className="border-t border-light-text lg:col-span-8">
               {guides.map((guide, index) => (
-                <li key={guide.slug} className="border-b border-[#c9c3b8]">
+                <li key={guide.slug} className="border-b border-light-border">
                   <article className="group relative grid gap-4 py-8 sm:grid-cols-[4rem_minmax(0,1fr)] sm:gap-8 lg:py-10">
                     <span className="text-sm font-bold text-light-muted">{String(index + 1).padStart(2, "0")}</span>
                     <div className="min-w-0">

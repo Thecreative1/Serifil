@@ -82,10 +82,10 @@ type ProcessDiagramProps = {
 export function ProcessDiagram({ caption, steps }: ProcessDiagramProps) {
   return (
     <figure className="border border-light-text">
-      <ol className="grid gap-px bg-[#c9c3b8] sm:grid-cols-2">
+      <ol className="grid gap-px bg-light-border sm:grid-cols-2">
         {steps.map((step, index) => (
           <li key={step.title} className="bg-light-background p-5 sm:p-6">
-            <div className="aspect-[4/3] border border-[#c9c3b8] bg-[#e6e1d6]">
+            <div className="aspect-[4/3] border border-light-border bg-[#e6e1d6]">
               <ProcessVisual visual={step.visual} />
             </div>
             <p className="mt-5 text-xs font-bold text-light-muted">{String(index + 1).padStart(2, "0")}</p>

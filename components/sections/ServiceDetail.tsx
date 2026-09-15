@@ -218,9 +218,9 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
                 </h2>
                 <p className="mt-7 max-w-[50ch] text-base leading-7 text-light-muted">{page.preparation.description}</p>
               </div>
-              <dl className="border-t border-[#c9c3b8] lg:col-span-7">
+              <dl className="border-t border-light-border lg:col-span-7">
                 {page.preparation.items.map((item) => (
-                  <div key={item.label} className="grid gap-3 border-b border-[#c9c3b8] py-6 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-8">
+                  <div key={item.label} className="grid gap-3 border-b border-light-border py-6 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-8">
                     <dt className="text-xs font-black uppercase tracking-[0.12em] text-light-text">{item.label}</dt>
                     <dd className="max-w-[54ch] text-base leading-7 text-light-muted">{item.value}</dd>
                   </div>

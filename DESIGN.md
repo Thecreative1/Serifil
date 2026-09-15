@@ -13,6 +13,7 @@ colors:
   technical-paper: "#eee9df"
   ink-dark: "#171916"
   paper-muted: "#63675f"
+  paper-border: "#c9c3b8"
   field-placeholder: "#858a82"
 typography:
   display:
@@ -136,6 +137,7 @@ A paleta combina carvão esverdeado, tinta marfim, superfícies de máquina e la
 - **Papel Técnico** (`technical-paper`): secções claras do processo, introdução e chamada para orçamento.
 - **Tinta Escura** (`ink-dark`): texto sobre laranja e papel técnico.
 - **Papel Atenuado** (`paper-muted`): texto secundário sobre superfícies claras.
+- **Linha de Papel** (`paper-border`, token CSS `--light-border`): divisores de 1px, grelhas e desenhos técnicos sobre papel técnico.
 - **Placeholder Industrial** (`field-placeholder`): texto de apoio dentro dos campos.
 
 **The One Ink Rule.** O laranja é reservado a ações, orientação, prioridade e estado. Nunca criar gradientes, brilho néon ou uma segunda cor saturada concorrente.
@@ -237,6 +239,16 @@ As imagens são publicadas em WebP com 1600×1200px, carregamento diferido e tex
 Os guias seguem a mesma gramática das páginas de serviço: hero escuro com breadcrumbs, corpo explicativo em papel técnico e fecho laranja com "Pedir orçamento" e contactos. O corpo usa uma coluna de leitura de 8/12 com índice fixo em desktop, texto até 65ch e secções numeradas separadas por linhas de 1px.
 
 O resumo inicial é um bloco em tinta escura sobre o papel técnico. Esquemas de processo usam SVG plano com as cores da marca (tinta, papel, laranja) e nunca substituem uma fotografia real quando existe. Fotografias de trabalhos e de equipamento levam sempre etiqueta: "Trabalho produzido pela SERIFIL" só para trabalhos da SERIFIL; equipamento e etapas do processo usam "Preparação da impressão" e descrevem a função, sem indicar instalações (o equipamento fotografado é de um parceiro). Ícones e pequenos textos sobre papel técnico usam tinta escura, porque o laranja não tem contraste suficiente sobre fundo claro.
+
+### Ferramenta de quadros
+
+A ferramenta de quadros (`/pt/quadros/`) é a única superfície de trabalho do site. Mantém o sistema, com menos escala e mais precisão.
+
+- **Desenho:** fica em papel técnico, com grelha em `paper-border`. O caixilho é em tinta escura (tracejado na retelagem) e a malha fica sobre `warm-ink`. A área de impressão e as medidas habituais são tracejadas, e as cotas são linhas com traços nas pontas. O único laranja do desenho é o canto arrastável.
+- **Escolhas de valor** (medidas, malhas): placas quadradas de 48px que ficam laranja quando escolhidas.
+- **Opções com explicação** (caixilho, gravação): linhas com indicador quadrado e contorno laranja de 1px quando escolhidas. O input nativo fica invisível por cima da linha, para manter teclado e leitores de ecrã.
+- **Números:** valores usam Inter com algarismos tabulares. Só a medida principal do desenho usa Archivo.
+- **Resumo:** o cabeçalho do desenho repete a configuração numa linha. Nunca mostrar preços.
 
 ### Motion
 
