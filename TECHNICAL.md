@@ -101,6 +101,7 @@ Ferramenta "Quadros de serigrafia". O cliente desenha o quadro à escala, arrast
 
 - É um serviço à parte dos serviços de impressão, porque os quadros são feitos por um parceiro. Não entra em `service-pages.ts`, no catálogo JSON-LD da home nem no formulário principal. Nunca mostra preços nem diz que a SERIFIL fabrica os quadros.
 - Conteúdo, opções e resumo em `data/screens.ts`. Interação em `components/screens/ScreenConfigurator.tsx` (client component; o desenho é SVG com pointer events e os campos numéricos são a alternativa por teclado).
+- Com gravação, a quantidade de quadros nunca fica abaixo do número de cores (um quadro por cor). Acompanha as cores enquanto o cliente não a aumentar à mão.
 - `screensPublished` controla a publicação. Com `false`, as páginas são geradas para testes, mas ficam `noindex`, fora do sitemap e sem ligação nos menus. Passar a `true` só com aprovação do utilizador e, nessa altura, acrescentar a ligação nos menus PT e EN.
 - As medidas habituais e as malhas são referências de mercado. Têm de ser confirmadas com o parceiro antes de publicar.
 

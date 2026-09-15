@@ -81,6 +81,25 @@ export function ScreenConfigurator({ locale }: { locale: Locale }) {
   const update = (changes: Partial<ScreenRequest>) => setRequest((current) => ({ ...current, ...changes }));
   const landscape = request.width > request.height;
 
+  // Com gravação, cada cor precisa da sua tela: a quantidade nunca fica abaixo do número de cores
+  // e acompanha as cores enquanto não tiver sido aumentada à mão.
+  const changeColours = (colours: number) =>
+    setRequest((current) => ({
+      ...current,
+      colours,
+      quantity: Math.min(
+        maxQuantity,
+        current.quantity <= current.colours ? colours : Math.max(current.quantity, colours),
+      ),
+    }));
+
+  const toggleEngraving = () =>
+    setRequest((current) => ({
+      ...current,
+      engraving: !current.engraving,
+      quantity: current.engraving ? current.quantity : Math.max(current.quantity, current.colours),
+    }));
+
   return (
     <>
       <section aria-label={copy.toolLabel} className="bg-background py-10 sm:py-14 lg:py-16">
@@ -167,7 +186,7 @@ export function ScreenConfigurator({ locale }: { locale: Locale }) {
                   type="checkbox"
                   name="screen-engraving"
                   checked={request.engraving}
-                  onChange={() => update({ engraving: !request.engraving })}
+                  onChange={toggleEngraving}
                   title={copy.engravingToggle}
                   text={copy.engravingText}
                 />
@@ -180,20 +199,8 @@ export function ScreenConfigurator({ locale }: { locale: Locale }) {
                     max={maxColours}
                     decreaseLabel={copy.decreaseColours}
                     increaseLabel={copy.increaseColours}
-                    onChange={(colours) => update({ colours })}
+                    onChange={changeColours}
                   />
-                ) : null}
-                {request.engraving && request.colours > request.quantity ? (
-                  <div className="flex flex-col items-start gap-3 border border-border p-4 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-sm leading-6 text-text-secondary">{copy.coloursHint(request.colours)}</p>
-                    <button
-                      type="button"
-                      onClick={() => update({ quantity: request.colours })}
-                      className="min-h-11 shrink-0 border-b border-text-secondary py-2 text-sm font-bold uppercase tracking-[0.08em] text-text-primary transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-                    >
-                      {copy.adjustQuantity(request.colours)}
-                    </button>
-                  </div>
                 ) : null}
               </OptionGroup>
 
@@ -202,12 +209,15 @@ export function ScreenConfigurator({ locale }: { locale: Locale }) {
                   id="screen-quantity"
                   label={copy.quantity}
                   value={request.quantity}
-                  min={1}
+                  min={request.engraving ? request.colours : 1}
                   max={maxQuantity}
                   decreaseLabel={copy.decreaseQuantity}
                   increaseLabel={copy.increaseQuantity}
                   onChange={(quantity) => update({ quantity })}
                 />
+                {request.engraving && request.colours > 1 ? (
+                  <p className="text-sm leading-6 text-text-secondary">{copy.quantityPerColour(request.colours)}</p>
+                ) : null}
               </OptionGroup>
 
               <Button href="#pedido" className="w-full sm:w-fit">{copy.continue}</Button>

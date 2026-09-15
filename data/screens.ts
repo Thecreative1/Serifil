@@ -111,8 +111,7 @@ type ScreensCopy = {
   colours: string;
   decreaseColours: string;
   increaseColours: string;
-  coloursHint: (colours: number) => string;
-  adjustQuantity: (colours: number) => string;
+  quantityPerColour: (colours: number) => string;
   quantity: string;
   decreaseQuantity: string;
   increaseQuantity: string;
@@ -207,8 +206,7 @@ export const screensCopy: Record<Locale, ScreensCopy> = {
     colours: "Número de cores",
     decreaseColours: "Menos cores",
     increaseColours: "Mais cores",
-    coloursHint: (colours) => `Em regra, cada cor precisa da sua tela: ${colours} cores são ${colours} quadros.`,
-    adjustQuantity: (colours) => `Passar para ${colours} quadros`,
+    quantityPerColour: (colours) => `Um quadro por cor: com ${colours} cores são precisos pelo menos ${colours} quadros.`,
     quantity: "Número de quadros",
     decreaseQuantity: "Menos quadros",
     increaseQuantity: "Mais quadros",
@@ -312,8 +310,7 @@ export const screensCopy: Record<Locale, ScreensCopy> = {
     colours: "Number of colours",
     decreaseColours: "Fewer colours",
     increaseColours: "More colours",
-    coloursHint: (colours) => `As a rule, each colour needs its own screen: ${colours} colours means ${colours} screens.`,
-    adjustQuantity: (colours) => `Set to ${colours} screens`,
+    quantityPerColour: (colours) => `One screen per colour: ${colours} colours need at least ${colours} screens.`,
     quantity: "Number of screens",
     decreaseQuantity: "Fewer screens",
     increaseQuantity: "More screens",
