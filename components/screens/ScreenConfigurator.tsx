@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertCircle, CheckCircle2, LoaderCircle, MessageCircle, Minus, Plus, RotateCw } from "lucide-react";
+import { AlertCircle, CheckCircle2, LoaderCircle, Mail, MessageCircle, Minus, Plus, RotateCw } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent, type PointerEvent, type ReactNode } from "react";
 import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { Button } from "@/components/ui/Button";
@@ -19,6 +19,7 @@ import {
   maxQuantity,
   meshOptions,
   printMargin,
+  screenEmailUrl,
   screenWhatsappMessage,
   screensCopy,
   sizeLimits,
@@ -32,6 +33,8 @@ type Size = { width: number; height: number };
 type FormErrors = Partial<Record<"name" | "email" | "phone" | "privacy", string>>;
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const contactButtonClass =
+  "inline-flex min-h-12 max-w-full items-center gap-3 border border-border px-5 py-3 text-left text-sm font-bold uppercase tracking-[0.08em] text-text-primary transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
 const ink = "#171916";
 const paper = "#f7f3ea";
@@ -689,20 +692,33 @@ function ScreenRequestForm({ locale, request }: { locale: Locale; request: Scree
               ))}
             </dl>
             <p className="mt-5 text-sm leading-6 text-text-secondary">{copy.noPrice}</p>
-            {brand.whatsapp ? (
+            {brand.email || brand.whatsapp ? (
               <div className="mt-8 border-t border-border pt-6">
-                <p className="text-sm font-bold text-text-primary">{copy.whatsappTitle}</p>
-                <TrackedLink
-                  href={whatsappUrl(screenWhatsappMessage(locale, request))}
-                  eventName="whatsapp_click"
-                  eventParameters={{ link_location: "screens_tool" }}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-4 inline-flex min-h-12 items-center gap-3 border border-border px-5 py-3 text-sm font-bold uppercase tracking-[0.08em] text-text-primary transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-                >
-                  <MessageCircle className="size-4" aria-hidden="true" />
-                  {copy.whatsappButton}
-                </TrackedLink>
+                <p className="text-sm font-bold text-text-primary">
+                  {request.engraving ? copy.artworkTitleEngraving : copy.artworkTitle}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-text-secondary">{copy.artworkText}</p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {brand.email ? (
+                    <a href={screenEmailUrl(locale, request, brand.email)} className={contactButtonClass}>
+                      <Mail className="size-4 shrink-0" aria-hidden="true" />
+                      {copy.emailButton}
+                    </a>
+                  ) : null}
+                  {brand.whatsapp ? (
+                    <TrackedLink
+                      href={whatsappUrl(screenWhatsappMessage(locale, request))}
+                      eventName="whatsapp_click"
+                      eventParameters={{ link_location: "screens_tool" }}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={contactButtonClass}
+                    >
+                      <MessageCircle className="size-4 shrink-0" aria-hidden="true" />
+                      {copy.whatsappButton}
+                    </TrackedLink>
+                  ) : null}
+                </div>
               </div>
             ) : null}
           </div>
@@ -713,6 +729,15 @@ function ScreenRequestForm({ locale, request }: { locale: Locale; request: Scree
                 <CheckCircle2 className="size-12 text-accent" aria-hidden="true" />
                 <h3 className="mt-7 max-w-[16ch] text-4xl font-bold tracking-[-0.05em] text-text-primary sm:text-5xl">{copy.successTitle}</h3>
                 <p className="mt-5 max-w-[50ch] text-lg leading-8 text-text-secondary">{copy.successDescription}</p>
+                {request.engraving && brand.email ? (
+                  <div className="mt-8 w-full max-w-[50ch] border-t border-border pt-6">
+                    <p className="text-sm leading-6 text-text-secondary">{copy.successArtwork}</p>
+                    <a href={screenEmailUrl(locale, request, brand.email)} className={`mt-4 ${contactButtonClass}`}>
+                      <Mail className="size-4 shrink-0" aria-hidden="true" />
+                      {copy.emailButton}
+                    </a>
+                  </div>
+                ) : null}
                 <button
                   type="button"
                   onClick={() => {
@@ -740,6 +765,9 @@ function ScreenRequestForm({ locale, request }: { locale: Locale; request: Scree
                   <TextInput id="screen-phone" name="phone" type="tel" label={copy.phone} autoComplete="tel" error={errors.phone} required />
                 </div>
                 <TextArea id="screen-message" name="message" label={copy.message} placeholder={copy.messagePlaceholder} optional optionalLabel={copy.optional} />
+                {request.engraving ? (
+                  <p className="-mt-3 text-sm leading-6 text-text-secondary">{copy.formArtworkNote}</p>
+                ) : null}
                 <div>
                   <label className="flex cursor-pointer items-start gap-3 text-sm leading-6 text-text-secondary">
                     <input

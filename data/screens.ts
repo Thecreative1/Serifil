@@ -122,9 +122,18 @@ type ScreensCopy = {
   engravingNone: string;
   engravingWith: (colours: number) => string;
   noPrice: string;
-  whatsappTitle: string;
+  artworkTitle: string;
+  artworkTitleEngraving: string;
+  artworkText: string;
+  emailButton: string;
+  emailSubject: string;
+  emailIntro: string;
+  emailAttachReminder: string;
   whatsappButton: string;
   whatsappIntro: string;
+  whatsappArtworkLine: string;
+  formArtworkNote: string;
+  successArtwork: string;
   formTitle: string;
   formLabel: string;
   name: string;
@@ -223,9 +232,19 @@ export const screensCopy: Record<Locale, ScreensCopy> = {
     engravingNone: "Sem gravação",
     engravingWith: (colours) => `Com gravação, ${colours} ${colours === 1 ? "cor" : "cores"}`,
     noPrice: "Sem preços online: respondemos com o orçamento.",
-    whatsappTitle: "Prefere WhatsApp?",
+    artworkTitle: "Tem um desenho ou referência?",
+    artworkTitleEngraving: "Envie o desenho para a gravação",
+    artworkText:
+      "O formulário não aceita ficheiros. Envie o desenho por e-mail ou WhatsApp, já com o resumo do pedido, de preferência em formato vetorial (PDF, AI, EPS ou SVG) e com as medidas reais.",
+    emailButton: "Enviar desenho por e-mail",
+    emailSubject: "Pedido de quadros de serigrafia",
+    emailIntro: "Olá SERIFIL! Envio em anexo o desenho para este pedido de quadros de serigrafia:",
+    emailAttachReminder: "(Anexe o ficheiro do desenho antes de enviar.)",
     whatsappButton: "Enviar resumo por WhatsApp",
     whatsappIntro: "Olá SERIFIL! Queria orçamento para quadros de serigrafia:",
+    whatsappArtworkLine: "Envio o desenho a seguir nesta conversa.",
+    formArtworkNote: "O desenho não segue por este formulário: envie-o por e-mail ou WhatsApp, a partir do resumo do pedido.",
+    successArtwork: "Falta o desenho? Envie-o agora por e-mail, já com o resumo do pedido.",
     formTitle: "Os seus contactos",
     formLabel: "Pedido de quadros de serigrafia",
     name: "Nome",
@@ -327,9 +346,19 @@ export const screensCopy: Record<Locale, ScreensCopy> = {
     engravingNone: "No exposure",
     engravingWith: (colours) => `With exposure, ${colours} ${colours === 1 ? "colour" : "colours"}`,
     noPrice: "No prices online: we reply with a quote.",
-    whatsappTitle: "Prefer WhatsApp?",
+    artworkTitle: "Have artwork or a reference?",
+    artworkTitleEngraving: "Send the artwork for exposure",
+    artworkText:
+      "The form does not accept files. Send the artwork by email or WhatsApp, together with the request summary, preferably as a vector file (PDF, AI, EPS or SVG) at actual size.",
+    emailButton: "Email the artwork",
+    emailSubject: "Screen printing frame request",
+    emailIntro: "Hello SERIFIL! Please find attached the artwork for this screen printing frame request:",
+    emailAttachReminder: "(Attach the artwork file before sending.)",
     whatsappButton: "Send summary on WhatsApp",
     whatsappIntro: "Hello SERIFIL! I'd like a quote for screen printing frames:",
+    whatsappArtworkLine: "I'll send the artwork next in this chat.",
+    formArtworkNote: "The artwork is not sent through this form: send it by email or WhatsApp from the request summary.",
+    successArtwork: "Still need to send the artwork? Email it now, together with the request summary.",
     formTitle: "Your details",
     formLabel: "Screen printing frame request",
     name: "Name",
@@ -373,9 +402,25 @@ export function describeScreenRequest(locale: Locale, request: ScreenRequest) {
   ];
 }
 
+function summaryLines(locale: Locale, request: ScreenRequest) {
+  return describeScreenRequest(locale, request).map((row) => `- ${row.label}: ${row.value}`);
+}
+
 export function screenWhatsappMessage(locale: Locale, request: ScreenRequest) {
+  const copy = screensCopy[locale];
   return [
-    screensCopy[locale].whatsappIntro,
-    ...describeScreenRequest(locale, request).map((row) => `- ${row.label}: ${row.value}`),
+    copy.whatsappIntro,
+    ...summaryLines(locale, request),
+    ...(request.engraving ? [copy.whatsappArtworkLine] : []),
   ].join("\n");
+}
+
+/**
+ * E-mail com o resumo do pedido para o cliente anexar o desenho.
+ * O formulário não aceita ficheiros: o plano grátis do Formspree não inclui anexos.
+ */
+export function screenEmailUrl(locale: Locale, request: ScreenRequest, email: string) {
+  const copy = screensCopy[locale];
+  const body = [copy.emailIntro, "", ...summaryLines(locale, request), "", copy.emailAttachReminder].join("\r\n");
+  return `mailto:${email}?subject=${encodeURIComponent(copy.emailSubject)}&body=${encodeURIComponent(body)}`;
 }

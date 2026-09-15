@@ -97,7 +97,7 @@ Cada guia publica canonical, hreflang recíproco (`x-default` para PT), Open Gra
 
 ### `/pt/quadros/` e `/en/quadros/`
 
-Ferramenta "Quadros de serigrafia". O cliente desenha o quadro à escala, arrastando o canto ou partindo de uma medida habitual. Escolhe caixilho novo ou retelagem, a malha, a gravação e a quantidade. Envia o pedido pelo Formspree (campos `quadro_*`) ou por WhatsApp com o resumo.
+Ferramenta "Quadros de serigrafia". O cliente desenha o quadro à escala, arrastando o canto ou partindo de uma medida habitual. Escolhe caixilho novo ou retelagem, a malha, a gravação e a quantidade. Envia o pedido pelo Formspree (campos `quadro_*`) ou por WhatsApp com o resumo. O desenho não vai no formulário, porque o plano grátis do Formspree não aceita ficheiros. Segue por e-mail (`mailto:` para `brand.email`, com o resumo no corpo) ou pelo WhatsApp. Para ter anexos no próprio formulário é preciso um plano pago do Formspree (Personal ou superior).
 
 - É um serviço à parte dos serviços de impressão, porque os quadros são feitos por um parceiro. Não entra em `service-pages.ts`, no catálogo JSON-LD da home nem no formulário principal. Nunca mostra preços nem diz que a SERIFIL fabrica os quadros.
 - Conteúdo, opções e resumo em `data/screens.ts`. Interação em `components/screens/ScreenConfigurator.tsx` (client component; o desenho é SVG com pointer events e os campos numéricos são a alternativa por teclado).

@@ -309,6 +309,14 @@ test("ferramenta de quadros desenha, resume e envia o pedido sem preços nem pub
   const whatsappHref = await summary.getByRole("link", { name: "Enviar resumo por WhatsApp" }).getAttribute("href");
   expect(whatsappHref).toContain("https://wa.me/351910508706?text=");
   expect(decodeURIComponent(whatsappHref?.split("text=")[1] ?? "")).toContain("Malha: 90T");
+  expect(decodeURIComponent(whatsappHref?.split("text=")[1] ?? "")).toContain("Envio o desenho a seguir nesta conversa.");
+  await expect(summary.getByText("Envie o desenho para a gravação")).toBeVisible();
+  const emailHref = await summary.getByRole("link", { name: "Enviar desenho por e-mail" }).getAttribute("href");
+  expect(emailHref).toMatch(/^mailto:geral@serifil\.com\?subject=/);
+  const emailBody = decodeURIComponent(emailHref?.split("body=")[1] ?? "");
+  expect(emailBody).toContain("Malha: 90T");
+  expect(emailBody).toContain("Anexe o ficheiro do desenho antes de enviar.");
+  await expect(page.getByText("O desenho não segue por este formulário")).toBeVisible();
 
   const form = page.getByRole("form", { name: "Pedido de quadros de serigrafia" });
   await form.getByRole("button", { name: "Enviar pedido" }).click();
@@ -319,6 +327,7 @@ test("ferramenta de quadros desenha, resume e envia o pedido sem preços nem pub
   await form.getByLabel(/Autorizo o tratamento/).check();
   await form.getByRole("button", { name: "Enviar pedido" }).click();
   await expect(page.getByRole("heading", { name: "Pedido enviado." })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Enviar desenho por e-mail" })).toHaveCount(2);
   expect(submittedBody).toContain("quadro_malha");
   expect(submittedBody).toContain("90T");
   expect(submittedBody).toContain("Retelagem");
