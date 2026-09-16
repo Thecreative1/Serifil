@@ -234,7 +234,7 @@ test("formulário valida e apresenta sucesso após envio", async ({ page }) => {
   expect(JSON.stringify(leadEvent)).not.toContain("000 000 000");
 });
 
-test("ferramenta de quadros desenha, resume e envia o pedido sem preços nem publicação", async ({ page, request }) => {
+test("ferramenta de quadros desenha, resume e envia o pedido sem preços", async ({ page }) => {
   let submittedBody = "";
   await page.addInitScript(() => {
     localStorage.setItem("serifil_analytics_consent", "denied");
@@ -244,15 +244,10 @@ test("ferramenta de quadros desenha, resume e envia o pedido sem preços nem pub
     await route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
   });
 
-  const sitemap = await (await request.get("/sitemap.xml")).text();
-  expect(sitemap).not.toContain("/quadros/");
-  await page.goto("/pt/");
-  await expect(page.locator('a[href="/pt/quadros/"]')).toHaveCount(0);
-
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/pt/quadros/");
-  await expect(page.locator("h1")).toHaveText("Desenhe o seu quadro.");
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  await expect(page.locator("h1")).toHaveText("Quadros de serigrafia à medida Desenhe o seu quadro.");
+  await expect(page.locator("main")).not.toContainText(/SERIFIL (fabrica|produz)|fabricamos/i);
   await expect(page.locator("main")).not.toContainText(/€|\beuros?\b/i);
 
   const summary = page.getByRole("region", { name: "O seu pedido" });
@@ -333,7 +328,7 @@ test("ferramenta de quadros desenha, resume e envia o pedido sem preços nem pub
   expect(submittedBody).toContain("Retelagem");
 
   await page.goto("/en/quadros/");
-  await expect(page.locator("h1")).toHaveText("Draw your screen.");
+  await expect(page.locator("h1")).toHaveText("Custom screen printing frames Draw your screen.");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://serifil.com/en/quadros/");
   await expect(page.locator('link[hreflang="pt-PT"]')).toHaveAttribute("href", "https://serifil.com/pt/quadros/");
   await expect(page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "pt" })).toHaveAttribute(
@@ -349,6 +344,74 @@ test("ferramenta de quadros desenha, resume e envia o pedido sem preços nem pub
     document: document.documentElement.scrollWidth,
   }));
   expect(dimensions.document).toBeLessThanOrEqual(dimensions.viewport + 1);
+});
+
+test("quadros de serigrafia publicados: nos serviços, indexáveis e com dados estruturados", async ({ page, request }) => {
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  for (const path of ["/pt/quadros/", "/en/quadros/"]) {
+    expect(sitemap).toContain(`<loc>https://serifil.com${path}</loc>`);
+  }
+  expect(sitemap).toContain("https://serifil.com/images/quadros/quadros-serigrafia-og.jpg");
+  expect((await request.get("/images/quadros/quadros-serigrafia-og.jpg")).status()).toBe(200);
+
+  const cases = [
+    {
+      locale: "pt",
+      servicePage: "/pt/servicos/sacos-tnt/",
+      guide: "/pt/guias/fotolitos/",
+      name: "Quadros de serigrafia",
+      title: "Quadros de Serigrafia à Medida e Retelagem | SERIFIL",
+    },
+    {
+      locale: "en",
+      servicePage: "/en/servicos/non-woven-bags/",
+      guide: "/en/guias/film-positives/",
+      name: "Screen printing frames",
+      title: "Custom Screen Printing Frames and Re-meshing | SERIFIL",
+    },
+  ];
+
+  for (const item of cases) {
+    const path = `/${item.locale}/quadros/`;
+    await page.goto(`/${item.locale}/`);
+    const listLink = page.locator(`#servicos nav a[href="${path}"]`);
+    await expect(listLink).toHaveCount(1);
+    await expect(listLink).toContainText("05");
+    await expect(listLink).toContainText(item.name);
+    const homeData = await page.locator('script[type="application/ld+json"]').first().textContent();
+    expect(homeData).toContain(`https://serifil.com${path}`);
+
+    for (const source of [item.servicePage, item.guide]) {
+      await page.goto(source);
+      await expect(page.locator(`main a[href="${path}"]`), source).toHaveCount(1);
+    }
+
+    await page.goto(path);
+    await expect(page).toHaveTitle(item.title);
+    expect(item.title.length).toBeLessThanOrEqual(60);
+    expect(((await page.locator('meta[name="description"]').getAttribute("content")) ?? "").length).toBeLessThanOrEqual(160);
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /^index, follow/);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://serifil.com${path}`);
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+      "content",
+      "https://serifil.com/images/quadros/quadros-serigrafia-og.jpg",
+    );
+
+    const data = JSON.parse((await page.locator('script[type="application/ld+json"]').first().textContent()) ?? "{}");
+    const graph: Array<Record<string, unknown>> = data["@graph"];
+    expect(graph.map((node) => node["@type"])).toEqual(
+      expect.arrayContaining(["WebPage", "Service", "FAQPage", "BreadcrumbList"]),
+    );
+    const faq = graph.find((node) => node["@type"] === "FAQPage");
+    expect(faq?.mainEntity).toHaveLength(6);
+    expect(JSON.stringify(faq)).not.toContain("](/");
+
+    await expect(page.locator(`main a[href="${item.guide}"]`)).toHaveCount(1);
+    await expect(page.locator('main img[src="/images/guias/telas-serigrafia.webp"]')).toHaveAttribute(
+      "alt",
+      /serigrafia|screen printing/i,
+    );
+  }
 });
 
 test("publica apenas contactos configurados e o WhatsApp correto", async ({ page }) => {
@@ -527,12 +590,15 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(structuredData.address.addressRegion).toBe("Braga");
   expect(structuredData.contactPoint.telephone).toBe("+351 910 508 706");
   expect(structuredData.contactPoint.availableLanguage).toEqual(["Portuguese", "English"]);
-  expect(structuredData.hasOfferCatalog.itemListElement).toHaveLength(8);
+  // Oito serviços de impressão e, no fim, os quadros de serigrafia (serviço à parte, com página própria).
+  expect(structuredData.hasOfferCatalog.itemListElement).toHaveLength(9);
+  expect(structuredData.hasOfferCatalog.itemListElement[8].itemOffered.url).toBe("https://serifil.com/pt/quadros/");
   expect(structuredData.hasOfferCatalog.itemListElement[0].itemOffered.name).toBe("Serigrafia Industrial");
   expect(structuredData.hasOfferCatalog.itemListElement.map((offer) => offer.itemOffered.name)).toEqual(
     expect.arrayContaining(["Impressão em PVC", "Impressão em Componentes", "Sacos Personalizados", "Porta-fatos e Capas"]),
   );
   expect(structuredData.knowsAbout).toContain("Impressão industrial");
+  expect(structuredData.knowsAbout).toContain("Quadros de serigrafia");
 });
 
 const serviceRoutes = [
@@ -935,6 +1001,8 @@ test("mantém menus consistentes: item ativo, contacto rápido e sem sobreposiç
     { path: "/pt/guias/fotolitos/", navigation: "Navegação principal", active: "Guias" },
     { path: "/en/servicos/non-woven-bags/", navigation: "Main navigation", active: "Services" },
     { path: "/en/guias/film-positives/", navigation: "Main navigation", active: "Guides" },
+    { path: "/pt/quadros/", navigation: "Navegação principal", active: "Serviços" },
+    { path: "/en/quadros/", navigation: "Main navigation", active: "Services" },
   ];
   for (const item of cases) {
     await page.goto(item.path);

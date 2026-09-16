@@ -80,6 +80,9 @@ export function getBusinessIdentity({
       "Porta-fatos personalizados",
       "Componentes para calçado",
       "Serigrafia para calçado",
+      "Quadros de serigrafia",
+      "Retelagem de quadros de serigrafia",
+      "Gravação de quadros de serigrafia",
     ],
     ...(brand.socialProfiles.length ? { sameAs: brand.socialProfiles } : {}),
     ...(brand.phone

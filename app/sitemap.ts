@@ -10,7 +10,14 @@ import {
   guideLocales,
 } from "@/data/guides";
 import { locales } from "@/data/i18n";
-import { getScreensHreflangPaths, getScreensPath, screensPublished } from "@/data/screens";
+import {
+  getScreensHreflangPaths,
+  getScreensPath,
+  screensDateModified,
+  screensPhoto,
+  screensPublished,
+  screensShareImage,
+} from "@/data/screens";
 import {
   getServiceAlternates,
   getServicePath,
@@ -127,10 +134,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const screensPages: MetadataRoute.Sitemap = screensPublished
     ? locales.map((locale) => ({
         url: new URL(getScreensPath(locale), brand.website).toString(),
-        lastModified,
+        lastModified: new Date(screensDateModified),
         changeFrequency: "monthly" as const,
-        priority: 0.7,
+        priority: 0.8,
         alternates: { languages: absoluteLanguages(getScreensHreflangPaths()) },
+        images: [screensShareImage, screensPhoto].map((image) => new URL(image.src, brand.website).toString()),
       }))
     : [];
 

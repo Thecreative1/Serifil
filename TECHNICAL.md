@@ -99,11 +99,21 @@ Cada guia publica canonical, hreflang recíproco (`x-default` para PT), Open Gra
 
 Ferramenta "Quadros de serigrafia". O cliente desenha o quadro à escala, arrastando o canto ou partindo de uma medida habitual. Escolhe caixilho novo ou retelagem, a malha, a gravação e a quantidade. Envia o pedido pelo Formspree (campos `quadro_*`) ou por WhatsApp com o resumo. O desenho não vai no formulário, porque o plano grátis do Formspree não aceita ficheiros. Segue por e-mail (`mailto:` para `brand.email`, com o resumo no corpo) ou pelo WhatsApp. Para ter anexos no próprio formulário é preciso um plano pago do Formspree (Personal ou superior).
 
-- É um serviço à parte dos serviços de impressão, porque os quadros são feitos por um parceiro. Não entra em `service-pages.ts`, no catálogo JSON-LD da home nem no formulário principal. Nunca mostra preços nem diz que a SERIFIL fabrica os quadros.
-- Conteúdo, opções e resumo em `data/screens.ts`. Interação em `components/screens/ScreenConfigurator.tsx` (client component; o desenho é SVG com pointer events e os campos numéricos são a alternativa por teclado).
+- É um serviço à parte dos serviços de impressão, porque os quadros são feitos por um parceiro. Não entra em `service-pages.ts` nem no formulário principal. Nunca mostra preços nem diz que a SERIFIL fabrica os quadros.
+- Publicado a 16 set 2026 (`screensPublished = true`). Aparece como item 05 da lista "Materiais e aplicações" da home (`Services`), nas ligações relacionadas das páginas de serviço (`ServiceDetail`) e dos guias (`GuideServiceLinks`), e no fim do `OfferCatalog` da home, com `url`. O `Header` marca "Serviços" como ativo e as migalhas são Início / Serviços / Quadros de serigrafia. Não tem item próprio no menu principal.
+- Com `screensPublished = false`, as páginas continuam a ser geradas, mas ficam `noindex`, fora do sitemap e sem nenhuma das ligações acima.
+- Conteúdo, opções, resumo, perguntas frequentes e textos de SEO em `data/screens.ts`. Interação em `components/screens/ScreenConfigurator.tsx` (client component; o desenho é SVG com pointer events e os campos numéricos são a alternativa por teclado).
 - Com gravação, a quantidade de quadros nunca fica abaixo do número de cores (um quadro por cor). Acompanha as cores enquanto o cliente não a aumentar à mão.
-- `screensPublished` controla a publicação. Com `false`, as páginas são geradas para testes, mas ficam `noindex`, fora do sitemap e sem ligação nos menus. Passar a `true` só com aprovação do utilizador e, nessa altura, acrescentar a ligação nos menus PT e EN.
-- As medidas habituais e as malhas são referências de mercado. Têm de ser confirmadas com o parceiro antes de publicar.
+- As medidas habituais (30×40, 40×50, 50×60, 60×80 cm, medida exterior do caixilho) e as malhas (43T, 55T, 77T, 90T, 120T) foram confirmadas com o parceiro em setembro de 2026.
+
+SEO da página de quadros:
+
+- `title` até 60 caracteres e `description` até 160, com "quadros de serigrafia", "retelagem" e as malhas. O H1 junta o nome do serviço (em `section-kicker`) e a chamada "Desenhe o seu quadro.", sem mudar o aspeto.
+- Perguntas frequentes visíveis (`details`) com H3 e ligação ao guia de fotolitos; as mesmas respostas vão para `FAQPage`, sem a sintaxe de ligação (`stripInlineLinks`).
+- JSON-LD em `@graph`: `WebPage`, `ImageObject`, `Service` (com `serviceType`, `areaServed` e `OfferCatalog` de quadro completo, retelagem e gravação, sem preços), `FAQPage` e `BreadcrumbList`.
+- Imagem de partilha própria, `public/images/quadros/quadros-serigrafia-og.jpg` (1200×630), gerada por `scripts/optimize-screens-images.mjs` a partir de `../fotos serifil/guias/telas.jpg`. A fotografia das telas (`public/images/guias/telas-serigrafia.webp`) aparece junto às perguntas. Ambas são de um parceiro: descrevem o que se vê, nunca instalações da SERIFIL.
+- Sitemap com prioridade 0.8, `lastmod` fixo em `screensDateModified` e as duas imagens. Atualizar a data quando o conteúdo mudar.
+- A página não define `robots`: herda do layout `index, follow` e `max-image-preview: large`.
 
 ### Menus e contacto rápido
 
@@ -263,7 +273,7 @@ Cada locale publica:
 - hreflang `pt-PT`, `en` e `x-default`;
 - Open Graph e Twitter card;
 - robots index/follow;
-- JSON-LD `LocalBusiness` com catálogo de seis serviços.
+- JSON-LD `LocalBusiness` com catálogo dos oito serviços de impressão e, no fim, dos quadros de serigrafia (com `url`).
 
 A raiz publica JSON-LD `WebSite`. `app/sitemap.ts` inclui páginas localizadas e assets visuais. `app/robots.ts` permite crawling e aponta para o sitemap.
 

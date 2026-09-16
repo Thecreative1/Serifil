@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { Locale, SiteContent } from "@/data/i18n";
+import { getScreensPath, screensCopy, screensPublished } from "@/data/screens";
 import { getServicePath, serviceKeys, servicePages, servicePageUi } from "@/data/service-pages";
 
 export function Services({ locale, copy }: { locale: Locale; copy: SiteContent["services"] }) {
@@ -10,6 +11,11 @@ export function Services({ locale, copy }: { locale: Locale; copy: SiteContent["
   const supportingServices = copy.items.filter((service) => service.emphasis === "supporting");
   const complementaryServices = copy.items.filter((service) => service.emphasis === "complementary");
   const guideUi = servicePageUi[locale];
+  // Os quadros de serigrafia são um serviço à parte (feito por um parceiro), mas ficam na mesma lista.
+  const serviceLinks = [
+    ...serviceKeys.map((key) => ({ href: getServicePath(locale, key), name: servicePages[locale][key].shortName })),
+    ...(screensPublished ? [{ href: getScreensPath(locale), name: screensCopy[locale].sectionName }] : []),
+  ];
 
   if (!primaryService) return null;
 
@@ -68,22 +74,19 @@ export function Services({ locale, copy }: { locale: Locale; copy: SiteContent["
             </h3>
           </Reveal>
           <nav className="border-t border-border lg:col-span-8" aria-label={guideUi.materialGuides}>
-            {serviceKeys.map((key, index) => {
-              const guide = servicePages[locale][key];
-              return (
-                <Reveal key={key}>
-                  <a
-                    href={getServicePath(locale, key)}
-                    className="group grid min-h-20 grid-cols-[3rem_minmax(0,1fr)_auto] items-center gap-4 border-b border-border py-5 text-text-primary transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:grid-cols-[4rem_minmax(0,1fr)_8rem_auto] sm:gap-6"
-                  >
-                    <span className="text-xs font-bold text-accent">{String(index + 1).padStart(2, "0")}</span>
-                    <span className="text-xl font-bold tracking-[-0.025em] sm:text-2xl">{guide.shortName}</span>
-                    <span className="hidden text-right text-xs font-bold uppercase tracking-[0.1em] text-text-secondary sm:block">{guideUi.learnMore}</span>
-                    <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-                  </a>
-                </Reveal>
-              );
-            })}
+            {serviceLinks.map((link, index) => (
+              <Reveal key={link.href}>
+                <a
+                  href={link.href}
+                  className="group grid min-h-20 grid-cols-[3rem_minmax(0,1fr)_auto] items-center gap-4 border-b border-border py-5 text-text-primary transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:grid-cols-[4rem_minmax(0,1fr)_8rem_auto] sm:gap-6"
+                >
+                  <span className="text-xs font-bold text-accent">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="text-xl font-bold tracking-[-0.025em] sm:text-2xl">{link.name}</span>
+                  <span className="hidden text-right text-xs font-bold uppercase tracking-[0.1em] text-text-secondary sm:block">{guideUi.learnMore}</span>
+                  <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                </a>
+              </Reveal>
+            ))}
           </nav>
         </div>
 

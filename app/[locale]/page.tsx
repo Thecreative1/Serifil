@@ -19,6 +19,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { brand } from "@/config/brand";
 import { businessId, getBusinessIdentity } from "@/config/seo";
 import { isLocale, translations } from "@/data/i18n";
+import { getScreensPath, screensCopy, screensPublished } from "@/data/screens";
 
 export default async function Home({
   params,
@@ -40,15 +41,31 @@ export default async function Home({
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: copy.services.title,
-      itemListElement: copy.services.items.map((service) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: service.title,
-          description: service.description,
-          provider: { "@id": businessId },
-        },
-      })),
+      itemListElement: [
+        ...copy.services.items.map((service) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: service.title,
+            description: service.description,
+            provider: { "@id": businessId },
+          },
+        })),
+        ...(screensPublished
+          ? [
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: screensCopy[locale].sectionName,
+                  description: screensCopy[locale].metaDescription,
+                  url: `${brand.website}${getScreensPath(locale).slice(1)}`,
+                  provider: { "@id": businessId },
+                },
+              },
+            ]
+          : []),
+      ],
     },
   };
 

@@ -4,10 +4,17 @@ import type { Locale } from "@/data/i18n";
  * Quadros de serigrafia: serviço à parte dos serviços de impressão, feito por um parceiro que
  * trabalha para a SERIFIL. Nunca mostrar preços nem indicar que a SERIFIL fabrica os quadros.
  *
- * Enquanto `screensPublished` for `false`, /pt/quadros/ e /en/quadros/ são geradas para testes,
- * mas ficam `noindex`, fora do sitemap e sem ligação nos menus.
+ * Publicado a 16 set 2026. Com `false`, /pt/quadros/ e /en/quadros/ continuam a ser geradas,
+ * mas ficam `noindex`, fora do sitemap e sem ligações na lista de serviços, nos guias e na home.
  */
-export const screensPublished = false;
+export const screensPublished = true;
+
+/** Data da última alteração de conteúdo: usada no sitemap. Atualizar quando o texto ou as opções mudarem. */
+export const screensDateModified = "2026-09-16";
+
+/** Fotografia de quadros com tela (equipamento de um parceiro): partilha nas redes e Google Imagens. */
+export const screensShareImage = { src: "/images/quadros/quadros-serigrafia-og.jpg", width: 1200, height: 630 } as const;
+export const screensPhoto = { src: "/images/guias/telas-serigrafia.webp", width: 1440, height: 810 } as const;
 
 export function getScreensPath(locale: Locale) {
   return `/${locale}/quadros/`;
@@ -25,10 +32,7 @@ export const frameOptions = ["new", "remesh"] as const;
 
 export type FrameOption = (typeof frameOptions)[number];
 
-/**
- * Medidas e malhas de referência no mercado (fornecedores de material de serigrafia, setembro de 2026).
- * Antes de publicar, confirmar com o parceiro quais faz.
- */
+/** Medidas e malhas confirmadas com o parceiro (setembro de 2026). A medida é a exterior do caixilho. */
 export const commonSizes = [
   { width: 30, height: 40 },
   { width: 40, height: 50 },
@@ -82,8 +86,10 @@ type ScreensCopy = {
   ogLocale: string;
   metaTitle: string;
   metaDescription: string;
+  serviceType: string;
   breadcrumbsLabel: string;
   home: string;
+  services: string;
   sectionName: string;
   eyebrow: string;
   title: string;
@@ -124,6 +130,18 @@ type ScreensCopy = {
   engravingNone: string;
   engravingWith: (colours: number) => string;
   noPrice: string;
+  offers: Array<{ name: string; description: string }>;
+  photoAlt: string;
+  photoLabel: string;
+  photoCaption: string;
+  questions: {
+    eyebrow: string;
+    title: string;
+    items: Array<{ question: string; answer: string }>;
+  };
+  relatedEyebrow: string;
+  relatedTitle: string;
+  relatedDescription: string;
   artworkTitle: string;
   artworkTitleEngraving: string;
   artworkText: string;
@@ -160,16 +178,18 @@ export const screensCopy: Record<Locale, ScreensCopy> = {
   pt: {
     htmlLang: "pt-PT",
     ogLocale: "pt_PT",
-    metaTitle: "Quadros de Serigrafia à Medida | SERIFIL",
+    metaTitle: "Quadros de Serigrafia à Medida e Retelagem | SERIFIL",
     metaDescription:
-      "Desenhe o seu quadro de serigrafia: medida, malha, caixilho novo ou retelagem e gravação do desenho. Envie o pedido e receba o orçamento.",
+      "Quadros de serigrafia à medida: caixilho novo ou retelagem, malha de 43T a 120T e gravação do desenho. Desenhe o quadro online e peça orçamento.",
+    serviceType: "Quadros de serigrafia",
     breadcrumbsLabel: "Navegação estrutural",
     home: "Início",
+    services: "Serviços",
     sectionName: "Quadros de serigrafia",
-    eyebrow: "QUADROS DE SERIGRAFIA · PEDIDO À MEDIDA",
+    eyebrow: "Quadros de serigrafia à medida",
     title: "Desenhe o seu quadro.",
     lead:
-      "Arraste o canto do quadro ou parta de uma medida habitual. Escolha o caixilho, a malha e se precisa de gravação. Enviamos o orçamento depois de analisar o pedido.",
+      "Quadro completo com caixilho novo ou retelagem do seu caixilho, com a malha certa e gravação do desenho. Arraste o canto do quadro ou parta de uma medida habitual e envie o pedido de orçamento.",
     toolLabel: "Desenho e opções do quadro",
     drawingTitle: "O seu quadro",
     canvasLabel: (width, height) => `Desenho à escala de um quadro com ${width} por ${height} centímetros`,
@@ -236,6 +256,57 @@ export const screensCopy: Record<Locale, ScreensCopy> = {
     engravingNone: "Sem gravação",
     engravingWith: (colours) => `Com gravação, ${colours} ${colours === 1 ? "cor" : "cores"}`,
     noPrice: "Sem preços online: respondemos com o orçamento.",
+    offers: [
+      { name: "Quadro de serigrafia completo", description: "Caixilho metálico novo com malha esticada, à medida." },
+      { name: "Retelagem de quadros de serigrafia", description: "Malha nova esticada no caixilho metálico do cliente." },
+      {
+        name: "Gravação de quadros de serigrafia",
+        description: "Tela revestida com emulsão e exposta com o fotolito do desenho, um quadro por cor.",
+      },
+    ],
+    photoAlt: "Quadros de serigrafia de vários tamanhos encostados à parede, alguns com a tela revestida de emulsão amarela e roxa",
+    photoLabel: "Preparação da impressão",
+    photoCaption: "Quadros de vários formatos. Nos amarelos e no roxo a tela já está revestida de emulsão; nos brancos vê-se a malha.",
+    questions: {
+      eyebrow: "PERGUNTAS FREQUENTES",
+      title: "Antes de pedir os quadros.",
+      items: [
+        {
+          question: "O que é a retelagem de um quadro de serigrafia?",
+          answer:
+            "É a substituição da malha: é esticada uma malha nova no seu caixilho metálico, que volta a ser usado. No desenho, escolha «Retelagem» e indique a medida exterior do caixilho.",
+        },
+        {
+          question: "A medida do quadro é interior ou exterior?",
+          answer:
+            "É sempre a medida exterior do caixilho. As medidas habituais são 30 × 40, 40 × 50, 50 × 60 e 60 × 80 cm, na vertical ou na horizontal. Outras medidas são confirmadas no orçamento.",
+        },
+        {
+          question: "Que malha escolher: 43T, 55T, 77T, 90T ou 120T?",
+          answer:
+            "O número indica fios por centímetro. A 43T serve desenhos cheios em têxtil e deixa passar muita tinta; a 55T dá um pouco mais de detalhe em têxtil; a 77T serve detalhe fino, tecidos leves, papel e cartão; a 90T, desenhos detalhados com camada de tinta fina; a 120T, meios-tons e texto pequeno em papel, cartão, vinil e plástico. Se não tiver a certeza, escolha «Não sei» e diga-nos o que vai imprimir.",
+        },
+        {
+          question: "Quantos quadros são precisos para um desenho a várias cores?",
+          answer:
+            "Em regra, um quadro por cor: cada cor é gravada na sua tela e impressa numa passagem própria. Um desenho a três cores precisa de pelo menos três quadros, e a ferramenta ajusta a quantidade quando muda o número de cores.",
+        },
+        {
+          question: "Como é feita a gravação do desenho na tela?",
+          answer:
+            "A tela é revestida com emulsão e exposta com o [fotolito](/pt/guias/fotolitos/) do seu desenho. Envie o desenho por e-mail ou WhatsApp, a partir do resumo do pedido, de preferência em formato vetorial (PDF, AI, EPS ou SVG) e com as medidas reais. A gravação é orçamentada à parte.",
+        },
+        {
+          question: "Porque é que não há preços no site?",
+          answer:
+            "O valor depende da medida, do caixilho, da malha, da gravação e da quantidade. Envie o pedido com as opções escolhidas e respondemos com o orçamento.",
+        },
+      ],
+    },
+    relatedEyebrow: "OUTROS SERVIÇOS",
+    relatedTitle: "Serigrafia para a sua produção.",
+    relatedDescription:
+      "Serigrafia e impressão industrial sobre materiais fornecidos pelo cliente ou em projetos completos, em Guimarães.",
     artworkTitle: "Tem um desenho ou referência?",
     artworkTitleEngraving: "Envie o desenho para a gravação",
     artworkText:
@@ -276,16 +347,18 @@ export const screensCopy: Record<Locale, ScreensCopy> = {
   en: {
     htmlLang: "en",
     ogLocale: "en_GB",
-    metaTitle: "Custom Screen Printing Frames | SERIFIL",
+    metaTitle: "Custom Screen Printing Frames and Re-meshing | SERIFIL",
     metaDescription:
-      "Draw your screen printing frame: size, mesh, new frame or re-meshing and design exposure. Send your request and receive a quote.",
+      "Custom screen printing frames: new frame or re-meshing, 43T to 120T mesh and design exposure. Draw your screen online and request a quote.",
+    serviceType: "Screen printing frames",
     breadcrumbsLabel: "Breadcrumb navigation",
     home: "Home",
+    services: "Services",
     sectionName: "Screen printing frames",
-    eyebrow: "SCREEN PRINTING FRAMES · MADE TO ORDER",
+    eyebrow: "Custom screen printing frames",
     title: "Draw your screen.",
     lead:
-      "Drag the corner of the frame or start from a common size. Choose the frame, the mesh and whether you need exposure. We send a quote after reviewing your request.",
+      "A complete screen with a new frame, or re-meshing of your own frame, with the right mesh and design exposure. Drag the corner of the frame or start from a common size and send your quote request.",
     toolLabel: "Screen drawing and options",
     drawingTitle: "Your screen",
     canvasLabel: (width, height) => `Scale drawing of a ${width} by ${height} centimetre screen`,
@@ -352,6 +425,57 @@ export const screensCopy: Record<Locale, ScreensCopy> = {
     engravingNone: "No exposure",
     engravingWith: (colours) => `With exposure, ${colours} ${colours === 1 ? "colour" : "colours"}`,
     noPrice: "No prices online: we reply with a quote.",
+    offers: [
+      { name: "Complete screen printing frame", description: "New metal frame with stretched mesh, made to size." },
+      { name: "Screen printing frame re-meshing", description: "New mesh stretched on the customer's own metal frame." },
+      {
+        name: "Screen exposure",
+        description: "Screen coated with emulsion and exposed with the film positive of the design, one screen per colour.",
+      },
+    ],
+    photoAlt: "Screen printing frames of various sizes leaning against a wall, some with the mesh coated in yellow and purple emulsion",
+    photoLabel: "Print preparation",
+    photoCaption: "Screens in several formats. The yellow and purple ones are already coated with emulsion; on the white ones you can see the mesh.",
+    questions: {
+      eyebrow: "FREQUENTLY ASKED QUESTIONS",
+      title: "Before you order screens.",
+      items: [
+        {
+          question: "What is re-meshing a screen printing frame?",
+          answer:
+            "It means replacing the mesh: new mesh is stretched on your own metal frame, which is used again. In the drawing, choose “Re-meshing” and enter the outside dimensions of the frame.",
+        },
+        {
+          question: "Are the screen dimensions inside or outside?",
+          answer:
+            "Always the outside dimensions of the frame. Common sizes are 30 × 40, 40 × 50, 50 × 60 and 60 × 80 cm, portrait or landscape. Other sizes are confirmed in the quote.",
+        },
+        {
+          question: "Which mesh should I choose: 43T, 55T, 77T, 90T or 120T?",
+          answer:
+            "The number is threads per centimetre. 43T suits bold, solid designs on fabric and lets plenty of ink through; 55T gives a little more detail on fabric; 77T suits finer detail, lightweight fabrics, paper and card; 90T, detailed designs with a thin ink layer; 120T, halftones and small text on paper, card, vinyl and plastic. If you are not sure, choose “Not sure” and tell us what you will print.",
+        },
+        {
+          question: "How many screens does a multi-colour design need?",
+          answer:
+            "As a rule, one screen per colour: each colour is exposed on its own screen and printed in a separate pass. A three-colour design needs at least three screens, and the tool adjusts the quantity when you change the number of colours.",
+        },
+        {
+          question: "How is the design exposed onto the screen?",
+          answer:
+            "The screen is coated with emulsion and exposed with the [film positive](/en/guias/film-positives/) of your design. Send the artwork by email or WhatsApp from the request summary, preferably as a vector file (PDF, AI, EPS or SVG) at actual size. Exposure is quoted separately.",
+        },
+        {
+          question: "Why are there no prices on the website?",
+          answer:
+            "The price depends on size, frame, mesh, exposure and quantity. Send your request with the options you chose and we reply with a quote.",
+        },
+      ],
+    },
+    relatedEyebrow: "OTHER SERVICES",
+    relatedTitle: "Screen printing for your production.",
+    relatedDescription:
+      "Industrial screen printing on materials supplied by the client or as complete projects, in Guimarães.",
     artworkTitle: "Have artwork or a reference?",
     artworkTitleEngraving: "Send the artwork for exposure",
     artworkText:

@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { assetPath, localizedPath } from "@/config/paths";
 import type { Locale } from "@/data/i18n";
+import { getScreensPath, screensCopy, screensPublished } from "@/data/screens";
 import {
   getServicePath,
   serviceKeys,
@@ -24,9 +25,12 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
   const quotePath = localizedPath(locale, "#orcamento");
   const contactPath = localizedPath(locale, "#contacto");
   const workPath = localizedPath(locale, "#trabalhos");
-  const relatedPages = serviceKeys
-    .filter((key) => key !== page.key)
-    .map((key) => servicePages[locale][key]);
+  const relatedLinks = [
+    ...serviceKeys
+      .filter((key) => key !== page.key)
+      .map((key) => ({ href: getServicePath(locale, key), name: servicePages[locale][key].shortName })),
+    ...(screensPublished ? [{ href: getScreensPath(locale), name: screensCopy[locale].sectionName }] : []),
+  ];
 
   return (
     <main id="conteudo-principal" tabIndex={-1}>
@@ -267,13 +271,13 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
                 <p className="mt-7 max-w-[52ch] text-base leading-7 text-text-secondary">{ui.relatedDescription}</p>
               </div>
               <nav className="border-t border-border lg:col-span-7" aria-label={ui.relatedEyebrow}>
-                {relatedPages.map((related) => (
+                {relatedLinks.map((related) => (
                   <a
-                    key={related.key}
-                    href={getServicePath(locale, related.key)}
+                    key={related.href}
+                    href={related.href}
                     className="group flex min-h-20 items-center justify-between gap-6 border-b border-border py-5 text-xl font-bold tracking-[-0.025em] text-text-primary transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                   >
-                    {related.shortName}
+                    {related.name}
                     <ArrowRight className="size-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </a>
                 ))}
