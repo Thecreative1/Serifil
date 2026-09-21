@@ -72,6 +72,19 @@ export function Footer({
                   </a>
                 </li>
               ) : null}
+              {brand.facebook ? (
+                <li>
+                  <a
+                    className="underline decoration-border underline-offset-4 transition-colors hover:decoration-text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                    href={brand.facebook}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Facebook ${brand.facebookName}`}
+                  >
+                    Facebook
+                  </a>
+                </li>
+              ) : null}
               <li>{copy.formRequests}</li>
             </ul>
           </div>

@@ -420,19 +420,24 @@ test("publica apenas contactos configurados e o WhatsApp correto", async ({ page
   const phoneLinks = page.locator('a[href="tel:+351910508706"]');
   const whatsappLinks = page.locator('a[href^="https://wa.me/351910508706"]');
   const instagramLinks = page.locator('a[href="https://www.instagram.com/serifil_serigrafia/"]');
+  const facebookLinks = page.locator('a[href="https://www.facebook.com/profile.php?id=61594421650535"]');
   await expect(emailLinks).toHaveCount(3);
   await expect(phoneLinks).toHaveCount(3);
   await expect(whatsappLinks).toHaveCount(2);
   await expect(instagramLinks).toHaveCount(2);
+  await expect(facebookLinks).toHaveCount(2);
   const contact = page.locator("#contacto");
   await expect(contact.getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
   await expect(contact.getByRole("link", { name: "@serifil_serigrafia", exact: true })).toHaveAttribute("href", "https://www.instagram.com/serifil_serigrafia/");
+  await expect(contact.getByRole("link", { name: "Serifil - Serigrafia Industrial", exact: true })).toHaveAttribute("href", "https://www.facebook.com/profile.php?id=61594421650535");
+  await expect(page.locator("footer").getByRole("link", { name: "Facebook Serifil - Serigrafia Industrial" })).toHaveAttribute("href", "https://www.facebook.com/profile.php?id=61594421650535");
   await expect(contact.getByText("+351 910 508 706", { exact: true })).toHaveCount(1);
   await expect(contact.getByRole("link", { name: "Ligar +351 910 508 706" })).toBeVisible();
   await expect(contact.getByRole("link", { name: "WhatsApp +351 910 508 706" })).toBeVisible();
   await expect(page.getByText("Orçamentos por formulário, e-mail, telefone ou WhatsApp")).toBeVisible();
   await expect(whatsappLinks.first()).toHaveAttribute("target", "_blank");
   await expect(instagramLinks.first()).toHaveAttribute("target", "_blank");
+  await expect(facebookLinks.first()).toHaveAttribute("target", "_blank");
   await expect(contact.getByRole("link", { name: "WhatsApp +351 910 508 706" })).toHaveAttribute(
     "href",
     `https://wa.me/351910508706?text=${encodeURIComponent("Olá SERIFIL! Queria pedir um orçamento. O meu projeto é:")}`,
@@ -445,6 +450,7 @@ test("publica apenas contactos configurados e o WhatsApp correto", async ({ page
   await page.goto("/en/#contacto");
   await expect(page.locator("#contacto").getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
   await expect(page.locator("#contacto").getByRole("link", { name: "@serifil_serigrafia", exact: true })).toHaveAttribute("href", "https://www.instagram.com/serifil_serigrafia/");
+  await expect(page.locator("#contacto").getByRole("link", { name: "Serifil - Serigrafia Industrial", exact: true })).toHaveAttribute("href", "https://www.facebook.com/profile.php?id=61594421650535");
   await expect(page.getByText("Quotes via form, email, phone or WhatsApp")).toBeVisible();
   await expect(page.locator("#contacto").getByRole("link", { name: "WhatsApp +351 910 508 706" })).toHaveAttribute(
     "href",
@@ -580,6 +586,7 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(structuredData["@id"]).toBe("https://serifil.com/#business");
   expect(structuredData.email).toBe("geral@serifil.com");
   expect(structuredData.sameAs).toContain("https://www.instagram.com/serifil_serigrafia/");
+  expect(structuredData.sameAs).toContain("https://www.facebook.com/profile.php?id=61594421650535");
   expect(structuredData.alternateName).toContain("Serifil Guimarães");
   expect(structuredData.taxID).toBe("250796210");
   expect(structuredData.vatID).toBe("PT250796210");

@@ -10,6 +10,8 @@ type BrandConfig = {
   whatsapp: string;
   instagram: string;
   instagramHandle: string;
+  facebook: string;
+  facebookName: string;
   socialProfiles: string[];
   address: string;
   openingHours: string;
@@ -35,7 +37,9 @@ export const brand: BrandConfig = {
   whatsapp: "+351 910 508 706",
   instagram: "https://www.instagram.com/serifil_serigrafia/",
   instagramHandle: "@serifil_serigrafia",
-  socialProfiles: ["https://www.instagram.com/serifil_serigrafia/"],
+  facebook: "https://www.facebook.com/profile.php?id=61594421650535",
+  facebookName: "Serifil - Serigrafia Industrial",
+  socialProfiles: ["https://www.instagram.com/serifil_serigrafia/", "https://www.facebook.com/profile.php?id=61594421650535"],
   address: "Travessa Bernardino Jordão 90, Urgezes",
   openingHours: "",
   website: "https://serifil.com/",

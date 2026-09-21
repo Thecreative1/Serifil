@@ -1,4 +1,4 @@
-import { ArrowUpRight, AtSign, Clock3, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, AtSign, Clock3, Mail, MapPin, MessageCircle, Phone, ThumbsUp } from "lucide-react";
 import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { brand } from "@/config/brand";
 import { Container } from "@/components/ui/Container";
@@ -11,6 +11,7 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
     { label: copy.email, value: brand.email, href: brand.email ? `mailto:${brand.email}` : "", icon: Mail, external: false },
     { label: copy.hours, value: brand.openingHours, href: "", icon: Clock3, external: false },
     { label: copy.instagram, value: brand.instagram ? brand.instagramHandle : "", href: brand.instagram, icon: AtSign, external: true },
+    { label: copy.facebook, value: brand.facebook ? brand.facebookName : "", href: brand.facebook, icon: ThumbsUp, external: true },
   ];
   const available = contactItems.filter((item) => item.value);
 

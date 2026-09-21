@@ -147,7 +147,7 @@ Regra de alteração:
 - nome e descritor;
 - titular da atividade e NIF;
 - localização e morada;
-- telefone, WhatsApp, email, Instagram e horário;
+- telefone, WhatsApp, email, Instagram, Facebook e horário;
 - website canónico;
 - endpoint Formspree;
 - coordenadas e URLs Google Maps.
