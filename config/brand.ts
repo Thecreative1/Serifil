@@ -14,6 +14,7 @@ type BrandConfig = {
   facebookName: string;
   socialProfiles: string[];
   address: string;
+  postalCode: string;
   openingHours: string;
   website: string;
   quoteEndpoint: string;
@@ -41,6 +42,7 @@ export const brand: BrandConfig = {
   facebookName: "Serifil - Serigrafia Industrial",
   socialProfiles: ["https://www.instagram.com/serifil_serigrafia/", "https://www.facebook.com/profile.php?id=61594421650535"],
   address: "Travessa Bernardino Jordão 90, Urgezes",
+  postalCode: "4810-480",
   openingHours: "",
   website: "https://serifil.com/",
   quoteEndpoint: "https://formspree.io/f/xzdnyead",

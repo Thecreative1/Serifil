@@ -55,6 +55,7 @@ export function getBusinessIdentity({
       addressLocality: "Guimarães",
       addressRegion: "Braga",
       addressCountry: "PT",
+      postalCode: brand.postalCode,
       ...(brand.address ? { streetAddress: brand.address } : {}),
     },
     geo: {

@@ -31,7 +31,7 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.12em] text-text-secondary">{copy.location}</p>
                   <p className="mt-2 max-w-[34ch] text-xl font-bold text-text-primary">{brand.address}</p>
-                  <p className="mt-1 text-sm text-text-secondary">{brand.location}</p>
+                  <p className="mt-1 text-sm text-text-secondary">{brand.postalCode} {brand.location}</p>
                 </div>
               </div>
               {brand.phone || brand.whatsapp ? (
@@ -91,7 +91,7 @@ export function ContactSection({ copy }: { copy: SiteContent["contact"] }) {
                 <p className="mt-8 max-w-[18ch] text-[clamp(2rem,4vw,4.2rem)] leading-[0.94] font-bold tracking-[-0.05em] text-text-primary">
                   {brand.address}
                 </p>
-                <p className="mt-5 text-base text-text-secondary">{brand.location}</p>
+                <p className="mt-5 text-base text-text-secondary">{brand.postalCode} {brand.location}</p>
               </div>
               <TrackedLink
                 href={brand.mapsUrl}

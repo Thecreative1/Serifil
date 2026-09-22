@@ -19,7 +19,7 @@ export function Footer({
     { label: copy.legal.owner, value: brand.legalOwner },
     { label: copy.legal.taxId, value: brand.taxId },
     { label: copy.legal.activity, value: copy.legal.activityValue },
-    { label: copy.legal.address, value: `${brand.address}, ${brand.location}` },
+    { label: copy.legal.address, value: `${brand.address}, ${brand.postalCode} ${brand.location}` },
     ...(brand.email
       ? [{ label: copy.legal.email, value: brand.email, href: `mailto:${brand.email}` }]
       : []),

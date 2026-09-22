@@ -472,7 +472,7 @@ test("disponibiliza informação legal discreta e bilingue no rodapé", async ({
   await expect(portugueseLegal.getByText("Lisete da Silva Araújo")).toBeVisible();
   await expect(portugueseLegal.getByText("250 796 210")).toBeVisible();
   await expect(portugueseLegal.getByText("Serigrafia, impressão industrial e personalização")).toBeVisible();
-  await expect(portugueseLegal.getByText("Travessa Bernardino Jordão 90, Urgezes, Guimarães, Portugal")).toBeVisible();
+  await expect(portugueseLegal.getByText("Travessa Bernardino Jordão 90, Urgezes, 4810-480 Guimarães, Portugal")).toBeVisible();
   await expect(portugueseLegal.getByRole("link", { name: "geral@serifil.com" })).toHaveAttribute("href", "mailto:geral@serifil.com");
   await expect(portugueseLegal.getByRole("link", { name: "+351 910 508 706" })).toHaveAttribute("href", "tel:+351910508706");
   await expect(portugueseLegal.getByText("E-mail", { exact: true })).toHaveCount(1);
@@ -577,7 +577,7 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
     vatID: string;
     knowsAbout: string[];
     logo: { url: string; width: number; height: number };
-    address: { addressRegion: string };
+    address: { addressRegion: string; postalCode: string };
     contactPoint: { telephone: string; availableLanguage: string[] };
     hasOfferCatalog: { itemListElement: Array<{ itemOffered: { name: string } }> };
   };
@@ -595,6 +595,7 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(structuredData.logo.width).toBe(512);
   expect(structuredData.logo.height).toBe(512);
   expect(structuredData.address.addressRegion).toBe("Braga");
+  expect(structuredData.address.postalCode).toBe("4810-480");
   expect(structuredData.contactPoint.telephone).toBe("+351 910 508 706");
   expect(structuredData.contactPoint.availableLanguage).toEqual(["Portuguese", "English"]);
   // Oito serviços de impressão e, no fim, os quadros de serigrafia (serviço à parte, com página própria).

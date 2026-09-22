@@ -146,7 +146,7 @@ Regra de alteração:
 
 - nome e descritor;
 - titular da atividade e NIF;
-- localização e morada;
+- localização, morada e código postal (`postalCode`), apresentado nos contactos, junto ao mapa e na informação legal, e incluído no JSON-LD `PostalAddress`;
 - telefone, WhatsApp, email, Instagram, Facebook e horário;
 - website canónico;
 - endpoint Formspree;
