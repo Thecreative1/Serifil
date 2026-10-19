@@ -19,6 +19,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { brand } from "@/config/brand";
 import { businessId, getBusinessIdentity } from "@/config/seo";
 import { isLocale, translations } from "@/data/i18n";
+import { dtfCopy, dtfPublished, getDtfPath } from "@/data/dtf";
 import { getScreensPath, screensCopy, screensPublished } from "@/data/screens";
 
 export default async function Home({
@@ -60,6 +61,20 @@ export default async function Home({
                   name: screensCopy[locale].sectionName,
                   description: screensCopy[locale].metaDescription,
                   url: `${brand.website}${getScreensPath(locale).slice(1)}`,
+                  provider: { "@id": businessId },
+                },
+              },
+            ]
+          : []),
+        ...(dtfPublished
+          ? [
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: dtfCopy[locale].sectionName,
+                  description: dtfCopy[locale].metaDescription,
+                  url: `${brand.website}${getDtfPath(locale).slice(1)}`,
                   provider: { "@id": businessId },
                 },
               },

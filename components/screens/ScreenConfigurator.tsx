@@ -512,7 +512,7 @@ function LegendSwatch({ kind }: { kind: "solid" | "hatch" | "print" | "ghost" })
   );
 }
 
-function OptionGroup({
+export function OptionGroup({
   number,
   title,
   description,
@@ -537,7 +537,7 @@ function OptionGroup({
   );
 }
 
-function OptionCard({
+export function OptionCard({
   type,
   name,
   checked,

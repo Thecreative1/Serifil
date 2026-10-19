@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { brand } from "@/config/brand";
+import { dtfDateModified, dtfPublished, getDtfHreflangPaths, getDtfPath } from "@/data/dtf";
 import {
   getGuideHreflangPaths,
   getGuideImages,
@@ -142,5 +143,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       }))
     : [];
 
-  return [...homePages, ...detailPages, ...guidePages, ...screensPages];
+  // O DTF ao metro só entra no sitemap depois de publicado (`dtfPublished`).
+  const dtfPages: MetadataRoute.Sitemap = dtfPublished
+    ? locales.map((locale) => ({
+        url: new URL(getDtfPath(locale), brand.website).toString(),
+        lastModified: new Date(dtfDateModified),
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+        alternates: { languages: absoluteLanguages(getDtfHreflangPaths()) },
+      }))
+    : [];
+
+  return [...homePages, ...detailPages, ...guidePages, ...screensPages, ...dtfPages];
 }

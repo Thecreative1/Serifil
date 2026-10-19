@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { guidesUi, type GuideLocale } from "@/data/guides";
+import { dtfCopy, dtfPublished, getDtfPath } from "@/data/dtf";
 import { getScreensPath, screensCopy, screensPublished } from "@/data/screens";
 import { getServicePath, servicePages, type ServiceKey } from "@/data/service-pages";
 
@@ -11,6 +12,7 @@ export function GuideServiceLinks({ locale, services }: { locale: GuideLocale; s
   const links = [
     ...services.map((key) => ({ href: getServicePath(locale, key), name: servicePages[locale][key].shortName })),
     ...(screensPublished ? [{ href: getScreensPath(locale), name: screensCopy[locale].sectionName }] : []),
+    ...(dtfPublished ? [{ href: getDtfPath(locale), name: dtfCopy[locale].sectionName }] : []),
   ];
 
   return (

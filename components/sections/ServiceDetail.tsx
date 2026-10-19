@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { assetPath, localizedPath } from "@/config/paths";
 import type { Locale } from "@/data/i18n";
+import { dtfCopy, dtfPublished, getDtfPath } from "@/data/dtf";
 import { getScreensPath, screensCopy, screensPublished } from "@/data/screens";
 import {
   getServicePath,
@@ -30,6 +31,7 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
       .filter((key) => key !== page.key)
       .map((key) => ({ href: getServicePath(locale, key), name: servicePages[locale][key].shortName })),
     ...(screensPublished ? [{ href: getScreensPath(locale), name: screensCopy[locale].sectionName }] : []),
+    ...(dtfPublished ? [{ href: getDtfPath(locale), name: dtfCopy[locale].sectionName }] : []),
   ];
 
   return (

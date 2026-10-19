@@ -1055,3 +1055,56 @@ test("apresenta uma página 404 personalizada, bilingue e não indexável", asyn
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex");
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(321);
 });
+
+test("calculadora de DTF estima o filme, resume e envia o pedido", async ({ page }) => {
+  let submittedBody = "";
+  await page.addInitScript(() => {
+    localStorage.setItem("serifil_analytics_consent", "denied");
+  });
+  await page.route("https://formspree.io/f/xzdnyead", async (route) => {
+    submittedBody = route.request().postData() ?? "";
+    await route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
+  });
+
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/pt/dtf/");
+  await expect(page.locator("h1")).toHaveText("DTF ao metro Encha o seu metro.");
+  // O filme é impresso por um parceiro: o site não o diz nem afirma que a SERIFIL o imprime.
+  await expect(page.locator("main")).not.toContainText(/parceiro|imprimimos/i);
+
+  const summary = page.getByRole("region", { name: "O seu pedido" });
+  // Valores por omissão: 20 desenhos de 10 × 10 cm ao lado de 10 desenhos A3 rodados.
+  await expect(summary).toContainText("3,10 m");
+  await expect(summary).toContainText("21,70 € + IVA");
+
+  await page.getByRole("button", { name: "Remover desenho 2" }).click();
+  await expect(summary).toContainText("0,50 m");
+  await expect(summary).toContainText("3,50 € + IVA");
+  await expect(page.getByText("Cabem 45 num metro.")).toBeVisible();
+
+  await page.getByRole("button", { name: "A4 21 × 30" }).click();
+  await expect(page.getByLabel("Largura (cm)").last()).toHaveValue("21");
+  await page.getByLabel("Quantidade").last().fill("4");
+  await page.getByLabel("Quantidade").last().press("Enter");
+  await expect(summary).toContainText("21 × 30 cm × 4");
+
+  await page.getByLabel("Filme e aplicação").check();
+  await expect(summary).toContainText("Sob orçamento");
+
+  const whatsappHref = await summary.getByRole("link", { name: "Enviar resumo por WhatsApp" }).getAttribute("href");
+  expect(decodeURIComponent(whatsappHref?.split("text=")[1] ?? "")).toContain("Aplicação: Sob orçamento");
+
+  const form = page.getByRole("form", { name: "Pedido de DTF ao metro" });
+  await form.getByLabel("Nome").fill("Loja Exemplo");
+  await form.getByLabel("E-mail").fill("dtf@example.test");
+  await form.getByLabel("Telefone").fill("000 000 000");
+  await form.getByLabel(/Autorizo o tratamento/).check();
+  await form.getByRole("button", { name: "Enviar pedido" }).click();
+  await expect(page.getByRole("heading", { name: "Pedido enviado." })).toBeVisible();
+  expect(submittedBody).toContain("dtf_desenhos");
+  expect(submittedBody).toContain("Filme e aplicação");
+
+  await page.goto("/en/dtf/");
+  await expect(page.locator("h1")).toHaveText("DTF transfers by the metre Fill your metre.");
+  await expect(page.getByRole("region", { name: "Your request" })).toContainText("€21.70 + VAT");
+});

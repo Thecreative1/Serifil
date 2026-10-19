@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { Locale, SiteContent } from "@/data/i18n";
+import { dtfCopy, dtfPublished, getDtfPath } from "@/data/dtf";
 import { getScreensPath, screensCopy, screensPublished } from "@/data/screens";
 import { getServicePath, serviceKeys, servicePages, servicePageUi } from "@/data/service-pages";
 
@@ -15,6 +16,7 @@ export function Services({ locale, copy }: { locale: Locale; copy: SiteContent["
   const serviceLinks = [
     ...serviceKeys.map((key) => ({ href: getServicePath(locale, key), name: servicePages[locale][key].shortName })),
     ...(screensPublished ? [{ href: getScreensPath(locale), name: screensCopy[locale].sectionName }] : []),
+    ...(dtfPublished ? [{ href: getDtfPath(locale), name: dtfCopy[locale].sectionName }] : []),
   ];
 
   if (!primaryService) return null;
