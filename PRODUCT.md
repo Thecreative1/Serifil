@@ -28,6 +28,15 @@ Não deve parecer uma loja barata de t-shirts, uma gráfica antiga, um catálogo
 4. Manter proximidade local: valorizar Guimarães, comunicação direta e acompanhamento técnico.
 5. Preparar o crescimento: dar prioridade atual à impressão em plástico e sacos, mantendo uma arquitetura flexível para ampliar serviços e portefólio.
 
+## Serviços complementares
+
+Desde set/out 2026 o site tem dois serviços com página própria, dentro de "Serviços" e sem item no menu:
+
+- **Quadros de serigrafia** (feitos por um parceiro): ferramenta para desenhar o quadro, sem preços.
+- **DTF ao metro** (filme de um parceiro, que não se nomeia; aplicação pela SERIFIL): calculadora com preço por metro, para pequenas produções a cores. Fala de "estampagem de t-shirts" porque é o que as pessoas pesquisam, mas mantém o tom de parceiro técnico e não deve escorregar para o registo de "loja barata de t-shirts" das anti-referências.
+
+Para configurar um serviço, o utilizador prefere ferramentas visuais (desenho, opções e resumo) a páginas de texto longo.
+
 ## Accessibility & Inclusion
 
 Cumprir WCAG 2.2 nível AA como referência: contraste adequado, navegação completa por teclado, foco visível, HTML semântico, labels associados, alvos de toque confortáveis e respeito por `prefers-reduced-motion`.

@@ -1,6 +1,14 @@
 # SERIFIL
 
-Site institucional bilingue da SERIFIL, empresa de serigrafia e personalização em Guimarães. O objetivo principal é explicar capacidades de produção e transformar visitas em pedidos de orçamento qualificados.
+Site institucional bilingue (PT/EN) da SERIFIL, empresa de serigrafia e impressão industrial em Guimarães, publicado em https://serifil.com/. O objetivo principal é explicar capacidades de produção e transformar visitas em pedidos de orçamento qualificados.
+
+O site tem:
+
+- **Página inicial** (`/pt/`, `/en/`) com serviços, trabalhos, processo, setores, formulário de orçamento e contactos.
+- **Quatro páginas de serviço**: serigrafia em PVC, em tecido, sacos em TNT e componentes para calçado (`/pt/servicos/…`).
+- **Quadros de serigrafia** (`/pt/quadros/`): ferramenta para desenhar o quadro e pedir orçamento, sem preços.
+- **DTF ao metro** (`/pt/dtf/`): calculadora que arruma os desenhos no filme e mostra o preço.
+- **Guias** (`/pt/guias/`): fotolitos e DTF.
 
 ## Documentação de preservação
 
@@ -23,8 +31,9 @@ npm run dev
 
 O servidor local fica disponível em `http://localhost:3000`. As páginas principais são:
 
-- `http://localhost:3000/pt/`
-- `http://localhost:3000/en/`
+- `http://localhost:3000/pt/` e `http://localhost:3000/en/`
+- `http://localhost:3000/pt/quadros/` e `http://localhost:3000/pt/dtf/`
+- `http://localhost:3000/pt/guias/`
 
 ## Verificação
 
@@ -34,7 +43,7 @@ npm run build
 npm run test:e2e
 ```
 
-O build produz exportação estática em `out/` e prepara o artefacto de alojamento em `dist/`.
+O build produz exportação estática em `out/` e prepara o artefacto de alojamento em `dist/`. O build e os testes precisam de rede, porque descarregam as fontes do Google.
 
 ## Publicar no site
 
@@ -80,7 +89,13 @@ As branches `agent/*` são rascunhos para pré-visualizar e rever. Fazer commit 
 | Cores e estilos globais | `app/globals.css` |
 | Componentes reutilizáveis | `components/ui/` |
 | Estrutura da página | `app/[locale]/page.tsx` |
-| Conteúdo PT e EN | `data/i18n.ts` |
+| Conteúdo PT e EN da página inicial | `data/i18n.ts` |
+| Páginas de serviço | `data/service-pages.ts` |
+| Guias | `data/guides.ts` |
+| Quadros de serigrafia | `data/screens.ts`, `components/screens/ScreenConfigurator.tsx` |
+| DTF ao metro (preços, encaixe, textos) | `data/dtf.ts`, `components/dtf/DtfCalculator.tsx` |
+| Sitemap e robots | `app/sitemap.ts`, `app/robots.ts` |
+| Resumo do site para assistentes de IA | `public/llms.txt` |
 | Contactos, localização e endpoint do formulário | `config/brand.ts` |
 | Analítica e consentimento | `config/analytics.ts`, `lib/analytics.ts` |
 | Contratos de comportamento | `tests/site.spec.ts` |
@@ -88,4 +103,4 @@ As branches `agent/*` são rascunhos para pré-visualizar e rever. Fazer commit 
 
 ## Regra de segurança
 
-Nunca inventar contactos, números comerciais, certificações, capacidades, prazos ou garantias. Alterações ao conteúdo devem manter paridade entre português e inglês, metadados localizados e dados estruturados.
+Nunca inventar contactos, números comerciais, certificações, capacidades, prazos ou garantias. Os quadros e o filme DTF são feitos por parceiros: ver as regras de cada um em `AGENTS.md`. Alterações ao conteúdo devem manter paridade entre português e inglês, metadados localizados e dados estruturados.

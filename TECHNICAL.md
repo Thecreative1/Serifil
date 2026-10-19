@@ -26,8 +26,11 @@ app/
   sitemap.ts             sitemap localizado e imagens
 components/
   analytics/             consentimento, Google Analytics e links medidos
-  layout/                header, menu mobile e footer
-  sections/              secções da landing page
+  dtf/                   calculadora de DTF ao metro (DtfCalculator)
+  guides/                peças dos guias: migalhas, esquema de processo, ligações
+  layout/                header, menu mobile, footer e contacto flutuante
+  screens/               ferramenta de quadros (ScreenConfigurator)
+  sections/              secções da landing page, páginas de serviço e guias
   ui/                    primitives reutilizáveis
 config/
   analytics.ts           ID, chave de consentimento e evento interno
@@ -37,12 +40,19 @@ data/
   i18n.ts                fonte ativa de todo o conteúdo PT e EN
   service-pages.ts       páginas de serviço PT e EN
   guides.ts              guias editoriais PT e EN e estado de publicação
+  screens.ts             quadros de serigrafia: opções, textos, SEO e resumo
+  dtf.ts                 DTF ao metro: preços, encaixe no filme, textos, SEO e resumo
 lib/
   analytics.ts           consent mode e eventos sem dados pessoais
 public/
   images/                imagem real do hero e trabalhos otimizados
 scripts/
-  optimize-portfolio-images.mjs preparação WebP das fotografias de trabalhos
+  optimize-portfolio-images.mjs     WebP das fotografias de trabalhos
+  optimize-guide-images.mjs         WebP das fotografias de equipamento dos guias
+  optimize-screens-images.mjs       imagem de partilha dos quadros
+  generate-service-share-images.mjs JPEG 1200×630 de partilha das páginas de serviço
+  generate-brand-icons.mjs          ícones da marca
+  serve-static.mjs                  servidor estático usado pelos testes (porta 3100)
 tests/
   site.spec.ts           contratos funcionais e de conteúdo
   visual.spec.ts         capturas completas desktop e mobile
@@ -56,6 +66,7 @@ Os ficheiros `data/services.ts`, `data/portfolio.ts`, `data/benefits.ts` e `data
 
 `app/(root)/page.tsx` escolhe idioma no cliente por esta ordem:
 
+0. Robôs (motores de busca e pré-visualizações de links, detetados pelo user agent) vão sempre para `/pt/`, o `x-default`. O Googlebot apresenta-se em inglês: sem esta regra era enviado para `/en/` e o Google tratava a raiz como a página inglesa (visto no Search Console em out 2026).
 1. `localStorage` com chave `serifil_locale`.
 2. Cookie `serifil_locale`.
 3. Preferências do navegador.
@@ -93,6 +104,10 @@ Secção editorial "Guias de Serigrafia" / "Screen Printing Guides", em portugu�
 - o corpo é uma lista de secções com blocos tipados (`paragraph`, `note`, `checklist`, `comparison`, `process`, `figure`, `gallery`), renderizados por `components/sections/GuideArticle.tsx`;
 - ligações internas no texto usam a sintaxe `[texto](/caminho/)`, construídas com `getServicePath` para não divergirem das rotas.
 
+Guias publicados: fotolitos (`/pt/guias/fotolitos/` ↔ `/en/guias/film-positives/`, set 2026) e DTF (`/pt/guias/o-que-e-dtf/` ↔ `/en/guias/what-is-dtf/`, out 2026). O esquema de processo (`components/guides/ProcessDiagram.tsx`) tem desenhos para serigrafia (`artwork`, `film`, `screen`, `print`) e para DTF (`dtf-film`, `powder`, `press`). O guia do DTF não tem fotografia própria e usa `og.jpg` como imagem de partilha.
+
+Cada página de serviço mostra "Guias relacionados" (`serviceGuides` em `components/sections/ServiceDetail.tsx`): fotolitos em todas e, na serigrafia em tecido, também o DTF. As respostas das perguntas frequentes dos serviços aceitam a sintaxe de ligação `[texto](/caminho/)`.
+
 Cada guia publica canonical, hreflang recíproco (`x-default` para PT), Open Graph `article`, JSON-LD `Article` e `BreadcrumbList`; o índice publica `CollectionPage`. O link "Guias"/"Guides" do menu é um caminho absoluto: `Header`, `MobileMenu` e `Footer` só prefixam `homeHref` a âncoras `#`.
 
 ### `/pt/quadros/` e `/en/quadros/`
@@ -114,6 +129,32 @@ SEO da página de quadros:
 - Imagem de partilha própria, `public/images/quadros/quadros-serigrafia-og.jpg` (1200×630), gerada por `scripts/optimize-screens-images.mjs` a partir de `../fotos serifil/guias/telas.jpg`. A fotografia das telas (`public/images/guias/telas-serigrafia.webp`) aparece junto às perguntas. Ambas são de um parceiro: descrevem o que se vê, nunca instalações da SERIFIL.
 - Sitemap com prioridade 0.8, `lastmod` fixo em `screensDateModified` e as duas imagens. Atualizar a data quando o conteúdo mudar.
 - A página não define `robots`: herda do layout `index, follow` e `max-image-preview: large`.
+
+### `/pt/dtf/` e `/en/dtf/`
+
+Calculadora "DTF ao metro", publicada a 19 out 2026 (`dtfPublished = true`). Conteúdo, preços, encaixe e textos em `data/dtf.ts`; interação em `components/dtf/DtfCalculator.tsx` (client component).
+
+Regras de negócio:
+
+- O filme é impresso por um parceiro, mas **isso não se diz no site**: nunca escrever que a SERIFIL imprime o filme nem que tem impressora DTF. A aplicação (prensagem) é feita pela SERIFIL e é sempre orçamentada à parte.
+- Os 7 € por metro são o custo do parceiro e nunca aparecem no site (há testes que o verificam). O preço de venda está em `priceTiers`: 9 € por metro até 9 m e 8,50 € a partir de 10 m, sem IVA, cobrado aos 10 cm (`billingStep`) com mínimo de 0,5 m (`minimumLength`). O guia do DTF repete estes valores em texto: mudar o preço obriga a rever `data/guides.ts`.
+- Provisório, por confirmar com o parceiro: largura útil do rolo de 58 cm (`rollWidth`) e 1 cm entre desenhos (`designGap`).
+
+Encaixe no filme (`layoutDtf`):
+
+1. Cada desenho fica na orientação que gasta menos filme; "Cabem N num metro" usa a orientação mais densa.
+2. As peças entram das mais altas para as mais baixas. Cada fila abre com a peça mais alta e o espaço livre à direita e por baixo das peças é aproveitado pelas menores (lista de espaços livres, divisão em guilhotina).
+3. Cada metro é uma folha (`sheetLength = 100`): nenhuma peça atravessa a linha do metro; se não couber no resto da folha, passa para o topo da seguinte.
+4. É uma estimativa: a página diz que o valor é confirmado depois de vermos os ficheiros.
+
+Interface:
+
+- Começa com um só desenho (10 × A4) e permite até 6 (`maxDesigns`), pelas medidas habituais ou por "Adicionar desenho".
+- Cada desenho tem um aspeto (`look`): cor e silhueta `lucide-react` (gato, pinheiro, peixe, pássaro, flor, tartaruga), iguais no cartão e nas peças do filme. Um desenho novo recebe o primeiro aspeto livre e mantém-no enquanto existir.
+- Clicar num cartão ou numa peça seleciona o desenho: o cartão fica com contorno laranja, as outras peças ficam esbatidas e o filme rola até à primeira peça do desenho escolhido (útil porque os desenhos pequenos ficam no fim).
+- O pedido segue pelo Formspree com campos `dtf_*`, ou por e-mail/WhatsApp com o resumo, porque os ficheiros não vão no formulário.
+
+SEO: título "DTF ao Metro e Estampagem de T-shirts | SERIFIL" (pesquisas "estampagem de t-shirts guimarães" no Search Console), `Service` + `FAQPage` + `BreadcrumbList`, `dtfDateModified` no sitemap. Aparece em Serviços como os quadros (lista da home, páginas de serviço, guias, `OfferCatalog`), sem item próprio no menu. Com `dtfPublished = false`, fica `noindex` e sem ligações.
 
 ### Menus e contacto rápido
 
@@ -177,8 +218,8 @@ Tokens CSS ativos:
 --surface-light: #242722;
 --text-primary: #f5f1e8;
 --text-secondary: #a6aaa4;
---accent: #e85b2a;
---accent-hover: #ff6b35;
+--accent: #ff5c00;
+--accent-hover: #ff7330;
 --border: #30332f;
 --light-background: #eee9df;
 --light-text: #171916;
@@ -207,6 +248,9 @@ Secções de conteúdo, footer e primitives sem estado permanecem server compone
 - `TrackedLink`: eventos de analítica.
 - `CookiePreferencesButton`: reabertura das preferências.
 - `LocalePreference`: persistência do idioma.
+- `ScreenConfigurator`: desenho e pedido dos quadros.
+- `DtfCalculator`: encaixe no filme, seleção de desenhos e pedido de DTF.
+- Raiz `app/(root)/page.tsx`: escolha de idioma e encaminhamento.
 
 ### Primitives
 
@@ -273,7 +317,7 @@ Cada locale publica:
 - hreflang `pt-PT`, `en` e `x-default`;
 - Open Graph e Twitter card;
 - robots index/follow;
-- JSON-LD `LocalBusiness` com catálogo dos oito serviços de impressão e, no fim, dos quadros de serigrafia (com `url`).
+- JSON-LD `LocalBusiness` com catálogo dos oito serviços de impressão e, no fim, dos quadros de serigrafia e do DTF ao metro (com `url`).
 
 A raiz publica JSON-LD `WebSite`, fica `noindex, follow` e tem Open Graph próprio (`og.jpg`), para que um link partilhado para serifil.com mostre pré-visualização. O `x-default` é sempre a versão portuguesa (`/pt/…`), também na raiz. `app/sitemap.ts` inclui páginas localizadas e assets visuais. `app/robots.ts` permite crawling e aponta para o sitemap.
 
@@ -282,6 +326,8 @@ Regras de metadados verificadas na auditoria de out 2026:
 - `title` até 60 caracteres e `description` até 160, terminando com ` | SERIFIL` (marca sempre em maiúsculas).
 - As páginas de serviço partilham imagens JPEG 1200×630 em `public/images/servicos/<chave>-og.jpg`, geradas por `scripts/generate-service-share-images.mjs` a partir da fotografia do topo de cada serviço. O WebP não aparece em todas as pré-visualizações (WhatsApp incluído). Mudar a fotografia de um serviço implica voltar a correr o script.
 - `public/llms.txt` lista as páginas de serviço, os quadros, o DTF e os guias nas duas línguas; uma página nova entra lá no mesmo trabalho.
+
+Google Search Console (propriedade de domínio `sc-domain:serifil.com`). Em out 2026: 72 cliques e 1,78 mil impressões em 3 meses, a maioria pela marca. Pesquisas com potencial: "estampagem de t-shirts (na hora) guimarães", "impressão em tecido", "fotolito", "tnt significado tecido". Depois de publicar páginas novas: reenviar o sitemap e pedir indexação na inspeção de URL (há uma quota diária de pedidos).
 
 Quando mudar domínio, serviços, contacto ou imagem:
 
@@ -334,6 +380,8 @@ npm run start
 npm run test:e2e
 ```
 
+O build descarrega as fontes do Google (`next/font/google`): sem rede, `npm run build` e `npm run test:e2e` falham com "Failed to fetch Inter/Archivo". O `npm run dev` funciona sem rede, com fontes de recurso.
+
 `npm run build` executa `next build` e cria a exportação estática em `out/`. O workflow `.github/workflows/deploy-pages.yml` envia esse diretório para o GitHub Pages e publica-o **apenas quando há push para a branch `main`**.
 
 Nenhuma outra branch é publicada. As branches `agent/*` e restantes servem para trabalho e revisão: commit ou push nelas não altera serifil.com. O processo de publicação e o diagnóstico "fiz commit mas não vejo" estão em `README.md` → "Publicar no site"; as regras para agentes estão em `AGENTS.md`.
@@ -352,7 +400,12 @@ Não editar `out/` manualmente. É um artefacto regenerável.
 - ausência de dados pessoais na analítica;
 - contactos e mapa;
 - metadata, robots, sitemap e JSON-LD;
-- conteúdo PT/EN e troca de idioma.
+- conteúdo PT/EN e troca de idioma;
+- ferramenta de quadros (sem preços) e calculadora de DTF (preços, mínimo, escalão dos 10 m, folhas de um metro, seleção, sem os 7 € de custo e sem referir o parceiro);
+- guias PT/EN (fotolitos e DTF) e ligações entre serviços, guias, quadros e DTF;
+- encaminhamento da raiz: robôs para `/pt/`, visitantes para o seu idioma.
+
+Os testes correm sobre a build estática (`npm run serve:test`, porta 3100). Para testar contra `npm run dev`, usar `http://localhost:<porta>` e não `127.0.0.1`: o Next bloqueia recursos de desenvolvimento noutras origens e a página não hidrata.
 
 `tests/visual.spec.ts` gera:
 

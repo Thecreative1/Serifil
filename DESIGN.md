@@ -242,13 +242,22 @@ O resumo inicial é um bloco em tinta escura sobre o papel técnico. Esquemas de
 
 ### Ferramenta de quadros
 
-A ferramenta de quadros (`/pt/quadros/`) é a única superfície de trabalho do site. Mantém o sistema, com menos escala e mais precisão.
+A ferramenta de quadros (`/pt/quadros/`) e a calculadora de DTF (`/pt/dtf/`) são as superfícies de trabalho do site. Mantêm o sistema, com menos escala e mais precisão.
 
 - **Desenho:** fica em papel técnico, com grelha em `paper-border`. O caixilho é em tinta escura (tracejado na retelagem) e a malha fica sobre `warm-ink`. A área de impressão e as medidas habituais são tracejadas, e as cotas são linhas com traços nas pontas. O único laranja do desenho é o canto arrastável.
 - **Escolhas de valor** (medidas, malhas): placas quadradas de 48px que ficam laranja quando escolhidas.
 - **Opções com explicação** (caixilho, gravação): linhas com indicador quadrado e contorno laranja de 1px quando escolhidas. O input nativo fica invisível por cima da linha, para manter teclado e leitores de ecrã.
 - **Números:** valores usam Inter com algarismos tabulares. Só a medida principal do desenho usa Archivo.
 - **Resumo:** o cabeçalho do desenho repete a configuração numa linha. Nunca mostrar preços.
+
+### Calculadora de DTF
+
+Usa a mesma gramática da ferramenta de quadros: desenho em papel técnico à esquerda (fixo em desktop) e opções numeradas à direita, com resumo e formulário por baixo.
+
+- **Filme:** faixa branca vertical com a largura útil à escala, linhas laranja tracejadas no fim de cada folha de um metro e a medida cobrada no cabeçalho, em Archivo. Em telemóvel, o filme fica numa caixa com scroll próprio de até 50vh.
+- **Desenhos:** cada desenho tem uma cor e uma silhueta `lucide-react` em traço, iguais no cartão (quadrado de 32px) e nas peças do filme. Desenhos escuros levam silhueta clara. As cores são as da marca e neutros: laranja, tinta, cinzas e laranja claro.
+- **Seleção:** o cartão escolhido tem contorno laranja de 1px; as peças dos outros desenhos ficam a 45% de opacidade e as do desenho escolhido têm contorno laranja.
+- **Preço:** caixa com dois valores (filme e estimativa), a estimativa em laranja e "+ IVA" em texto secundário. Ao contrário dos quadros, o DTF mostra preços.
 
 ### Motion
 
