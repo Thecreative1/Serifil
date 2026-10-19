@@ -525,6 +525,32 @@ test("publica metadados canónicos e de partilha corretos", async ({ page }) => 
   await expect(page.locator('meta[name="googlebot"]')).toHaveAttribute("content", /max-image-preview:large/);
 });
 
+test("mostra pré-visualização de partilha na raiz e nos serviços e liga o DTF aos quadros", async ({ page, request }) => {
+  // A raiz escolhe o idioma no cliente: lê-se o HTML exportado, antes do redirecionamento.
+  const rootHtml = await (await request.get("/")).text();
+  expect(rootHtml).toContain('<meta property="og:image" content="https://serifil.com/og.jpg"/>');
+  expect(rootHtml).toContain('<link rel="alternate" hrefLang="x-default" href="https://serifil.com/pt/"/>');
+  expect(rootHtml).toContain('<meta name="robots" content="noindex, follow"/>');
+
+  for (const [path, image] of [
+    ["/pt/servicos/serigrafia-pvc/", "pvc-og.jpg"],
+    ["/en/servicos/footwear-components/", "footwear-og.jpg"],
+  ]) {
+    await page.goto(path);
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", `https://serifil.com/images/servicos/${image}`);
+    await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute("content", "1200");
+    expect((await request.get(`/images/servicos/${image}`)).ok()).toBeTruthy();
+    await expect(page).toHaveTitle(/ \| SERIFIL$/);
+  }
+
+  for (const locale of ["pt", "en"]) {
+    await page.goto(`/${locale}/dtf/`);
+    await expect(page.locator(`main a[href="/${locale}/quadros/"]`)).toHaveCount(1);
+    await page.goto(`/${locale}/quadros/`);
+    await expect(page.locator(`main a[href="/${locale}/dtf/"]`)).toHaveCount(1);
+  }
+});
+
 test("publica robots, sitemap localizado e dados estruturados completos", async ({ page, request }) => {
   const faviconResponse = await request.get("/favicon.ico");
   expect(faviconResponse.ok()).toBeTruthy();

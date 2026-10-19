@@ -44,7 +44,8 @@ export async function generateMetadata({
 
   const alternates = getServiceAlternates(page.key);
   const canonical = absoluteUrl(getServicePath(localeParam, page.key));
-  const imageUrl = absoluteUrl(page.image.src);
+  // Imagem de partilha em JPEG 1200×630 (scripts/generate-service-share-images.mjs), aceite pelo WhatsApp e pelas redes.
+  const imageUrl = absoluteUrl(`/images/servicos/${page.key}-og.jpg`);
 
   return {
     title: page.metaTitle,
@@ -67,6 +68,8 @@ export async function generateMetadata({
       alternateLocale: localeParam === "pt" ? ["en_GB"] : ["pt_PT"],
       images: [{
         url: imageUrl,
+        width: 1200,
+        height: 630,
         alt: page.image.alt,
       }],
     },

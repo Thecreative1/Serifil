@@ -35,6 +35,8 @@ A SERIFIL é uma empresa de serigrafia e personalização sediada em Guimarães,
 - Produção de artigos personalizados para empresas
 - Impressão de componentes e materiais industriais
 - Soluções de serigrafia por medida
+- Quadros de serigrafia à medida, retelagem e gravação
+- DTF ao metro e aplicação de transfers DTF em têxtil
 
 ## Official English description
 
@@ -45,6 +47,18 @@ SERIFIL is a Portuguese screen-printing and customisation company located in Gui
 - [Website oficial da SERIFIL](https://serifil.com/)
 - [SERIFIL em Português](https://serifil.com/pt/)
 - [SERIFIL in English](https://serifil.com/en/)
+- [Serigrafia em PVC](https://serifil.com/pt/servicos/serigrafia-pvc/)
+- [Serigrafia em tecido](https://serifil.com/pt/servicos/serigrafia-tecido/)
+- [Sacos em TNT](https://serifil.com/pt/servicos/sacos-tnt/)
+- [Impressão em componentes para calçado](https://serifil.com/pt/servicos/componentes-calcado/)
+- [Quadros de serigrafia à medida e retelagem](https://serifil.com/pt/quadros/)
+- [DTF ao metro e aplicação em têxtil](https://serifil.com/pt/dtf/)
+- [PVC screen printing](https://serifil.com/en/servicos/pvc-screen-printing/)
+- [Fabric screen printing](https://serifil.com/en/servicos/fabric-screen-printing/)
+- [Non-woven bags](https://serifil.com/en/servicos/non-woven-bags/)
+- [Printing on footwear components](https://serifil.com/en/servicos/footwear-components/)
+- [Custom screen printing frames and re-meshing](https://serifil.com/en/quadros/)
+- [DTF transfers by the metre](https://serifil.com/en/dtf/)
 - [Guias de Serigrafia](https://serifil.com/pt/guias/)
 - [Fotolitos: o que são e para que servem na serigrafia](https://serifil.com/pt/guias/fotolitos/)
 - [Screen Printing Guides](https://serifil.com/en/guias/)

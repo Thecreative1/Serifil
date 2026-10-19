@@ -14,6 +14,7 @@ import { absoluteUrl, businessId, getBusinessIdentity } from "@/config/seo";
 import { stripInlineLinks } from "@/data/guides";
 import { isLocale, locales, translations } from "@/data/i18n";
 import { dtfCopy, dtfPublished, dtfShareImage, getDtfHreflangPaths, getDtfPath } from "@/data/dtf";
+import { getScreensPath, screensCopy, screensPublished } from "@/data/screens";
 import { getServicePath, serviceKeys, servicePages } from "@/data/service-pages";
 
 export const dynamicParams = false;
@@ -82,7 +83,10 @@ export default async function DtfPage({
   const homePath = `/${locale}/`;
   const servicesPath = `${homePath}#servicos`;
   const canonical = absoluteUrl(getDtfPath(locale));
-  const relatedPages = serviceKeys.map((key) => servicePages[locale][key]);
+  const relatedLinks = [
+    ...serviceKeys.map((key) => ({ href: getServicePath(locale, key), name: servicePages[locale][key].shortName })),
+    ...(screensPublished ? [{ href: getScreensPath(locale), name: screensCopy[locale].sectionName }] : []),
+  ];
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -280,13 +284,13 @@ export default async function DtfPage({
                   <p className="mt-7 max-w-[52ch] text-base leading-7 text-text-secondary">{copy.relatedDescription}</p>
                 </div>
                 <nav className="border-t border-border lg:col-span-7" aria-label={copy.relatedEyebrow}>
-                  {relatedPages.map((related) => (
+                  {relatedLinks.map((related) => (
                     <a
-                      key={related.key}
-                      href={getServicePath(locale, related.key)}
+                      key={related.href}
+                      href={related.href}
                       className="group flex min-h-20 items-center justify-between gap-6 border-b border-border py-5 text-xl font-bold tracking-[-0.025em] text-text-primary transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                     >
-                      {related.shortName}
+                      {related.name}
                       <ArrowRight className="size-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
                     </a>
                   ))}

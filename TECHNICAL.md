@@ -100,7 +100,7 @@ Cada guia publica canonical, hreflang recíproco (`x-default` para PT), Open Gra
 Ferramenta "Quadros de serigrafia". O cliente desenha o quadro à escala, arrastando o canto ou partindo de uma medida habitual. Escolhe caixilho novo ou retelagem, a malha, a gravação e a quantidade. Envia o pedido pelo Formspree (campos `quadro_*`) ou por WhatsApp com o resumo. O desenho não vai no formulário, porque o plano grátis do Formspree não aceita ficheiros. Segue por e-mail (`mailto:` para `brand.email`, com o resumo no corpo) ou pelo WhatsApp. Para ter anexos no próprio formulário é preciso um plano pago do Formspree (Personal ou superior).
 
 - É um serviço à parte dos serviços de impressão, porque os quadros são feitos por um parceiro. Não entra em `service-pages.ts` nem no formulário principal. Nunca mostra preços nem diz que a SERIFIL fabrica os quadros.
-- Publicado a 16 set 2026 (`screensPublished = true`). Aparece como item 05 da lista "Materiais e aplicações" da home (`Services`), nas ligações relacionadas das páginas de serviço (`ServiceDetail`) e dos guias (`GuideServiceLinks`), e no fim do `OfferCatalog` da home, com `url`. O `Header` marca "Serviços" como ativo e as migalhas são Início / Serviços / Quadros de serigrafia. Não tem item próprio no menu principal.
+- Publicado a 16 set 2026 (`screensPublished = true`). Aparece como item 05 da lista "Materiais e aplicações" da home (`Services`), nas ligações relacionadas das páginas de serviço (`ServiceDetail`), dos guias (`GuideServiceLinks`) e do DTF ao metro ("Outros serviços", que por sua vez aparece nos outros serviços da página de quadros), e no fim do `OfferCatalog` da home, com `url`. O `Header` marca "Serviços" como ativo e as migalhas são Início / Serviços / Quadros de serigrafia. Não tem item próprio no menu principal.
 - Com `screensPublished = false`, as páginas continuam a ser geradas, mas ficam `noindex`, fora do sitemap e sem nenhuma das ligações acima.
 - Conteúdo, opções, resumo, perguntas frequentes e textos de SEO em `data/screens.ts`. Interação em `components/screens/ScreenConfigurator.tsx` (client component; o desenho é SVG com pointer events e os campos numéricos são a alternativa por teclado).
 - Com gravação, a quantidade de quadros nunca fica abaixo do número de cores (um quadro por cor). Acompanha as cores enquanto o cliente não a aumentar à mão.
@@ -275,7 +275,13 @@ Cada locale publica:
 - robots index/follow;
 - JSON-LD `LocalBusiness` com catálogo dos oito serviços de impressão e, no fim, dos quadros de serigrafia (com `url`).
 
-A raiz publica JSON-LD `WebSite`. `app/sitemap.ts` inclui páginas localizadas e assets visuais. `app/robots.ts` permite crawling e aponta para o sitemap.
+A raiz publica JSON-LD `WebSite`, fica `noindex, follow` e tem Open Graph próprio (`og.jpg`), para que um link partilhado para serifil.com mostre pré-visualização. O `x-default` é sempre a versão portuguesa (`/pt/…`), também na raiz. `app/sitemap.ts` inclui páginas localizadas e assets visuais. `app/robots.ts` permite crawling e aponta para o sitemap.
+
+Regras de metadados verificadas na auditoria de out 2026:
+
+- `title` até 60 caracteres e `description` até 160, terminando com ` | SERIFIL` (marca sempre em maiúsculas).
+- As páginas de serviço partilham imagens JPEG 1200×630 em `public/images/servicos/<chave>-og.jpg`, geradas por `scripts/generate-service-share-images.mjs` a partir da fotografia do topo de cada serviço. O WebP não aparece em todas as pré-visualizações (WhatsApp incluído). Mudar a fotografia de um serviço implica voltar a correr o script.
+- `public/llms.txt` lista as páginas de serviço, os quadros, o DTF e os guias nas duas línguas; uma página nova entra lá no mesmo trabalho.
 
 Quando mudar domínio, serviços, contacto ou imagem:
 

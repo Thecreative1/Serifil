@@ -144,7 +144,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     key: "pvc",
     slug: slugs.pt.pvc,
     shortName: "Serigrafia em PVC",
-    metaTitle: "Serigrafia em PVC para Sacos e Embalagens | Serifil",
+    metaTitle: "Serigrafia em PVC para Sacos e Embalagens | SERIFIL",
     metaDescription:
       "Impressão serigráfica em PVC transparente ou colorido para sacos, capas, embalagem e proteção. Produção personalizada em Guimarães.",
     eyebrow: "SERIGRAFIA EM PVC · GUIMARÃES",
@@ -270,7 +270,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     key: "fabric",
     slug: slugs.pt.fabric,
     shortName: "Serigrafia em tecido",
-    metaTitle: "Serigrafia em Tecido e Roupa Profissional | Serifil",
+    metaTitle: "Serigrafia em Tecido e Roupa Profissional | SERIFIL",
     metaDescription:
       "Serigrafia em tecido para sacos, capas, porta-fatos, vestuário e roupa profissional. Personalização para empresas em Guimarães.",
     eyebrow: "SERIGRAFIA TÊXTIL · GUIMARÃES",
@@ -391,7 +391,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     key: "nonwoven",
     slug: slugs.pt.nonwoven,
     shortName: "Sacos em TNT",
-    metaTitle: "Sacos em TNT Personalizados e Serigrafia | Serifil",
+    metaTitle: "Sacos em TNT Personalizados e Serigrafia | SERIFIL",
     metaDescription:
       "O que é TNT e como personalizar sacos em tecido não tecido por serigrafia. Produção para empresas, comércio e marcas em Guimarães.",
     eyebrow: "SACOS EM TNT · GUIMARÃES",
@@ -512,7 +512,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     key: "footwear",
     slug: slugs.pt.footwear,
     shortName: "Componentes para calçado",
-    metaTitle: "Impressão em Componentes para Calçado | Serifil",
+    metaTitle: "Impressão em Componentes para Calçado | SERIFIL",
     metaDescription:
       "Impressão e personalização de palmilhas, palas e outros componentes para a indústria do calçado. Produção em Guimarães.",
     eyebrow: "SETOR DO CALÇADO · GUIMARÃES",
@@ -624,7 +624,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     ...portuguesePages.pvc,
     slug: slugs.en.pvc,
     shortName: "PVC screen printing",
-    metaTitle: "PVC Screen Printing for Bags and Packaging | Serifil",
+    metaTitle: "PVC Screen Printing for Bags and Packaging | SERIFIL",
     metaDescription:
       "Screen printing on clear or coloured PVC for bags, covers, packaging and protection. Custom production in Guimarães, Portugal.",
     eyebrow: "PVC SCREEN PRINTING · GUIMARÃES",
@@ -705,7 +705,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     ...portuguesePages.fabric,
     slug: slugs.en.fabric,
     shortName: "Fabric screen printing",
-    metaTitle: "Fabric Screen Printing and Workwear | Serifil",
+    metaTitle: "Fabric Screen Printing and Workwear | SERIFIL",
     metaDescription:
       "Fabric screen printing for bags, covers, garment bags, clothing and workwear. Custom production for businesses in Guimarães.",
     eyebrow: "FABRIC SCREEN PRINTING · GUIMARÃES",
@@ -784,7 +784,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     ...portuguesePages.nonwoven,
     slug: slugs.en.nonwoven,
     shortName: "Non-woven bags",
-    metaTitle: "Custom Non-Woven Bags and Screen Printing | Serifil",
+    metaTitle: "Custom Non-Woven Bags and Screen Printing | SERIFIL",
     metaDescription:
       "What non-woven fabric is and how bags are customised with screen printing. Production for businesses and brands in Guimarães.",
     eyebrow: "NON-WOVEN BAGS · GUIMARÃES",
@@ -863,7 +863,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     ...portuguesePages.footwear,
     slug: slugs.en.footwear,
     shortName: "Footwear components",
-    metaTitle: "Printing on Footwear Components | Serifil",
+    metaTitle: "Printing on Footwear Components | SERIFIL",
     metaDescription:
       "Printing and customisation of insoles, vamps and other components for the footwear industry. Production in Guimarães, Portugal.",
     eyebrow: "FOOTWEAR INDUSTRY · GUIMARÃES",

@@ -262,7 +262,7 @@ export const translations = {
       items: [
         {
           title: "Produção local em Guimarães",
-          description: "Contacto próximo com quem acompanha e produz o trabalho.",
+          description: "Em Urgezes, Guimarães, no distrito de Braga: contacto próximo com quem acompanha e produz o trabalho.",
         },
         {
           title: "Acompanhamento técnico",
@@ -437,7 +437,7 @@ export const translations = {
     meta: {
       title: "Industrial Screen Printing in Guimarães | SERIFIL",
       description:
-        "SERIFIL – Industrial screen printing in Guimarães, Portugal. Printing on PVC, textiles, non-woven materials, components, bags, garment bags and other substrates for businesses.",
+        "SERIFIL – Industrial screen printing in Guimarães, Portugal. Printing on PVC, textiles, non-woven fabric, components, bags and garment bags for businesses.",
       openGraphDescription:
         "Industrial screen printing for businesses in Guimarães. Printing on PVC, textiles, non-woven materials and components, on materials supplied by the client or as complete projects.",
       imageAlt: "Industrial screen-printing process at SERIFIL",
@@ -687,7 +687,7 @@ export const translations = {
       items: [
         {
           title: "Local production in Guimarães",
-          description: "Direct contact with the people managing and producing your order.",
+          description: "In Urgezes, Guimarães, in the Braga district: direct contact with the people managing and producing your order.",
         },
         {
           title: "Technical guidance",

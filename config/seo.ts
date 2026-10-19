@@ -84,6 +84,8 @@ export function getBusinessIdentity({
       "Quadros de serigrafia",
       "Retelagem de quadros de serigrafia",
       "Gravação de quadros de serigrafia",
+      "DTF ao metro",
+      "Aplicação de transfers DTF em têxtil",
     ],
     ...(brand.socialProfiles.length ? { sameAs: brand.socialProfiles } : {}),
     ...(brand.phone

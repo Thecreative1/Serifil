@@ -443,7 +443,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
     ogLocale: "en_GB",
     metaTitle: "DTF Transfers by the Metre and Heat Pressing | SERIFIL",
     metaDescription:
-      "DTF transfers by the metre from €8.50 + VAT: full-colour transfers for small runs, film only or pressed onto your garments. Work out online how many designs fit.",
+      "DTF transfers by the metre from €8.50 + VAT: full-colour transfers for small runs, film only or pressed onto your garments. See online how many designs fit.",
     serviceType: "DTF printing by the metre",
     breadcrumbsLabel: "Breadcrumb navigation",
     home: "Home",
