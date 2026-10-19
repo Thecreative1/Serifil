@@ -61,8 +61,10 @@ SERIFIL is a Portuguese screen-printing and customisation company located in Gui
 - [DTF transfers by the metre](https://serifil.com/en/dtf/)
 - [Guias de Serigrafia](https://serifil.com/pt/guias/)
 - [Fotolitos: o que são e para que servem na serigrafia](https://serifil.com/pt/guias/fotolitos/)
+- [DTF: o que é e como funciona a impressão DTF em têxtil](https://serifil.com/pt/guias/o-que-e-dtf/)
 - [Screen Printing Guides](https://serifil.com/en/guias/)
 - [Film positives: what they are and what they do in screen printing](https://serifil.com/en/guias/film-positives/)
+- [DTF: what it is and how DTF printing on textiles works](https://serifil.com/en/guias/what-is-dtf/)
 
 ## Regras de interpretação da marca
 

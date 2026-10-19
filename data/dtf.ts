@@ -370,7 +370,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
         {
           question: "O que é DTF?",
           answer:
-            "DTF quer dizer «direct to film». O desenho é impresso a cores num filme, com uma base branca e pó adesivo, e depois é transferido para a peça com uma prensa de calor. Não precisa de quadros nem de fotolitos, por isso serve bem para poucas peças e desenhos com muitas cores.",
+            "DTF quer dizer «direct to film». O desenho é impresso a cores num filme, com uma base branca e pó adesivo, e depois é transferido para a peça com uma prensa de calor. Não precisa de quadros nem de fotolitos, por isso serve bem para poucas peças e desenhos com muitas cores. Explicamos tudo no [guia do DTF](/pt/guias/o-que-e-dtf/).",
         },
         {
           question: "Quanto custa o DTF ao metro?",
@@ -515,7 +515,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
         {
           question: "What is DTF?",
           answer:
-            "DTF stands for “direct to film”. The design is printed in full colour on film, with a white base and adhesive powder, and then transferred to the garment with a heat press. It needs no screens or film positives, so it suits small quantities and designs with many colours.",
+            "DTF stands for “direct to film”. The design is printed in full colour on film, with a white base and adhesive powder, and then transferred to the garment with a heat press. It needs no screens or film positives, so it suits small quantities and designs with many colours. Our [DTF guide](/en/guias/what-is-dtf/) explains it in full.",
         },
         {
           question: "How much does DTF by the metre cost?",

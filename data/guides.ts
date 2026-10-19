@@ -13,7 +13,7 @@ export function isGuideLocale(value: string): value is GuideLocale {
   return guideLocales.includes(value as GuideLocale);
 }
 
-export const guideKeys = ["fotolitos"] as const;
+export const guideKeys = ["fotolitos", "dtf"] as const;
 
 export type GuideKey = (typeof guideKeys)[number];
 
@@ -38,7 +38,7 @@ export type GuideImage = {
   credit: "work" | "process";
 };
 
-export type GuideProcessVisual = "artwork" | "film" | "screen" | "print";
+export type GuideProcessVisual = "artwork" | "film" | "screen" | "print" | "dtf-film" | "powder" | "press";
 
 export type GuideBlock =
   | { type: "paragraph"; text: string }
@@ -814,9 +814,402 @@ const filmPositives: Guide = {
   relatedServices: ["pvc", "fabric", "nonwoven", "footwear"],
 };
 
+/** Sem fotografia de DTF: a partilha usa a imagem genérica do site. */
+const dtfShare = { src: "/og.jpg", width: 1200, height: 630, credit: "process" } as const;
+
+/**
+ * Guia do DTF. Regras: nunca dizer quem imprime o filme nem que a SERIFIL tem impressora DTF;
+ * a aplicação (prensagem) é feita pela SERIFIL. Os preços repetem os de `data/dtf.ts`.
+ */
+const dtfPt: Guide = {
+  key: "dtf",
+  slug: "o-que-e-dtf",
+  status: "published",
+  shortTitle: "DTF",
+  title: "DTF: o que é e como funciona a impressão DTF em têxtil",
+  metaTitle: "O que é DTF e como funciona a impressão DTF | SERIFIL",
+  metaDescription:
+    "O que é o DTF, como se faz, quando compensa face à serigrafia e como preparar o ficheiro. Guia prático da SERIFIL, em Guimarães, com DTF ao metro.",
+  excerpt:
+    "O que é o DTF, as quatro etapas do processo, quando compensa face à serigrafia e como preparar os ficheiros para encher um metro de filme.",
+  eyebrow: "GUIAS DE IMPRESSÃO · DTF",
+  lead:
+    "O DTF permite estampar desenhos a cores em têxtil sem quadros nem fotolitos. É uma boa solução para poucas peças, muitas cores ou desenhos que mudam de peça para peça. Este guia explica como funciona e o que convém saber antes de encomendar.",
+  datePublished: "2026-10-19",
+  dateModified: "2026-10-19",
+  image: { ...dtfShare, alt: "SERIFIL, serigrafia e impressão industrial em Guimarães", caption: "DTF ao metro na SERIFIL." },
+  summary: [
+    "DTF quer dizer «direct to film»: o desenho é impresso num filme e depois transferido para a peça com calor.",
+    "Não precisa de fotolitos nem de telas, por isso o número de cores não muda a preparação.",
+    "Compensa em pequenas produções, desenhos com muitas cores, degradês ou fotografias.",
+    "Envie cada desenho à medida real, em PNG com fundo transparente a 300 dpi ou em PDF.",
+    "O filme é vendido ao metro e pode juntar vários desenhos no mesmo metro.",
+  ],
+  sections: [
+    {
+      id: "o-que-e-o-dtf",
+      title: "O que é o DTF?",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "DTF é a sigla de «direct to film», impressão direta em filme. O desenho é impresso a cores sobre um filme transparente, com uma camada de tinta branca por trás das cores. Depois recebe um pó adesivo que, com calor, o fixa ao tecido.",
+        },
+        {
+          type: "paragraph",
+          text:
+            "Ao contrário da serigrafia, não há [fotolitos](/pt/guias/fotolitos/) nem telas para preparar. O filme sai pronto a prensar, seja para uma peça ou para cem, e cada metro pode levar desenhos diferentes. É por isso que o DTF é vendido ao metro: paga-se o filme que os desenhos ocupam.",
+        },
+      ],
+    },
+    {
+      id: "como-funciona",
+      title: "Como funciona, passo a passo",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Do ficheiro à peça estampada há quatro etapas. As três primeiras fazem o filme; a última passa o desenho para o tecido.",
+        },
+        {
+          type: "process",
+          caption: "Esquema simplificado do processo DTF.",
+          steps: [
+            {
+              visual: "artwork",
+              title: "Ficheiro",
+              text: "Cada desenho é preparado à medida real, com fundo transparente, e os desenhos são arrumados lado a lado na largura do filme.",
+            },
+            {
+              visual: "dtf-film",
+              title: "Impressão no filme",
+              text: "O desenho é impresso a cores sobre o filme, em espelho, com uma camada de branco por cima para que as cores se vejam em tecidos escuros.",
+            },
+            {
+              visual: "powder",
+              title: "Pó adesivo",
+              text: "Ainda com a tinta fresca, o filme recebe um pó adesivo que só agarra onde há impressão. Com calor, o pó funde e fica pronto a colar.",
+            },
+            {
+              visual: "press",
+              title: "Prensagem",
+              text: "O filme é posto sobre a peça e prensado com calor e pressão. Depois de arrefecer o necessário, retira-se o filme e o desenho fica no tecido.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "dtf-ou-serigrafia",
+      title: "DTF ou serigrafia?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "São técnicas diferentes, cada uma com o seu lugar. A escolha depende sobretudo da quantidade, do número de cores e do suporte.",
+        },
+        {
+          type: "comparison",
+          columns: ["DTF", "Serigrafia"],
+          rows: [
+            {
+              label: "Preparação",
+              values: ["Nenhuma: o desenho vai direto do ficheiro para o filme.", "Um fotolito e uma tela por cor, antes de imprimir."],
+            },
+            {
+              label: "Cores",
+              values: ["Indiferente: fotografias, degradês e muitas cores.", "Cada cor acrescenta preparação e uma passagem."],
+            },
+            {
+              label: "Quantidades",
+              values: ["Poucas peças, séries curtas e desenhos diferentes por peça.", "Séries maiores, em que a preparação se dilui."],
+            },
+            {
+              label: "Suportes",
+              values: ["Têxteis.", "Têxtil, PVC, TNT, componentes e outros suportes."],
+            },
+            {
+              label: "Acabamento",
+              values: ["Camada fina por cima do tecido.", "A tinta fica no material; o toque depende da tinta."],
+            },
+          ],
+        },
+        {
+          type: "paragraph",
+          text: `Em séries grandes com poucas cores, a [serigrafia em tecido](${ptPaths.fabric}) costuma compensar mais. Se tiver dúvidas, envie o desenho e a quantidade e dizemos-lhe o que faz mais sentido.`,
+        },
+      ],
+    },
+    {
+      id: "pecas",
+      title: "Em que peças se pode aplicar",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "O DTF adere à maioria dos têxteis, em cores claras ou escuras: algodão, poliéster e misturas, em t-shirts, sweats, sacos de pano, roupa de trabalho e muitas outras peças.",
+        },
+        {
+          type: "note",
+          text:
+            "Tecidos muito texturados, impermeáveis, com acabamentos especiais ou sensíveis ao calor devem ser confirmados antes. Se quiser que prensemos nas suas peças, diga-nos que peças são e de que tecido.",
+        },
+      ],
+    },
+    {
+      id: "preparar-o-ficheiro",
+      title: "Como preparar o ficheiro",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "O filme reproduz exatamente o ficheiro, por isso vale a pena prepará-lo bem. Use esta lista antes de enviar.",
+        },
+        {
+          type: "checklist",
+          items: [
+            { title: "Medida real", text: "Prepare cada desenho no tamanho em que vai ficar na peça. Um logótipo de peito tem, em regra, entre 8 e 10 cm de largura." },
+            { title: "Fundo transparente", text: "Em PNG, o fundo tem de ser transparente. Um fundo branco seria impresso como um retângulo branco." },
+            { title: "Resolução", text: "300 dpi à medida real. Imagens de baixa resolução ficam com contornos serrilhados." },
+            { title: "Formato", text: "PNG com fundo transparente ou PDF. Envie um ficheiro por desenho." },
+            { title: "Traços finos", text: "Linhas e letras muito finas podem não aderir bem ao tecido. Evite traços com menos de 1 mm." },
+            { title: "Vários desenhos", text: "Pode juntar vários desenhos no mesmo filme. Diga-nos quantas vezes quer cada um." },
+          ],
+        },
+      ],
+    },
+    {
+      id: "aplicar-e-cuidar",
+      title: "Aplicar e cuidar das peças",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "Se levar só o filme, aplica-o com uma prensa de calor. A temperatura, o tempo e o momento de retirar o filme dependem do filme: confirme connosco os valores antes de prensar a primeira peça.",
+        },
+        {
+          type: "checklist",
+          items: [
+            { title: "Lavar do avesso", text: "Vire a peça do avesso antes de lavar e evite temperaturas altas." },
+            { title: "Sem ferro sobre o desenho", text: "Se passar a peça a ferro, faça-o do avesso ou com um pano por cima." },
+            { title: "Sem lixívia nem secador forte", text: "Produtos agressivos e calor intenso desgastam o desenho mais depressa." },
+          ],
+        },
+      ],
+    },
+    {
+      id: "preco",
+      title: "Quanto custa o DTF ao metro",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "O filme custa 9 € por metro até 9 m e 8,50 € por metro a partir de 10 m, mais IVA. É cobrado aos 10 cm, com um mínimo de meio metro. A aplicação nas suas peças é orçamentada à parte.",
+        },
+        {
+          type: "paragraph",
+          text:
+            "Na [calculadora de DTF ao metro](/pt/dtf/) junta os seus desenhos, vê como ficam arrumados no filme e quanto custam, e envia o pedido.",
+        },
+      ],
+    },
+  ],
+  relatedServices: ["fabric"],
+};
+
+const dtfEn: Guide = {
+  key: "dtf",
+  slug: "what-is-dtf",
+  status: "published",
+  shortTitle: "DTF",
+  title: "DTF: what it is and how DTF printing on textiles works",
+  metaTitle: "What Is DTF Printing and How Does It Work | SERIFIL",
+  metaDescription:
+    "What DTF is, how it is made, when it beats screen printing and how to prepare your files. A practical guide from SERIFIL in Portugal, with DTF by the metre.",
+  excerpt:
+    "What DTF is, the four stages of the process, when it beats screen printing and how to prepare your files to fill a metre of film.",
+  eyebrow: "PRINTING GUIDES · DTF",
+  lead:
+    "DTF lets you print full-colour designs on textiles with no screens or film positives. It suits small runs, many colours or designs that change from garment to garment. This guide explains how it works and what is worth knowing before you order.",
+  datePublished: "2026-10-19",
+  dateModified: "2026-10-19",
+  image: { ...dtfShare, alt: "SERIFIL, screen printing and industrial printing in Guimarães", caption: "DTF by the metre at SERIFIL." },
+  summary: [
+    "DTF stands for “direct to film”: the design is printed on film and then transferred to the garment with heat.",
+    "It needs no film positives or screens, so the number of colours does not change the preparation.",
+    "It pays off for small runs and for designs with many colours, gradients or photos.",
+    "Send each design at actual size, as a PNG with a transparent background at 300 dpi or as a PDF.",
+    "The film is sold by the metre and you can combine several designs on the same metre.",
+  ],
+  sections: [
+    {
+      id: "what-is-dtf",
+      title: "What is DTF?",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "DTF stands for “direct to film”. The design is printed in full colour on a clear film, with a layer of white ink behind the colours. It then receives an adhesive powder which, with heat, bonds it to the fabric.",
+        },
+        {
+          type: "paragraph",
+          text:
+            "Unlike screen printing, there are no [film positives](/en/guias/film-positives/) or screens to prepare. The film comes out ready to press, whether for one garment or a hundred, and each metre can carry different designs. That is why DTF is sold by the metre: you pay for the film your designs take up.",
+        },
+      ],
+    },
+    {
+      id: "how-it-works",
+      title: "How it works, step by step",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "There are four stages from file to printed garment. The first three make the film; the last one transfers the design to the fabric.",
+        },
+        {
+          type: "process",
+          caption: "Simplified diagram of the DTF process.",
+          steps: [
+            {
+              visual: "artwork",
+              title: "File",
+              text: "Each design is prepared at actual size with a transparent background, and the designs are laid out side by side across the width of the film.",
+            },
+            {
+              visual: "dtf-film",
+              title: "Printing on film",
+              text: "The design is printed in colour on the film, mirrored, with a layer of white on top so the colours show on dark fabrics.",
+            },
+            {
+              visual: "powder",
+              title: "Adhesive powder",
+              text: "While the ink is still wet, the film receives an adhesive powder that only sticks where there is print. With heat, the powder melts and is ready to bond.",
+            },
+            {
+              visual: "press",
+              title: "Heat pressing",
+              text: "The film is placed on the garment and pressed with heat and pressure. Once it has cooled as needed, the film is peeled off and the design stays on the fabric.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "dtf-or-screen-printing",
+      title: "DTF or screen printing?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "They are different techniques, each with its place. The choice mainly depends on quantity, number of colours and substrate.",
+        },
+        {
+          type: "comparison",
+          columns: ["DTF", "Screen printing"],
+          rows: [
+            {
+              label: "Preparation",
+              values: ["None: the design goes straight from file to film.", "One film positive and one screen per colour before printing."],
+            },
+            {
+              label: "Colours",
+              values: ["No difference: photos, gradients and many colours.", "Each colour adds preparation and a print pass."],
+            },
+            {
+              label: "Quantities",
+              values: ["Small runs, short series and different designs per garment.", "Larger runs, where the preparation is spread out."],
+            },
+            {
+              label: "Substrates",
+              values: ["Textiles.", "Textiles, PVC, non-woven fabric, components and other substrates."],
+            },
+            {
+              label: "Finish",
+              values: ["A thin layer on top of the fabric.", "The ink sits in the material; the feel depends on the ink."],
+            },
+          ],
+        },
+        {
+          type: "paragraph",
+          text: `For large runs with few colours, [fabric screen printing](${enPaths.fabric}) is usually better value. If in doubt, send us the design and the quantity and we will tell you what makes more sense.`,
+        },
+      ],
+    },
+    {
+      id: "garments",
+      title: "Which garments it works on",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "DTF bonds to most textiles, light or dark: cotton, polyester and blends, on T-shirts, sweatshirts, cloth bags, workwear and many other items.",
+        },
+        {
+          type: "note",
+          text:
+            "Heavily textured, waterproof, specially finished or heat-sensitive fabrics should be checked first. If you want us to press onto your garments, tell us what they are and what fabric they are made of.",
+        },
+      ],
+    },
+    {
+      id: "preparing-the-file",
+      title: "How to prepare your file",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "The film reproduces the file exactly, so it is worth preparing it well. Use this checklist before sending.",
+        },
+        {
+          type: "checklist",
+          items: [
+            { title: "Actual size", text: "Prepare each design at the size it will be on the garment. A chest logo is usually 8 to 10 cm wide." },
+            { title: "Transparent background", text: "In a PNG the background must be transparent. A white background would be printed as a white rectangle." },
+            { title: "Resolution", text: "300 dpi at actual size. Low-resolution images end up with jagged edges." },
+            { title: "Format", text: "PNG with a transparent background or PDF. Send one file per design." },
+            { title: "Fine lines", text: "Very thin lines and small lettering may not bond well to the fabric. Avoid strokes thinner than 1 mm." },
+            { title: "Several designs", text: "You can combine several designs on the same film. Tell us how many of each you need." },
+          ],
+        },
+      ],
+    },
+    {
+      id: "applying-and-care",
+      title: "Applying and caring for garments",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "If you take the film only, you apply it with a heat press. Temperature, time and when to peel the film depend on the film: check the settings with us before pressing the first garment.",
+        },
+        {
+          type: "checklist",
+          items: [
+            { title: "Wash inside out", text: "Turn the garment inside out before washing and avoid high temperatures." },
+            { title: "No iron on the design", text: "If you iron the garment, do it inside out or with a cloth on top." },
+            { title: "No bleach or hot tumble drying", text: "Harsh products and strong heat wear the design faster." },
+          ],
+        },
+      ],
+    },
+    {
+      id: "price",
+      title: "How much DTF by the metre costs",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "The film costs €9 per metre up to 9 m and €8.50 per metre from 10 m, plus VAT. It is charged per 10 cm, with a minimum of half a metre. Pressing onto your garments is quoted separately.",
+        },
+        {
+          type: "paragraph",
+          text:
+            "In the [DTF by the metre calculator](/en/dtf/) you add your designs, see how they are laid out on the film and what they cost, and send your request.",
+        },
+      ],
+    },
+  ],
+  relatedServices: ["fabric"],
+};
+
 const guidesByLocale: Record<GuideLocale, Guide[]> = {
-  pt: [fotolitos],
-  en: [filmPositives],
+  pt: [fotolitos, dtfPt],
+  en: [filmPositives, dtfEn],
 };
 
 export function getPublishedGuides(locale: GuideLocale) {

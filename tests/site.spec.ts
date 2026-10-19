@@ -1197,3 +1197,26 @@ test("DTF ao metro publicado: nos serviços, indexável e no sitemap", async ({ 
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://serifil.com${path}`);
   }
 });
+
+test("guia do DTF publicado em PT e EN, ligado à calculadora", async ({ page, request }) => {
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(sitemap).toContain("<loc>https://serifil.com/pt/guias/o-que-e-dtf/</loc>");
+  expect(sitemap).toContain("<loc>https://serifil.com/en/guias/what-is-dtf/</loc>");
+
+  await page.goto("/pt/guias/");
+  await expect(page.locator('main a[href="/pt/guias/o-que-e-dtf/"]').first()).toBeVisible();
+
+  await page.goto("/pt/guias/o-que-e-dtf/");
+  await expect(page.locator("h1")).toHaveText("DTF: o que é e como funciona a impressão DTF em têxtil");
+  await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/guias/what-is-dtf/");
+  await expect(page.locator('main a[href="/pt/dtf/"]').first()).toBeVisible();
+  // O guia não diz quem imprime o filme nem mostra o custo de 7 € por metro.
+  await expect(page.locator("main")).not.toContainText(/parceiro|7 €|7,00 €/i);
+
+  await page.goto("/pt/dtf/");
+  await expect(page.locator('main a[href="/pt/guias/o-que-e-dtf/"]')).toHaveCount(1);
+
+  await page.goto("/en/guias/what-is-dtf/");
+  await expect(page.locator('link[hreflang="pt-PT"]')).toHaveAttribute("href", "https://serifil.com/pt/guias/o-que-e-dtf/");
+  await expect(page.locator("main")).not.toContainText(/partner|€7(?!\d)/i);
+});

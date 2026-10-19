@@ -71,6 +71,49 @@ function ProcessVisual({ visual }: { visual: GuideProcessVisual }) {
           <path d="M172 30h36m-8-7 8 7-8 7" stroke={ink} strokeWidth="2.5" fill="none" />
         </svg>
       );
+    case "dtf-film":
+      // Filme transparente com o desenho a cores e, por trás, a camada de branco.
+      return (
+        <svg {...svgProps}>
+          <rect x="40" y="22" width="160" height="136" fill="#ffffff" fillOpacity=".55" stroke={ink} strokeWidth="1.5" />
+          <circle cx="126" cy="78" r="30" fill="#ffffff" stroke={ink} strokeOpacity=".3" strokeWidth="1" />
+          <circle cx="120" cy="74" r="28" fill={accent} />
+          <rect x="84" y="118" width="72" height="14" fill="#ffffff" stroke={ink} strokeOpacity=".3" strokeWidth="1" />
+          <rect x="80" y="114" width="72" height="14" fill="#2f6fb3" />
+          <path d="M28 40v100M212 40v100" stroke={ink} strokeOpacity=".35" strokeWidth="2" strokeDasharray="4 4" />
+        </svg>
+      );
+    case "powder":
+      // O pó cai sobre o filme e só fica agarrado à impressão.
+      return (
+        <svg {...svgProps}>
+          <rect x="40" y="60" width="160" height="100" fill="#ffffff" fillOpacity=".55" stroke={ink} strokeWidth="1.5" />
+          <circle cx="120" cy="104" r="26" fill={accent} />
+          {[
+            [100, 20], [118, 30], [136, 18], [92, 40], [128, 44], [146, 36], [110, 52], [140, 56],
+          ].map(([x, y]) => (
+            <circle key={`${x}-${y}`} cx={x} cy={y} r="2.6" fill={ink} fillOpacity=".55" />
+          ))}
+          {[
+            [104, 92], [118, 86], [134, 94], [110, 110], [126, 106], [140, 112], [116, 122], [130, 124], [100, 104],
+          ].map(([x, y]) => (
+            <circle key={`p-${x}-${y}`} cx={x} cy={y} r="2.2" fill="#ffffff" />
+          ))}
+        </svg>
+      );
+    case "press":
+      // Prensa de calor fechada sobre a peça.
+      return (
+        <svg {...svgProps}>
+          <path d="M70 96l26-14h48l26 14-12 22-14-6v52H96v-52l-14 6z" fill={sheet} stroke={ink} strokeWidth="2" />
+          <circle cx="120" cy="128" r="16" fill={accent} />
+          <rect x="50" y="52" width="140" height="22" fill={ink} />
+          <rect x="112" y="20" width="16" height="32" fill={ink} />
+          {[76, 104, 136, 164].map((x) => (
+            <path key={x} d={`M${x} 80c-4 4 4 8 0 12`} stroke={accent} strokeWidth="2.5" fill="none" />
+          ))}
+        </svg>
+      );
   }
 }
 
