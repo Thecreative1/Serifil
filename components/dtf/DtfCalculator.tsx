@@ -53,6 +53,14 @@ export function DtfCalculator({ locale }: { locale: Locale }) {
   const [request, setRequest] = useState<DtfRequest>(defaultDtfRequest);
   const layout = layoutDtf(request.designs);
   const nextId = useRef(defaultDtfRequest.designs.length + 1);
+  // Desenho em destaque: o cartão fica laranja e as suas peças sobressaem no filme.
+  const [selectedId, setSelectedId] = useState(defaultDtfRequest.designs[0].id);
+  const selected = request.designs.some((design) => design.id === selectedId) ? selectedId : request.designs[0]?.id;
+
+  const selectFromRoll = (id: number) => {
+    setSelectedId(id);
+    document.getElementById(`dtf-design-${id}`)?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  };
 
   const updateDesign = (id: number, changes: Partial<DtfDesign>) =>
     setRequest((current) => ({
@@ -60,12 +68,12 @@ export function DtfCalculator({ locale }: { locale: Locale }) {
       designs: current.designs.map((design) => (design.id === id ? { ...design, ...changes } : design)),
     }));
 
-  const addDesign = (size: { width: number; height: number }) =>
-    setRequest((current) =>
-      current.designs.length >= maxDesigns
-        ? current
-        : { ...current, designs: [...current.designs, { id: nextId.current++, ...size, copies: 10 }] },
-    );
+  const addDesign = (size: { width: number; height: number }) => {
+    if (request.designs.length >= maxDesigns) return;
+    const id = nextId.current++;
+    setRequest((current) => ({ ...current, designs: [...current.designs, { id, ...size, copies: 10 }] }));
+    setSelectedId(id);
+  };
 
   const removeDesign = (id: number) =>
     setRequest((current) => ({ ...current, designs: current.designs.filter((design) => design.id !== id) }));
@@ -79,7 +87,7 @@ export function DtfCalculator({ locale }: { locale: Locale }) {
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
             <div className="min-w-0 lg:col-span-7">
               <div className="lg:sticky lg:top-28">
-                <RollDrawing locale={locale} request={request} layout={layout} />
+                <RollDrawing locale={locale} request={request} layout={layout} selectedId={selected} onSelect={selectFromRoll} />
               </div>
             </div>
 
@@ -88,11 +96,18 @@ export function DtfCalculator({ locale }: { locale: Locale }) {
                 <ol className="grid gap-3">
                   {request.designs.map((design, index) => {
                     const fit = layout.perDesign.find((item) => item.id === design.id);
+                    const active = design.id === selected;
                     return (
-                      <li key={design.id} className="border border-border bg-surface p-4">
+                      <li
+                        key={design.id}
+                        id={`dtf-design-${design.id}`}
+                        onPointerDown={() => setSelectedId(design.id)}
+                        onFocusCapture={() => setSelectedId(design.id)}
+                        className={`scroll-mt-28 border bg-surface p-4 transition-colors duration-300 ${active ? "border-accent" : "border-border hover:border-[#4d514b]"}`}
+                      >
                         <div className="flex items-center justify-between gap-3">
                           <p className="flex items-center gap-3 font-bold text-text-primary">
-                            <span className="size-3.5 shrink-0 border border-[#4d514b]" style={{ backgroundColor: designColour(index) }} aria-hidden="true" />
+                            <DesignBadge index={index} />
                             {copy.design(index + 1)}
                           </p>
                           {request.designs.length > 1 ? (
@@ -221,7 +236,32 @@ export function DtfCalculator({ locale }: { locale: Locale }) {
   );
 }
 
-function RollDrawing({ locale, request, layout }: { locale: Locale; request: DtfRequest; layout: DtfLayout }) {
+function DesignBadge({ index }: { index: number }) {
+  const dark = index === 1 || index === 4;
+  return (
+    <span
+      aria-hidden="true"
+      className={`grid size-6 shrink-0 place-items-center text-xs font-black tabular-nums ${dark ? "border border-[#6b6f68] text-text-primary" : "text-light-text"}`}
+      style={{ backgroundColor: designColour(index) }}
+    >
+      {index + 1}
+    </span>
+  );
+}
+
+function RollDrawing({
+  locale,
+  request,
+  layout,
+  selectedId,
+  onSelect,
+}: {
+  locale: Locale;
+  request: DtfRequest;
+  layout: DtfLayout;
+  selectedId: number | undefined;
+  onSelect: (id: number) => void;
+}) {
   const copy = dtfCopy[locale];
   // Mostra-se sempre pelo menos um metro, para se ver quanto do metro fica livre.
   const shown = Math.max(100, layout.billedLength);
@@ -261,16 +301,22 @@ function RollDrawing({ locale, request, layout }: { locale: Locale; request: Dtf
           {layout.pieces.map((piece, index) => {
             const colourIndex = designIndex.get(piece.design) ?? 0;
             const labelSize = Math.min(piece.width, piece.height) * 0.45;
+            const active = piece.design === selectedId;
             return (
-              <g key={index}>
+              <g
+                key={index}
+                onClick={() => onSelect(piece.design)}
+                className="cursor-pointer"
+                opacity={active || selectedId === undefined ? 1 : 0.45}
+              >
                 <rect
                   x={pad + piece.x}
                   y={pad + piece.y}
                   width={piece.width}
                   height={piece.height}
                   fill={designColour(colourIndex)}
-                  className="stroke-light-background"
-                  strokeWidth={0.2}
+                  className={active ? "stroke-accent" : "stroke-light-background"}
+                  strokeWidth={active ? 0.6 : 0.2}
                 />
                 {labelSize >= 2.4 ? (
                   <text

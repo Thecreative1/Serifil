@@ -1080,6 +1080,12 @@ test("calculadora de DTF estima o filme, resume e envia o pedido", async ({ page
   // Os 7 € por metro são o custo do parceiro: nunca aparecem no site.
   await expect(page.locator("main")).not.toContainText(/7 €|7,00 €/);
 
+  // Cada desenho seleciona-se no cartão ou nas peças do filme.
+  await expect(page.locator("#dtf-design-1")).toHaveClass(/border-accent/);
+  await page.locator("#dtf-design-2 p").first().click();
+  await expect(page.locator("#dtf-design-2")).toHaveClass(/border-accent/);
+  await expect(page.locator("#dtf-design-1")).not.toHaveClass(/border-accent/);
+
   await page.getByRole("button", { name: "Remover desenho 2" }).click();
   await expect(summary).toContainText("0,50 m");
   await expect(summary).toContainText("4,50 € + IVA");
