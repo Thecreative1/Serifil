@@ -269,6 +269,26 @@ function RollDrawing({
   const labelSpace = 9;
   const metres = Array.from({ length: Math.floor(shown / 100) }, (_, index) => (index + 1) * 100);
   const designIndex = new Map(request.designs.map((design, index) => [design.id, index]));
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  // As peças arrumam-se das maiores para as menores, por isso um desenho pequeno pode ficar no fim
+  // do filme: ao escolher ou adicionar um desenho, o filme rola até à primeira peça dele.
+  const firstSelectedY = layout.pieces.find((piece) => piece.design === selectedId)?.y;
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    const svg = svgRef.current;
+    if (!container || !svg || firstSelectedY === undefined) return;
+    const svgBox = svg.getBoundingClientRect();
+    const scale = svgBox.height / (shown + 2 * pad);
+    const svgTop = svgBox.top - container.getBoundingClientRect().top + container.scrollTop;
+    const target = svgTop + (pad + firstSelectedY) * scale - 24;
+    const visibleTop = container.scrollTop;
+    const visibleBottom = visibleTop + container.clientHeight;
+    if (target < visibleTop || target + 48 > visibleBottom) {
+      container.scrollTo({ top: Math.max(0, target), behavior: "smooth" });
+    }
+  }, [selectedId, firstSelectedY, shown]);
   const pieceCount = layout.pieces.length;
   const specLine = [
     copy.pieces(pieceCount),
@@ -286,8 +306,9 @@ function RollDrawing({
         <p className="mt-1 text-sm leading-6 font-semibold text-light-muted">{specLine}</p>
       </div>
 
-      <div className="max-h-[50vh] overflow-y-auto px-3 pt-4 pb-2 sm:px-5 lg:max-h-[calc(100vh-20rem)]">
+      <div ref={scrollRef} className="max-h-[50vh] overflow-y-auto px-3 pt-4 pb-2 sm:px-5 lg:max-h-[calc(100vh-20rem)]">
         <svg
+          ref={svgRef}
           viewBox={`0 0 ${pad + rollWidth + labelSpace} ${shown + 2 * pad}`}
           role="img"
           aria-label={copy.rollLabel(formatMetres(locale, layout.billedLength), pieceCount)}
