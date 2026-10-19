@@ -13,7 +13,7 @@ export function isGuideLocale(value: string): value is GuideLocale {
   return guideLocales.includes(value as GuideLocale);
 }
 
-export const guideKeys = ["fotolitos", "dtf"] as const;
+export const guideKeys = ["fotolitos", "dtf", "serigrafia"] as const;
 
 export type GuideKey = (typeof guideKeys)[number];
 
@@ -273,6 +273,7 @@ const ptPaths = {
   fabric: getServicePath("pt", "fabric"),
   nonwoven: getServicePath("pt", "nonwoven"),
   footwear: getServicePath("pt", "footwear"),
+  tshirts: getServicePath("pt", "tshirts"),
 };
 
 const enPaths = {
@@ -280,6 +281,7 @@ const enPaths = {
   fabric: getServicePath("en", "fabric"),
   nonwoven: getServicePath("en", "nonwoven"),
   footwear: getServicePath("en", "footwear"),
+  tshirts: getServicePath("en", "tshirts"),
 };
 
 const fotolitos: Guide = {
@@ -1207,9 +1209,377 @@ const dtfEn: Guide = {
   relatedServices: ["fabric"],
 };
 
+/**
+ * Guia principal: o que é a serigrafia. Os outros guias (fotolitos, DTF) aprofundam partes dele.
+ * Tintas descritas de forma geral, sem afirmar que a SERIFIL usa cada uma.
+ */
+const serigrafiaPt: Guide = {
+  key: "serigrafia",
+  slug: "o-que-e-serigrafia",
+  status: "published",
+  shortTitle: "Serigrafia",
+  title: "Serigrafia: o que é e como funciona",
+  metaTitle: "Serigrafia: o que é e como funciona | SERIFIL",
+  metaDescription:
+    "O que é a serigrafia, como funciona passo a passo, em que materiais se usa, que tintas existem e quando compensa. Guia prático da SERIFIL, em Guimarães.",
+  excerpt:
+    "O que é a serigrafia, as etapas do processo, os suportes e as tintas, as vantagens e os limites, e quando compensa outra técnica.",
+  eyebrow: "GUIAS DE SERIGRAFIA · FUNDAMENTOS",
+  lead:
+    "A serigrafia é uma das técnicas de impressão mais versáteis: imprime em tecido, PVC, TNT, papel e muitos outros materiais, com cores vivas e resistentes. Este guia explica como funciona e quando é a escolha certa.",
+  datePublished: "2026-10-20",
+  dateModified: "2026-10-20",
+  image: guideImage("pt", "screens"),
+  summary: [
+    "Na serigrafia, a tinta passa através de uma tela de malha fina, só nas zonas abertas do desenho.",
+    "Cada cor tem o seu fotolito, a sua tela e a sua passagem de impressão.",
+    "Imprime em tecido, PVC, TNT, papel, componentes e muitos outros suportes.",
+    "Compensa sobretudo em séries com poucas cores; em poucas peças a muitas cores, o DTF pode ser melhor.",
+    "A tinta escolhe-se pelo suporte e pelo uso que a peça vai ter.",
+  ],
+  sections: [
+    {
+      id: "o-que-e-a-serigrafia",
+      title: "O que é a serigrafia?",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "A serigrafia é uma técnica de impressão em que a tinta é empurrada através de uma tela de malha fina, esticada num quadro. Nas zonas do desenho a malha está aberta e a tinta passa; no resto está tapada e a tinta fica retida.",
+        },
+        {
+          type: "paragraph",
+          text: `Cada cor do desenho é impressa separadamente, com a sua tela. Por isso um logótipo a uma cor é mais simples de preparar do que um desenho a quatro cores. A peça que permite gravar o desenho na tela é o [fotolito](/pt/guias/fotolitos/).`,
+        },
+        { type: "figure", image: guideImage("pt", "screens") },
+      ],
+    },
+    {
+      id: "como-funciona",
+      title: "Como funciona, passo a passo",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Do ficheiro à peça impressa há quatro etapas principais. As três primeiras são preparação; a impressão é a última.",
+        },
+        {
+          type: "process",
+          caption: "Esquema simplificado do processo de serigrafia, para um desenho a duas cores.",
+          steps: [
+            {
+              visual: "artwork",
+              title: "Arte final",
+              text: "O ficheiro é ajustado ao tamanho real de impressão e separado cor a cor.",
+            },
+            {
+              visual: "film",
+              title: "Fotolitos",
+              text: "Cada cor passa para uma película transparente, com essa parte do desenho em preto opaco.",
+            },
+            {
+              visual: "screen",
+              title: "Gravação da tela",
+              text: "A tela, revestida com emulsão sensível à luz, é exposta com o fotolito. Onde há preto, a emulsão sai com água e a malha fica aberta.",
+            },
+            {
+              visual: "print",
+              title: "Impressão",
+              text: "A raclete empurra a tinta pela malha aberta para o suporte. Depois, a tinta seca ou é curada, conforme o tipo.",
+            },
+          ],
+        },
+        {
+          type: "paragraph",
+          text: `Os quadros e as telas são uma parte importante da preparação. Se precisa de quadros para imprimir, pode desenhá-los na nossa [ferramenta de quadros de serigrafia](/pt/quadros/).`,
+        },
+      ],
+    },
+    {
+      id: "onde-se-usa",
+      title: "Em que materiais se usa",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "A serigrafia adapta-se a superfícies planas e a peças confecionadas, desde que a tinta seja a adequada ao material.",
+        },
+        {
+          type: "checklist",
+          items: [
+            { title: "Tecido e vestuário", text: `Sacos, capas, t-shirts, sweats e roupa de trabalho. Veja [serigrafia em tecido](${ptPaths.fabric}) e [estampagem de t-shirts](${ptPaths.tshirts}).` },
+            { title: "PVC e plásticos", text: `Sacos, embalagens e peças técnicas em PVC transparente ou colorido. Veja [serigrafia em PVC](${ptPaths.pvc}).` },
+            { title: "TNT", text: `Sacos e capas em tecido não tecido. Veja [sacos em TNT](${ptPaths.nonwoven}).` },
+            { title: "Componentes", text: `Palmilhas, palas e outras peças de produção. Veja [componentes para calçado](${ptPaths.footwear}).` },
+            { title: "Papel e cartão", text: "Cartazes, embalagens e outros suportes gráficos." },
+          ],
+        },
+        { type: "figure", image: guideImage("pt", "nonwovenWork") },
+      ],
+    },
+    {
+      id: "tintas",
+      title: "Que tintas se usam",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "Não há uma tinta para tudo. A escolha depende do material, da cor da peça e do uso que vai ter: uma peça lavada todas as semanas pede uma tinta diferente de um saco promocional.",
+        },
+        {
+          type: "comparison",
+          columns: ["Tipo de tinta", "Para que serve"],
+          rows: [
+            { label: "Plastisol", values: ["Tinta para têxtil, muito usada em vestuário.", "Cores opacas, que se veem bem em tecidos escuros. Cura com calor."] },
+            { label: "Base aquosa", values: ["Tinta para têxtil à base de água.", "Toque mais suave, sobretudo em tecidos claros."] },
+            { label: "Para plásticos", values: ["Tintas formuladas para PVC e outros plásticos.", "Aderem a superfícies lisas, onde as tintas têxteis não agarram."] },
+            { label: "Cura UV", values: ["Tintas que secam com luz ultravioleta.", "Usadas sobretudo em plásticos, papel e superfícies rígidas."] },
+          ],
+        },
+        {
+          type: "note",
+          text: "A tinta e a cura são escolhidas em cada trabalho, depois de avaliar o material. Se tiver uma amostra da peça, envie-a com o pedido.",
+        },
+      ],
+    },
+    {
+      id: "vantagens-e-limites",
+      title: "Vantagens e limites",
+      blocks: [
+        {
+          type: "checklist",
+          items: [
+            { title: "Cores vivas e opacas", text: "A camada de tinta é mais espessa do que noutras técnicas e cobre bem, mesmo em fundos escuros." },
+            { title: "Resistência", text: "Com a tinta e a cura certas, aguenta bem o uso e as lavagens." },
+            { title: "Económica em séries", text: "Depois da preparação, cada peça imprime-se depressa: o custo por peça desce com a quantidade." },
+            { title: "Muitos suportes", text: "Tecido, PVC, TNT, papel e componentes, com a tinta adequada a cada um." },
+            { title: "Preparação por cor", text: "Cada cor precisa do seu fotolito e da sua tela, o que pesa em poucas peças." },
+            { title: "Fotografias e degradês", text: "São possíveis, mas exigem mais preparação e nem sempre se adaptam a todos os suportes." },
+          ],
+        },
+      ],
+    },
+    {
+      id: "serigrafia-ou-dtf",
+      title: "Serigrafia ou DTF?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: `Em têxtil, a alternativa mais comum é o DTF: o desenho é impresso num filme e transferido com calor, sem fotolitos nem telas. Compensa em poucas peças, com muitas cores, fotografias ou nomes diferentes. Explicamos tudo no [guia do DTF](/pt/guias/o-que-e-dtf/) e pode calcular o filme na página de [DTF ao metro](/pt/dtf/).`,
+        },
+        {
+          type: "paragraph",
+          text: "Para séries com poucas cores, sobretudo em PVC, TNT e componentes, a serigrafia continua a ser a escolha mais habitual.",
+        },
+      ],
+    },
+    {
+      id: "pedir-orcamento",
+      title: "O que indicar num pedido de orçamento",
+      blocks: [
+        {
+          type: "checklist",
+          items: [
+            { title: "Suporte", text: "Material, cor e, se possível, uma fotografia ou amostra da peça." },
+            { title: "Desenho", text: "Ficheiro vetorial (PDF, AI, EPS ou SVG) e número de cores." },
+            { title: "Medidas e posição", text: "Tamanho da impressão e local na peça." },
+            { title: "Quantidade", text: "Número aproximado de peças." },
+            { title: "Prazo", text: "Data em que precisa do trabalho." },
+          ],
+        },
+        {
+          type: "paragraph",
+          text: `No guia dos [fotolitos](/pt/guias/fotolitos/) explicamos em detalhe que ficheiros enviar e como o número de cores pesa no orçamento.`,
+        },
+      ],
+    },
+  ],
+  relatedServices: ["pvc", "fabric", "nonwoven", "footwear", "tshirts"],
+};
+
+const serigrafiaEn: Guide = {
+  key: "serigrafia",
+  slug: "what-is-screen-printing",
+  status: "published",
+  shortTitle: "Screen printing",
+  title: "Screen printing: what it is and how it works",
+  metaTitle: "Screen Printing: What It Is and How It Works | SERIFIL",
+  metaDescription:
+    "What screen printing is, how it works step by step, which materials and inks it uses and when it pays off. A practical guide from SERIFIL in Portugal.",
+  excerpt:
+    "What screen printing is, the stages of the process, substrates and inks, its strengths and limits, and when another technique is better.",
+  eyebrow: "SCREEN PRINTING GUIDES · BASICS",
+  lead:
+    "Screen printing is one of the most versatile printing techniques: it prints on fabric, PVC, non-woven material, paper and much more, with bright, durable colours. This guide explains how it works and when it is the right choice.",
+  datePublished: "2026-10-20",
+  dateModified: "2026-10-20",
+  image: guideImage("en", "screens"),
+  summary: [
+    "In screen printing, ink passes through a fine mesh screen, only where the design is open.",
+    "Each colour has its own film positive, its own screen and its own print pass.",
+    "It prints on fabric, PVC, non-woven material, paper, components and many other substrates.",
+    "It pays off mainly on runs with few colours; for a few items in many colours, DTF may be better.",
+    "The ink is chosen for the substrate and the way the item will be used.",
+  ],
+  sections: [
+    {
+      id: "what-is-screen-printing",
+      title: "What is screen printing?",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "Screen printing is a printing technique in which ink is pushed through a fine mesh stretched on a frame. Where the design is, the mesh is open and the ink passes through; everywhere else it is blocked and the ink stays behind.",
+        },
+        {
+          type: "paragraph",
+          text: `Each colour of the design is printed separately, with its own screen. That is why a one-colour logo is simpler to prepare than a four-colour design. The item used to transfer the design onto the screen is the [film positive](/en/guias/film-positives/).`,
+        },
+        { type: "figure", image: guideImage("en", "screens") },
+      ],
+    },
+    {
+      id: "how-it-works",
+      title: "How it works, step by step",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "There are four main stages from file to printed item. The first three are preparation; printing comes last.",
+        },
+        {
+          type: "process",
+          caption: "Simplified diagram of the screen printing process, for a two-colour design.",
+          steps: [
+            {
+              visual: "artwork",
+              title: "Final artwork",
+              text: "The file is set to the actual print size and separated colour by colour.",
+            },
+            {
+              visual: "film",
+              title: "Film positives",
+              text: "Each colour is output onto a clear film, with that part of the design in opaque black.",
+            },
+            {
+              visual: "screen",
+              title: "Screen exposure",
+              text: "The screen, coated with light-sensitive emulsion, is exposed with the film positive. Where there is black, the emulsion washes out and the mesh stays open.",
+            },
+            {
+              visual: "print",
+              title: "Printing",
+              text: "The squeegee pushes the ink through the open mesh onto the substrate. The ink then dries or is cured, depending on its type.",
+            },
+          ],
+        },
+        {
+          type: "paragraph",
+          text: `Frames and screens are a big part of the preparation. If you need screens for your own printing, you can draw them in our [screen printing frame tool](/en/quadros/).`,
+        },
+      ],
+    },
+    {
+      id: "materials",
+      title: "Which materials it works on",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Screen printing works on flat surfaces and on finished items, as long as the ink suits the material.",
+        },
+        {
+          type: "checklist",
+          items: [
+            { title: "Fabric and clothing", text: `Bags, covers, T-shirts, sweatshirts and workwear. See [fabric screen printing](${enPaths.fabric}) and [T-shirt printing](${enPaths.tshirts}).` },
+            { title: "PVC and plastics", text: `Bags, packaging and technical parts in clear or coloured PVC. See [PVC screen printing](${enPaths.pvc}).` },
+            { title: "Non-woven material", text: `Non-woven bags and covers. See [non-woven bags](${enPaths.nonwoven}).` },
+            { title: "Components", text: `Insoles, vamps and other production parts. See [footwear components](${enPaths.footwear}).` },
+            { title: "Paper and card", text: "Posters, packaging and other graphic substrates." },
+          ],
+        },
+        { type: "figure", image: guideImage("en", "nonwovenWork") },
+      ],
+    },
+    {
+      id: "inks",
+      title: "Which inks are used",
+      blocks: [
+        {
+          type: "paragraph",
+          text:
+            "There is no single ink for everything. The choice depends on the material, the colour of the item and how it will be used: an item washed every week needs a different ink from a promotional bag.",
+        },
+        {
+          type: "comparison",
+          columns: ["Ink type", "What it is for"],
+          rows: [
+            { label: "Plastisol", values: ["A textile ink widely used on clothing.", "Opaque colours that show well on dark fabrics. Cured with heat."] },
+            { label: "Water-based", values: ["A water-based textile ink.", "A softer feel, especially on light fabrics."] },
+            { label: "For plastics", values: ["Inks formulated for PVC and other plastics.", "They bond to smooth surfaces where textile inks do not."] },
+            { label: "UV-cured", values: ["Inks that dry under ultraviolet light.", "Used mainly on plastics, paper and rigid surfaces."] },
+          ],
+        },
+        {
+          type: "note",
+          text: "The ink and curing are chosen for each job after assessing the material. If you have a sample of the item, send it with your request.",
+        },
+      ],
+    },
+    {
+      id: "strengths-and-limits",
+      title: "Strengths and limits",
+      blocks: [
+        {
+          type: "checklist",
+          items: [
+            { title: "Bright, opaque colours", text: "The ink layer is thicker than with other techniques and covers well, even on dark backgrounds." },
+            { title: "Durability", text: "With the right ink and curing, it stands up well to use and washing." },
+            { title: "Good value on runs", text: "Once prepared, each item prints quickly: the cost per item falls as the quantity grows." },
+            { title: "Many substrates", text: "Fabric, PVC, non-woven material, paper and components, each with the right ink." },
+            { title: "Preparation per colour", text: "Each colour needs its own film positive and screen, which weighs on small quantities." },
+            { title: "Photos and gradients", text: "They are possible, but need more preparation and do not suit every substrate." },
+          ],
+        },
+      ],
+    },
+    {
+      id: "screen-printing-or-dtf",
+      title: "Screen printing or DTF?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: `On textiles, the most common alternative is DTF: the design is printed on film and transferred with heat, with no film positives or screens. It pays off for a few garments, many colours, photos or different names. Our [DTF guide](/en/guias/what-is-dtf/) explains it in full, and you can work out the film on the [DTF by the metre](/en/dtf/) page.`,
+        },
+        {
+          type: "paragraph",
+          text: "For runs with few colours, especially on PVC, non-woven material and components, screen printing remains the usual choice.",
+        },
+      ],
+    },
+    {
+      id: "requesting-a-quote",
+      title: "What to include in a quote request",
+      blocks: [
+        {
+          type: "checklist",
+          items: [
+            { title: "Substrate", text: "Material, colour and, if possible, a photo or sample of the item." },
+            { title: "Design", text: "Vector file (PDF, AI, EPS or SVG) and number of colours." },
+            { title: "Size and position", text: "Print size and position on the item." },
+            { title: "Quantity", text: "Approximate number of items." },
+            { title: "Deadline", text: "When you need the job." },
+          ],
+        },
+        {
+          type: "paragraph",
+          text: `Our [film positives](/en/guias/film-positives/) guide explains in detail which files to send and how the number of colours affects the quote.`,
+        },
+      ],
+    },
+  ],
+  relatedServices: ["pvc", "fabric", "nonwoven", "footwear", "tshirts"],
+};
+
 const guidesByLocale: Record<GuideLocale, Guide[]> = {
-  pt: [fotolitos, dtfPt],
-  en: [filmPositives, dtfEn],
+  pt: [fotolitos, dtfPt, serigrafiaPt],
+  en: [filmPositives, dtfEn, serigrafiaEn],
 };
 
 export function getPublishedGuides(locale: GuideLocale) {

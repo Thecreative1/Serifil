@@ -18,14 +18,15 @@ import {
 } from "@/data/service-pages";
 
 /**
- * Guias ligados a cada serviço: o dos fotolitos explica a preparação da serigrafia em todos os
- * suportes; o do DTF é a alternativa para poucas peças a cores em tecido.
+ * Guias ligados a cada serviço: o da serigrafia explica a técnica, o dos fotolitos a preparação
+ * em todos os suportes e o do DTF a alternativa para poucas peças a cores em têxtil.
  */
 const serviceGuides: Record<ServicePageContent["key"], GuideKey[]> = {
-  pvc: ["fotolitos"],
-  fabric: ["fotolitos", "dtf"],
-  nonwoven: ["fotolitos"],
-  footwear: ["fotolitos"],
+  pvc: ["serigrafia", "fotolitos"],
+  fabric: ["serigrafia", "fotolitos", "dtf"],
+  nonwoven: ["serigrafia", "fotolitos"],
+  footwear: ["serigrafia", "fotolitos"],
+  tshirts: ["serigrafia", "dtf"],
 };
 
 const inlineLinkClassName =

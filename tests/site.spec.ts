@@ -376,7 +376,7 @@ test("quadros de serigrafia publicados: nos serviços, indexáveis e com dados e
     await page.goto(`/${item.locale}/`);
     const listLink = page.locator(`#servicos nav a[href="${path}"]`);
     await expect(listLink).toHaveCount(1);
-    await expect(listLink).toContainText("05");
+    await expect(listLink).toContainText("06");
     await expect(listLink).toContainText(item.name);
     const homeData = await page.locator('script[type="application/ld+json"]').first().textContent();
     expect(homeData).toContain(`https://serifil.com${path}`);
@@ -1255,4 +1255,43 @@ test("a raiz envia os motores de busca para /pt/ e os visitantes para o seu idio
   await visitorPage.goto("/");
   await expect(visitorPage).toHaveURL(/\/en\/$/);
   await visitor.close();
+});
+
+test("estampagem de t-shirts e guia da serigrafia publicados e ligados", async ({ page, request }) => {
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  for (const path of [
+    "/pt/servicos/estampagem-t-shirts/",
+    "/en/servicos/t-shirt-printing/",
+    "/pt/guias/o-que-e-serigrafia/",
+    "/en/guias/what-is-screen-printing/",
+  ]) {
+    expect(sitemap).toContain(`<loc>https://serifil.com${path}</loc>`);
+  }
+
+  await page.goto("/pt/");
+  await expect(page.locator('#servicos nav a[href="/pt/servicos/estampagem-t-shirts/"]')).toHaveCount(1);
+
+  await page.goto("/pt/servicos/estampagem-t-shirts/");
+  await expect(page.locator("h1")).toContainText("T-shirts e camisolas com a sua marca.");
+  await expect(page).toHaveTitle("Estampagem de T-shirts e Camisolas em Guimarães | SERIFIL");
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://serifil.com/images/servicos/tshirts-og.jpg");
+  await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/servicos/t-shirt-printing/");
+  // Só serigrafia e DTF: a SERIFIL não faz bordado nem sublimação.
+  await expect(page.locator("main")).not.toContainText(/bordad|sublima/i);
+  await expect(page.locator('main a[href="/pt/guias/o-que-e-serigrafia/"]').first()).toBeAttached();
+  await expect(page.locator('main a[href="/pt/guias/o-que-e-dtf/"]').first()).toBeAttached();
+  await expect(page.locator('main nav a[href="/pt/dtf/"]')).toBeVisible();
+
+  await page.goto("/pt/guias/o-que-e-serigrafia/");
+  await expect(page.locator("h1")).toHaveText("Serigrafia: o que é e como funciona");
+  await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/guias/what-is-screen-printing/");
+  for (const href of ["/pt/guias/fotolitos/", "/pt/guias/o-que-e-dtf/", "/pt/dtf/", "/pt/quadros/", "/pt/servicos/estampagem-t-shirts/"]) {
+    await expect(page.locator(`main a[href="${href}"]`).first()).toBeAttached();
+  }
+
+  await page.goto("/pt/servicos/serigrafia-pvc/");
+  await expect(page.locator('main a[href="/pt/guias/o-que-e-serigrafia/"]')).toHaveCount(1);
+
+  await page.goto("/en/guias/what-is-screen-printing/");
+  await expect(page.locator('link[hreflang="pt-PT"]')).toHaveAttribute("href", "https://serifil.com/pt/guias/o-que-e-serigrafia/");
 });

@@ -104,9 +104,11 @@ Secção editorial "Guias de Serigrafia" / "Screen Printing Guides", em portugu�
 - o corpo é uma lista de secções com blocos tipados (`paragraph`, `note`, `checklist`, `comparison`, `process`, `figure`, `gallery`), renderizados por `components/sections/GuideArticle.tsx`;
 - ligações internas no texto usam a sintaxe `[texto](/caminho/)`, construídas com `getServicePath` para não divergirem das rotas.
 
-Guias publicados: fotolitos (`/pt/guias/fotolitos/` ↔ `/en/guias/film-positives/`, set 2026) e DTF (`/pt/guias/o-que-e-dtf/` ↔ `/en/guias/what-is-dtf/`, out 2026). O esquema de processo (`components/guides/ProcessDiagram.tsx`) tem desenhos para serigrafia (`artwork`, `film`, `screen`, `print`) e para DTF (`dtf-film`, `powder`, `press`). O guia do DTF não tem fotografia própria e usa `og.jpg` como imagem de partilha.
+Guias publicados: serigrafia, o guia principal (`/pt/guias/o-que-e-serigrafia/` ↔ `/en/guias/what-is-screen-printing/`, out 2026), fotolitos (`/pt/guias/fotolitos/` ↔ `/en/guias/film-positives/`, set 2026) e DTF (`/pt/guias/o-que-e-dtf/` ↔ `/en/guias/what-is-dtf/`, out 2026). O esquema de processo (`components/guides/ProcessDiagram.tsx`) tem desenhos para serigrafia (`artwork`, `film`, `screen`, `print`) e para DTF (`dtf-film`, `powder`, `press`). O guia do DTF não tem fotografia própria e usa `og.jpg` como imagem de partilha.
 
-Cada página de serviço mostra "Guias relacionados" (`serviceGuides` em `components/sections/ServiceDetail.tsx`): fotolitos em todas e, na serigrafia em tecido, também o DTF. As respostas das perguntas frequentes dos serviços aceitam a sintaxe de ligação `[texto](/caminho/)`.
+Cada página de serviço mostra "Guias relacionados" (`serviceGuides` em `components/sections/ServiceDetail.tsx`): serigrafia e fotolitos nos suportes industriais, mais o DTF no tecido e nas t-shirts.
+
+Páginas de serviço (`serviceKeys`): PVC, tecido, TNT, componentes para calçado e, desde out 2026, estampagem de t-shirts (`/pt/servicos/estampagem-t-shirts/` ↔ `/en/servicos/t-shirt-printing/`). A página de t-shirts nasceu da pesquisa de sugestões do Google e do Search Console: a SERIFIL fornece as peças (fornecimento condicional), usa só serigrafia e DTF (não faz bordado nem sublimação) e envia para todo o país. Ainda usa fotografias de trabalhos em tecido; falta uma fotografia de t-shirts. As respostas das perguntas frequentes dos serviços aceitam a sintaxe de ligação `[texto](/caminho/)`.
 
 Cada guia publica canonical, hreflang recíproco (`x-default` para PT), Open Graph `article`, JSON-LD `Article` e `BreadcrumbList`; o índice publica `CollectionPage`. O link "Guias"/"Guides" do menu é um caminho absoluto: `Header`, `MobileMenu` e `Footer` só prefixam `homeHref` a âncoras `#`.
 

@@ -9,6 +9,7 @@ const sources = {
   fabric: "public/images/trabalhos/tecido-01.webp",
   nonwoven: "public/images/trabalhos/tnt-05.webp",
   footwear: "public/images/hero-serigrafia.webp",
+  tshirts: "public/images/trabalhos/tecido-04.webp",
 };
 
 const outputDirectory = path.resolve(process.cwd(), "public/images/servicos");

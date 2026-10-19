@@ -1,6 +1,6 @@
 import type { Locale } from "@/data/i18n";
 
-export const serviceKeys = ["pvc", "fabric", "nonwoven", "footwear"] as const;
+export const serviceKeys = ["pvc", "fabric", "nonwoven", "footwear", "tshirts"] as const;
 
 export type ServiceKey = (typeof serviceKeys)[number];
 
@@ -92,12 +92,14 @@ const slugs: Record<Locale, Record<ServiceKey, string>> = {
     fabric: "serigrafia-tecido",
     nonwoven: "sacos-tnt",
     footwear: "componentes-calcado",
+    tshirts: "estampagem-t-shirts",
   },
   en: {
     pvc: "pvc-screen-printing",
     fabric: "fabric-screen-printing",
     nonwoven: "non-woven-bags",
     footwear: "footwear-components",
+    tshirts: "t-shirt-printing",
   },
 };
 
@@ -625,6 +627,135 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
       ],
     },
   },
+  tshirts: {
+    key: "tshirts",
+    slug: slugs.pt.tshirts,
+    shortName: "Estampagem de t-shirts",
+    metaTitle: "Estampagem de T-shirts e Camisolas em Guimarães | SERIFIL",
+    metaDescription:
+      "Estampagem de t-shirts, sweats e camisolas para empresas, equipas e eventos: serigrafia para séries e DTF para poucas peças. Em Guimarães, com envio.",
+    eyebrow: "ESTAMPAGEM DE T-SHIRTS · GUIMARÃES",
+    title: "T-shirts e camisolas com a sua marca.",
+    lead:
+      "Estampagem de t-shirts, sweats, polos e camisolas para empresas, equipas, eventos e marcas. Serigrafia para séries, DTF para poucas peças e muitas cores, com envio para todo o país.",
+    image: {
+      src: "/images/trabalhos/tecido-04.webp",
+      alt: "Tecido escuro personalizado com marca impressa pela SERIFIL",
+    },
+    introduction: {
+      title: "Duas técnicas, escolhidas pela quantidade.",
+      paragraphs: [
+        "Em séries com uma ou poucas cores, a serigrafia deposita uma camada de tinta resistente e compensa cada vez mais à medida que a quantidade aumenta. Em poucas peças, desenhos com muitas cores, fotografias, ou nomes e números diferentes em cada peça, o DTF dispensa fotolitos e telas.",
+        "Pode entregar-nos as suas peças ou pedir-nos que as fornecemos. O fornecimento depende do modelo, das cores, dos tamanhos e da quantidade, e é confirmado no orçamento.",
+      ],
+    },
+    facts: [
+      { label: "PEÇAS", value: "T-shirts, sweats, polos e camisolas, suas ou fornecidas por nós." },
+      { label: "TÉCNICAS", value: "Serigrafia para séries; DTF para poucas peças e muitas cores." },
+      { label: "ENVIO", value: "Produção em Guimarães, com envio para todo o país." },
+    ],
+    technique: {
+      eyebrow: "COMO TRABALHAMOS",
+      title: "Da peça à estampagem, passo a passo.",
+      description:
+        "Antes de estampar, escolhemos a técnica que faz mais sentido para o desenho, para a peça e para a quantidade.",
+      steps: [
+        {
+          title: "Peças e quantidade",
+          description:
+            "Modelo, cor, tamanhos e número de peças. Se não tiver as peças, indicamos o que podemos fornecer.",
+        },
+        {
+          title: "Escolha da técnica",
+          description:
+            "Serigrafia ou DTF, consoante o número de cores, o detalhe do desenho e a quantidade.",
+        },
+        {
+          title: "Preparação",
+          description:
+            "A arte é ajustada à medida e à posição: peito, costas ou manga. Na serigrafia fazem-se os fotolitos e as telas; no DTF, o filme.",
+        },
+        {
+          title: "Estampagem",
+          description:
+            "Impressão e cura da tinta, na serigrafia; prensagem com calor e pressão, no DTF.",
+        },
+      ],
+    },
+    applications: {
+      eyebrow: "PARA QUEM",
+      title: "T-shirts para empresas, equipas e eventos.",
+      description:
+        "A técnica e a peça são escolhidas pelo uso: uma farda lavada todas as semanas pede decisões diferentes de uma t-shirt para um evento.",
+      items: [
+        "T-shirts e sweats com o logótipo da empresa",
+        "Fardas e roupa de trabalho",
+        "Equipas desportivas, com nomes e números",
+        "Eventos, associações e festas",
+        "Marcas de roupa e merchandising",
+      ],
+    },
+    gallery: {
+      eyebrow: "TRABALHOS EM TÊXTIL",
+      title: "Têxteis estampados pela SERIFIL.",
+      images: [
+        {
+          src: "/images/trabalhos/tecido-01.webp",
+          alt: "Tecido preto com impressão dourada",
+        },
+        {
+          src: "/images/trabalhos/tecido-02.webp",
+          alt: "Capa em tecido preto com logótipo branco",
+        },
+        {
+          src: "/images/trabalhos/tecido-03.webp",
+          alt: "Peça em tecido claro com texto impresso a preto",
+        },
+      ],
+    },
+    preparation: {
+      eyebrow: "PREPARAR O PEDIDO",
+      title: "O que nos deve indicar.",
+      description: "Com esta informação conseguimos escolher a técnica e responder com o orçamento.",
+      items: [
+        { label: "Peças", value: "Modelo, cor e composição, e se são suas ou se as fornecemos." },
+        { label: "Quantidade", value: "Número de peças por tamanho." },
+        { label: "Desenho", value: "Ficheiro, número de cores e medidas." },
+        { label: "Posição", value: "Peito, costas, manga ou outra zona." },
+        { label: "Prazo", value: "Data em que precisa das peças." },
+      ],
+    },
+    questions: {
+      eyebrow: "PERGUNTAS FREQUENTES",
+      title: "Antes de estampar t-shirts.",
+      items: [
+        {
+          question: "Fornecem as t-shirts?",
+          answer:
+            "Sim. Podemos fornecer t-shirts, sweats, polos e camisolas, conforme o modelo, as cores, os tamanhos e a quantidade. Também estampamos as peças que nos entregar.",
+        },
+        {
+          question: "Qual é a quantidade mínima?",
+          answer:
+            "Depende da técnica. Com [DTF ao metro](/pt/dtf/), compensa a partir de poucas peças. Na serigrafia, a preparação de fotolitos e telas faz com que compense sobretudo em séries maiores.",
+        },
+        {
+          question: "Serigrafia ou DTF: qual escolher?",
+          answer:
+            "Serigrafia para séries com poucas cores; DTF para poucas peças, fotografias, degradês, ou nomes e números diferentes. Explicamos as duas técnicas no [guia da serigrafia](/pt/guias/o-que-e-serigrafia/) e no [guia do DTF](/pt/guias/o-que-e-dtf/).",
+        },
+        {
+          question: "Enviam para fora de Guimarães?",
+          answer: "Sim. Produzimos em Guimarães e enviamos para todo o país.",
+        },
+        {
+          question: "Quanto tempo demora?",
+          answer:
+            "Depende da técnica, da quantidade e de as peças serem suas ou fornecidas por nós. O prazo é indicado no orçamento.",
+        },
+      ],
+    },
+  },
 };
 
 const englishPages: Record<ServiceKey, ServicePageContent> = {
@@ -948,6 +1079,123 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
         { question: "Which components can be customised?", answer: "SERIFIL works with insoles, vamps and other components. Feasibility depends on material, geometry and available area." },
         { question: "Is a sample required?", answer: "It is recommended, especially for a new reference. A sample allows us to assess how the item can be held during printing, as well as its surface and positioning." },
         { question: "Can you work with several references?", answer: "Yes, provided each reference is identified with its artwork, dimensions, quantity and print position." },
+      ],
+    },
+  },
+  tshirts: {
+    ...portuguesePages.tshirts,
+    slug: slugs.en.tshirts,
+    shortName: "T-shirt printing",
+    metaTitle: "T-shirt and Sweatshirt Printing in Portugal | SERIFIL",
+    metaDescription:
+      "Printing on T-shirts, sweatshirts and polos for businesses, teams and events: screen printing for runs, DTF for small batches. Made in Guimarães, shipped.",
+    eyebrow: "T-SHIRT PRINTING · GUIMARÃES",
+    title: "T-shirts and sweatshirts carrying your brand.",
+    lead:
+      "Printing on T-shirts, sweatshirts, polos and jumpers for businesses, teams, events and brands. Screen printing for runs, DTF for small batches and many colours, shipped across Portugal.",
+    image: {
+      src: "/images/trabalhos/tecido-04.webp",
+      alt: "Dark fabric customised with a brand printed by SERIFIL",
+    },
+    introduction: {
+      title: "Two techniques, chosen by quantity.",
+      paragraphs: [
+        "For runs with one or a few colours, screen printing lays down a durable ink layer and becomes better value as the quantity grows. For a few garments, designs with many colours, photos, or different names and numbers on each garment, DTF needs no film positives or screens.",
+        "You can send us your own garments or ask us to supply them. Supply depends on the model, colours, sizes and quantity, and is confirmed in the quote.",
+      ],
+    },
+    facts: [
+      { label: "GARMENTS", value: "T-shirts, sweatshirts, polos and jumpers, yours or supplied by us." },
+      { label: "TECHNIQUES", value: "Screen printing for runs; DTF for small batches and many colours." },
+      { label: "SHIPPING", value: "Made in Guimarães, shipped across Portugal." },
+    ],
+    technique: {
+      eyebrow: "HOW WE WORK",
+      title: "From garment to print, step by step.",
+      description:
+        "Before printing, we choose the technique that makes most sense for the design, the garment and the quantity.",
+      steps: [
+        {
+          title: "Garments and quantity",
+          description: "Model, colour, sizes and number of garments. If you do not have the garments, we tell you what we can supply.",
+        },
+        {
+          title: "Choosing the technique",
+          description: "Screen printing or DTF, depending on the number of colours, the detail of the design and the quantity.",
+        },
+        {
+          title: "Preparation",
+          description:
+            "The artwork is sized and positioned: chest, back or sleeve. Screen printing needs film positives and screens; DTF needs the film.",
+        },
+        {
+          title: "Printing",
+          description: "Printing and curing the ink, for screen printing; heat pressing, for DTF.",
+        },
+      ],
+    },
+    applications: {
+      eyebrow: "WHO IT IS FOR",
+      title: "T-shirts for businesses, teams and events.",
+      description:
+        "The technique and the garment are chosen by use: a uniform washed every week calls for different decisions from an event T-shirt.",
+      items: [
+        "T-shirts and sweatshirts with your company logo",
+        "Uniforms and workwear",
+        "Sports teams, with names and numbers",
+        "Events, associations and parties",
+        "Clothing brands and merchandise",
+      ],
+    },
+    gallery: {
+      eyebrow: "TEXTILE WORK",
+      title: "Textiles printed by SERIFIL.",
+      images: [
+        { src: "/images/trabalhos/tecido-01.webp", alt: "Black fabric with gold printing" },
+        { src: "/images/trabalhos/tecido-02.webp", alt: "Black fabric cover with a white logo" },
+        { src: "/images/trabalhos/tecido-03.webp", alt: "Light fabric item with black printed text" },
+      ],
+    },
+    preparation: {
+      eyebrow: "PREPARING YOUR REQUEST",
+      title: "What to tell us.",
+      description: "With this information we can choose the technique and reply with a quote.",
+      items: [
+        { label: "Garments", value: "Model, colour and composition, and whether they are yours or supplied by us." },
+        { label: "Quantity", value: "Number of garments per size." },
+        { label: "Design", value: "File, number of colours and dimensions." },
+        { label: "Position", value: "Chest, back, sleeve or another area." },
+        { label: "Deadline", value: "When you need the garments." },
+      ],
+    },
+    questions: {
+      eyebrow: "FREQUENTLY ASKED QUESTIONS",
+      title: "Before printing T-shirts.",
+      items: [
+        {
+          question: "Do you supply the T-shirts?",
+          answer:
+            "Yes. We can supply T-shirts, sweatshirts, polos and jumpers, depending on the model, colours, sizes and quantity. We also print on garments you bring us.",
+        },
+        {
+          question: "What is the minimum quantity?",
+          answer:
+            "It depends on the technique. With [DTF by the metre](/en/dtf/), it pays off from a few garments. With screen printing, preparing film positives and screens means it pays off mainly on larger runs.",
+        },
+        {
+          question: "Screen printing or DTF: which should I choose?",
+          answer:
+            "Screen printing for runs with few colours; DTF for a few garments, photos, gradients, or different names and numbers. Both techniques are explained in our [screen printing guide](/en/guias/what-is-screen-printing/) and [DTF guide](/en/guias/what-is-dtf/).",
+        },
+        {
+          question: "Do you ship outside Guimarães?",
+          answer: "Yes. We produce in Guimarães and ship across Portugal.",
+        },
+        {
+          question: "How long does it take?",
+          answer:
+            "It depends on the technique, the quantity and whether the garments are yours or supplied by us. The lead time is given in the quote.",
+        },
       ],
     },
   },

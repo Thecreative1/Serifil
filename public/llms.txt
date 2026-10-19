@@ -37,6 +37,7 @@ A SERIFIL é uma empresa de serigrafia e personalização sediada em Guimarães,
 - Soluções de serigrafia por medida
 - Quadros de serigrafia à medida, retelagem e gravação
 - DTF ao metro e aplicação de transfers DTF em têxtil
+- Estampagem de t-shirts, sweats e camisolas (serigrafia e DTF), com fornecimento das peças e envio para todo o país
 
 ## Official English description
 
@@ -51,18 +52,22 @@ SERIFIL is a Portuguese screen-printing and customisation company located in Gui
 - [Serigrafia em tecido](https://serifil.com/pt/servicos/serigrafia-tecido/)
 - [Sacos em TNT](https://serifil.com/pt/servicos/sacos-tnt/)
 - [Impressão em componentes para calçado](https://serifil.com/pt/servicos/componentes-calcado/)
+- [Estampagem de t-shirts e camisolas](https://serifil.com/pt/servicos/estampagem-t-shirts/)
 - [Quadros de serigrafia à medida e retelagem](https://serifil.com/pt/quadros/)
 - [DTF ao metro e aplicação em têxtil](https://serifil.com/pt/dtf/)
 - [PVC screen printing](https://serifil.com/en/servicos/pvc-screen-printing/)
 - [Fabric screen printing](https://serifil.com/en/servicos/fabric-screen-printing/)
 - [Non-woven bags](https://serifil.com/en/servicos/non-woven-bags/)
 - [Printing on footwear components](https://serifil.com/en/servicos/footwear-components/)
+- [T-shirt and sweatshirt printing](https://serifil.com/en/servicos/t-shirt-printing/)
 - [Custom screen printing frames and re-meshing](https://serifil.com/en/quadros/)
 - [DTF transfers by the metre](https://serifil.com/en/dtf/)
 - [Guias de Serigrafia](https://serifil.com/pt/guias/)
+- [Serigrafia: o que é e como funciona](https://serifil.com/pt/guias/o-que-e-serigrafia/)
 - [Fotolitos: o que são e para que servem na serigrafia](https://serifil.com/pt/guias/fotolitos/)
 - [DTF: o que é e como funciona a impressão DTF em têxtil](https://serifil.com/pt/guias/o-que-e-dtf/)
 - [Screen Printing Guides](https://serifil.com/en/guias/)
+- [Screen printing: what it is and how it works](https://serifil.com/en/guias/what-is-screen-printing/)
 - [Film positives: what they are and what they do in screen printing](https://serifil.com/en/guias/film-positives/)
 - [DTF: what it is and how DTF printing on textiles works](https://serifil.com/en/guias/what-is-dtf/)
 
