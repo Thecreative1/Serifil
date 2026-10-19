@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { ArrowRight, Check } from "lucide-react";
+import { InlineText } from "@/components/guides/InlineText";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { assetPath, localizedPath } from "@/config/paths";
 import type { Locale } from "@/data/i18n";
 import { dtfCopy, dtfPublished, getDtfPath } from "@/data/dtf";
+import { getGuidePath, getPublishedGuides, type GuideKey } from "@/data/guides";
 import { getScreensPath, screensCopy, screensPublished } from "@/data/screens";
 import {
   getServicePath,
@@ -14,6 +16,20 @@ import {
   servicePageUi,
   type ServicePageContent,
 } from "@/data/service-pages";
+
+/**
+ * Guias ligados a cada serviço: o dos fotolitos explica a preparação da serigrafia em todos os
+ * suportes; o do DTF é a alternativa para poucas peças a cores em tecido.
+ */
+const serviceGuides: Record<ServicePageContent["key"], GuideKey[]> = {
+  pvc: ["fotolitos"],
+  fabric: ["fotolitos", "dtf"],
+  nonwoven: ["fotolitos"],
+  footwear: ["fotolitos"],
+};
+
+const inlineLinkClassName =
+  "font-semibold text-text-primary underline decoration-text-secondary underline-offset-4 transition-colors hover:decoration-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
 type ServiceDetailProps = {
   locale: Locale;
@@ -33,6 +49,8 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
     ...(screensPublished ? [{ href: getScreensPath(locale), name: screensCopy[locale].sectionName }] : []),
     ...(dtfPublished ? [{ href: getDtfPath(locale), name: dtfCopy[locale].sectionName }] : []),
   ];
+  const publishedGuides = getPublishedGuides(locale);
+  const guides = serviceGuides[page.key].flatMap((key) => publishedGuides.filter((guide) => guide.key === key));
 
   return (
     <main id="conteudo-principal" tabIndex={-1}>
@@ -254,7 +272,9 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
                       {item.question}
                       <span className="text-2xl font-light text-accent transition-transform duration-300 group-open:rotate-45" aria-hidden="true">+</span>
                     </summary>
-                    <p className="max-w-[62ch] pb-7 text-base leading-7 text-text-secondary">{item.answer}</p>
+                    <p className="max-w-[62ch] pb-7 text-base leading-7 text-text-secondary">
+                      <InlineText text={item.answer} linkClassName={inlineLinkClassName} />
+                    </p>
                   </details>
                 ))}
               </div>
@@ -271,6 +291,24 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
                 <p className="section-kicker text-accent">{ui.relatedEyebrow}</p>
                 <h2 className="mt-8 max-w-[12ch] text-[clamp(2.6rem,4.8vw,5.2rem)] leading-[0.92] font-bold tracking-[-0.06em] text-text-primary">{ui.relatedTitle}</h2>
                 <p className="mt-7 max-w-[52ch] text-base leading-7 text-text-secondary">{ui.relatedDescription}</p>
+                {guides.length > 0 ? (
+                  <div className="mt-10 border-t border-border pt-6">
+                    <p className="text-xs font-black uppercase tracking-[0.12em] text-text-secondary">{ui.guides}</p>
+                    <ul className="mt-4 grid gap-3">
+                      {guides.map((guide) => (
+                        <li key={guide.key}>
+                          <a
+                            href={getGuidePath(locale, guide.slug)}
+                            className="group inline-flex items-start gap-3 text-base leading-6 font-bold text-text-primary transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                          >
+                            <ArrowRight className="mt-1 size-4 shrink-0 text-accent transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                            {guide.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
               </div>
               <nav className="border-t border-border lg:col-span-7" aria-label={ui.relatedEyebrow}>
                 {relatedLinks.map((related) => (

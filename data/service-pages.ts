@@ -81,6 +81,7 @@ type ServicePageUi = {
   learnMore: string;
   materialGuides: string;
   materialGuidesDescription: string;
+  guides: string;
   quoteTitle: string;
   contact: string;
 };
@@ -113,6 +114,7 @@ export const servicePageUi: Record<Locale, ServicePageUi> = {
     relatedDescription:
       "Cada suporte pede uma preparação própria. Consulte as páginas relacionadas ou envie-nos uma amostra para avaliação.",
     learnMore: "Saber mais",
+    guides: "Guias relacionados",
     materialGuides: "Materiais e aplicações",
     materialGuidesDescription:
       "Perceba como trabalhamos cada suporte e que informação ajuda a preparar o seu projeto.",
@@ -131,6 +133,7 @@ export const servicePageUi: Record<Locale, ServicePageUi> = {
     relatedDescription:
       "Each substrate requires its own preparation. Explore the related pages or send us a sample for assessment.",
     learnMore: "Learn more",
+    guides: "Related guides",
     materialGuides: "Materials and applications",
     materialGuidesDescription:
       "Understand how each substrate is approached and what information helps us prepare your project.",
@@ -378,6 +381,11 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
           question: "É possível imprimir várias cores?",
           answer:
             "Sim. Cada cor é preparada e impressa separadamente, o que deve ser considerado na arte e no orçamento.",
+        },
+        {
+          question: "E para poucas peças com muitas cores?",
+          answer:
+            "Em séries curtas, com fotografias, degradês ou muitas cores, o [DTF ao metro](/pt/dtf/) pode compensar mais, porque não precisa de fotolitos nem de telas. Explicamos as diferenças no [guia do DTF](/pt/guias/o-que-e-dtf/).",
         },
         {
           question: "O que devo indicar sobre a lavagem?",
@@ -776,6 +784,11 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       items: [
         { question: "Does screen printing work on every fabric?", answer: "Many fabrics can be printed, but composition, texture, finish and item format need assessment. A sample helps confirm the solution." },
         { question: "Can you print several colours?", answer: "Yes. Each colour is prepared and printed separately, which should be considered in the artwork and quote." },
+        {
+          question: "What about a few garments with many colours?",
+          answer:
+            "For short runs with photos, gradients or many colours, [DTF by the metre](/en/dtf/) may be better value, as it needs no film positives or screens. Our [DTF guide](/en/guias/what-is-dtf/) explains the differences.",
+        },
         { question: "What should I say about washing?", answer: "Explain how the item will be used and washed. Final durability depends on the material, ink, curing and aftercare." },
       ],
     },

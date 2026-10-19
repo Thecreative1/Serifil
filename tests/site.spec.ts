@@ -1190,7 +1190,7 @@ test("DTF ao metro publicado: nos serviços, indexável e no sitemap", async ({ 
     await expect(listLink).toContainText(item.name);
 
     await page.goto(item.servicePage);
-    await expect(page.locator(`main a[href="${path}"]`).first()).toBeVisible();
+    await expect(page.locator(`main nav a[href="${path}"]`)).toBeVisible();
 
     await page.goto(path);
     await expect(page.locator('meta[name="robots"]')).not.toHaveAttribute("content", /noindex/);
@@ -1219,4 +1219,23 @@ test("guia do DTF publicado em PT e EN, ligado à calculadora", async ({ page, r
   await page.goto("/en/guias/what-is-dtf/");
   await expect(page.locator('link[hreflang="pt-PT"]')).toHaveAttribute("href", "https://serifil.com/pt/guias/o-que-e-dtf/");
   await expect(page.locator("main")).not.toContainText(/partner|€7(?!\d)/i);
+});
+
+test("páginas de serviço ligam aos guias; tecido liga ao DTF", async ({ page }) => {
+  for (const path of ["/pt/servicos/serigrafia-pvc/", "/pt/servicos/sacos-tnt/", "/pt/servicos/componentes-calcado/"]) {
+    await page.goto(path);
+    await expect(page.locator('main a[href="/pt/guias/fotolitos/"]')).toHaveCount(1);
+    await expect(page.locator('main a[href="/pt/guias/o-que-e-dtf/"]')).toHaveCount(0);
+  }
+
+  await page.goto("/pt/servicos/serigrafia-tecido/");
+  await expect(page.locator('main a[href="/pt/guias/fotolitos/"]')).toHaveCount(1);
+  // O guia do DTF aparece nos guias relacionados e na pergunta sobre poucas peças a cores.
+  await expect(page.locator('main a[href="/pt/guias/o-que-e-dtf/"]')).toHaveCount(2);
+  await page.getByText("E para poucas peças com muitas cores?").click();
+  await expect(page.getByRole("link", { name: "guia do DTF" })).toBeVisible();
+
+  await page.goto("/en/servicos/fabric-screen-printing/");
+  await expect(page.locator('main a[href="/en/guias/what-is-dtf/"]')).toHaveCount(2);
+  await expect(page.locator('main a[href="/en/guias/film-positives/"]')).toHaveCount(1);
 });
