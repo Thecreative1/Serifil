@@ -11,7 +11,7 @@ import type { Locale } from "@/data/i18n";
 export const dtfPublished = true;
 
 /** Data da última alteração de conteúdo: usada no sitemap. Atualizar quando o texto, o preço ou as opções mudarem. */
-export const dtfDateModified = "2026-10-19";
+export const dtfDateModified = "2026-10-20";
 
 /** Sem fotografia própria do DTF: usa a imagem de partilha do site. */
 export const dtfShareImage = { src: "/og.jpg", width: 1200, height: 630 } as const;
@@ -296,15 +296,15 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
   pt: {
     htmlLang: "pt-PT",
     ogLocale: "pt_PT",
-    metaTitle: "DTF ao Metro e Aplicação em Têxtil | SERIFIL",
+    metaTitle: "DTF ao Metro e Estampagem de T-shirts | SERIFIL",
     metaDescription:
-      "DTF ao metro desde 8,50 € + IVA: transfers a cores para pequenas produções, só o filme ou já prensado nas suas peças. Calcule online quantos desenhos cabem.",
+      "Estampagem de t-shirts e DTF ao metro em Guimarães, desde 8,50 € + IVA: só o filme ou já prensado nas suas peças. Veja online quantos desenhos cabem.",
     serviceType: "Impressão DTF ao metro",
     breadcrumbsLabel: "Navegação estrutural",
     home: "Início",
     services: "Serviços",
     sectionName: "DTF ao metro",
-    eyebrow: "DTF ao metro",
+    eyebrow: "DTF ao metro · Estampagem de t-shirts",
     title: "Encha o seu metro.",
     lead:
       "Transfers a cores, sem quadros nem fotolitos, para pequenas produções. Junte os seus desenhos, veja quanto filme ocupam e escolha se leva só o filme ou se prensamos nas suas peças.",
@@ -441,15 +441,15 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
   en: {
     htmlLang: "en",
     ogLocale: "en_GB",
-    metaTitle: "DTF Transfers by the Metre and Heat Pressing | SERIFIL",
+    metaTitle: "DTF Transfers by the Metre and T-shirt Printing | SERIFIL",
     metaDescription:
-      "DTF transfers by the metre from €8.50 + VAT: full-colour transfers for small runs, film only or pressed onto your garments. See online how many designs fit.",
+      "T-shirt printing and DTF transfers by the metre in Guimarães, Portugal, from €8.50 + VAT: film only or pressed onto your garments. See how many designs fit.",
     serviceType: "DTF printing by the metre",
     breadcrumbsLabel: "Breadcrumb navigation",
     home: "Home",
     services: "Services",
     sectionName: "DTF by the metre",
-    eyebrow: "DTF transfers by the metre",
+    eyebrow: "DTF transfers · T-shirt printing",
     title: "Fill your metre.",
     lead:
       "Full-colour transfers with no screens or film positives, for small runs. Add your designs, see how much film they take and choose film only or pressing onto your garments.",

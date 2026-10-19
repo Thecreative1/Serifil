@@ -273,9 +273,9 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     key: "fabric",
     slug: slugs.pt.fabric,
     shortName: "Serigrafia em tecido",
-    metaTitle: "Serigrafia em Tecido e Roupa Profissional | SERIFIL",
+    metaTitle: "Impressão e Serigrafia em Tecido em Guimarães | SERIFIL",
     metaDescription:
-      "Serigrafia em tecido para sacos, capas, porta-fatos, vestuário e roupa profissional. Personalização para empresas em Guimarães.",
+      "Impressão em tecido por serigrafia para sacos, capas, porta-fatos, vestuário e roupa profissional. Personalização têxtil para empresas em Guimarães.",
     eyebrow: "SERIGRAFIA TÊXTIL · GUIMARÃES",
     title: "Impressão em tecido, pensada para a peça e para o uso.",
     lead:
@@ -713,7 +713,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     ...portuguesePages.fabric,
     slug: slugs.en.fabric,
     shortName: "Fabric screen printing",
-    metaTitle: "Fabric Screen Printing and Workwear | SERIFIL",
+    metaTitle: "Fabric Printing and Textile Screen Printing | SERIFIL",
     metaDescription:
       "Fabric screen printing for bags, covers, garment bags, clothing and workwear. Custom production for businesses in Guimarães.",
     eyebrow: "FABRIC SCREEN PRINTING · GUIMARÃES",

@@ -7,7 +7,14 @@ import { BrandMark } from "@/components/ui/BrandMark";
 
 const preferenceKey = "serifil_locale";
 
+/** Motores de busca e pré-visualizações de links. */
+const crawlerPattern = /bot|crawl|spider|slurp|preview|facebookexternalhit|whatsapp/i;
+
 function getPreferredLocale(): Locale {
+  // Os robôs seguem para o x-default (/pt/). Sem isto, o Googlebot, que se apresenta em inglês,
+  // era enviado para /en/ e o Google passava a tratar a raiz como a página inglesa.
+  if (crawlerPattern.test(navigator.userAgent)) return "pt";
+
   const stored = window.localStorage.getItem(preferenceKey);
   if (stored === "pt" || stored === "en") return stored;
 

@@ -1095,7 +1095,7 @@ test("calculadora de DTF estima o filme, resume e envia o pedido", async ({ page
 
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/pt/dtf/");
-  await expect(page.locator("h1")).toHaveText("DTF ao metro Encha o seu metro.");
+  await expect(page.locator("h1")).toHaveText("DTF ao metro · Estampagem de t-shirts Encha o seu metro.");
   // O filme é impresso por um parceiro: o site não o diz nem afirma que a SERIFIL o imprime.
   await expect(page.locator("main")).not.toContainText(/parceiro|imprimimos/i);
 
@@ -1169,7 +1169,7 @@ test("calculadora de DTF estima o filme, resume e envia o pedido", async ({ page
   expect(submittedBody).toContain("Filme e aplicação");
 
   await page.goto("/en/dtf/");
-  await expect(page.locator("h1")).toHaveText("DTF transfers by the metre Fill your metre.");
+  await expect(page.locator("h1")).toHaveText("DTF transfers · T-shirt printing Fill your metre.");
   await expect(page.getByRole("region", { name: "Your request" })).toContainText("€15.30 + VAT");
 });
 
@@ -1238,4 +1238,21 @@ test("páginas de serviço ligam aos guias; tecido liga ao DTF", async ({ page }
   await page.goto("/en/servicos/fabric-screen-printing/");
   await expect(page.locator('main a[href="/en/guias/what-is-dtf/"]')).toHaveCount(2);
   await expect(page.locator('main a[href="/en/guias/film-positives/"]')).toHaveCount(1);
+});
+
+test("a raiz envia os motores de busca para /pt/ e os visitantes para o seu idioma", async ({ browser }) => {
+  const googlebot = await browser.newContext({
+    userAgent: "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+    locale: "en-US",
+  });
+  const botPage = await googlebot.newPage();
+  await botPage.goto("/");
+  await expect(botPage).toHaveURL(/\/pt\/$/);
+  await googlebot.close();
+
+  const visitor = await browser.newContext({ locale: "en-GB" });
+  const visitorPage = await visitor.newPage();
+  await visitorPage.goto("/");
+  await expect(visitorPage).toHaveURL(/\/en\/$/);
+  await visitor.close();
 });
