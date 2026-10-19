@@ -1272,8 +1272,14 @@ test("estampagem de t-shirts e guia da serigrafia publicados e ligados", async (
   await expect(page.locator('#servicos nav a[href="/pt/servicos/estampagem-t-shirts/"]')).toHaveCount(1);
 
   await page.goto("/pt/servicos/estampagem-t-shirts/");
-  await expect(page.locator("h1")).toContainText("T-shirts e camisolas com a sua marca.");
-  await expect(page).toHaveTitle("Estampagem de T-shirts e Camisolas em Guimarães | SERIFIL");
+  await expect(page.locator("h1")).toContainText("T-shirts estampadas em serigrafia.");
+  await expect(page).toHaveTitle("Estampagem de T-shirts em Serigrafia em Guimarães | SERIFIL");
+  // As duas técnicas aparecem em separado, com a serigrafia (feita pela SERIFIL) em destaque.
+  const techniques = page.locator("section[aria-labelledby=\"tecnicas\"] article");
+  await expect(techniques).toHaveCount(2);
+  await expect(techniques.first()).toContainText("Feita na SERIFIL");
+  await expect(techniques.first()).toContainText("Serigrafia");
+  await expect(techniques.nth(1)).toContainText("DTF");
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://serifil.com/images/servicos/tshirts-og.jpg");
   await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/servicos/t-shirt-printing/");
   // Só serigrafia e DTF: a SERIFIL não faz bordado nem sublimação.

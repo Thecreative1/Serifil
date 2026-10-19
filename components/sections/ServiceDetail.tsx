@@ -147,6 +147,64 @@ export function ServiceDetail({ locale, page }: ServiceDetailProps) {
         </Container>
       </section>
 
+      {page.techniques ? (
+        <section aria-labelledby="tecnicas" className="bg-background pt-20 sm:pt-28 lg:pt-36">
+          <Container>
+            <Reveal>
+              <p className="section-kicker text-accent">{page.techniques.eyebrow}</p>
+              <h2
+                id="tecnicas"
+                className="mt-8 max-w-[18ch] text-[clamp(2.6rem,5vw,5.4rem)] leading-[0.92] font-bold tracking-[-0.06em] text-text-primary"
+              >
+                {page.techniques.title}
+              </h2>
+              <p className="mt-7 max-w-[60ch] text-base leading-7 text-text-secondary">{page.techniques.description}</p>
+              <div className="mt-12 grid gap-4 lg:grid-cols-12">
+                {page.techniques.items.map((technique) => (
+                  <article
+                    key={technique.name}
+                    className={`flex flex-col border p-7 sm:p-9 ${
+                      technique.featured ? "border-accent bg-surface lg:col-span-7" : "border-border lg:col-span-5"
+                    }`}
+                  >
+                    <p
+                      className={`w-fit px-2.5 py-1 text-[0.68rem] font-black uppercase tracking-[0.12em] ${
+                        technique.featured ? "bg-accent text-light-text" : "border border-border text-text-secondary"
+                      }`}
+                    >
+                      {technique.badge}
+                    </p>
+                    <h3
+                      className={`mt-6 font-bold tracking-[-0.05em] text-text-primary ${
+                        technique.featured ? "text-5xl leading-[0.95] sm:text-6xl" : "text-3xl leading-tight"
+                      }`}
+                    >
+                      {technique.name}
+                    </h3>
+                    <p className="mt-4 max-w-[48ch] text-base leading-7 text-text-secondary">{technique.summary}</p>
+                    <ul className="mt-6 grid gap-3">
+                      {technique.points.map((point) => (
+                        <li key={point} className="flex items-start gap-3 text-base leading-6 text-text-primary">
+                          <Check className={`mt-1 size-4 shrink-0 ${technique.featured ? "text-accent" : "text-text-secondary"}`} aria-hidden="true" />
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                    <a
+                      href={technique.link.href}
+                      className="group mt-8 inline-flex w-fit items-center gap-2 text-sm font-bold uppercase tracking-[0.08em] text-text-primary transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                    >
+                      {technique.link.label}
+                      <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                    </a>
+                  </article>
+                ))}
+              </div>
+            </Reveal>
+          </Container>
+        </section>
+      ) : null}
+
       <section className="bg-background py-20 sm:py-28 lg:py-36">
         <Container>
           <Reveal>
