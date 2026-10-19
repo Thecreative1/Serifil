@@ -637,7 +637,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     eyebrow: "ESTAMPAGEM DE T-SHIRTS · GUIMARÃES",
     title: "T-shirts e camisolas com a sua marca.",
     lead:
-      "Estampagem de t-shirts, sweats, polos e camisolas para empresas, equipas, eventos e marcas. Serigrafia para séries, DTF para poucas peças e muitas cores, com envio para todo o país.",
+      "Estampagem de t-shirts, sweats e camisolas para empresas, equipas, eventos e marcas. Serigrafia para séries, DTF para poucas peças e muitas cores, com envio para todo o país.",
     image: {
       src: "/images/trabalhos/tecido-04.webp",
       alt: "Tecido escuro personalizado com marca impressa pela SERIFIL",
@@ -650,7 +650,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
       ],
     },
     facts: [
-      { label: "PEÇAS", value: "T-shirts, sweats, polos e camisolas, suas ou fornecidas por nós." },
+      { label: "PEÇAS", value: "T-shirts, sweats e camisolas, suas ou fornecidas por nós." },
       { label: "TÉCNICAS", value: "Serigrafia para séries; DTF para poucas peças e muitas cores." },
       { label: "ENVIO", value: "Produção em Guimarães, com envio para todo o país." },
     ],
@@ -732,7 +732,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
         {
           question: "Fornecem as t-shirts?",
           answer:
-            "Sim. Podemos fornecer t-shirts, sweats, polos e camisolas, conforme o modelo, as cores, os tamanhos e a quantidade. Também estampamos as peças que nos entregar.",
+            "Sim. Podemos fornecer t-shirts e camisolas, conforme o modelo, as cores, os tamanhos e a quantidade. Também estampamos as peças que nos entregar.",
         },
         {
           question: "Qual é a quantidade mínima?",
@@ -1088,11 +1088,11 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     shortName: "T-shirt printing",
     metaTitle: "T-shirt and Sweatshirt Printing in Portugal | SERIFIL",
     metaDescription:
-      "Printing on T-shirts, sweatshirts and polos for businesses, teams and events: screen printing for runs, DTF for small batches. Made in Guimarães, shipped.",
+      "Printing on T-shirts and sweatshirts for businesses, teams and events: screen printing for runs, DTF for small batches. Made in Guimarães, shipped.",
     eyebrow: "T-SHIRT PRINTING · GUIMARÃES",
     title: "T-shirts and sweatshirts carrying your brand.",
     lead:
-      "Printing on T-shirts, sweatshirts, polos and jumpers for businesses, teams, events and brands. Screen printing for runs, DTF for small batches and many colours, shipped across Portugal.",
+      "Printing on T-shirts and sweatshirts for businesses, teams, events and brands. Screen printing for runs, DTF for small batches and many colours, shipped across Portugal.",
     image: {
       src: "/images/trabalhos/tecido-04.webp",
       alt: "Dark fabric customised with a brand printed by SERIFIL",
@@ -1105,7 +1105,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       ],
     },
     facts: [
-      { label: "GARMENTS", value: "T-shirts, sweatshirts, polos and jumpers, yours or supplied by us." },
+      { label: "GARMENTS", value: "T-shirts and sweatshirts, yours or supplied by us." },
       { label: "TECHNIQUES", value: "Screen printing for runs; DTF for small batches and many colours." },
       { label: "SHIPPING", value: "Made in Guimarães, shipped across Portugal." },
     ],
@@ -1175,7 +1175,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
         {
           question: "Do you supply the T-shirts?",
           answer:
-            "Yes. We can supply T-shirts, sweatshirts, polos and jumpers, depending on the model, colours, sizes and quantity. We also print on garments you bring us.",
+            "Yes. We can supply T-shirts and sweatshirts, depending on the model, colours, sizes and quantity. We also print on garments you bring us.",
         },
         {
           question: "What is the minimum quantity?",
