@@ -1074,19 +1074,25 @@ test("calculadora de DTF estima o filme, resume e envia o pedido", async ({ page
   await expect(page.locator("main")).not.toContainText(/parceiro|imprimimos/i);
 
   const summary = page.getByRole("region", { name: "O seu pedido" });
-  // Valores por omissão: 20 desenhos de 10 × 10 cm ao lado de 10 desenhos A3 rodados.
-  await expect(summary).toContainText("3,10 m");
-  await expect(summary).toContainText("27,90 € + IVA");
+  // Começa com um só desenho: 10 A4, dois por fila.
+  await expect(page.locator('[id^="dtf-design-"]')).toHaveCount(1);
+  await expect(page.getByRole("button", { name: "Remover desenho 1" })).toHaveCount(0);
+  await expect(summary).toContainText("1,60 m");
+  await expect(summary).toContainText("14,40 € + IVA");
   // Os 7 € por metro são o custo do parceiro: nunca aparecem no site.
-  await expect(page.locator("main")).not.toContainText(/7 €|7,00 €/);
+  await expect(page.locator("main")).not.toContainText(/7 €|7,00 €/);
 
-  // Cada desenho seleciona-se no cartão ou nas peças do filme.
+  // Um desenho novo fica selecionado; cada um seleciona-se no cartão ou nas peças do filme.
   await expect(page.locator("#dtf-design-1")).toHaveClass(/border-accent/);
-  await page.locator("#dtf-design-2 p").first().click();
+  await page.getByRole("button", { name: "Peito 10 × 10" }).click();
   await expect(page.locator("#dtf-design-2")).toHaveClass(/border-accent/);
-  await expect(page.locator("#dtf-design-1")).not.toHaveClass(/border-accent/);
+  await page.locator("#dtf-design-1 p").first().click();
+  await expect(page.locator("#dtf-design-1")).toHaveClass(/border-accent/);
+  await expect(page.locator("#dtf-design-2")).not.toHaveClass(/border-accent/);
 
-  await page.getByRole("button", { name: "Remover desenho 2" }).click();
+  await page.getByRole("button", { name: "Remover desenho 1" }).click();
+  await page.getByLabel("Quantidade").fill("20");
+  await page.getByLabel("Quantidade").press("Enter");
   await expect(summary).toContainText("0,50 m");
   await expect(summary).toContainText("4,50 € + IVA");
   await expect(page.getByText("Cabem 45 num metro.")).toBeVisible();
@@ -1137,7 +1143,7 @@ test("calculadora de DTF estima o filme, resume e envia o pedido", async ({ page
 
   await page.goto("/en/dtf/");
   await expect(page.locator("h1")).toHaveText("DTF transfers by the metre Fill your metre.");
-  await expect(page.getByRole("region", { name: "Your request" })).toContainText("€27.90 + VAT");
+  await expect(page.getByRole("region", { name: "Your request" })).toContainText("€14.40 + VAT");
 });
 
 test("DTF ao metro publicado: nos serviços, indexável e no sitemap", async ({ page, request }) => {

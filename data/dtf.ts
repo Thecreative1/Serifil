@@ -65,7 +65,8 @@ export const dtfServiceOptions = ["film", "pressed"] as const;
 
 export type DtfService = (typeof dtfServiceOptions)[number];
 
-export type DtfDesign = { id: number; width: number; height: number; copies: number };
+/** `look` escolhe a cor e o ícone do desenho (0 a 5) e fica com ele enquanto existir. */
+export type DtfDesign = { id: number; look: number; width: number; height: number; copies: number };
 
 export type DtfRequest = { service: DtfService; designs: DtfDesign[] };
 
@@ -81,10 +82,7 @@ export type DtfPresetKey = (typeof dtfPresets)[number]["key"];
 
 export const defaultDtfRequest: DtfRequest = {
   service: "film",
-  designs: [
-    { id: 1, width: 10, height: 10, copies: 20 },
-    { id: 2, width: 30, height: 42, copies: 10 },
-  ],
+  designs: [{ id: 1, look: 0, width: 21, height: 30, copies: 10 }],
 };
 
 export function clampDesignSize(value: number, max: number) {

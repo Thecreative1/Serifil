@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertCircle, CheckCircle2, LoaderCircle, Mail, MessageCircle, Plus, X } from "lucide-react";
+import { AlertCircle, Bird, Cat, CheckCircle2, Fish, Flower2, LoaderCircle, Mail, MessageCircle, Plus, TreePine, Turtle, X, type LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { OptionCard, OptionGroup } from "@/components/screens/ScreenConfigurator";
@@ -41,11 +41,21 @@ const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-
 const contactButtonClass = `inline-flex min-h-12 max-w-full items-center gap-3 border border-border px-5 py-3 text-left text-sm font-bold uppercase tracking-[0.08em] text-text-primary transition-colors duration-300 hover:border-accent hover:text-accent ${focusRing}`;
 const smallButtonClass = `inline-flex min-h-11 items-center justify-center gap-2 border border-border px-3 text-sm font-bold tabular-nums text-text-primary transition-colors duration-300 hover:border-text-secondary active:bg-surface-light ${focusRing}`;
 
-/** Cor de cada desenho no filme e na lista, pela ordem em que são adicionados. */
-const designColours = ["#ff5c00", "#171916", "#7a7e76", "#ff9c66", "#3d403b", "#b9b4a8"] as const;
+/**
+ * Aspeto de cada desenho no filme e na lista: cor e uma silhueta simples, para o cliente
+ * reconhecer as peças de cada desenho sem ler números. `dark` pede ícone claro.
+ */
+const designLooks: Array<{ colour: string; icon: LucideIcon; dark: boolean }> = [
+  { colour: "#ff5c00", icon: Cat, dark: false },
+  { colour: "#171916", icon: TreePine, dark: true },
+  { colour: "#9a9e96", icon: Fish, dark: false },
+  { colour: "#ffa36b", icon: Bird, dark: false },
+  { colour: "#3d403b", icon: Flower2, dark: true },
+  { colour: "#c9c3b8", icon: Turtle, dark: false },
+];
 
-function designColour(index: number) {
-  return designColours[index % designColours.length];
+function designLook(look: number) {
+  return designLooks[look % designLooks.length];
 }
 
 export function DtfCalculator({ locale }: { locale: Locale }) {
@@ -71,7 +81,10 @@ export function DtfCalculator({ locale }: { locale: Locale }) {
   const addDesign = (size: { width: number; height: number }) => {
     if (request.designs.length >= maxDesigns) return;
     const id = nextId.current++;
-    setRequest((current) => ({ ...current, designs: [...current.designs, { id, ...size, copies: 10 }] }));
+    // O desenho novo fica com o primeiro aspeto livre, para nunca haver dois iguais.
+    const used = new Set(request.designs.map((design) => design.look));
+    const look = designLooks.findIndex((_, index) => !used.has(index));
+    setRequest((current) => ({ ...current, designs: [...current.designs, { id, look, ...size, copies: 10 }] }));
     setSelectedId(id);
   };
 
@@ -107,7 +120,7 @@ export function DtfCalculator({ locale }: { locale: Locale }) {
                       >
                         <div className="flex items-center justify-between gap-3">
                           <p className="flex items-center gap-3 font-bold text-text-primary">
-                            <DesignBadge index={index} />
+                            <DesignBadge look={design.look} />
                             {copy.design(index + 1)}
                           </p>
                           {request.designs.length > 1 ? (
@@ -236,15 +249,15 @@ export function DtfCalculator({ locale }: { locale: Locale }) {
   );
 }
 
-function DesignBadge({ index }: { index: number }) {
-  const dark = index === 1 || index === 4;
+function DesignBadge({ look }: { look: number }) {
+  const { colour, icon: Icon, dark } = designLook(look);
   return (
     <span
       aria-hidden="true"
-      className={`grid size-6 shrink-0 place-items-center text-xs font-black tabular-nums ${dark ? "border border-[#6b6f68] text-text-primary" : "text-light-text"}`}
-      style={{ backgroundColor: designColour(index) }}
+      className={`grid size-8 shrink-0 place-items-center ${dark ? "border border-[#6b6f68] text-text-primary" : "text-light-text"}`}
+      style={{ backgroundColor: colour }}
     >
-      {index + 1}
+      <Icon className="size-5" strokeWidth={2} />
     </span>
   );
 }
@@ -268,7 +281,7 @@ function RollDrawing({
   const pad = 6;
   const labelSpace = 9;
   const metres = Array.from({ length: Math.floor(shown / 100) }, (_, index) => (index + 1) * 100);
-  const designIndex = new Map(request.designs.map((design, index) => [design.id, index]));
+  const looks = new Map(request.designs.map((design) => [design.id, design.look]));
   const scrollRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   // As peças arrumam-se das maiores para as menores, por isso um desenho pequeno pode ficar no fim
@@ -320,8 +333,8 @@ function RollDrawing({
           ) : null}
 
           {layout.pieces.map((piece, index) => {
-            const colourIndex = designIndex.get(piece.design) ?? 0;
-            const labelSize = Math.min(piece.width, piece.height) * 0.45;
+            const { colour, icon: Icon, dark } = designLook(looks.get(piece.design) ?? 0);
+            const iconSize = Math.min(piece.width, piece.height, 14) * 0.6;
             const active = piece.design === selectedId;
             return (
               <g
@@ -335,22 +348,20 @@ function RollDrawing({
                   y={pad + piece.y}
                   width={piece.width}
                   height={piece.height}
-                  fill={designColour(colourIndex)}
+                  fill={colour}
                   className={active ? "stroke-accent" : "stroke-light-background"}
                   strokeWidth={active ? 0.6 : 0.2}
                 />
-                {labelSize >= 2.4 ? (
-                  <text
-                    x={pad + piece.x + piece.width / 2}
-                    y={pad + piece.y + piece.height / 2}
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fontSize={Math.min(labelSize, 6)}
-                    fontWeight={800}
-                    className={colourIndex === 1 || colourIndex === 4 ? "fill-text-primary" : "fill-light-text"}
-                  >
-                    {colourIndex + 1}
-                  </text>
+                {iconSize >= 3 ? (
+                  <Icon
+                    x={pad + piece.x + (piece.width - iconSize) / 2}
+                    y={pad + piece.y + (piece.height - iconSize) / 2}
+                    width={iconSize}
+                    height={iconSize}
+                    strokeWidth={2}
+                    className={dark ? "text-text-primary" : "text-light-text"}
+                    aria-hidden="true"
+                  />
                 ) : null}
               </g>
             );
