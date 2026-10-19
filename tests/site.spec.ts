@@ -598,9 +598,10 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(structuredData.address.postalCode).toBe("4810-480");
   expect(structuredData.contactPoint.telephone).toBe("+351 910 508 706");
   expect(structuredData.contactPoint.availableLanguage).toEqual(["Portuguese", "English"]);
-  // Oito serviços de impressão e, no fim, os quadros de serigrafia (serviço à parte, com página própria).
-  expect(structuredData.hasOfferCatalog.itemListElement).toHaveLength(9);
+  // Oito serviços de impressão e, no fim, os quadros de serigrafia e o DTF ao metro (com páginas próprias).
+  expect(structuredData.hasOfferCatalog.itemListElement).toHaveLength(10);
   expect(structuredData.hasOfferCatalog.itemListElement[8].itemOffered.url).toBe("https://serifil.com/pt/quadros/");
+  expect(structuredData.hasOfferCatalog.itemListElement[9].itemOffered.url).toBe("https://serifil.com/pt/dtf/");
   expect(structuredData.hasOfferCatalog.itemListElement[0].itemOffered.name).toBe("Serigrafia Industrial");
   expect(structuredData.hasOfferCatalog.itemListElement.map((offer) => offer.itemOffered.name)).toEqual(
     expect.arrayContaining(["Impressão em PVC", "Impressão em Componentes", "Sacos Personalizados", "Porta-fatos e Capas"]),
@@ -1131,4 +1132,29 @@ test("calculadora de DTF estima o filme, resume e envia o pedido", async ({ page
   await page.goto("/en/dtf/");
   await expect(page.locator("h1")).toHaveText("DTF transfers by the metre Fill your metre.");
   await expect(page.getByRole("region", { name: "Your request" })).toContainText("€27.90 + VAT");
+});
+
+test("DTF ao metro publicado: nos serviços, indexável e no sitemap", async ({ page, request }) => {
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  for (const path of ["/pt/dtf/", "/en/dtf/"]) {
+    expect(sitemap).toContain(`<loc>https://serifil.com${path}</loc>`);
+  }
+
+  for (const item of [
+    { locale: "pt", name: "DTF ao metro", servicePage: "/pt/servicos/serigrafia-tecido/" },
+    { locale: "en", name: "DTF by the metre", servicePage: "/en/servicos/fabric-screen-printing/" },
+  ]) {
+    const path = `/${item.locale}/dtf/`;
+    await page.goto(`/${item.locale}/`);
+    const listLink = page.locator(`#servicos nav a[href="${path}"]`);
+    await expect(listLink).toHaveCount(1);
+    await expect(listLink).toContainText(item.name);
+
+    await page.goto(item.servicePage);
+    await expect(page.locator(`main a[href="${path}"]`).first()).toBeVisible();
+
+    await page.goto(path);
+    await expect(page.locator('meta[name="robots"]')).not.toHaveAttribute("content", /noindex/);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://serifil.com${path}`);
+  }
 });

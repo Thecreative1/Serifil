@@ -5,10 +5,10 @@ import type { Locale } from "@/data/i18n";
  * O filme é impresso por um parceiro, mas isso não se diz no site: nunca escrever que a SERIFIL
  * imprime o filme nem que tem impressora DTF. A aplicação é feita pela SERIFIL.
  *
- * Com `false`, /pt/dtf/ e /en/dtf/ continuam a ser geradas, mas ficam `noindex`, fora do sitemap
- * e sem ligações na lista de serviços, nos guias e na home.
+ * Publicado a 19 out 2026. Com `false`, /pt/dtf/ e /en/dtf/ continuam a ser geradas, mas ficam
+ * `noindex`, fora do sitemap e sem ligações na lista de serviços, nos guias e na home.
  */
-export const dtfPublished = false;
+export const dtfPublished = true;
 
 /** Data da última alteração de conteúdo: usada no sitemap. Atualizar quando o texto, o preço ou as opções mudarem. */
 export const dtfDateModified = "2026-10-19";
