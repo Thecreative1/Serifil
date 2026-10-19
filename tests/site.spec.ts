@@ -1075,12 +1075,36 @@ test("calculadora de DTF estima o filme, resume e envia o pedido", async ({ page
   const summary = page.getByRole("region", { name: "O seu pedido" });
   // Valores por omissão: 20 desenhos de 10 × 10 cm ao lado de 10 desenhos A3 rodados.
   await expect(summary).toContainText("3,10 m");
-  await expect(summary).toContainText("21,70 € + IVA");
+  await expect(summary).toContainText("27,90 € + IVA");
+  // Os 7 € por metro são o custo do parceiro: nunca aparecem no site.
+  await expect(page.locator("main")).not.toContainText(/7 €|7,00 €/);
 
   await page.getByRole("button", { name: "Remover desenho 2" }).click();
   await expect(summary).toContainText("0,50 m");
-  await expect(summary).toContainText("3,50 € + IVA");
+  await expect(summary).toContainText("4,50 € + IVA");
   await expect(page.getByText("Cabem 45 num metro.")).toBeVisible();
+
+  // Mínimo de meio metro, mesmo com um só desenho.
+  await page.getByLabel("Quantidade").fill("1");
+  await page.getByLabel("Quantidade").press("Enter");
+  await expect(summary).toContainText("0,50 m");
+  await expect(summary).toContainText("4,50 € + IVA");
+
+  // A partir de 10 m, o metro passa a 8,50 €.
+  await page.getByLabel("Largura (cm)").fill("30");
+  await page.getByLabel("Largura (cm)").press("Enter");
+  await page.getByLabel("Altura (cm)").fill("42");
+  await page.getByLabel("Altura (cm)").press("Enter");
+  await page.getByLabel("Quantidade").fill("33");
+  await page.getByLabel("Quantidade").press("Enter");
+  await expect(summary).toContainText("10,30 m");
+  await expect(summary).toContainText("87,55 € + IVA");
+  await page.getByLabel("Largura (cm)").fill("10");
+  await page.getByLabel("Largura (cm)").press("Enter");
+  await page.getByLabel("Altura (cm)").fill("10");
+  await page.getByLabel("Altura (cm)").press("Enter");
+  await page.getByLabel("Quantidade").fill("20");
+  await page.getByLabel("Quantidade").press("Enter");
 
   await page.getByRole("button", { name: "A4 21 × 30" }).click();
   await expect(page.getByLabel("Largura (cm)").last()).toHaveValue("21");
@@ -1106,5 +1130,5 @@ test("calculadora de DTF estima o filme, resume e envia o pedido", async ({ page
 
   await page.goto("/en/dtf/");
   await expect(page.locator("h1")).toHaveText("DTF transfers by the metre Fill your metre.");
-  await expect(page.getByRole("region", { name: "Your request" })).toContainText("€21.70 + VAT");
+  await expect(page.getByRole("region", { name: "Your request" })).toContainText("€27.90 + VAT");
 });

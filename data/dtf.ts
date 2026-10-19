@@ -28,8 +28,23 @@ export function getDtfHreflangPaths() {
   };
 }
 
-/** Preço indicado pelo utilizador a 19 out 2026: 7 € por metro de filme, sem IVA. */
-export const pricePerMetre = 7;
+/**
+ * Preço de venda do filme, sem IVA, decidido pelo utilizador a 19 out 2026: 9 € por metro até 9 m
+ * e 8,50 € por metro a partir de 10 m. Os 7 € por metro são o custo do parceiro: nunca mostrar.
+ */
+export const priceTiers = [
+  { fromMetres: 0, price: 9 },
+  { fromMetres: 10, price: 8.5 },
+] as const;
+
+export const basePrice = priceTiers[0].price;
+
+export function pricePerMetreFor(billedLength: number) {
+  return [...priceTiers].reverse().find((tier) => billedLength / 100 >= tier.fromMetres)?.price ?? basePrice;
+}
+
+/** Faturação mínima do filme, em cm. */
+export const minimumLength = 50;
 
 /**
  * Largura útil do rolo e espaço entre desenhos, em cm. POR CONFIRMAR com o utilizador:
@@ -38,7 +53,7 @@ export const pricePerMetre = 7;
 export const rollWidth = 58;
 export const designGap = 1;
 
-/** Arredondamento do comprimento na estimativa, em cm. POR CONFIRMAR com o utilizador. */
+/** O filme é cobrado aos 10 cm, com o mínimo de `minimumLength`. */
 export const billingStep = 10;
 
 /** Limites dos campos, em cm: a largura nunca passa a largura útil do rolo. */
@@ -105,8 +120,9 @@ export type DtfLayout = {
   pieces: PlacedPiece[];
   /** Comprimento de filme ocupado, em cm. */
   length: number;
-  /** Comprimento arredondado para a estimativa, em cm. */
+  /** Comprimento cobrado (aos 10 cm, com mínimo), em cm. */
   billedLength: number;
+  pricePerMetre: number;
   price: number;
   perDesign: Array<{ id: number; rotated: boolean; perRow: number; perMetre: number }>;
 };
@@ -176,9 +192,10 @@ export function layoutDtf(designs: DtfDesign[]): DtfLayout {
     free = free.sort((a, b) => a.y - b.y || a.x - b.x);
   }
 
-  const billedLength = Math.ceil(length / billingStep) * billingStep;
+  const billedLength = pieces.length ? Math.max(minimumLength, Math.ceil(length / billingStep - 1e-9) * billingStep) : 0;
+  const pricePerMetre = pricePerMetreFor(billedLength);
 
-  return { pieces, length, billedLength, price: (billedLength / 100) * pricePerMetre, perDesign };
+  return { pieces, length, billedLength, pricePerMetre, price: (billedLength / 100) * pricePerMetre, perDesign };
 }
 
 type DtfCopy = {
@@ -273,7 +290,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
     ogLocale: "pt_PT",
     metaTitle: "DTF ao Metro e Aplicação em Têxtil | SERIFIL",
     metaDescription:
-      "DTF ao metro a 7 € + IVA: transfers a cores para pequenas produções, só o filme ou já prensado nas suas peças. Calcule online quantos desenhos cabem.",
+      "DTF ao metro desde 8,50 € + IVA: transfers a cores para pequenas produções, só o filme ou já prensado nas suas peças. Calcule online quantos desenhos cabem.",
     serviceType: "Impressão DTF ao metro",
     breadcrumbsLabel: "Navegação estrutural",
     home: "Início",
@@ -321,7 +338,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
     resultLength: "Filme",
     resultPrice: "Estimativa",
     priceNote: "+ IVA",
-    perMetre: `${pricePerMetre} € por metro + IVA`,
+    perMetre: "9 € por metro até 9 m e 8,50 € a partir de 10 m, + IVA. Cobrado aos 10 cm, mínimo 0,5 m",
     estimateNote: "Estimativa do filme, confirmada depois de vermos os ficheiros.",
     continue: "Rever e enviar pedido",
     summaryTitle: "O seu pedido",
@@ -335,7 +352,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
     pressingQuote: "Sob orçamento",
     pressingNone: "Sem aplicação",
     offers: [
-      { name: "DTF ao metro", description: `Filme DTF impresso a cores, pronto a prensar, a ${pricePerMetre} € por metro + IVA.` },
+      { name: "DTF ao metro", description: "Filme DTF impresso a cores, pronto a prensar, desde 8,50 € por metro + IVA." },
       { name: "Aplicação de DTF em têxtil", description: "Prensagem dos transfers DTF nas peças do cliente." },
     ],
     questions: {
@@ -349,7 +366,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
         },
         {
           question: "Quanto custa o DTF ao metro?",
-          answer: `${pricePerMetre} € por metro de filme, mais IVA. A calculadora estima quantos metros ocupam os seus desenhos; o valor final é confirmado depois de vermos os ficheiros. A aplicação nas peças é orçamentada à parte.`,
+          answer: `9 € por metro de filme até 9 m e 8,50 € por metro a partir de 10 m, mais IVA. O filme é cobrado aos 10 cm, com um mínimo de meio metro. A calculadora estima quantos metros ocupam os seus desenhos; o valor final é confirmado depois de vermos os ficheiros. A aplicação nas peças é orçamentada à parte.`,
         },
         {
           question: "Posso juntar vários desenhos no mesmo metro?",
@@ -418,7 +435,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
     ogLocale: "en_GB",
     metaTitle: "DTF Transfers by the Metre and Heat Pressing | SERIFIL",
     metaDescription:
-      "DTF transfers by the metre at €7 + VAT: full-colour transfers for small runs, film only or pressed onto your garments. Work out online how many designs fit.",
+      "DTF transfers by the metre from €8.50 + VAT: full-colour transfers for small runs, film only or pressed onto your garments. Work out online how many designs fit.",
     serviceType: "DTF printing by the metre",
     breadcrumbsLabel: "Breadcrumb navigation",
     home: "Home",
@@ -466,7 +483,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
     resultLength: "Film",
     resultPrice: "Estimate",
     priceNote: "+ VAT",
-    perMetre: `€${pricePerMetre} per metre + VAT`,
+    perMetre: "€9 per metre up to 9 m and €8.50 from 10 m, + VAT. Charged per 10 cm, minimum 0.5 m",
     estimateNote: "Film estimate, confirmed once we have seen your files.",
     continue: "Review and send request",
     summaryTitle: "Your request",
@@ -480,7 +497,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
     pressingQuote: "Quoted separately",
     pressingNone: "No pressing",
     offers: [
-      { name: "DTF transfers by the metre", description: `Full-colour DTF film, ready to press, at €${pricePerMetre} per metre + VAT.` },
+      { name: "DTF transfers by the metre", description: "Full-colour DTF film, ready to press, from €8.50 per metre + VAT." },
       { name: "DTF heat pressing on textiles", description: "Pressing DTF transfers onto the customer's garments." },
     ],
     questions: {
@@ -494,7 +511,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
         },
         {
           question: "How much does DTF by the metre cost?",
-          answer: `€${pricePerMetre} per metre of film, plus VAT. The calculator estimates how many metres your designs take; the final amount is confirmed once we have seen your files. Pressing onto garments is quoted separately.`,
+          answer: `€9 per metre of film up to 9 m and €8.50 per metre from 10 m, plus VAT. Film is charged per 10 cm, with a minimum of half a metre. The calculator estimates how many metres your designs take; the final amount is confirmed once we have seen your files. Pressing onto garments is quoted separately.`,
         },
         {
           question: "Can I combine several designs on the same metre?",
