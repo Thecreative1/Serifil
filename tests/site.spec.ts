@@ -1074,11 +1074,12 @@ test("calculadora de DTF estima o filme, resume e envia o pedido", async ({ page
   await expect(page.locator("main")).not.toContainText(/parceiro|imprimimos/i);
 
   const summary = page.getByRole("region", { name: "O seu pedido" });
-  // Começa com um só desenho: 10 A4, dois por fila.
+  // Começa com um só desenho: 10 A4, dois por fila. A quarta fila já não cabe no primeiro metro
+  // e passa para a segunda folha, para nenhum desenho ficar cortado.
   await expect(page.locator('[id^="dtf-design-"]')).toHaveCount(1);
   await expect(page.getByRole("button", { name: "Remover desenho 1" })).toHaveCount(0);
-  await expect(summary).toContainText("1,60 m");
-  await expect(summary).toContainText("14,40 € + IVA");
+  await expect(summary).toContainText("1,70 m");
+  await expect(summary).toContainText("15,30 € + IVA");
   // Os 7 € por metro são o custo do parceiro: nunca aparecem no site.
   await expect(page.locator("main")).not.toContainText(/7 €|7,00 €/);
 
@@ -1110,8 +1111,8 @@ test("calculadora de DTF estima o filme, resume e envia o pedido", async ({ page
   await page.getByLabel("Altura (cm)").press("Enter");
   await page.getByLabel("Quantidade").fill("33");
   await page.getByLabel("Quantidade").press("Enter");
-  await expect(summary).toContainText("10,30 m");
-  await expect(summary).toContainText("87,55 € + IVA");
+  await expect(summary).toContainText("11,00 m");
+  await expect(summary).toContainText("93,50 € + IVA");
   await page.getByLabel("Largura (cm)").fill("10");
   await page.getByLabel("Largura (cm)").press("Enter");
   await page.getByLabel("Altura (cm)").fill("10");
@@ -1143,7 +1144,7 @@ test("calculadora de DTF estima o filme, resume e envia o pedido", async ({ page
 
   await page.goto("/en/dtf/");
   await expect(page.locator("h1")).toHaveText("DTF transfers by the metre Fill your metre.");
-  await expect(page.getByRole("region", { name: "Your request" })).toContainText("€14.40 + VAT");
+  await expect(page.getByRole("region", { name: "Your request" })).toContainText("€15.30 + VAT");
 });
 
 test("DTF ao metro publicado: nos serviços, indexável e no sitemap", async ({ page, request }) => {

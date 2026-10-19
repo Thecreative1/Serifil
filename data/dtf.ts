@@ -43,6 +43,9 @@ export function pricePerMetreFor(billedLength: number) {
   return [...priceTiers].reverse().find((tier) => billedLength / 100 >= tier.fromMetres)?.price ?? basePrice;
 }
 
+/** O filme é entregue em folhas de um metro: os desenhos nunca ficam cortados entre folhas. */
+export const sheetLength = 100;
+
 /** Faturação mínima do filme, em cm. */
 export const minimumLength = 50;
 
@@ -167,15 +170,22 @@ export function layoutDtf(designs: DtfDesign[]): DtfLayout {
   const pieces: PlacedPiece[] = [];
   let free: FreeSpace[] = [];
   let length = 0;
+  // Cada metro é uma folha: nenhuma peça pode atravessar o corte entre folhas.
+  const sheetEnd = (y: number) => (Math.floor(y / sheetLength + 1e-9) + 1) * sheetLength;
   const fits = (space: FreeSpace, piece: PlacedPiece) =>
-    piece.width <= space.width + 0.001 && piece.height <= space.height + 0.001;
+    piece.width <= space.width + 0.001 &&
+    piece.height <= space.height + 0.001 &&
+    space.y + piece.height <= sheetEnd(space.y) + 0.001;
 
   for (const piece of queue) {
     let index = free.findIndex((space) => fits(space, piece));
 
     if (index === -1) {
-      // Nova fila no fim do filme, com a altura da peça que a abre.
-      free.push({ x: 0, y: length === 0 ? 0 : length + designGap, width: rollWidth, height: piece.height });
+      // Nova fila no fim do filme, com a altura da peça que a abre; se não couber no que resta
+      // da folha, começa no topo da folha seguinte.
+      let y = length === 0 ? 0 : length + designGap;
+      if (y + piece.height > sheetEnd(y) + 0.001) y = sheetEnd(y);
+      free.push({ x: 0, y, width: rollWidth, height: piece.height });
       index = free.length - 1;
     }
 
@@ -308,7 +318,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
     toolLabel: "Calculadora de DTF ao metro",
     rollTitle: "O seu filme",
     rollLabel: (length, pieces) => `Desenho à escala do filme DTF: ${pieces} desenhos em ${length}`,
-    rollHint: `Filme com ${rollWidth} cm úteis de largura e ${designGap} cm entre desenhos. As linhas tracejadas marcam cada metro.`,
+    rollHint: `Filme com ${rollWidth} cm úteis de largura e ${designGap} cm entre desenhos. As linhas tracejadas marcam o fim de cada folha de um metro: nenhum desenho fica cortado.`,
     pieces: (count) => `${count} ${count === 1 ? "desenho" : "desenhos"}`,
     metre: (count) => `${count} m`,
     steps: { designs: "Desenhos", service: "Serviço" },
@@ -453,7 +463,7 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
     toolLabel: "DTF by the metre calculator",
     rollTitle: "Your film",
     rollLabel: (length, pieces) => `Scale drawing of the DTF film: ${pieces} designs on ${length}`,
-    rollHint: `Film with ${rollWidth} cm usable width and ${designGap} cm between designs. Dashed lines mark each metre.`,
+    rollHint: `Film with ${rollWidth} cm usable width and ${designGap} cm between designs. Dashed lines mark the end of each one-metre sheet: no design is cut.`,
     pieces: (count) => `${count} ${count === 1 ? "design" : "designs"}`,
     metre: (count) => `${count} m`,
     steps: { designs: "Designs", service: "Service" },
