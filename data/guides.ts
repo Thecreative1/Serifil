@@ -274,6 +274,7 @@ const ptPaths = {
   nonwoven: getServicePath("pt", "nonwoven"),
   footwear: getServicePath("pt", "footwear"),
   tshirts: getServicePath("pt", "tshirts"),
+  bags: getServicePath("pt", "bags"),
 };
 
 const enPaths = {
@@ -282,6 +283,7 @@ const enPaths = {
   nonwoven: getServicePath("en", "nonwoven"),
   footwear: getServicePath("en", "footwear"),
   tshirts: getServicePath("en", "tshirts"),
+  bags: getServicePath("en", "bags"),
 };
 
 const fotolitos: Guide = {
@@ -1305,7 +1307,7 @@ const serigrafiaPt: Guide = {
         {
           type: "checklist",
           items: [
-            { title: "Tecido e vestuário", text: `Sacos, capas, t-shirts, sweats e roupa de trabalho. Veja [serigrafia em tecido](${ptPaths.fabric}) e [estampagem de t-shirts](${ptPaths.tshirts}).` },
+            { title: "Tecido e vestuário", text: `Sacos, capas, t-shirts, sweats e roupa de trabalho. Veja [serigrafia em tecido](${ptPaths.fabric}), [estampagem de t-shirts](${ptPaths.tshirts}) e [sacos personalizados](${ptPaths.bags}).` },
             { title: "PVC e plásticos", text: `Sacos, embalagens e peças técnicas em PVC transparente ou colorido. Veja [serigrafia em PVC](${ptPaths.pvc}).` },
             { title: "TNT", text: `Sacos e capas em tecido não tecido. Veja [sacos em TNT](${ptPaths.nonwoven}).` },
             { title: "Componentes", text: `Palmilhas, palas e outras peças de produção. Veja [componentes para calçado](${ptPaths.footwear}).` },
@@ -1391,7 +1393,7 @@ const serigrafiaPt: Guide = {
       ],
     },
   ],
-  relatedServices: ["pvc", "fabric", "nonwoven", "footwear", "tshirts"],
+  relatedServices: ["pvc", "fabric", "nonwoven", "footwear", "tshirts", "bags"],
 };
 
 const serigrafiaEn: Guide = {
@@ -1486,7 +1488,7 @@ const serigrafiaEn: Guide = {
         {
           type: "checklist",
           items: [
-            { title: "Fabric and clothing", text: `Bags, covers, T-shirts, sweatshirts and workwear. See [fabric screen printing](${enPaths.fabric}) and [T-shirt printing](${enPaths.tshirts}).` },
+            { title: "Fabric and clothing", text: `Bags, covers, T-shirts, sweatshirts and workwear. See [fabric screen printing](${enPaths.fabric}), [T-shirt printing](${enPaths.tshirts}) and [custom bags](${enPaths.bags}).` },
             { title: "PVC and plastics", text: `Bags, packaging and technical parts in clear or coloured PVC. See [PVC screen printing](${enPaths.pvc}).` },
             { title: "Non-woven material", text: `Non-woven bags and covers. See [non-woven bags](${enPaths.nonwoven}).` },
             { title: "Components", text: `Insoles, vamps and other production parts. See [footwear components](${enPaths.footwear}).` },
@@ -1572,7 +1574,7 @@ const serigrafiaEn: Guide = {
       ],
     },
   ],
-  relatedServices: ["pvc", "fabric", "nonwoven", "footwear", "tshirts"],
+  relatedServices: ["pvc", "fabric", "nonwoven", "footwear", "tshirts", "bags"],
 };
 
 const guidesByLocale: Record<GuideLocale, Guide[]> = {

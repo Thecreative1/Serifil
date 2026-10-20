@@ -376,7 +376,7 @@ test("quadros de serigrafia publicados: nos serviços, indexáveis e com dados e
     await page.goto(`/${item.locale}/`);
     const listLink = page.locator(`#servicos nav a[href="${path}"]`);
     await expect(listLink).toHaveCount(1);
-    await expect(listLink).toContainText("06");
+    await expect(listLink).toContainText("07");
     await expect(listLink).toContainText(item.name);
     const homeData = await page.locator('script[type="application/ld+json"]').first().textContent();
     expect(homeData).toContain(`https://serifil.com${path}`);
@@ -1304,4 +1304,32 @@ test("estampagem de t-shirts e guia da serigrafia publicados e ligados", async (
 
   await page.goto("/en/guias/what-is-screen-printing/");
   await expect(page.locator('link[hreflang="pt-PT"]')).toHaveAttribute("href", "https://serifil.com/pt/guias/o-que-e-serigrafia/");
+});
+
+test("sacos personalizados publicados, ligados e sem prometer o que não foi confirmado", async ({ page, request }) => {
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  for (const path of ["/pt/servicos/sacos-personalizados/", "/en/servicos/custom-bags/"]) {
+    expect(sitemap).toContain(`<loc>https://serifil.com${path}</loc>`);
+  }
+
+  await page.goto("/pt/");
+  await expect(page.locator('#servicos nav a[href="/pt/servicos/sacos-personalizados/"]')).toHaveCount(1);
+
+  await page.goto("/pt/servicos/sacos-personalizados/");
+  await expect(page.locator("h1")).toContainText("Sacos com o logótipo da sua marca.");
+  await expect(page).toHaveTitle("Sacos Personalizados com Logótipo em Serigrafia | SERIFIL");
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://serifil.com/images/servicos/bags-og.jpg");
+  await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/servicos/custom-bags/");
+  // Só TNT e pano (algodão) são fornecidos; sem mínimos, prazos, papel ou bordado prometidos.
+  await expect(page.locator("main")).not.toContainText(/bordad|sublima|papel|unidades mínimas|dias úteis/i);
+  for (const href of ["/pt/servicos/sacos-tnt/", "/pt/servicos/serigrafia-tecido/", "/pt/guias/o-que-e-serigrafia/"]) {
+    await expect(page.locator(`main a[href="${href}"]`).first()).toBeAttached();
+  }
+
+  await page.goto("/pt/guias/o-que-e-serigrafia/");
+  await expect(page.locator('main a[href="/pt/servicos/sacos-personalizados/"]').first()).toBeAttached();
+
+  await page.goto("/en/servicos/custom-bags/");
+  await expect(page.locator("h1")).toContainText("Bags with your brand’s logo.");
+  await expect(page.locator('link[hreflang="pt-PT"]')).toHaveAttribute("href", "https://serifil.com/pt/servicos/sacos-personalizados/");
 });

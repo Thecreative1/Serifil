@@ -107,7 +107,8 @@ As branches `agent/*` são rascunhos para pré-visualizar e rever. Fazer commit 
 - **DTF:** confirmar com o parceiro a largura útil do rolo (58 cm no site) e o espaço entre desenhos (1 cm); definir o preço da aplicação (hoje "sob orçamento"). Fotografia da prensagem já na página e no guia (out 2026); a folha de transfer da mesma montagem tem a gralha "SIRIFIL" e ficou de fora.
 - **T-shirts:** a página usa t-shirts dobradas e uma camisola com o logótipo SERIFIL (fotografias retocadas com IA, out 2026); faltam fotografias de trabalhos de clientes.
 - **Guia da serigrafia:** confirmar a tabela de tintas (plastisol, base aquosa, para plásticos, cura UV).
-- **Páginas seguintes** (pesquisa de sugestões do Google): sacos personalizados com logótipo, fardas e roupa de trabalho, guia comparativo DTF/serigrafia/sublimação/vinil. Serigrafia sempre em primeiro lugar.
+- **Sacos personalizados:** página publicada na branch (out 2026) só com fotografias de sacos em TNT; faltam fotografias de sacos de pano.
+- **Páginas seguintes** (pesquisa de sugestões do Google): fardas e roupa de trabalho (por confirmar que peças a SERIFIL fornece), guia comparativo DTF/serigrafia/sublimação/vinil. Serigrafia sempre em primeiro lugar.
 - **Fora do código:** perfil Google Business e horário de funcionamento (`brand.openingHours`).
 
 ## Regra de segurança

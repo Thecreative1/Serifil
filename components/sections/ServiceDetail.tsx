@@ -27,6 +27,7 @@ const serviceGuides: Record<ServicePageContent["key"], GuideKey[]> = {
   nonwoven: ["serigrafia", "fotolitos"],
   footwear: ["serigrafia", "fotolitos"],
   tshirts: ["serigrafia", "dtf"],
+  bags: ["serigrafia", "fotolitos"],
 };
 
 const inlineLinkClassName =
