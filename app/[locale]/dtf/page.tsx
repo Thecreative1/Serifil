@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { InlineText } from "@/components/guides/InlineText";
@@ -10,10 +11,11 @@ import { DtfCalculator } from "@/components/dtf/DtfCalculator";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { brand } from "@/config/brand";
+import { assetPath } from "@/config/paths";
 import { absoluteUrl, businessId, getBusinessIdentity } from "@/config/seo";
 import { stripInlineLinks } from "@/data/guides";
 import { isLocale, locales, translations } from "@/data/i18n";
-import { dtfCopy, dtfPublished, dtfShareImage, getDtfHreflangPaths, getDtfPath } from "@/data/dtf";
+import { dtfCopy, dtfPhoto, dtfPublished, dtfShareImage, getDtfHreflangPaths, getDtfPath } from "@/data/dtf";
 import { getScreensPath, screensCopy, screensPublished } from "@/data/screens";
 import { getServicePath, serviceKeys, servicePages } from "@/data/service-pages";
 
@@ -238,6 +240,18 @@ export default async function DtfPage({
                 </li>
               ))}
             </ol>
+            <figure className="mt-10 max-w-4xl">
+              <div className="relative aspect-[775/537] overflow-hidden border border-border bg-surface">
+                <Image
+                  src={assetPath(dtfPhoto.src)}
+                  alt={copy.imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 56rem, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="mt-3 text-sm leading-6 text-text-secondary">{copy.photoCaption}</figcaption>
+            </figure>
           </Container>
         </section>
 

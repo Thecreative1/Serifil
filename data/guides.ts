@@ -816,8 +816,8 @@ const filmPositives: Guide = {
   relatedServices: ["pvc", "fabric", "nonwoven", "footwear"],
 };
 
-/** Sem fotografia de DTF: a partilha usa a imagem genérica do site. */
-const dtfShare = { src: "/og.jpg", width: 1200, height: 630, credit: "process" } as const;
+/** Fotografia da prensagem (trabalho real retocado com IA): crédito "process", nunca "work". */
+const dtfShare = { src: "/images/dtf/dtf-og.jpg", width: 1200, height: 630, credit: "process" } as const;
 
 /**
  * Guia do DTF. Regras: nunca dizer quem imprime o filme nem que a SERIFIL tem impressora DTF;
@@ -839,7 +839,7 @@ const dtfPt: Guide = {
     "O DTF permite estampar desenhos a cores em têxtil sem quadros nem fotolitos. É uma boa solução para poucas peças, muitas cores ou desenhos que mudam de peça para peça. Este guia explica como funciona e o que convém saber antes de encomendar.",
   datePublished: "2026-10-19",
   dateModified: "2026-10-19",
-  image: { ...dtfShare, alt: "SERIFIL, serigrafia e impressão industrial em Guimarães", caption: "DTF ao metro na SERIFIL." },
+  image: { ...dtfShare, alt: "Prensa de calor a aplicar um transfer DTF com o logótipo SERIFIL numa t-shirt azul", caption: "Prensagem de um transfer DTF numa t-shirt." },
   summary: [
     "DTF quer dizer «direct to film»: o desenho é impresso num filme e depois transferido para a peça com calor.",
     "Não precisa de fotolitos nem de telas, por isso o número de cores não muda a preparação.",
@@ -1032,7 +1032,7 @@ const dtfEn: Guide = {
     "DTF lets you print full-colour designs on textiles with no screens or film positives. It suits small runs, many colours or designs that change from garment to garment. This guide explains how it works and what is worth knowing before you order.",
   datePublished: "2026-10-19",
   dateModified: "2026-10-19",
-  image: { ...dtfShare, alt: "SERIFIL, screen printing and industrial printing in Guimarães", caption: "DTF by the metre at SERIFIL." },
+  image: { ...dtfShare, alt: "Heat press applying a DTF transfer with the SERIFIL logo to a blue T-shirt", caption: "Heat pressing a DTF transfer onto a T-shirt." },
   summary: [
     "DTF stands for “direct to film”: the design is printed on film and then transferred to the garment with heat.",
     "It needs no film positives or screens, so the number of colours does not change the preparation.",

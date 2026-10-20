@@ -655,9 +655,11 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     title: "T-shirts estampadas em serigrafia.",
     lead:
       "Estampamos t-shirts, sweats e camisolas em serigrafia, na nossa produção em Guimarães: cores vivas, resistentes às lavagens e com melhor preço por peça em séries. Para poucas peças com muitas cores, também fazemos DTF.",
+    // Trabalho real retocado com IA: illustrative evita a legenda "Trabalho produzido pela SERIFIL".
     image: {
-      src: "/images/trabalhos/tecido-04.webp",
-      alt: "Tecido escuro personalizado com marca impressa pela SERIFIL",
+      src: "/images/servicos/tshirts-dobradas.webp",
+      alt: "T-shirts dobradas, azul, verde e bege, com o logótipo SERIFIL estampado a laranja",
+      illustrative: true,
     },
     introduction: {
       title: "Serigrafia feita por nós, do quadro à peça.",
@@ -742,6 +744,10 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
       eyebrow: "TRABALHOS EM TÊXTIL",
       title: "Têxteis estampados pela SERIFIL.",
       images: [
+        {
+          src: "/images/servicos/camisola-serifil.webp",
+          alt: "Camisola verde com o logótipo SERIFIL estampado nas costas",
+        },
         {
           src: "/images/trabalhos/tecido-01.webp",
           alt: "Tecido preto com impressão dourada",
@@ -1136,9 +1142,11 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     title: "T-shirts screen printed by us.",
     lead:
       "We screen print T-shirts and sweatshirts in our own production in Guimarães: bright colours that stand up to washing, with a better price per item on runs. For a few items in many colours, we also do DTF.",
+    // Real work retouched with AI: illustrative hides the "Work produced by SERIFIL" caption.
     image: {
-      src: "/images/trabalhos/tecido-04.webp",
-      alt: "Dark fabric customised with a brand printed by SERIFIL",
+      src: "/images/servicos/tshirts-dobradas.webp",
+      alt: "Folded blue, green and beige T-shirts with the SERIFIL logo printed in orange",
+      illustrative: true,
     },
     introduction: {
       title: "Screen printing done by us, from screen to garment.",
@@ -1223,6 +1231,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       eyebrow: "TEXTILE WORK",
       title: "Textiles printed by SERIFIL.",
       images: [
+        { src: "/images/servicos/camisola-serifil.webp", alt: "Green sweatshirt with the SERIFIL logo printed on the back" },
         { src: "/images/trabalhos/tecido-01.webp", alt: "Black fabric with gold printing" },
         { src: "/images/trabalhos/tecido-02.webp", alt: "Black fabric cover with a white logo" },
         { src: "/images/trabalhos/tecido-03.webp", alt: "Light fabric item with black printed text" },

@@ -1195,7 +1195,11 @@ test("DTF ao metro publicado: nos serviços, indexável e no sitemap", async ({ 
     await page.goto(path);
     await expect(page.locator('meta[name="robots"]')).not.toHaveAttribute("content", /noindex/);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://serifil.com${path}`);
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://serifil.com/images/dtf/dtf-og.jpg");
+    await expect(page.locator('section:has(#dtf-como-funciona) img[src*="dtf-prensagem"]')).toHaveCount(1);
   }
+  expect(sitemap).toContain("<image:loc>https://serifil.com/images/dtf/dtf-og.jpg</image:loc>");
+  expect((await request.get("/images/dtf/dtf-og.jpg")).status()).toBe(200);
 });
 
 test("guia do DTF publicado em PT e EN, ligado à calculadora", async ({ page, request }) => {

@@ -104,8 +104,8 @@ As branches `agent/*` são rascunhos para pré-visualizar e rever. Fazer commit 
 ## Pendentes (out 2026)
 
 - **Search Console:** pedir indexação de `/pt/guias/o-que-e-dtf/`, `/pt/servicos/serigrafia-tecido/`, `/pt/`, `/en/dtf/`, `/en/guias/what-is-dtf/`, `/pt/servicos/estampagem-t-shirts/` e `/pt/guias/o-que-e-serigrafia/` (a quota diária esgotou a 19 out). O sitemap foi reenviado a 19 out.
-- **DTF:** confirmar com o parceiro a largura útil do rolo (58 cm no site) e o espaço entre desenhos (1 cm); definir o preço da aplicação (hoje "sob orçamento"); fotografia de um trabalho em DTF.
-- **T-shirts:** fotografia de t-shirts estampadas pela SERIFIL (a página usa fotografias de trabalhos em tecido).
+- **DTF:** confirmar com o parceiro a largura útil do rolo (58 cm no site) e o espaço entre desenhos (1 cm); definir o preço da aplicação (hoje "sob orçamento"). Fotografia da prensagem já na página e no guia (out 2026); a folha de transfer da mesma montagem tem a gralha "SIRIFIL" e ficou de fora.
+- **T-shirts:** a página usa t-shirts dobradas e uma camisola com o logótipo SERIFIL (fotografias retocadas com IA, out 2026); faltam fotografias de trabalhos de clientes.
 - **Guia da serigrafia:** confirmar a tabela de tintas (plastisol, base aquosa, para plásticos, cura UV).
 - **Páginas seguintes** (pesquisa de sugestões do Google): sacos personalizados com logótipo, fardas e roupa de trabalho, guia comparativo DTF/serigrafia/sublimação/vinil. Serigrafia sempre em primeiro lugar.
 - **Fora do código:** perfil Google Business e horário de funcionamento (`brand.openingHours`).

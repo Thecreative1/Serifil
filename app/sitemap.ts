@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { brand } from "@/config/brand";
-import { dtfDateModified, dtfPublished, getDtfHreflangPaths, getDtfPath } from "@/data/dtf";
+import { dtfDateModified, dtfPhoto, dtfPublished, dtfShareImage, getDtfHreflangPaths, getDtfPath } from "@/data/dtf";
 import {
   getGuideHreflangPaths,
   getGuideImages,
@@ -151,6 +151,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: "monthly" as const,
         priority: 0.8,
         alternates: { languages: absoluteLanguages(getDtfHreflangPaths()) },
+        images: [dtfShareImage, dtfPhoto].map((image) => new URL(image.src, brand.website).toString()),
       }))
     : [];
 

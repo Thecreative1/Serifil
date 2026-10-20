@@ -13,8 +13,12 @@ export const dtfPublished = true;
 /** Data da última alteração de conteúdo: usada no sitemap. Atualizar quando o texto, o preço ou as opções mudarem. */
 export const dtfDateModified = "2026-10-20";
 
-/** Sem fotografia própria do DTF: usa a imagem de partilha do site. */
-export const dtfShareImage = { src: "/og.jpg", width: 1200, height: 630 } as const;
+/**
+ * Fotografia da prensagem (trabalho real da SERIFIL, retocado com IA): partilha e secção "Como funciona".
+ * Não a legendar como "trabalho produzido pela SERIFIL"; descrever só o que se vê.
+ */
+export const dtfShareImage = { src: "/images/dtf/dtf-og.jpg", width: 1200, height: 630 } as const;
+export const dtfPhoto = { src: "/images/dtf/dtf-prensagem.webp", width: 775, height: 537 } as const;
 
 export function getDtfPath(locale: Locale) {
   return `/${locale}/dtf/`;
@@ -220,6 +224,7 @@ type DtfCopy = {
   title: string;
   lead: string;
   imageAlt: string;
+  photoCaption: string;
   howTitle: string;
   howSteps: Array<{ title: string; text: string }>;
   toolLabel: string;
@@ -308,7 +313,8 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
     title: "Encha o seu metro.",
     lead:
       "Transfers a cores, sem quadros nem fotolitos, para pequenas produções. Junte os seus desenhos, veja quanto filme ocupam e escolha se leva só o filme ou se prensamos nas suas peças.",
-    imageAlt: "SERIFIL, serigrafia e impressão industrial em Guimarães",
+    imageAlt: "Prensa de calor a aplicar um transfer DTF com o logótipo SERIFIL numa t-shirt azul",
+    photoCaption: "Prensagem: com calor e pressão, o desenho passa do filme para a t-shirt.",
     howTitle: "Como funciona o DTF",
     howSteps: [
       { title: "Impressão no filme", text: "O desenho é impresso a cores num filme, com uma base branca por trás." },
@@ -453,7 +459,8 @@ export const dtfCopy: Record<Locale, DtfCopy> = {
     title: "Fill your metre.",
     lead:
       "Full-colour transfers with no screens or film positives, for small runs. Add your designs, see how much film they take and choose film only or pressing onto your garments.",
-    imageAlt: "SERIFIL, screen printing and industrial printing in Guimarães",
+    imageAlt: "Heat press applying a DTF transfer with the SERIFIL logo to a blue T-shirt",
+    photoCaption: "Heat pressing: heat and pressure transfer the design from the film to the T-shirt.",
     howTitle: "How DTF works",
     howSteps: [
       { title: "Printing on film", text: "The design is printed in full colour on film, with a white base behind it." },
