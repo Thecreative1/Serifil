@@ -819,7 +819,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     eyebrow: "SACOS PERSONALIZADOS · GUIMARÃES",
     title: "Sacos com o logótipo da sua marca.",
     lead:
-      "Fornecemos sacos em TNT e sacos de pano em algodão e estampamo-los em serigrafia, na nossa produção em Guimarães. Também imprimimos os sacos que nos entregar.",
+      "Fornecemos sacos em TNT e sacos de pano em algodão e estampamo-los em serigrafia, na nossa produção em Guimarães. Também estampamos as suas peças, entregues por si, sob consulta.",
     image: {
       src: "/images/trabalhos/tnt-01.webp",
       alt: "Saco preto em TNT com «Merry Christmas» impresso a dourado",
@@ -1452,7 +1452,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     eyebrow: "CUSTOM BAGS · GUIMARÃES",
     title: "Bags with your brand’s logo.",
     lead:
-      "We supply non-woven bags and cotton cloth bags and screen print them in our own production in Guimarães. We also print on bags you bring us.",
+      "We supply non-woven bags and cotton cloth bags and screen print them in our own production in Guimarães. We can also print on items you bring us, on request.",
     image: {
       src: "/images/trabalhos/tnt-01.webp",
       alt: "Black non-woven bag with “Merry Christmas” printed in gold",
