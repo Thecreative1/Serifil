@@ -1318,6 +1318,9 @@ test("sacos personalizados publicados, ligados e sem prometer o que não foi con
   await page.goto("/pt/servicos/sacos-personalizados/");
   await expect(page.locator("h1")).toContainText("Sacos com o logótipo da sua marca.");
   await expect(page).toHaveTitle("Sacos Personalizados com Logótipo em Serigrafia | SERIFIL");
+  // A impressão dos sacos do cliente vem primeiro; o fornecimento é sempre sob consulta.
+  await expect(page.locator("main")).toContainText("Estampamos em serigrafia os sacos que nos entrega");
+  await expect(page.locator("main")).toContainText("podemos fornecê-los, sob consulta");
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://serifil.com/images/servicos/bags-og.jpg");
   await expect(page.locator('link[hreflang="en"]')).toHaveAttribute("href", "https://serifil.com/en/servicos/custom-bags/");
   // Só TNT e pano (algodão) são fornecidos; sem mínimos, prazos, papel ou bordado prometidos.
@@ -1331,5 +1334,7 @@ test("sacos personalizados publicados, ligados e sem prometer o que não foi con
 
   await page.goto("/en/servicos/custom-bags/");
   await expect(page.locator("h1")).toContainText("Bags with your brand’s logo.");
+  await expect(page.locator("main")).toContainText("We screen print the bags you bring us");
+  await expect(page.locator("main")).toContainText("we can supply them on request");
   await expect(page.locator('link[hreflang="pt-PT"]')).toHaveAttribute("href", "https://serifil.com/pt/servicos/sacos-personalizados/");
 });

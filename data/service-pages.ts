@@ -815,31 +815,31 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     shortName: "Sacos personalizados",
     metaTitle: "Sacos Personalizados com Logótipo em Serigrafia | SERIFIL",
     metaDescription:
-      "Sacos personalizados com o logótipo da sua empresa: sacos em TNT e de pano (algodão) fornecidos e estampados em serigrafia pela SERIFIL, em Guimarães.",
+      "Sacos personalizados com o logótipo da sua empresa: estampamos em serigrafia os seus sacos em TNT, pano (algodão) e outros materiais, em Guimarães. Fornecimento de sacos sob consulta.",
     eyebrow: "SACOS PERSONALIZADOS · GUIMARÃES",
     title: "Sacos com o logótipo da sua marca.",
     lead:
-      "Fornecemos sacos em TNT e sacos de pano em algodão e estampamo-los em serigrafia, na nossa produção em Guimarães. Também estampamos as suas peças, entregues por si, sob consulta.",
+      "Estampamos em serigrafia os sacos que nos entrega, na nossa produção em Guimarães: TNT, pano em algodão e outros materiais. Se ainda não tem os sacos, podemos fornecê-los, sob consulta.",
     image: {
       src: "/images/trabalhos/tnt-01.webp",
       alt: "Saco preto em TNT com «Merry Christmas» impresso a dourado",
     },
     introduction: {
-      title: "Escolha o saco. Nós tratamos da impressão.",
+      title: "Traga os sacos. Nós tratamos da impressão.",
       paragraphs: [
-        "Um saco com o logótipo leva a marca para fora da loja, da feira ou do evento. Há dois tipos de saco que fornecemos já personalizados: em TNT (tecido não tecido) e de pano, em algodão.",
-        "O modelo, a cor, a medida e a quantidade dos sacos são confirmados no orçamento, porque o fornecimento depende do que estiver disponível. Se já tem os sacos, imprimimos sobre eles depois de avaliar o material.",
+        "Um saco com o logótipo leva a marca para fora da loja, da feira ou do evento. O nosso trabalho é a impressão: recebemos os seus sacos e estampamo-los em serigrafia, depois de avaliar o material.",
+        "Se ainda não tem os sacos, podemos fornecer sacos em TNT (tecido não tecido) ou de pano em algodão, sob consulta. O modelo, a cor, a medida e a quantidade dependem do que estiver disponível e são confirmados no orçamento.",
       ],
     },
     facts: [
-      { label: "SACOS", value: "TNT e pano (algodão), fornecidos por nós ou seus." },
+      { label: "SACOS", value: "Os seus, em TNT, pano ou outros materiais. Fornecimento sob consulta." },
       { label: "IMPRESSÃO", value: "Serigrafia feita pela SERIFIL, em Guimarães." },
       { label: "ORÇAMENTO", value: "Modelo, quantidade e impressão confirmados caso a caso." },
     ],
     techniques: {
       eyebrow: "DOIS TIPOS DE SACO",
       title: "TNT ou pano?",
-      description: "Os dois levam bem a serigrafia. A escolha depende do uso: diga-nos para que é o saco e ajudamos a decidir.",
+      description: "Os dois levam bem a serigrafia, quer nos traga os sacos quer os forneçamos nós, sob consulta. Se ainda vai escolher, diga-nos para que é o saco e ajudamos a decidir.",
       items: [
         {
           name: "Sacos em TNT",
@@ -872,7 +872,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
       steps: [
         {
           title: "Saco e arte",
-          description: "Confirmamos o saco, a quantidade e a posição. O logótipo é ajustado à medida e separado por cores.",
+          description: "Avaliamos o saco e confirmamos a quantidade e a posição. O logótipo é ajustado à medida e separado por cores.",
         },
         {
           title: "Fotolitos e telas",
@@ -926,9 +926,9 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
     preparation: {
       eyebrow: "PREPARAR O PEDIDO",
       title: "O que nos deve indicar.",
-      description: "Com esta informação respondemos com o orçamento. Se ainda não escolheu o saco, diga-nos para que o vai usar.",
+      description: "Com esta informação respondemos com o orçamento. Se ainda não tem os sacos, diga-nos para que os vai usar.",
       items: [
-        { label: "Saco", value: "TNT ou pano, medida, tipo de asa e cor, e se é seu ou fornecido por nós." },
+        { label: "Saco", value: "Material, medida e cor dos seus sacos, ou se precisa que os forneçamos." },
         { label: "Quantidade", value: "Número aproximado de sacos." },
         { label: "Logótipo", value: "Ficheiro, idealmente vetorial, e número de cores." },
         { label: "Impressão", value: "Tamanho e posição, num lado ou nos dois." },
@@ -940,14 +940,14 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
       title: "Antes de personalizar sacos.",
       items: [
         {
-          question: "Fornecem os sacos?",
-          answer:
-            "Sim. Fornecemos sacos em TNT e sacos de pano em algodão, já personalizados. O modelo, a cor e a medida dependem da disponibilidade e são confirmados no orçamento.",
-        },
-        {
           question: "Imprimem sacos que eu já tenho?",
           answer:
-            "Sim, depois de avaliarmos o material. A serigrafia também funciona em [PVC](/pt/servicos/serigrafia-pvc/) e em muitos outros suportes.",
+            "Sim, é o nosso trabalho principal. Avaliamos o material e estampamos em serigrafia. Além de TNT e pano, a serigrafia funciona em [PVC](/pt/servicos/serigrafia-pvc/) e em muitos outros suportes.",
+        },
+        {
+          question: "Fornecem os sacos?",
+          answer:
+            "Sob consulta. Podemos fornecer sacos em TNT e de pano em algodão, já personalizados. O modelo, a cor e a medida dependem da disponibilidade e são confirmados no orçamento.",
         },
         {
           question: "Qual é a quantidade mínima?",
@@ -1448,31 +1448,31 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     shortName: "Custom bags",
     metaTitle: "Custom Printed Bags with Your Logo | SERIFIL",
     metaDescription:
-      "Custom bags with your company logo: non-woven and cotton cloth bags supplied and screen printed by SERIFIL in Guimarães, Portugal.",
+      "Custom bags with your company logo: we screen print your non-woven, cotton cloth and other bags in Guimarães, Portugal. Bags can be supplied on request.",
     eyebrow: "CUSTOM BAGS · GUIMARÃES",
     title: "Bags with your brand’s logo.",
     lead:
-      "We supply non-woven bags and cotton cloth bags and screen print them in our own production in Guimarães. We can also print on items you bring us, on request.",
+      "We screen print the bags you bring us in our own production in Guimarães: non-woven, cotton cloth and other materials. If you do not have the bags yet, we can supply them on request.",
     image: {
       src: "/images/trabalhos/tnt-01.webp",
       alt: "Black non-woven bag with “Merry Christmas” printed in gold",
     },
     introduction: {
-      title: "Choose the bag. We take care of the print.",
+      title: "Bring the bags. We take care of the print.",
       paragraphs: [
-        "A bag with your logo takes your brand beyond the shop, the trade fair or the event. There are two kinds of bag we supply already customised: non-woven and cotton cloth.",
-        "The model, colour, size and quantity of the bags are confirmed in the quote, because supply depends on availability. If you already have bags, we print on them after assessing the material.",
+        "A bag with your logo takes your brand beyond the shop, the trade fair or the event. Printing is what we do: we receive your bags and screen print them after assessing the material.",
+        "If you do not have the bags yet, we can supply non-woven or cotton cloth bags on request. The model, colour, size and quantity depend on availability and are confirmed in the quote.",
       ],
     },
     facts: [
-      { label: "BAGS", value: "Non-woven and cotton cloth, supplied by us or yours." },
+      { label: "BAGS", value: "Yours, in non-woven, cloth or other materials. Supply on request." },
       { label: "PRINT", value: "Screen printing done by SERIFIL in Guimarães." },
       { label: "QUOTE", value: "Model, quantity and print confirmed case by case." },
     ],
     techniques: {
       eyebrow: "TWO KINDS OF BAG",
       title: "Non-woven or cotton?",
-      description: "Both take screen printing well. The choice depends on use: tell us what the bag is for and we will help you decide.",
+      description: "Both take screen printing well, whether you bring the bags or we supply them on request. If you are still choosing, tell us what the bag is for and we will help you decide.",
       items: [
         {
           name: "Non-woven bags",
@@ -1505,7 +1505,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       steps: [
         {
           title: "Bag and artwork",
-          description: "We confirm the bag, quantity and position. The logo is sized and separated by colour.",
+          description: "We assess the bag and confirm the quantity and position. The logo is sized and separated by colour.",
         },
         {
           title: "Film positives and screens",
@@ -1547,9 +1547,9 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
     preparation: {
       eyebrow: "PREPARING YOUR REQUEST",
       title: "What to tell us.",
-      description: "With this information we can reply with a quote. If you have not chosen the bag yet, tell us what you will use it for.",
+      description: "With this information we can reply with a quote. If you do not have the bags yet, tell us what you will use them for.",
       items: [
-        { label: "Bag", value: "Non-woven or cloth, size, handle type and colour, and whether it is yours or supplied by us." },
+        { label: "Bag", value: "Material, size and colour of your bags, or whether you need us to supply them." },
         { label: "Quantity", value: "Approximate number of bags." },
         { label: "Logo", value: "File, ideally vector, and number of colours." },
         { label: "Print", value: "Size and position, on one side or both." },
@@ -1561,14 +1561,14 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
       title: "Before customising bags.",
       items: [
         {
-          question: "Do you supply the bags?",
-          answer:
-            "Yes. We supply non-woven bags and cotton cloth bags, already customised. The model, colour and size depend on availability and are confirmed in the quote.",
-        },
-        {
           question: "Can you print bags I already have?",
           answer:
-            "Yes, after assessing the material. Screen printing also works on [PVC](/en/servicos/pvc-screen-printing/) and many other substrates.",
+            "Yes, that is our main work. We assess the material and screen print it. Besides non-woven and cloth, screen printing works on [PVC](/en/servicos/pvc-screen-printing/) and many other substrates.",
+        },
+        {
+          question: "Do you supply the bags?",
+          answer:
+            "On request. We can supply non-woven and cotton cloth bags, already customised. The model, colour and size depend on availability and are confirmed in the quote.",
         },
         {
           question: "What is the minimum quantity?",
