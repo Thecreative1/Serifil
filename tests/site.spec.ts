@@ -623,7 +623,7 @@ test("publica robots, sitemap localizado e dados estruturados completos", async 
   expect(structuredData.address.addressRegion).toBe("Braga");
   expect(structuredData.address.postalCode).toBe("4810-480");
   expect(structuredData.contactPoint.telephone).toBe("+351 910 508 706");
-  expect(structuredData.contactPoint.availableLanguage).toEqual(["Portuguese", "English"]);
+  expect(structuredData.contactPoint.availableLanguage).toEqual(["Portuguese", "English", "Dutch"]);
   // Oito serviços de impressão e, no fim, os quadros de serigrafia e o DTF ao metro (com páginas próprias).
   expect(structuredData.hasOfferCatalog.itemListElement).toHaveLength(10);
   expect(structuredData.hasOfferCatalog.itemListElement[8].itemOffered.url).toBe("https://serifil.com/pt/quadros/");
@@ -1342,8 +1342,8 @@ test("sacos personalizados publicados, ligados e sem prometer o que não foi con
 test("diz que trabalha com empresas de fora de Portugal sem prometer envio", async ({ page }) => {
   // O utilizador quer clientes de fora (contacto da Bélgica, out 2026), mas o envio ainda não está decidido.
   for (const [path, text] of [
-    ["/pt/", "Também trabalhamos com empresas de outros países"],
-    ["/en/", "We also work with companies in other countries"],
+    ["/pt/", "Também trabalhamos com empresas de outros países, em português, inglês ou holandês."],
+    ["/en/", "We also work with companies in other countries, in English, Dutch or Portuguese."],
   ]) {
     await page.goto(path);
     await expect(page.locator("main")).toContainText(text);

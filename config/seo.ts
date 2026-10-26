@@ -98,7 +98,7 @@ export function getBusinessIdentity({
             "@type": "ContactPoint",
             telephone: brand.phone,
             contactType: "sales",
-            availableLanguage: ["Portuguese", "English"],
+            availableLanguage: ["Portuguese", "English", "Dutch"],
             areaServed: serviceArea,
           },
         }

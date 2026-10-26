@@ -282,7 +282,7 @@ export const translations = {
         },
         {
           title: "Clientes fora de Portugal",
-          description: "Também trabalhamos com empresas de outros países, em português ou inglês. A entrega combina-se em cada encomenda.",
+          description: "Também trabalhamos com empresas de outros países, em português, inglês ou holandês. A entrega combina-se em cada encomenda.",
         },
       ],
     },
@@ -390,7 +390,7 @@ export const translations = {
       title: "Falamos do seu projeto?",
       descriptionPrefix: "Estamos em",
       descriptionSuffix:
-        "Envie os detalhes através do formulário ou por e-mail para prepararmos a análise inicial. Também trabalhamos com empresas fora de Portugal.",
+        "Envie os detalhes através do formulário ou por e-mail para prepararmos a análise inicial. Também trabalhamos com empresas fora de Portugal, em inglês ou holandês.",
       location: "Localização",
       directContact: "Contacto direto",
       phone: "Telefone",
@@ -711,7 +711,7 @@ export const translations = {
         },
         {
           title: "Clients outside Portugal",
-          description: "We also work with companies in other countries, in English or Portuguese. Delivery is agreed for each order.",
+          description: "We also work with companies in other countries, in English, Dutch or Portuguese. Delivery is agreed for each order.",
         },
       ],
     },
@@ -818,7 +818,7 @@ export const translations = {
       eyebrow: "CONTACT",
       title: "Shall we discuss your project?",
       descriptionPrefix: "We are based in",
-      descriptionSuffix: "Send the details through the form or by email for an initial assessment. We also work with companies outside Portugal.",
+      descriptionSuffix: "Send the details through the form or by email for an initial assessment. We also work with companies outside Portugal, in English or Dutch.",
       location: "Location",
       directContact: "Direct contact",
       phone: "Phone",
