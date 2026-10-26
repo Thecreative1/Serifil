@@ -280,6 +280,10 @@ export const translations = {
           title: "Solução adaptada",
           description: "A proposta considera o material, a quantidade e a utilização final.",
         },
+        {
+          title: "Clientes fora de Portugal",
+          description: "Também trabalhamos com empresas de outros países, em português ou inglês. A entrega combina-se em cada encomenda.",
+        },
       ],
     },
     process: {
@@ -386,7 +390,7 @@ export const translations = {
       title: "Falamos do seu projeto?",
       descriptionPrefix: "Estamos em",
       descriptionSuffix:
-        "Envie os detalhes através do formulário ou por e-mail para prepararmos a análise inicial.",
+        "Envie os detalhes através do formulário ou por e-mail para prepararmos a análise inicial. Também trabalhamos com empresas fora de Portugal.",
       location: "Localização",
       directContact: "Contacto direto",
       phone: "Telefone",
@@ -435,7 +439,7 @@ export const translations = {
   en: {
     htmlLang: "en",
     meta: {
-      title: "Industrial Screen Printing in Guimarães | SERIFIL",
+      title: "Industrial Screen Printing in Guimarães, Portugal | SERIFIL",
       description:
         "SERIFIL – Industrial screen printing in Guimarães, Portugal. Printing on PVC, textiles, non-woven fabric, components, bags and garment bags for businesses.",
       openGraphDescription:
@@ -705,6 +709,10 @@ export const translations = {
           title: "A tailored solution",
           description: "Our proposal reflects the material, quantity and intended use.",
         },
+        {
+          title: "Clients outside Portugal",
+          description: "We also work with companies in other countries, in English or Portuguese. Delivery is agreed for each order.",
+        },
       ],
     },
     process: {
@@ -810,7 +818,7 @@ export const translations = {
       eyebrow: "CONTACT",
       title: "Shall we discuss your project?",
       descriptionPrefix: "We are based in",
-      descriptionSuffix: "Send the details through the form or by email for an initial assessment.",
+      descriptionSuffix: "Send the details through the form or by email for an initial assessment. We also work with companies outside Portugal.",
       location: "Location",
       directContact: "Direct contact",
       phone: "Phone",

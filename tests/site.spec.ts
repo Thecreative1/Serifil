@@ -793,7 +793,7 @@ test("comunica materiais, setores e componentes de calçado nas duas línguas", 
   ]);
 
   await page.goto("/en/");
-  await expect(page).toHaveTitle("Industrial Screen Printing in Guimarães | SERIFIL");
+  await expect(page).toHaveTitle("Industrial Screen Printing in Guimarães, Portugal | SERIFIL");
   await expect(page.getByText("INDUSTRIAL SCREEN PRINTING FOR BUSINESSES")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Component Printing" }).first()).toBeVisible();
   await expect(page.getByRole("heading", { name: "The client supplies the material" })).toBeVisible();
@@ -1337,4 +1337,24 @@ test("sacos personalizados publicados, ligados e sem prometer o que não foi con
   await expect(page.locator("main")).toContainText("We screen print the bags you bring us");
   await expect(page.locator("main")).toContainText("we can supply them on request");
   await expect(page.locator('link[hreflang="pt-PT"]')).toHaveAttribute("href", "https://serifil.com/pt/servicos/sacos-personalizados/");
+});
+
+test("diz que trabalha com empresas de fora de Portugal sem prometer envio", async ({ page }) => {
+  // O utilizador quer clientes de fora (contacto da Bélgica, out 2026), mas o envio ainda não está decidido.
+  for (const [path, text] of [
+    ["/pt/", "Também trabalhamos com empresas de outros países"],
+    ["/en/", "We also work with companies in other countries"],
+  ]) {
+    await page.goto(path);
+    await expect(page.locator("main")).toContainText(text);
+    await expect(page.locator("main")).not.toContainText(/ship(ping)? (across|to|throughout) Europe|envio para (toda a )?Europa/i);
+    const ld = await page.locator('script[type="application/ld+json"]').first().textContent();
+    expect(ld).toContain('"areaServed":[{"@type":"City","name":"Guimarães"}');
+    expect(ld).toContain('{"@type":"Place","name":"Europe"}');
+  }
+
+  await page.goto("/en/servicos/t-shirt-printing/");
+  await expect(page.locator("main")).toContainText("For orders from other countries, contact us and we will agree on delivery.");
+  const serviceLd = await page.locator('script[type="application/ld+json"]').first().textContent();
+  expect(serviceLd).toContain('{"@type":"Place","name":"Europe"}');
 });

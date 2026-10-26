@@ -797,7 +797,7 @@ const portuguesePages: Record<ServiceKey, ServicePageContent> = {
         },
         {
           question: "Enviam para fora de Guimarães?",
-          answer: "Sim. Produzimos em Guimarães e enviamos para todo o país.",
+          answer: "Sim. Produzimos em Guimarães e enviamos para todo o país. Para encomendas de outros países, fale connosco e combinamos a entrega.",
         },
         {
           question: "Quanto tempo demora?",
@@ -1432,7 +1432,7 @@ const englishPages: Record<ServiceKey, ServicePageContent> = {
         },
         {
           question: "Do you ship outside Guimarães?",
-          answer: "Yes. We produce in Guimarães and ship across Portugal.",
+          answer: "Yes. We produce in Guimarães and ship across Portugal. For orders from other countries, contact us and we will agree on delivery.",
         },
         {
           question: "How long does it take?",

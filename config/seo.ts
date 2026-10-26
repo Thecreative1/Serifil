@@ -7,6 +7,14 @@ export function absoluteUrl(path: string) {
   return new URL(path, brand.website).toString();
 }
 
+// Guimarães e Braga para as pesquisas locais; a Europa porque a SERIFIL também trabalha com empresas de fora.
+export const serviceArea = [
+  { "@type": "City", name: "Guimarães" },
+  { "@type": "AdministrativeArea", name: "Braga" },
+  { "@type": "Country", name: "Portugal" },
+  { "@type": "Place", name: "Europe" },
+];
+
 export const businessAlternateNames = [
   "Serifil",
   "Serifil Serigrafia",
@@ -64,11 +72,7 @@ export function getBusinessIdentity({
       longitude: brand.longitude,
     },
     hasMap: brand.mapsUrl,
-    areaServed: [
-      { "@type": "City", name: "Guimarães" },
-      { "@type": "AdministrativeArea", name: "Braga" },
-      { "@type": "Country", name: "Portugal" },
-    ],
+    areaServed: serviceArea,
     knowsAbout: [
       "Serigrafia",
       "Serigrafia industrial",
@@ -95,7 +99,7 @@ export function getBusinessIdentity({
             telephone: brand.phone,
             contactType: "sales",
             availableLanguage: ["Portuguese", "English"],
-            areaServed: "PT",
+            areaServed: serviceArea,
           },
         }
       : {}),

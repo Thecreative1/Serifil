@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { LocalePreference } from "@/components/LocalePreference";
 import { ServiceDetail } from "@/components/sections/ServiceDetail";
 import { brand } from "@/config/brand";
-import { getBusinessIdentity } from "@/config/seo";
+import { getBusinessIdentity, serviceArea } from "@/config/seo";
 import { isLocale, locales, translations } from "@/data/i18n";
 import {
   getServiceAlternates,
@@ -112,10 +112,7 @@ export default async function ServicePage({
           inLanguage: copy.htmlLang,
           mainEntityOfPage: absoluteUrl(homePath),
         }),
-        areaServed: {
-          "@type": "City",
-          name: "Guimarães",
-        },
+        areaServed: serviceArea,
       },
       {
         "@type": "BreadcrumbList",

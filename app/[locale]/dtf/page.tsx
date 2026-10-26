@@ -12,7 +12,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { brand } from "@/config/brand";
 import { assetPath } from "@/config/paths";
-import { absoluteUrl, businessId, getBusinessIdentity } from "@/config/seo";
+import { absoluteUrl, businessId, getBusinessIdentity, serviceArea } from "@/config/seo";
 import { stripInlineLinks } from "@/data/guides";
 import { isLocale, locales, translations } from "@/data/i18n";
 import { dtfCopy, dtfPhoto, dtfPublished, dtfShareImage, getDtfHreflangPaths, getDtfPath } from "@/data/dtf";
@@ -126,11 +126,7 @@ export default async function DtfPage({
           inLanguage: siteCopy.htmlLang,
           mainEntityOfPage: absoluteUrl(homePath),
         }),
-        areaServed: [
-          { "@type": "City", name: "Guimarães" },
-          { "@type": "AdministrativeArea", name: "Braga" },
-          { "@type": "Country", name: "Portugal" },
-        ],
+        areaServed: serviceArea,
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: copy.sectionName,
