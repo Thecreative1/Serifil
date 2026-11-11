@@ -71,6 +71,11 @@ export const translations = {
       description:
         "Realizamos serigrafia e personalização em sacos, capas, porta-fatos, componentes e outros suportes, fornecidos pelo cliente ou integrados em projetos de produção.",
       otherServices: "APLICAÇÕES E PRODUTOS",
+      moreServices: "Mais serviços",
+      viewService: "Ver serviço",
+      viewServiceLabel: "Ver o serviço de",
+      primaryImageAlt: "Saco preto em TNT com «Merry Christmas» impresso a dourado em serigrafia",
+      primaryImageCaption: "Trabalho produzido pela SERIFIL",
       quote: "Pedir orçamento",
       shortQuote: "Orçamento",
       quoteLabel: "Pedir orçamento para",
@@ -86,6 +91,7 @@ export const translations = {
         {
           number: "02",
           title: "Impressão em PVC",
+          pageKey: "pvc",
           description:
             "Impressão sobre PVC transparente ou colorido para embalagem, proteção, apresentação de produto e peças técnicas.",
           emphasis: "supporting",
@@ -94,6 +100,7 @@ export const translations = {
         {
           number: "03",
           title: "Impressão em Têxtil",
+          pageKey: "fabric",
           description:
             "Serigrafia sobre tecido para vestuário, roupa profissional, capas, sacos, têxtil-lar e outras peças de produção.",
           emphasis: "supporting",
@@ -102,6 +109,7 @@ export const translations = {
         {
           number: "04",
           title: "Impressão em TNT",
+          pageKey: "nonwoven",
           description:
             "Impressão sobre tecido não tecido para sacos, capas e soluções de proteção e comunicação de marca.",
           emphasis: "supporting",
@@ -110,6 +118,7 @@ export const translations = {
         {
           number: "05",
           title: "Impressão em Componentes",
+          pageKey: "footwear",
           description:
             "Impressão e personalização de palmilhas, palas e outros componentes utilizados em linhas de produção, nomeadamente na indústria do calçado.",
           emphasis: "complementary",
@@ -118,6 +127,7 @@ export const translations = {
         {
           number: "06",
           title: "Sacos Personalizados",
+          pageKey: "bags",
           description:
             "Personalização e fornecimento de sacos para aplicações industriais, comerciais e promocionais, em PVC, têxtil ou TNT.",
           emphasis: "complementary",
@@ -301,25 +311,6 @@ export const translations = {
         { number: "05", title: "Entrega", description: "A encomenda é preparada para levantamento ou envio." },
       ],
     },
-    about: {
-      eyebrow: "A SERIFIL",
-      title: "Serigrafia e impressão industrial em Guimarães.",
-      description:
-        "A Serifil é uma empresa de serigrafia e impressão industrial em Guimarães, com experiência em impressão sobre PVC, têxtil, TNT e componentes. Trabalhamos sobre peças e suportes fornecidos pelo cliente e, quando o projeto o justifica, estudamos soluções completas que incluem o fornecimento e personalização de sacos, porta-fatos, capas e outros suportes para empresas, fábricas e marcas de diferentes setores, incluindo o calçado.",
-      principles: [
-        ["01", "Produção local"],
-        ["02", "Comunicação direta"],
-        ["03", "Acompanhamento técnico"],
-      ],
-    },
-    quoteCta: {
-      eyebrow: "VAMOS PRODUZIR",
-      title: "Precisa de impressão para a sua produção?",
-      description:
-        "Indique o material, as medidas, a quantidade e o número de cores. Diga-nos também se fornece o material ou se precisa do fornecimento do suporte.",
-      button: "Pedir orçamento",
-      secondaryButton: "Fale connosco sobre o seu projeto",
-    },
     quoteForm: {
       eyebrow: "PEDIDO DE ORÇAMENTO",
       title: "Conte-nos o que pretende produzir.",
@@ -500,6 +491,11 @@ export const translations = {
       description:
         "We screen print and customise bags, covers, garment bags, components and other substrates, supplied by the client or integrated into production projects.",
       otherServices: "APPLICATIONS AND PRODUCTS",
+      moreServices: "More services",
+      viewService: "View service",
+      viewServiceLabel: "View the service for",
+      primaryImageAlt: "Black non-woven bag with «Merry Christmas» screen printed in gold",
+      primaryImageCaption: "Work produced by SERIFIL",
       quote: "Request a quote",
       shortQuote: "Quote",
       quoteLabel: "Request a quote for",
@@ -515,6 +511,7 @@ export const translations = {
         {
           number: "02",
           title: "PVC Printing",
+          pageKey: "pvc",
           description:
             "Printing on clear or coloured PVC for packaging, protection, product presentation and technical parts.",
           emphasis: "supporting",
@@ -523,6 +520,7 @@ export const translations = {
         {
           number: "03",
           title: "Textile Printing",
+          pageKey: "fabric",
           description:
             "Screen printing on fabric for clothing, workwear, covers, bags, home textiles and other production items.",
           emphasis: "supporting",
@@ -531,6 +529,7 @@ export const translations = {
         {
           number: "04",
           title: "Non-Woven Printing",
+          pageKey: "nonwoven",
           description:
             "Printing on non-woven material for bags, covers and solutions for protection and brand communication.",
           emphasis: "supporting",
@@ -539,6 +538,7 @@ export const translations = {
         {
           number: "05",
           title: "Component Printing",
+          pageKey: "footwear",
           description:
             "Printing and customisation of insoles, vamps and other components used on production lines, including the footwear industry.",
           emphasis: "complementary",
@@ -547,6 +547,7 @@ export const translations = {
         {
           number: "06",
           title: "Custom Bags",
+          pageKey: "bags",
           description:
             "Customisation and supply of bags for industrial, retail and promotional use, in PVC, fabric or non-woven material.",
           emphasis: "complementary",
@@ -729,25 +730,6 @@ export const translations = {
         { number: "04", title: "Production", description: "Production begins once the work is approved." },
         { number: "05", title: "Delivery", description: "Your order is prepared for collection or shipping." },
       ],
-    },
-    about: {
-      eyebrow: "SERIFIL",
-      title: "Industrial screen printing in Guimarães.",
-      description:
-        "Serifil is a screen-printing and industrial printing company based in Guimarães, Portugal, with experience printing on PVC, textiles, non-woven materials and components. We print on parts and substrates supplied by the client and, when the project calls for it, we study complete solutions that include supplying and customising bags, garment bags, covers and other substrates for businesses, manufacturers and brands across a range of industries, including footwear.",
-      principles: [
-        ["01", "Local production"],
-        ["02", "Direct communication"],
-        ["03", "Technical guidance"],
-      ],
-    },
-    quoteCta: {
-      eyebrow: "LET'S MAKE IT",
-      title: "Need printing for your production?",
-      description:
-        "Tell us the material, dimensions, quantity and number of print colours. Let us know whether you supply the material or need the substrate supplied as well.",
-      button: "Request a quote",
-      secondaryButton: "Talk to us about your project",
     },
     quoteForm: {
       eyebrow: "QUOTE REQUEST",

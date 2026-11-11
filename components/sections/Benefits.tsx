@@ -1,26 +1,24 @@
-import { Check } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { SiteContent } from "@/data/i18n";
 
+// Também é a secção "Sobre" do menu (#sobre): a apresentação da empresa já está na introdução.
 export function Benefits({ copy }: { copy: SiteContent["benefits"] }) {
   return (
-    <section className="bg-background py-20 sm:py-28 lg:py-36">
+    <section id="sobre" className="scroll-mt-20 bg-background py-20 sm:py-28 lg:scroll-mt-24 lg:py-36">
       <Container>
         <Reveal><SectionHeading eyebrow={copy.eyebrow} title={copy.title} /></Reveal>
-        <div className="mt-16 border-y border-border lg:mt-24">
-          {copy.items.map((benefit, index) => (
-            <Reveal key={benefit.title}>
-              <div className="grid gap-4 border-b border-border py-7 last:border-b-0 sm:grid-cols-[4rem_1fr_1.2fr] sm:items-center sm:gap-8 lg:py-9">
-                <span className="grid size-9 place-items-center bg-accent text-light-text"><Check className="size-4" strokeWidth={3} aria-hidden="true" /></span>
+        <Reveal>
+        <ul className="mt-16 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:mt-24 lg:grid-cols-3 lg:gap-y-14">
+          {copy.items.map((benefit) => (
+              <li key={benefit.title} className="border-t border-border pt-6">
                 <h3 className="text-xl font-bold tracking-[-0.03em] text-text-primary sm:text-2xl">{benefit.title}</h3>
-                <p className="max-w-[58ch] text-sm leading-6 text-text-secondary sm:text-base">{benefit.description}</p>
-                <span className="sr-only">{copy.advantage} {index + 1}</span>
-              </div>
-            </Reveal>
+                <p className="mt-3 max-w-[40ch] text-sm leading-6 text-text-secondary sm:text-base sm:leading-7">{benefit.description}</p>
+              </li>
           ))}
-        </div>
+        </ul>
+        </Reveal>
       </Container>
     </section>
   );

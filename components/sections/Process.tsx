@@ -7,7 +7,7 @@ export function Process({ copy }: { copy: SiteContent["process"] }) {
   return (
     <section id="processo" className="scroll-mt-20 bg-light-background py-20 sm:py-28 lg:scroll-mt-24 lg:py-36">
       <Container>
-        <Reveal><SectionHeading eyebrow={copy.eyebrow} title={copy.title} light /></Reveal>
+        <Reveal><SectionHeading title={copy.title} light /></Reveal>
         <div className="relative mt-16 grid gap-0 border-y border-light-border lg:mt-24 lg:grid-cols-5 lg:border-x">
           <div className="absolute left-[10%] right-[10%] top-[3.55rem] hidden h-px bg-[#b9b3a8] lg:block" aria-hidden="true" />
           {copy.items.map((step) => (

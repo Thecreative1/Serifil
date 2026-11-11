@@ -218,11 +218,11 @@ Em mobile, o botão tem alvo de 48px e abre um diálogo de ecrã inteiro. O diá
 
 ### Section Heading
 
-O cabeçalho de secção usa uma grelha assimétrica: kicker estreito à esquerda e título amplo à direita. O título é fluido, muito apertado e pode ter descrição até 62ch. Em mobile, os elementos empilham-se com 28px de intervalo.
+O cabeçalho de secção usa uma grelha assimétrica: kicker estreito à esquerda e título amplo à direita. O kicker é opcional e só aparece onde orienta a leitura (Serviços, Trabalhos, Porquê a SERIFIL, formulário); sem kicker, o título fica alinhado à esquerda e a secção ganha outra composição (por exemplo setores como etiquetas ao lado do título). Não numerar listas sem ordem real: a numeração fica para o processo. O título é fluido, muito apertado e pode ter descrição até 62ch. Em mobile, os elementos empilham-se com 28px de intervalo.
 
 ### Service Priority Block
 
-O serviço principal ocupa mais área e usa fundo laranja integral. Serviços de apoio vivem em superfície escura; serviços complementares tornam-se linhas estruturadas. Esta diferença é semântica e deve acompanhar o campo `emphasis`.
+O serviço principal ocupa mais área, usa fundo laranja integral e abre com uma fotografia real de trabalho da SERIFIL (legenda "Trabalho produzido pela SERIFIL"), nunca um bloco laranja vazio. Cada serviço com página própria liga para ela ("Ver serviço"); os outros levam ao orçamento. Serviços sem cartão (t-shirts, quadros, DTF) ficam numa linha "Mais serviços". Serviços de apoio vivem em superfície escura; serviços complementares tornam-se linhas estruturadas. Esta diferença é semântica e deve acompanhar o campo `emphasis`.
 
 ### Hero
 

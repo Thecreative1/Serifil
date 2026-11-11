@@ -12,8 +12,6 @@ import { Sectors } from "@/components/sections/Sectors";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Benefits } from "@/components/sections/Benefits";
 import { Process } from "@/components/sections/Process";
-import { About } from "@/components/sections/About";
-import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { QuoteForm } from "@/components/sections/QuoteForm";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { brand } from "@/config/brand";
@@ -99,8 +97,6 @@ export default async function Home({
         <Portfolio locale={locale} copy={copy.portfolio} />
         <Benefits copy={copy.benefits} />
         <Process copy={copy.process} />
-        <About copy={copy.about} />
-        <QuoteCTA copy={copy.quoteCta} />
         <QuoteForm copy={copy.quoteForm} />
         <ContactSection copy={copy.contact} />
       </main>

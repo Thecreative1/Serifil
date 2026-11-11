@@ -20,7 +20,7 @@ test("estrutura, imagens e navegação principal", async ({ page }) => {
   await expect(heading).toContainText("Serigrafia e impressão");
   await expect(heading).toContainText("industrial em");
   await expect(page.locator('header svg[viewBox="0 0 1000 1000"]')).toHaveCount(1);
-  await expect(page.locator("img")).toHaveCount(12);
+  await expect(page.locator("img")).toHaveCount(13);
 
   const images = page.locator("img");
   for (let index = 0; index < await images.count(); index += 1) {
@@ -376,7 +376,6 @@ test("quadros de serigrafia publicados: nos serviços, indexáveis e com dados e
     await page.goto(`/${item.locale}/`);
     const listLink = page.locator(`#servicos nav a[href="${path}"]`);
     await expect(listLink).toHaveCount(1);
-    await expect(listLink).toContainText("07");
     await expect(listLink).toContainText(item.name);
     const homeData = await page.locator('script[type="application/ld+json"]').first().textContent();
     expect(homeData).toContain(`https://serifil.com${path}`);
@@ -721,9 +720,14 @@ test("publica páginas de serviço bilingues com metadados e ligações recípro
 
 test("liga a página principal aos guias de materiais e explica TNT sem misturar idiomas", async ({ page }) => {
   await page.goto("/pt/");
-  await expect(page.getByRole("link", { name: /Sacos em TNT/ }).first()).toHaveAttribute(
+  // Cada cartão de serviço com página própria liga para ela.
+  await expect(page.getByRole("link", { name: "Ver o serviço de Impressão em TNT" })).toHaveAttribute(
     "href",
     "/pt/servicos/sacos-tnt/",
+  );
+  await expect(page.getByRole("link", { name: "Ver o serviço de Impressão em PVC" })).toHaveAttribute(
+    "href",
+    "/pt/servicos/serigrafia-pvc/",
   );
   await page.goto("/pt/servicos/sacos-tnt/");
   await expect(page.getByRole("heading", { name: "O que é TNT?" })).toBeVisible();
@@ -1313,7 +1317,7 @@ test("sacos personalizados publicados, ligados e sem prometer o que não foi con
   }
 
   await page.goto("/pt/");
-  await expect(page.locator('#servicos nav a[href="/pt/servicos/sacos-personalizados/"]')).toHaveCount(1);
+  await expect(page.locator('#servicos a[href="/pt/servicos/sacos-personalizados/"]')).toHaveCount(1);
 
   await page.goto("/pt/servicos/sacos-personalizados/");
   await expect(page.locator("h1")).toContainText("Sacos com o logótipo da sua marca.");
