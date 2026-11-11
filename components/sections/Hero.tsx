@@ -8,10 +8,16 @@ import type { SiteContent } from "@/data/i18n";
 export function Hero({ copy }: { copy: SiteContent["hero"] }) {
   return (
     <section id="inicio" className="relative min-h-[760px] overflow-hidden bg-background pt-20 lg:min-h-screen lg:pt-24">
-      <Image src={assetPath("/images/hero-serigrafia.webp")} alt={copy.imageAlt} fill priority sizes="100vw" className="object-cover object-[62%_center]" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,13,11,0.98)_0%,rgba(12,13,11,0.92)_36%,rgba(12,13,11,0.38)_72%,rgba(12,13,11,0.3)_100%)]" aria-hidden="true" />
-      <div className="absolute inset-0 industrial-grid opacity-20" aria-hidden="true" />
-      <Container className="relative flex min-h-[680px] flex-col justify-end pb-9 pt-24 lg:min-h-[calc(100vh-6rem)] lg:pb-12">
+      {/* Em telemóvel e tablet a fotografia fica numa faixa limpa no topo, com o texto por baixo;
+          em desktop ocupa o hero e o escurecimento concentra-se em baixo e à esquerda, onde está o texto. */}
+      <div className="absolute inset-x-0 top-0 h-[22rem] lg:inset-0 lg:h-auto">
+        <Image src={assetPath("/images/hero-serigrafia.webp")} alt={copy.imageAlt} fill priority sizes="100vw" className="object-cover object-[62%_center]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,18,16,0.55)_0%,rgba(17,18,16,0.05)_30%,rgba(17,18,16,0.25)_65%,rgba(17,18,16,1)_100%)] lg:hidden" aria-hidden="true" />
+        <div className="absolute inset-0 hidden bg-[linear-gradient(180deg,rgba(12,13,11,0.45)_0%,rgba(12,13,11,0.12)_28%,rgba(12,13,11,0.55)_52%,rgba(12,13,11,0.9)_74%,rgba(12,13,11,0.97)_100%)] lg:block" aria-hidden="true" />
+        <div className="absolute inset-0 hidden bg-[linear-gradient(90deg,rgba(12,13,11,0.7)_0%,rgba(12,13,11,0.35)_45%,rgba(12,13,11,0)_75%)] lg:block" aria-hidden="true" />
+      </div>
+      <div className="absolute inset-0 industrial-grid opacity-10" aria-hidden="true" />
+      <Container className="relative flex min-h-[680px] flex-col justify-end pb-9 pt-[14rem] lg:min-h-[calc(100vh-6rem)] lg:pb-12 lg:pt-24">
         <div className="max-w-[1050px]">
           <p className="hero-enter text-xs font-bold uppercase tracking-[0.17em] text-accent sm:text-sm">{copy.eyebrow}</p>
           <h1 className="mt-6 max-w-[14ch] text-[clamp(2.2rem,9.8vw,9.2rem)] leading-[0.9] font-black uppercase tracking-[-0.075em] text-text-primary">

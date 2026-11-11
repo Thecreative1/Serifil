@@ -226,7 +226,7 @@ O serviço principal ocupa mais área, usa fundo laranja integral e abre com uma
 
 ### Hero
 
-O hero combina uma fotografia real de serigrafia, overlay escuro horizontal, grelha industrial subtil e H1 de escala extrema. A fotografia fica em `object-cover` com foco horizontal em 62%. O texto entra em quatro passos entre 0ms e 340ms, com duração de 900ms.
+O hero combina uma fotografia de serigrafia, grelha industrial subtil e H1 de escala extrema. A fotografia tem de se ver: em desktop o escurecimento concentra-se em baixo e à esquerda, onde está o texto; abaixo de 1024px a fotografia fica numa faixa limpa no topo (22rem) que se funde no carvão, com o texto por baixo e o botão de orçamento ainda dentro do primeiro ecrã. A fotografia fica em `object-cover` com foco horizontal em 62%. O texto entra em quatro passos entre 0ms e 340ms, com duração de 900ms.
 
 ### Galeria de Trabalhos
 
